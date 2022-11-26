@@ -1,6 +1,7 @@
 #ifndef RM_COMMUNICATE_TYPES_H
 #define RM_COMMUNICATE_TYPES_H
 
+#include "rm_redefine_types.h"
 
 #define UART5_RX_STREAM        	DMA1_Stream0
 #define USART3_RX_STREAM        DMA1_Stream1
@@ -19,5 +20,19 @@
 #define USART6_TX_STREAM        DMA2_Stream6
 #define USART1_TX_STREAM        DMA2_Stream7
 
-
+/** 电机编码器解码结构体 */
+typedef struct
+{
+	u32 uiRawValue;     	//本次编码器的原始值
+	u32 uiPreRawValue;  	//上一次编码器的原始值
+	s32 siDiff;         	//编码器两次原始值的差值
+	float fpSpeed;      	//电机减速器输出轴转速，单位：r/min
+	float fpGearRatio; 		//电机减速器减速比
+	s32 siNumber;       	//编码器线数
+	float fpSumValue; 	  	//编码器累加值
+} ST_ENCODER;
 #endif
+
+
+
+

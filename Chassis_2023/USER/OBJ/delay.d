@@ -2,6 +2,8 @@
 .\obj\delay.o: ..\File\BSP\delay.h
 .\obj\delay.o: ..\File\USER\main.h
 .\obj\delay.o: ..\File\USER\global_declare.h
+.\obj\delay.o: ..\File\RM_Types\rm_rc_types.h
+.\obj\delay.o: ..\File\RM_Types\rm_redefine_types.h
 .\obj\delay.o: ..\File\USER\stm32f4xx.h
 .\obj\delay.o: ..\File\STM32_LIB\CMSIS\core_cm4.h
 .\obj\delay.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -46,4 +48,7 @@
 .\obj\delay.o: ..\File\USER\main.h
 .\obj\delay.o: ..\File\BSP\delay.h
 .\obj\delay.o: ..\File\USER\stm32f4xx_it.h
+.\obj\delay.o: ..\File\API\can_protocol.h
+.\obj\delay.o: ..\File\RM_Types\rm_communicate_types.h
 .\obj\delay.o: ..\File\USER\os.h
+.\obj\delay.o: ..\File\RM_Types\rm_os_types.h

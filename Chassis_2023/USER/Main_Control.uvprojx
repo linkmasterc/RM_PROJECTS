@@ -417,6 +417,38 @@
         </Group>
         <Group>
           <GroupName>API</GroupName>
+          <Files>
+            <File>
+              <FileName>verify.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\verify.c</FilePath>
+            </File>
+            <File>
+              <FileName>rm_algorithm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\rm_algorithm.c</FilePath>
+            </File>
+            <File>
+              <FileName>can_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\can_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>gimbal_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\gimbal_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>DJI_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\DJI_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>vision_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\vision_protocol.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>BSP</GroupName>
@@ -445,6 +477,11 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\BSP\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\BSP\systick.c</FilePath>
             </File>
           </Files>
         </Group>

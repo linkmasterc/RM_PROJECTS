@@ -1,7 +1,8 @@
 #ifndef RM_ALGORITHM_H
 #define RM_ALGORITHM_H
 
-#include "rm_sentry_types.h"
+#include "math.h"
+#include "rm_pid_types.h"
 
 /*********************************************** 通用数学函数 ***********************************************************/
 float LinearInterpolation(const float *fpSampleX, const float *fpSampleY, float fpX, uint8_t size);

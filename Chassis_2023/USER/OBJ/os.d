@@ -35,15 +35,5 @@
 .\obj\os.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\os.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\os.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
-.\obj\os.o: ..\File\USER\main.h
-.\obj\os.o: ..\File\USER\global_declare.h
-.\obj\os.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
-.\obj\os.o: ..\File\USER\bsp_init.h
-.\obj\os.o: ..\File\BSP\tim.h
-.\obj\os.o: ..\File\BSP\can.h
-.\obj\os.o: ..\File\BSP\usart.h
-.\obj\os.o: ..\File\BSP\nvic.h
-.\obj\os.o: ..\File\USER\main.h
-.\obj\os.o: ..\File\BSP\delay.h
-.\obj\os.o: ..\File\USER\stm32f4xx_it.h
-.\obj\os.o: ..\File\USER\os.h
+.\obj\os.o: ..\File\RM_Types\rm_os_types.h
+.\obj\os.o: ..\File\RM_Types\rm_redefine_types.h

@@ -36,3 +36,4 @@
 .\obj\usart.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\usart.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
 .\obj\usart.o: ..\File\RM_Types\rm_communicate_types.h
+.\obj\usart.o: ..\File\RM_Types\rm_redefine_types.h
