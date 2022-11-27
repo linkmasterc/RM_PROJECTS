@@ -384,19 +384,14 @@
           <GroupName>USER</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\USER\main.c</FilePath>
-            </File>
-            <File>
               <FileName>os.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\USER\os.c</FilePath>
             </File>
             <File>
-              <FileName>global_declare.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\USER\global_declare.c</FilePath>
+              <FilePath>..\File\USER\main.c</FilePath>
             </File>
             <File>
               <FileName>bsp_init.c</FileName>
@@ -407,6 +402,11 @@
               <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\USER\stm32f4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>global_declare.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\USER\global_declare.c</FilePath>
             </File>
             <File>
               <FileName>system_stm32f4xx.c</FileName>
@@ -424,9 +424,9 @@
               <FilePath>..\File\API\verify.c</FilePath>
             </File>
             <File>
-              <FileName>rm_algorithm.c</FileName>
+              <FileName>DJI_protocol.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\API\rm_algorithm.c</FilePath>
+              <FilePath>..\File\API\DJI_protocol.c</FilePath>
             </File>
             <File>
               <FileName>can_protocol.c</FileName>
@@ -434,19 +434,19 @@
               <FilePath>..\File\API\can_protocol.c</FilePath>
             </File>
             <File>
-              <FileName>gimbal_protocol.c</FileName>
+              <FileName>rm_algorithm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\API\gimbal_protocol.c</FilePath>
-            </File>
-            <File>
-              <FileName>DJI_protocol.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\API\DJI_protocol.c</FilePath>
+              <FilePath>..\File\API\rm_algorithm.c</FilePath>
             </File>
             <File>
               <FileName>vision_protocol.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\API\vision_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>gimbal_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\gimbal_protocol.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -459,9 +459,9 @@
               <FilePath>..\File\BSP\tim.c</FilePath>
             </File>
             <File>
-              <FileName>delay.c</FileName>
+              <FileName>can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\BSP\delay.c</FilePath>
+              <FilePath>..\File\BSP\can.c</FilePath>
             </File>
             <File>
               <FileName>nvic.c</FileName>
@@ -469,14 +469,14 @@
               <FilePath>..\File\BSP\nvic.c</FilePath>
             </File>
             <File>
-              <FileName>can.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\BSP\can.c</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\BSP\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\BSP\delay.c</FilePath>
             </File>
             <File>
               <FileName>systick.c</FileName>
@@ -532,6 +532,18 @@
         </Group>
         <Group>
           <GroupName>TASK</GroupName>
+          <Files>
+            <File>
+              <FileName>gimbal_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\gimbal_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>systemmonitor_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\systemmonitor_task.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>CMSIS</GroupName>

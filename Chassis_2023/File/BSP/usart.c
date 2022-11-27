@@ -1,4 +1,5 @@
 #include "usart.h"
+#include "global_declare.h"
 #include "rm_communicate_types.h"
 /* ----------------------- Function Implements ---------------------------- */
 /******************************************************************************
@@ -130,8 +131,8 @@ void usart2_init(u32 bound)
 		DMA_InitStructure.DMA_Channel=DMA_Channel_4;
 		DMA_InitStructure.DMA_PeripheralBaseAddr=(u32)(&(USART2->DR));
 		
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&cushioning);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(cushioning));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralToMemory;//传输方向：从外设到内存
 		
 		DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
@@ -151,8 +152,8 @@ void usart2_init(u32 bound)
 	DMA_DeInit(USART2_TX_STREAM);
 	while (DMA_GetCmdStatus(USART2_TX_STREAM) != DISABLE){};
 
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&SendBuf);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(USART2_DMA));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
 	
 	DMA_Init(USART2_TX_STREAM,&DMA_InitStructure);
@@ -214,8 +215,8 @@ void usart3_init(u32 bound)
 		DMA_InitStructure.DMA_Channel=DMA_Channel_4;
 		DMA_InitStructure.DMA_PeripheralBaseAddr=(u32)(&(USART2->DR));
 		
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&cushioning);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(cushioning));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&GimbalCushioning_Rx);
+		DMA_InitStructure.DMA_BufferSize=(u32)(ChassisBufLen_Rx);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralToMemory;//传输方向：从外设到内存
 		
 		DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
@@ -235,8 +236,8 @@ void usart3_init(u32 bound)
 	DMA_DeInit(USART3_TX_STREAM);
 	while (DMA_GetCmdStatus(USART3_TX_STREAM) != DISABLE){};
 
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&SendBuf);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(USART2_DMA));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&GimbalCushioning_Tx);
+		DMA_InitStructure.DMA_BufferSize=(u32)(ChassisBufLen_Tx);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
 	
 	DMA_Init(USART3_TX_STREAM,&DMA_InitStructure);
@@ -298,8 +299,8 @@ void uart4_init(u32 bound)
 		DMA_InitStructure.DMA_Channel=DMA_Channel_4;
 		DMA_InitStructure.DMA_PeripheralBaseAddr=(u32)(&(USART2->DR));
 		
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&cushioning);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(cushioning));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)0;
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralToMemory;//传输方向：从外设到内存
 		
 		DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
@@ -319,8 +320,8 @@ void uart4_init(u32 bound)
 	DMA_DeInit(UART4_TX_STREAM);
 	while (DMA_GetCmdStatus(UART4_TX_STREAM) != DISABLE){};
 
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&SendBuf);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(USART2_DMA));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
 	
 	DMA_Init(UART4_TX_STREAM,&DMA_InitStructure);
@@ -385,8 +386,8 @@ void uart5_init(u32 bound)
 		DMA_InitStructure.DMA_Channel=DMA_Channel_4;
 		DMA_InitStructure.DMA_PeripheralBaseAddr=(u32)(&(USART2->DR));
 		
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&cushioning);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(cushioning));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralToMemory;//传输方向：从外设到内存
 		
 		DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
@@ -406,8 +407,8 @@ void uart5_init(u32 bound)
 	DMA_DeInit(UART5_TX_STREAM);
 	while (DMA_GetCmdStatus(UART5_TX_STREAM) != DISABLE){};
 
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&SendBuf);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(USART2_DMA));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
 	
 	DMA_Init(UART5_TX_STREAM,&DMA_InitStructure);
@@ -469,8 +470,8 @@ void usart6_init(u32 bound)
 		DMA_InitStructure.DMA_Channel=DMA_Channel_4;
 		DMA_InitStructure.DMA_PeripheralBaseAddr=(u32)(&(USART2->DR));
 		
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&cushioning);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(cushioning));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralToMemory;//传输方向：从外设到内存
 		
 		DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
@@ -490,8 +491,8 @@ void usart6_init(u32 bound)
 	DMA_DeInit(USART6_TX_STREAM);
 	while (DMA_GetCmdStatus(USART6_TX_STREAM) != DISABLE){};
 
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&SendBuf);
-		DMA_InitStructure.DMA_BufferSize=(u32)(sizeof(USART2_DMA));
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
+		DMA_InitStructure.DMA_BufferSize=(u32)(0);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
 	
 	DMA_Init(USART6_TX_STREAM,&DMA_InitStructure);

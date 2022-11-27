@@ -42,23 +42,12 @@ u32 TaskTotalTimeLeast;
 //typedef enum {OS_READY,OS_FINISH,OS_SUSPENDED} OS_TASK_STATE;
 ST_TAST G_ST_Task[] =
 {
-//{.Name="SystemMonitorTask",   .Func=SystemMonitorTask,    .State=OS_READY,    .TimeDelay=1000*1000,   .TimeUsedLeast=0xFFFFFFFF},
+{.Name="SystemMonitorTask",   .Func=SystemMonitorTask,    .State=OS_READY,    .TimeDelay=1000*1000,   .TimeUsedLeast=0xFFFFFFFF},
 //{.Name="CommunicateTask",			.Func=CommunicateTask,			.State=OS_READY,		.TimeDelay=1000*10,				.TimeUsedLeast=0xFFFFFFFF},
 ////{.Name="ChassisTask",			.Func=ChassisTask,			.State=OS_READY,		.TimeDelay=1000,				.TimeUsedLeast=0xFFFFFFFF},
 //{.Name="PlatformTask",       .Func=PlatformTask,        .State=OS_READY,    .TimeDelay=1000*0.8,      .TimeUsedLeast=0xFFFFFFFF},
 };
 u32 TotalTaskNum = sizeof(G_ST_Task)/sizeof(ST_TAST);
-
-
-/*-------------------------------------------------------------------
-±¸    ×¢£ºÐÅºÅÁ¿
--------------------------------------------------------------------*/
-
-
-
-
-
-
 
 
 /*-------------------------------------------------------------------

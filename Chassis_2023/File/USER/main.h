@@ -16,12 +16,14 @@
 /*--------------API--------------*/
 
 /*--------------TASK--------------*/
+#include "systemmonitor_task.h"
+#include "gimbal_task.h"
 
 /*------------OS_init-----------*/
 #include "os.h"
 
 void SystemMonitorTask(void);
-void CommunicateTask(void);
-void ChassisTask(void);
-void PlatformTask(void);
+void GimbalTask(void);
+void MotorDataSendTask(void);
+void SendDataTask(void);
 #endif

@@ -397,3 +397,33 @@ float DataSmoothFilter(float* Box, u8 BoxSize, float RawData)
 	}
 	return (DataAllAdd / BoxSize);
 }
+
+ /** --------------------------------------------------------------------------
+  * @brief  离散信号模拟器
+  
+  * @retval None
+  
+  * @param	None
+			
+  * @note	暂未使用
+ -------------------------------------------------------------------------- **/
+float NoiseSimulator(float in, bool state)
+{
+	static uint8_t 	delayTick = 0;
+	static float	delayAngle;
+	if(state)
+	{
+		if(delayTick--)
+		{	return delayAngle;}
+		else
+		{
+			delayTick	= TIM5->CNT % 15;
+			delayAngle	= in;
+		}
+		return delayAngle;
+	}
+	else
+		return in;
+}
+
+

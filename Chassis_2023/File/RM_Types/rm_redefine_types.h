@@ -1,6 +1,8 @@
 #ifndef RM_REDEFINE_TYPES_H
 #define RM_REDEFINE_TYPES_H
 
+
+
 typedef unsigned char  		UCHAR8;                  /** defined for unsigned 8-bits integer variable 	    无符号8位整型变量       */
 typedef signed   char  		SCHAR8;                  /** defined for signed 8-bits integer variable		    有符号8位整型变量       */
 typedef unsigned short 		USHORT16;                /** defined for unsigned 16-bits integer variable 	    无符号16位整型变量      */

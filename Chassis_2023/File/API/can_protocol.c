@@ -1,6 +1,7 @@
+#include "ParamConfig.h"
 #include "can_protocol.h"
 #include "global_declare.h"
-
+#include "rm_algorithm.h"
 /**
 * @brief		由设备向CAN总线发送数据
  * @param 	Data1~4对应总线上挂载的某四个设备，
@@ -39,9 +40,9 @@ void CAN_SendData(CAN_TypeDef* CANx,u32 id,s16 Data1,s16 Data2,s16 Data3,s16 Dat
  * @param 	
  * @return 	无
  */
-void CAN1_Ptotocol(void)
+void CAN1_Protocol(void)
 {
-//	switch(CAN1_RX_Message.StdId)
+	
 }
 
 
@@ -50,9 +51,41 @@ void CAN1_Ptotocol(void)
  * @param 	
  * @return 	无
  */
-void CAN2_Ptotocol(void)
+void CAN2_Protocol(void)
 {
-//	switch(CAN2_RX_Message.StdId)
+	static bool FirstInDNYaw = TRUE;
+	static bool firstInUPYaw		= TRUE;
+	static bool firstInUPShoot 		= TRUE;
+	switch(CAN2_RX_Message.StdId)
+	{	
+		/** 下云台Yaw 6020电机 */
+		case 0x205: 
+		SubSystemMonitor.CAN2_YawMotor_rx_cnt++;
+		if(FirstInDNYaw)
+		{
+			GimbalYawEncoder.uiRawValue = GetEncoderNumber(CAN2_RX_Message.Data);													// 初次获取电机编码值fpSumValue取当前编码值
+			GimbalYawEncoder.fpSumValue = GimbalYawEncoder.uiRawValue;
+			if((GimbalYawEncoder.fpSumValue-DN_YAW_MID) > GimbalYawEncoder.siNumber / 2)								
+			{	
+				GimbalYawEncoder.fpSumValue -= GimbalYawEncoder.siNumber;
+			}
+			else if((GimbalYawEncoder.fpSumValue-DN_YAW_MID) < -GimbalYawEncoder.siNumber / 2)
+			{	
+				GimbalYawEncoder.fpSumValue += GimbalYawEncoder.siNumber;
+			}
+			FirstInDNYaw = FALSE;
+		}
+		else
+		{	
+			AbsEncoderProcess(&GimbalYawEncoder, GetEncoderNumber(CAN2_RX_Message.Data));											// 对YAW电机编码器返回的原始值进行预处理
+		}
+			YawEncoderAngle = (GimbalYawEncoder.fpSumValue - DN_YAW_MID) * 360 / 8192.0f;										// 以YAW电机设定中值为0°,得到YAW轴当前角度
+			YawEncoderSpeed = GetSpeed(CAN2_RX_Message.Data);																	// 得到编码器测得的速度
+		break;
+
+		default:
+			break;
+	}
 }
 
 

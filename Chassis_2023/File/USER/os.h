@@ -1,6 +1,6 @@
 #ifndef __OS_H__
 #define __OS_H__
-
+#include "main.h"
 #include "stm32f4xx.h"
 #include "rm_os_types.h"
 #include "rm_redefine_types.h"

@@ -2,7 +2,10 @@
 #define RM_ALGORITHM_H
 
 #include "math.h"
+#include "os.h"
 #include "rm_pid_types.h"
+
+#define PI 3.14159265358979f
 
 /*********************************************** 通用数学函数 ***********************************************************/
 float LinearInterpolation(const float *fpSampleX, const float *fpSampleY, float fpX, uint8_t size);
@@ -24,5 +27,6 @@ void U32RampSignal(u32 *Output, u32 DesValue, u32 Step);
 float FPRampSignal(float Output, float DesValue, float Step);
 /*********************************************** 滤波器 ***********************************************************/
 float DataSmoothFilter(float* Box, u8 BoxSize, float RawData);
-
+/***********************************************离散信号***********************************************************/
+float NoiseSimulator(float in, bool state);
 #endif
