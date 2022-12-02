@@ -48,6 +48,7 @@ ST_TAST G_ST_Task[] =
 {.Name="SendDataTask",			.Func=SendDataTask,			.State=OS_READY,		.TimeDelay=1000,				.TimeUsedLeast=0xFFFFFFFF},
 {.Name="MotorDataSendTask",			.Func=MotorDataSendTask,			.State=OS_READY,		.TimeDelay=1000,				.TimeUsedLeast=0xFFFFFFFF},
 {.Name="GimbalTask",       .Func=GimbalTask,        .State=OS_READY,    .TimeDelay=1000,      .TimeUsedLeast=0xFFFFFFFF},
+{.Name="VisionDataSendTask",       .Func=VisionDataSendTask,        .State=OS_READY,    .TimeDelay=1000,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="LEDStateChangeTask",       .Func=LEDStateChangeTask,        .State=OS_READY,    .TimeDelay=1000,      .TimeUsedLeast=0xFFFFFFFF},
 
 };

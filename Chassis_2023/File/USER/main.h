@@ -32,5 +32,5 @@ void SendDataTask(void);
 void ModeChooseTask(void);
 void ShootTask(void);
 void LEDStateChangeTask(void);
-
+void VisionDataSendTask(void);
 #endif

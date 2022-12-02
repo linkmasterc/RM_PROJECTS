@@ -54,8 +54,8 @@ void CAN1_Protocol(void)
 void CAN2_Protocol(void)
 {
 	static bool FirstInDNYaw = TRUE;
-	static bool firstInUPYaw		= TRUE;
-	static bool firstInUPShoot 		= TRUE;
+//	static bool firstInUPYaw		= TRUE;
+//	static bool firstInUPShoot 		= TRUE;
 	switch(CAN2_RX_Message.StdId)
 	{	
 		/** 下云台Yaw 6020电机 */

@@ -14,7 +14,7 @@
 /*帧头             ID   数据长度  |   1个浮点数据     |            帧尾*/
 /****************************************************************************/
 
-static float HP_Detect(void);
+//static float HP_Detect(void);
 
 bool UPReceiveFlag = FALSE;
 bool DNReceiveFlag = FALSE;

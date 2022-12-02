@@ -58,6 +58,7 @@
 .\obj\vision_protocol.o: ..\File\BSP\delay.h
 .\obj\vision_protocol.o: ..\File\USER\stm32f4xx_it.h
 .\obj\vision_protocol.o: ..\File\API\can_protocol.h
+.\obj\vision_protocol.o: ..\File\API\vision_protocol.h
 .\obj\vision_protocol.o: ..\File\TASK\systemmonitor_task.h
 .\obj\vision_protocol.o: ..\File\TASK\gimbal_task.h
 .\obj\vision_protocol.o: ..\File\TASK\led_task.h

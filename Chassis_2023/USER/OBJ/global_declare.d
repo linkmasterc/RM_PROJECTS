@@ -57,6 +57,7 @@
 .\obj\global_declare.o: ..\File\BSP\delay.h
 .\obj\global_declare.o: ..\File\USER\stm32f4xx_it.h
 .\obj\global_declare.o: ..\File\API\can_protocol.h
+.\obj\global_declare.o: ..\File\API\vision_protocol.h
 .\obj\global_declare.o: ..\File\TASK\systemmonitor_task.h
 .\obj\global_declare.o: ..\File\TASK\gimbal_task.h
 .\obj\global_declare.o: ..\File\TASK\led_task.h

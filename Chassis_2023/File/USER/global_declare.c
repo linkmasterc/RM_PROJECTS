@@ -78,7 +78,8 @@
 		float		VisionSendData9 = 0;
 		float		VisionSendData10 = 0;
 		float		VisionSendData11 = 0;
-
+	
+		u8 			TirggerState = 0 ;
 
 /** @brief 电机所用变量 */
 	/** @brief	编码器数据结构体 */

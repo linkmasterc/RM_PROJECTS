@@ -59,6 +59,7 @@
 .\obj\main.o: ..\File\BSP\delay.h
 .\obj\main.o: ..\File\USER\stm32f4xx_it.h
 .\obj\main.o: ..\File\API\can_protocol.h
+.\obj\main.o: ..\File\API\vision_protocol.h
 .\obj\main.o: ..\File\TASK\systemmonitor_task.h
 .\obj\main.o: ..\File\TASK\gimbal_task.h
 .\obj\main.o: ..\File\TASK\led_task.h

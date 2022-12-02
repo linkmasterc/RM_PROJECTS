@@ -57,6 +57,7 @@
 .\obj\led_task.o: ..\File\BSP\delay.h
 .\obj\led_task.o: ..\File\USER\stm32f4xx_it.h
 .\obj\led_task.o: ..\File\API\can_protocol.h
+.\obj\led_task.o: ..\File\API\vision_protocol.h
 .\obj\led_task.o: ..\File\TASK\systemmonitor_task.h
 .\obj\led_task.o: ..\File\TASK\gimbal_task.h
 .\obj\led_task.o: ..\File\TASK\mode_choose_task.h

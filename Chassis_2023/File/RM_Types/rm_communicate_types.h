@@ -74,7 +74,7 @@ typedef __packed struct
 		float BMIYawAngle;		//IMU经解算得到的yaw轴角度
 		float BMIYawSpeed;		//IMU发出的yaw轴角速度
 		float BMIPitchAngle;	//IMU经解算得到的pitch轴角度
-		u8 TRIGGER_STATUS;
+		u8 TriggerState;			//1
 		u8 CRC8_Bit;					//CRC校验位
 		
 	}Receive;

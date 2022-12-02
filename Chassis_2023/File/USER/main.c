@@ -77,3 +77,24 @@ void LEDStateChangeTask(void)
 	systemMonitor.LEDStateChangeTask_cnt++;
 }
 
+/** --------------------------------------------------------------------------
+	* @brief  	视觉数据发送任务
+
+	* @note		1000Hz
+				
+ -------------------------------------------------------------------------- **/
+void VisionDataSendTask(void)
+{
+	/*下云台视觉数据发送*/
+	#ifdef DN_CAMERA_HARDWARE_TRIGER_ENABLE
+	if(TirggerState)
+	#else
+	if(TRUE)
+	#endif
+	{
+		DNVisionDataSend();
+		systemMonitor.DNVisionDataSendTask_cnt++;
+	}	
+}
+
+

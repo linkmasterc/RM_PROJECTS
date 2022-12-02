@@ -8,12 +8,12 @@
 
 
 static void 	RCShootBullet(void);											// 遥控射击
-static void 	AutoShootBullet(void);											// 自动射击
+//static void 	AutoShootBullet(void);											// 自动射击
 static void 	GBShoot(int Shoot_f, bool mode);								// 按频率拨弹
-static void		RammerDetect(void);												// 子弹装填情况检测
+//static void		RammerDetect(void);												// 子弹装填情况检测
 static void 	ShootNumberRecord(bool mode);									// 实际发射子弹数记录
-static void 	ShootAreaDetect(void);											// 射击允许区域检测
-static void 	UPShooterPID(void);												// 射击用拨盘PID计算
+//static void 	ShootAreaDetect(void);											// 射击允许区域检测
+//static void 	UPShooterPID(void);												// 射击用拨盘PID计算
 
 /** --------------------------------------------------------------------------
   * @brief  控制子弹发射

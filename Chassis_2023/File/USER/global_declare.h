@@ -103,6 +103,7 @@
 		extern float		VisionSendData10 ;
 		extern float		VisionSendData11 ;
 
+		extern u8 			TirggerState;
 
 /** @brief 电机所用变量 */
 	/** @brief	编码器数据结构体 */

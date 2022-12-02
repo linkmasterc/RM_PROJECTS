@@ -10,6 +10,7 @@ void GimbalReceiveDataProtocol(void)
 		memcpy(&GimbalReceiveData.Receive, (u8*)GimbalCushioning_Rx, sizeof(GimbalReceiveData.Receive));	// 帧尾CRC16校验
 		YawBMIAngle			= GimbalReceiveData.Receive.BMIYawAngle;										// 上云台YAW轴角度（陀螺仪测得，但实际使用的是电机编码器测得的角度）
 		PitchBMIAngle	= GimbalReceiveData.Receive.BMIPitchAngle;									// 上云台Pitch轴角度(陀螺仪测得）
+		TirggerState  = GimbalReceiveData.Receive.TriggerState;
 		if(PitchBMIAngle < 90.0f)																// 此处用意？
 		{	
 			YawBMISpeed = GimbalReceiveData.Receive.BMIYawSpeed;

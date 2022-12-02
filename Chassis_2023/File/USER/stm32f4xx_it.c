@@ -1,5 +1,57 @@
 #include "stm32f4xx_it.h"
 
+
+/** --------------------------------------------------------------------------
+  * @brief  获取串口的DMA中接收数据的长度
+  
+  * @retval 接收数据的长度
+  
+  * @param	串口结构体变量
+			
+  * @note	
+ -------------------------------------------------------------------------- **/
+u16 USART_Receive(USART_RX_TypeDef* USARTx)
+{
+	USARTx->rxConter = USARTx->DMALen - DMA_GetCurrDataCounter(USARTx->DMAy_Streamx);				// 本次DMA缓冲区填充到的位置
+	USARTx->rxBufferPtr += USARTx->rxSize;															// 上次DMA缓冲区填充到的位置
+	
+	if(USARTx->rxBufferPtr >= USARTx->DMALen)														// 说明DMA缓冲区已经满了一次
+	{
+		USARTx->rxBufferPtr %= USARTx->DMALen;
+	}
+	
+	if(USARTx->rxBufferPtr < USARTx->rxConter)
+	{
+		USARTx->rxSize = USARTx->rxConter - USARTx->rxBufferPtr; 									// 计算本次接收数据长度
+		
+		if(USARTx->rxSize <= USARTx->MBLen)
+		{
+			for(u16 i=0;i<USARTx->rxSize;i++)
+			{
+				*(USARTx->pMailbox + i) = *(USARTx->pDMAbuf + USARTx->rxBufferPtr + i);
+			}
+		}
+	}
+	else
+	{
+		USARTx->rxSize = USARTx->rxConter + USARTx->DMALen - USARTx->rxBufferPtr;					// 计算本次接收数据长度
+		
+		if(USARTx->rxSize <= USARTx->MBLen)															// 接收的数据长度与期望数据长度相同，则把本数据写进邮箱
+		{
+			for(u16 i=0; i<USARTx->rxSize-USARTx->rxConter; i++)
+			{
+				*(USARTx->pMailbox + i) = *(USARTx->pDMAbuf + USARTx->rxBufferPtr + i);
+			}
+			for(u16 i=0; i<USARTx->rxConter; i++)
+			{
+				*(USARTx->pMailbox + USARTx->rxSize - USARTx->rxConter + i) = *(USARTx->pDMAbuf + i);
+			}
+		}
+	}
+	return USARTx->rxSize;
+}
+
+
 /** --------------------------------------------------------------------------
   * @brief  串口3中断服务函数
   
@@ -33,27 +85,27 @@ void USART3_IRQHandler(void)
 }
 
 /** --------------------------------------------------------------------------
-  * @brief  串口5中断服务函数
+  * @brief  串口6中断服务函数
   
   * @retval None
   
   * @param	None
 			
-  * @note	串口5用于接收上云台小电脑发送的数据
+  * @note	串口6用于接收下云台小电脑发送的数据
 			使用空闲中断+DMA对数据进行处理
 			先读SR再读DR清除IDLE中断标志位
  -------------------------------------------------------------------------- **/
-void UART5_IRQHandler(void)
+void USART6_IRQHandler(void)
 {
-	if(USART_GetITStatus(UART5, USART_IT_IDLE) == SET)
+	if(USART_GetITStatus(USART6, USART_IT_IDLE) == SET)
 	{
-		UART5->SR;
-		UART5->DR;
+		USART6->SR;
+		USART6->DR;
 		
-		USART_Receive(&UART5_Rcr);																// 获取串口的DMA中接收数据的长度(暂未利用）
-		UPVisionDataProtocol();
-		systemMonitor.UART5_rx_cnt++;															// 对接收次数进行计数（1s内）
-	}
+		USART_Receive(&USART6_Rcr);																// 获取串口的DMA中接收数据的长度(暂未利用） 
+		DNVisionDataProtocol();
+		systemMonitor.USART6_rx_cnt++;
+	}	
 }
 
 /** --------------------------------------------------------------------------
