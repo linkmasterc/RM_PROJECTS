@@ -61,3 +61,7 @@
 .\obj\bsp_init.o: ..\File\API\can_protocol.h
 .\obj\bsp_init.o: ..\File\TASK\systemmonitor_task.h
 .\obj\bsp_init.o: ..\File\TASK\gimbal_task.h
+.\obj\bsp_init.o: ..\File\TASK\led_task.h
+.\obj\bsp_init.o: ..\File\TASK\mode_choose_task.h
+.\obj\bsp_init.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\bsp_init.o: ..\File\TASK\shoot_task.h

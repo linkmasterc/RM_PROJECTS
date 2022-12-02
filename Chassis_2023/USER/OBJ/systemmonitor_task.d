@@ -8,7 +8,7 @@
 .\obj\systemmonitor_task.o: ..\File\RM_Types\rm_pid_types.h
 .\obj\systemmonitor_task.o: ..\File\RM_Types\rm_scanner_types.h
 .\obj\systemmonitor_task.o: ..\File\RM_Types\rm_communicate_types.h
-.\obj\systemmonitor_task.o: ..\File\API\gimbal_protocol.h
+.\obj\systemmonitor_task.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h
 .\obj\systemmonitor_task.o: ..\File\USER\stm32f4xx.h
 .\obj\systemmonitor_task.o: ..\File\STM32_LIB\CMSIS\core_cm4.h
 .\obj\systemmonitor_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -44,6 +44,7 @@
 .\obj\systemmonitor_task.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\systemmonitor_task.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\systemmonitor_task.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
+.\obj\systemmonitor_task.o: ..\File\API\gimbal_protocol.h
 .\obj\systemmonitor_task.o: ..\File\USER\global_declare.h
 .\obj\systemmonitor_task.o: ..\File\API\rm_algorithm.h
 .\obj\systemmonitor_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
@@ -60,4 +61,8 @@
 .\obj\systemmonitor_task.o: ..\File\API\can_protocol.h
 .\obj\systemmonitor_task.o: ..\File\TASK\systemmonitor_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\gimbal_task.h
+.\obj\systemmonitor_task.o: ..\File\TASK\led_task.h
+.\obj\systemmonitor_task.o: ..\File\TASK\mode_choose_task.h
+.\obj\systemmonitor_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\systemmonitor_task.o: ..\File\TASK\shoot_task.h
 .\obj\systemmonitor_task.o: ..\File\RM_Types\rm_os_types.h

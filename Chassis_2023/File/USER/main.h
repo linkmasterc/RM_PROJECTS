@@ -18,6 +18,9 @@
 /*--------------TASK--------------*/
 #include "systemmonitor_task.h"
 #include "gimbal_task.h"
+#include "led_task.h"
+#include "mode_choose_task.h"
+#include "shoot_task.h"
 
 /*------------OS_init-----------*/
 #include "os.h"
@@ -26,4 +29,8 @@ void SystemMonitorTask(void);
 void GimbalTask(void);
 void MotorDataSendTask(void);
 void SendDataTask(void);
+void ModeChooseTask(void);
+void ShootTask(void);
+void LEDStateChangeTask(void);
+
 #endif

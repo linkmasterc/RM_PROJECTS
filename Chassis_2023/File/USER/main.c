@@ -40,5 +40,40 @@ void SendDataTask(void)
 	systemMonitor.GimbalDataSendTask_cnt++;																
 }
 
+/** --------------------------------------------------------------------------
+	* @brief  控制模式选择任务
+			
+	* @note	1000Hz
+ -------------------------------------------------------------------------- **/
+void ModeChooseTask(void)
+{
+	ModeChoose();																						// 选择控制模式
+	
+	systemMonitor.ModeChooseTask_cnt++;																	// 任务计数
+}	
+/** --------------------------------------------------------------------------
+	* @brief  	射击任务
+			
+	* @note		1000Hz
+ -------------------------------------------------------------------------- **/
+void ShootTask(void)
+{
+	ShootBullet();
+	
+	systemMonitor.ShootTask_cnt++;																		
+}
 
+
+
+/** --------------------------------------------------------------------------
+	* @brief  	LED指示灯状态切换任务
+			
+	* @note		1000 * 20Hz
+ -------------------------------------------------------------------------- **/
+void LEDStateChangeTask(void)
+{
+	LEDStateChange();
+	
+	systemMonitor.LEDStateChangeTask_cnt++;
+}
 

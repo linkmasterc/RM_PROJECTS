@@ -2,7 +2,7 @@
 #define RM_COMMUNICATE_TYPES_H
 
 #include "rm_redefine_types.h"
-
+#include "stm32f4xx_usart.h"
 #define UART5_RX_STREAM        	DMA1_Stream0
 #define USART3_RX_STREAM        DMA1_Stream1
 #define UART4_RX_STREAM         DMA1_Stream2
@@ -24,10 +24,32 @@
 #define GimbalCushioning_Rx     USART3_Cushioning_Rx 	
 #define GimbalCushioning_Tx			GimbalSendData
 
+#define USART2_RX_BUF_LEN       	500
+#define USART2_TX_BUF_LEN					250
+
 #define USART3_RX_BUF_LEN       	16
-#define USART3_TX_BUF_LEN				13
+#define USART3_TX_BUF_LEN				17
+
+#define UART4_RX_BUF_LEN       	
+#define UART4_TX_BUF_LEN				
+
+#define UA6RxDMAbuf_LEN    60
+#define UA6RxMBbuf_LEN     (VISION_RECIEVE_DATA_LEN_DN + 5)
 
 #define QuickEncoder(Ratio, Number) {.fpGearRatio=Ratio, .siNumber=Number}
+
+/** 状态机结构体 */
+typedef struct {
+	USART_TypeDef* USARTx;					//串口号
+	DMA_Stream_TypeDef* DMAy_Streamx;		//DMA数据流
+	u8 *pMailbox;                           //接收邮箱地址
+	__IO u8 *pDMAbuf;                       //DMA内存基地址
+	u16 MBLen;                              //邮箱大小
+	u16 DMALen;                             //DMA缓存区大小
+	u16 rxConter;                           //当前接收帧结束地址+1
+	u16 rxBufferPtr;                        //当前帧起始地址
+	u16 rxSize;                             //当前帧大小
+} USART_RX_TypeDef;
 
 /**@brief 电机编码器解码结构体 */
 typedef struct
@@ -60,10 +82,10 @@ typedef __packed struct
 	__packed struct
 	{
 		u8 head[2];
-		u8 GIMBAL_STATUS;			//云台状态变量 2:关闭	1:手动操作	3:自动操作
-		u8 SHOOT_STATUS;			//枪管发射状态 暂定
-//		s16 ShooterSendDes;
-//		s16 FrictionSendDes;
+		u8 Flag_Run;					//云台使能标志位
+		u8 Flag_Shoot;				
+		s16 Friction_Send_Des;//摩擦轮转速期望值
+		s16 Shooter_Send_Des;		//弹数期望
 		float PitAngleDes;		//在手操时发给云控的pitch角度期望
 		float ShootFreq;			//枪管打蛋频率
 		u8 CRC8_Bit;
@@ -72,7 +94,115 @@ typedef __packed struct
 	
 }ST_IMU;
 
+/** 视觉数据接收结构体 */
+#define VISION_RECIEVE_DATA_NUM_UP		11
+#define VISION_RECIEVE_DATA_LEN_UP		(VISION_RECIEVE_DATA_NUM_UP * 4 + 1)
+#define VISION_RECIEVE_DATA_NUM_DN		11
+#define VISION_RECIEVE_DATA_LEN_DN		(VISION_RECIEVE_DATA_NUM_DN * 4 + 1)
+typedef __packed struct
+{
+	u8 Recieve_ID;
+	float Recieve_Data1;	//Pitch
+	float Recieve_Data2;	//Yaw
+	float Recieve_Data3;	//Distance
+	float Recieve_Data4;	//相机解算PITCH
+	float Recieve_Data5;	//相机解算YAW
+	float Recieve_Data6;	//滤波PITCH
+	float Recieve_Data7;	//滤波YAW	
+	float Recieve_Data8;	//全局视野PITCH
+	float Recieve_Data9;	//全局视野YAW
+	float Recieve_Data10;	//全局视野权重
+	float Recieve_Data11;	//全局视野权重
+} ST_VISION_DATA_UP;
+typedef __packed struct
+{
+	u8 Recieve_ID;
+	float Recieve_Data1;	//Pitch
+	float Recieve_Data2;	//Yaw
+	float Recieve_Data3;	//Distance
+	float Recieve_Data4;	//相机解算PITCH
+	float Recieve_Data5;	//相机解算YAW
+	float Recieve_Data6;	//滤波PITCH
+	float Recieve_Data7;	//滤波YAW	
+	float Recieve_Data8;	//Test1
+	float Recieve_Data9;	//Test2
+	float Recieve_Data10;	//Test3
+	float Recieve_Data11;	//Test4	
+} ST_VISION_DATA_DN;
+typedef union
+{
+	ST_VISION_DATA_UP stVisionData;
+	u8 pVisionData[VISION_RECIEVE_DATA_LEN_UP];
+} UN_VISION_DATA_UP;
+typedef union
+{
+	ST_VISION_DATA_DN stVisionData;
+	u8 pVisionData[VISION_RECIEVE_DATA_LEN_DN];
+} UN_VISION_DATA_DN;
 
+
+
+/** 视觉数据发送结构体 */
+#define VISION_SEND_DATA_NUM_UP	8
+#define VISION_SEND_DATA_LEN_UP	(VISION_SEND_DATA_NUM_UP * 4 + 6)
+#define VISION_SEND_DATA_NUM_DN	11
+#define VISION_SEND_DATA_LEN_DN	(VISION_SEND_DATA_NUM_DN * 4 + 6)
+typedef struct
+{
+	u8 Head1;
+	u8 Head2;
+	u8 ID;
+	u8 Length;
+
+	float Send_Data1;   //Pitch
+	float Send_Data2;   //Yaw
+	float Send_Data3;   //Bullet Speed
+	float Send_Data4;   //Enemy HP Detect
+	float Send_Data5;   //Chassis Position
+	float Send_Data6;   //Chassis Speed
+	float Send_Data7;   //Banlance Soldior Number
+	float Send_Data8;	//Trigger Times
+//	float Send_Data9;	//Vision Anti Fault Sniper
+
+	u8 Tail1;
+	u8 Tail2;
+} ST_DATA_UP_V;          //向视觉发送数据结构体
+
+typedef struct
+{
+	u8 Head1;
+	u8 Head2;
+	u8 ID;
+	u8 Length;
+
+	float Send_Data1;   //Pitch
+	float Send_Data2;   //Yaw
+	float Send_Data3;   //Bullet Speed
+	float Send_Data4;   //Enemy HP Detect
+	float Send_Data5;   //Chassis Position
+	float Send_Data6;   //Chassis Speed
+	float Send_Data7;   //Banlance Soldior Number
+	float Send_Data8;	//全局视野Pitch
+	float Send_Data9;	//全局视野Yaw
+	float Send_Data10;	//全局视野权重
+	float Send_Data11;	//全局视野号码
+
+
+	u8 Tail1;
+	u8 Tail2;
+} ST_DATA_DN_V;          //向视觉发送数据结构体
+
+typedef union
+{
+	ST_DATA_UP_V My_Data;
+	UCHAR8 Vision_Send_Data_Buf[VISION_SEND_DATA_LEN_UP];
+} VISION_SEND_DATA_UP;		//向视觉发送打包联合体
+
+typedef union
+{
+	ST_DATA_DN_V My_Data;
+	UCHAR8 Vision_Send_Data_Buf[VISION_SEND_DATA_LEN_DN];
+} VISION_SEND_DATA_DN;		//向视觉发送打包联合体
 #endif
 
 

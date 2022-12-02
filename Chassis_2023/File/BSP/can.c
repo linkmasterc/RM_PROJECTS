@@ -53,8 +53,11 @@ void CAN2_Configuration()
 	CAN_InitTypeDef CAN_InitStructure;
 	CAN_FilterInitTypeDef CAN_FilterInitStructure;
 	GPIO_InitTypeDef GPIO_InitStructure;
-	
+
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1,ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2,ENABLE);
+	
 	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_5|GPIO_Pin_6;
 	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;

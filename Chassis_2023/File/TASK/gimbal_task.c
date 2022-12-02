@@ -28,7 +28,7 @@ void GimbalRCMode(void)
 	/* 遥控器通道1控制云台PITCH轴位置 */
 	if(g_StDbus.stRC.Ch1 - RC_CH_VALUE_OFFSET != 0 )		
 	{	
-		if(stFlag.DN_RunFlag == TRUE)
+		if(stFlag.RunFlag == TRUE)
 		{
 			if(TestFlag)
 			{
@@ -46,7 +46,7 @@ void GimbalRCMode(void)
 	/* 遥控器通道0控制云台YAW轴位置 */
 	if(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET != 0 )		
 	{	
-		if(stFlag.DN_RunFlag == TRUE)
+		if(stFlag.RunFlag == TRUE)
 		{	
 			if(TestFlag)
 			{

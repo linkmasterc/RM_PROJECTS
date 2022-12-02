@@ -8,7 +8,7 @@
 .\obj\delay.o: ..\File\RM_Types\rm_pid_types.h
 .\obj\delay.o: ..\File\RM_Types\rm_scanner_types.h
 .\obj\delay.o: ..\File\RM_Types\rm_communicate_types.h
-.\obj\delay.o: ..\File\API\gimbal_protocol.h
+.\obj\delay.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h
 .\obj\delay.o: ..\File\USER\stm32f4xx.h
 .\obj\delay.o: ..\File\STM32_LIB\CMSIS\core_cm4.h
 .\obj\delay.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -44,6 +44,7 @@
 .\obj\delay.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\delay.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\delay.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
+.\obj\delay.o: ..\File\API\gimbal_protocol.h
 .\obj\delay.o: ..\File\USER\global_declare.h
 .\obj\delay.o: ..\File\API\rm_algorithm.h
 .\obj\delay.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
@@ -61,3 +62,7 @@
 .\obj\delay.o: ..\File\API\can_protocol.h
 .\obj\delay.o: ..\File\TASK\systemmonitor_task.h
 .\obj\delay.o: ..\File\TASK\gimbal_task.h
+.\obj\delay.o: ..\File\TASK\led_task.h
+.\obj\delay.o: ..\File\TASK\mode_choose_task.h
+.\obj\delay.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\delay.o: ..\File\TASK\shoot_task.h

@@ -439,14 +439,14 @@
               <FilePath>..\File\API\rm_algorithm.c</FilePath>
             </File>
             <File>
-              <FileName>vision_protocol.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\API\vision_protocol.c</FilePath>
-            </File>
-            <File>
               <FileName>gimbal_protocol.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\API\gimbal_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>vision_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\vision_protocol.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -542,6 +542,21 @@
               <FileName>systemmonitor_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\TASK\systemmonitor_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>shoot_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\shoot_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mode_choose_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\mode_choose_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>led_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\led_task.c</FilePath>
             </File>
           </Files>
         </Group>

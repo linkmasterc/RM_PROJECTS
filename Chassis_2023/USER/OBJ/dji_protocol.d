@@ -7,7 +7,7 @@
 .\obj\dji_protocol.o: ..\File\RM_Types\rm_pid_types.h
 .\obj\dji_protocol.o: ..\File\RM_Types\rm_scanner_types.h
 .\obj\dji_protocol.o: ..\File\RM_Types\rm_communicate_types.h
-.\obj\dji_protocol.o: ..\File\API\gimbal_protocol.h
+.\obj\dji_protocol.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h
 .\obj\dji_protocol.o: ..\File\USER\stm32f4xx.h
 .\obj\dji_protocol.o: ..\File\STM32_LIB\CMSIS\core_cm4.h
 .\obj\dji_protocol.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -43,6 +43,7 @@
 .\obj\dji_protocol.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\dji_protocol.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\dji_protocol.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
+.\obj\dji_protocol.o: ..\File\API\gimbal_protocol.h
 .\obj\dji_protocol.o: ..\File\USER\global_declare.h
 .\obj\dji_protocol.o: ..\File\API\rm_algorithm.h
 .\obj\dji_protocol.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
@@ -59,6 +60,10 @@
 .\obj\dji_protocol.o: ..\File\API\can_protocol.h
 .\obj\dji_protocol.o: ..\File\TASK\systemmonitor_task.h
 .\obj\dji_protocol.o: ..\File\TASK\gimbal_task.h
+.\obj\dji_protocol.o: ..\File\TASK\led_task.h
+.\obj\dji_protocol.o: ..\File\TASK\mode_choose_task.h
+.\obj\dji_protocol.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\dji_protocol.o: ..\File\TASK\shoot_task.h
 .\obj\dji_protocol.o: ..\File\USER\os.h
 .\obj\dji_protocol.o: ..\File\RM_Types\rm_os_types.h
 .\obj\dji_protocol.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

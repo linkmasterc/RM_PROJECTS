@@ -32,12 +32,10 @@ void GimbalReceiveDataProtocol(void)
 void GimbalSendDataProtocol(void)
 {
 	GimbalSendData.Send.PitAngleDes		= NoiseSimulator(GimbalPitchPosPid.m_fpDes,FALSE);
-	GimbalSendData.Send.GIMBAL_STATUS	= g_StDbus.stRC.SW_L;
-	GimbalSendData.Send.SHOOT_STATUS  = g_StDbus.stRC.SW_R;
-//	GimbalSendData.Send.ShooterSendDes		= Bullet_Des_DN;
-//	GimbalSendData.Send.FrictionSendDes		= Friction_State_DN;
-//	GimbalSendData.Send.Flag_Run				= stFlag.DN_RunFlag;
-//	GimbalSendData.Send.Flag_Shoot			= stFlag.DN_ShootFlag;
+	GimbalSendData.Send.Shooter_Send_Des		= Bullet_Des;
+	GimbalSendData.Send.Friction_Send_Des		= Friction_State;
+	GimbalSendData.Send.Flag_Run				= stFlag.RunFlag;
+	GimbalSendData.Send.Flag_Shoot			= stFlag.ShootFlag;
 //	GimbalSendData.Send.Flag_Sniper			= stFlag.DN_SniperFlag;
 //	GimbalSendData.Send.Flag_Reset			= stFlag.ResetFlag;
 //	GimbalSendData.Send.Flag_Pitch_Protect	= stFlag.PT_DNFlag; 

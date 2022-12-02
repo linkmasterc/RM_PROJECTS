@@ -59,6 +59,10 @@
 .\obj\stm32f4xx_it.o: ..\File\USER\stm32f4xx_it.h
 .\obj\stm32f4xx_it.o: ..\File\TASK\systemmonitor_task.h
 .\obj\stm32f4xx_it.o: ..\File\TASK\gimbal_task.h
+.\obj\stm32f4xx_it.o: ..\File\TASK\led_task.h
+.\obj\stm32f4xx_it.o: ..\File\TASK\mode_choose_task.h
+.\obj\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\stm32f4xx_it.o: ..\File\TASK\shoot_task.h
 .\obj\stm32f4xx_it.o: ..\File\USER\os.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_os_types.h
 .\obj\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

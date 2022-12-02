@@ -58,6 +58,10 @@
 .\obj\usart.o: ..\File\API\can_protocol.h
 .\obj\usart.o: ..\File\TASK\systemmonitor_task.h
 .\obj\usart.o: ..\File\TASK\gimbal_task.h
+.\obj\usart.o: ..\File\TASK\led_task.h
+.\obj\usart.o: ..\File\TASK\mode_choose_task.h
+.\obj\usart.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\usart.o: ..\File\TASK\shoot_task.h
 .\obj\usart.o: ..\File\USER\os.h
 .\obj\usart.o: ..\File\RM_Types\rm_os_types.h
 .\obj\usart.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

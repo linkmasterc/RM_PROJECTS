@@ -6,7 +6,7 @@
 .\obj\global_declare.o: ..\File\RM_Types\rm_pid_types.h
 .\obj\global_declare.o: ..\File\RM_Types\rm_scanner_types.h
 .\obj\global_declare.o: ..\File\RM_Types\rm_communicate_types.h
-.\obj\global_declare.o: ..\File\API\gimbal_protocol.h
+.\obj\global_declare.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h
 .\obj\global_declare.o: ..\File\USER\stm32f4xx.h
 .\obj\global_declare.o: ..\File\STM32_LIB\CMSIS\core_cm4.h
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -42,6 +42,7 @@
 .\obj\global_declare.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\global_declare.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\global_declare.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
+.\obj\global_declare.o: ..\File\API\gimbal_protocol.h
 .\obj\global_declare.o: ..\File\USER\global_declare.h
 .\obj\global_declare.o: ..\File\API\rm_algorithm.h
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
@@ -58,6 +59,10 @@
 .\obj\global_declare.o: ..\File\API\can_protocol.h
 .\obj\global_declare.o: ..\File\TASK\systemmonitor_task.h
 .\obj\global_declare.o: ..\File\TASK\gimbal_task.h
+.\obj\global_declare.o: ..\File\TASK\led_task.h
+.\obj\global_declare.o: ..\File\TASK\mode_choose_task.h
+.\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\global_declare.o: ..\File\TASK\shoot_task.h
 .\obj\global_declare.o: ..\File\USER\os.h
 .\obj\global_declare.o: ..\File\RM_Types\rm_os_types.h
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
