@@ -1,5 +1,11 @@
 .\obj\global_declare.o: ..\File\USER\global_declare.c
 .\obj\global_declare.o: ..\File\USER\global_declare.h
+.\obj\global_declare.o: ..\File\RM_Types\rm_rc_types.h
+.\obj\global_declare.o: ..\File\RM_Types\rm_redefine_types.h
+.\obj\global_declare.o: ..\File\RM_Types\rm_rs_types.h
+.\obj\global_declare.o: ..\File\RM_Types\rm_pid_types.h
+.\obj\global_declare.o: ..\File\RM_Types\rm_scanner_types.h
+.\obj\global_declare.o: ..\File\RM_Types\rm_communicate_types.h
 .\obj\global_declare.o: ..\File\USER\stm32f4xx.h
 .\obj\global_declare.o: ..\File\STM32_LIB\CMSIS\core_cm4.h
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -35,6 +41,4 @@
 .\obj\global_declare.o: ..\File\STM32_LIB\FWLIB\stm32f4xx_dac.h
 .\obj\global_declare.o: ..\File\STM32_LIB\FWLIB\stm32f4xx_dcmi.h
 .\obj\global_declare.o: ..\File\STM32_LIB\FWLIB\stm32f4xx_fsmc.h
-.\obj\global_declare.o: ..\File\RM_Types\rm_robot_types.h
-.\obj\global_declare.o: ..\File\RM_Types\parameter_config.h
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

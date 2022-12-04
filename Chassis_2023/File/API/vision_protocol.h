@@ -20,10 +20,8 @@ typedef enum {
 	V_RX_DATA = 4,
 	V_RX_END = 5,
 }V_RX_Status;
-
+float HP_Detect(void);
 void DNVisionDataProtocol(void);
-void UPVisionDataProtocol(void);
 void DNVisionDataSend(void);
-void UPVisionDataSend(void);
 
 #endif

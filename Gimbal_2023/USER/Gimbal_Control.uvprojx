@@ -383,14 +383,44 @@
           <GroupName>RM_Types</GroupName>
           <Files>
             <File>
-              <FileName>parameter_config.h</FileName>
+              <FileName>ParamConfig.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\File\RM_Types\parameter_config.h</FilePath>
+              <FilePath>..\File\RM_Types\ParamConfig.h</FilePath>
             </File>
             <File>
-              <FileName>rm_robot_types.h</FileName>
+              <FileName>rm_communicate_types.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\File\RM_Types\rm_robot_types.h</FilePath>
+              <FilePath>..\File\RM_Types\rm_communicate_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>rm_os_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\File\RM_Types\rm_os_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>rm_pid_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\File\RM_Types\rm_pid_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>rm_rc_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\File\RM_Types\rm_rc_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>rm_redefine_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\File\RM_Types\rm_redefine_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>rm_rs_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\File\RM_Types\rm_rs_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>rm_scanner_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\File\RM_Types\rm_scanner_types.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -438,29 +468,14 @@
               <FilePath>..\File\TASK\system_monitor_task.c</FilePath>
             </File>
             <File>
-              <FileName>communicate_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\TASK\communicate_task.c</FilePath>
-            </File>
-            <File>
               <FileName>imu_update_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\TASK\imu_update_task.c</FilePath>
             </File>
             <File>
-              <FileName>sensor_data_task.c</FileName>
+              <FileName>gimbal_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\TASK\sensor_data_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\TASK\motor_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>shoot_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\TASK\shoot_task.c</FilePath>
+              <FilePath>..\File\TASK\gimbal_task.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -468,34 +483,34 @@
           <GroupName>API</GroupName>
           <Files>
             <File>
+              <FileName>verify.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\verify.c</FilePath>
+            </File>
+            <File>
+              <FileName>can_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\can_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>rm_algorithm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\rm_algorithm.c</FilePath>
+            </File>
+            <File>
               <FileName>bmi088_driver.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\API\bmi088_driver.c</FilePath>
             </File>
             <File>
-              <FileName>uart_protocol.c</FileName>
+              <FileName>chassis_protocol.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\API\uart_protocol.c</FilePath>
+              <FilePath>..\File\API\chassis_protocol.c</FilePath>
             </File>
             <File>
-              <FileName>mahony_algorithm.c</FileName>
+              <FileName>general_math.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\API\mahony_algorithm.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\API\motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>pid_algorithm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\API\pid_algorithm.c</FilePath>
-            </File>
-            <File>
-              <FileName>CRC_TABLE.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\File\API\CRC_TABLE.h</FilePath>
+              <FilePath>..\File\API\general_math.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -511,16 +526,6 @@
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\BSP\delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\BSP\gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\BSP\led.c</FilePath>
             </File>
             <File>
               <FileName>nvic.c</FileName>
@@ -546,6 +551,11 @@
               <FileName>systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\BSP\systick.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\BSP\gpio.c</FilePath>
             </File>
           </Files>
         </Group>

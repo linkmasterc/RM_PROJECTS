@@ -55,6 +55,7 @@ void CAN2_Configuration()
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1,ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2,ENABLE);
 	
 	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_12|GPIO_Pin_13;

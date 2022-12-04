@@ -23,16 +23,10 @@ void SystemMonitorTask(void)
 
 void GimbalTask(void)
 {
-	GimbalRCMode();
+	GimbalModeChoose();
 	systemMonitor.GimbalTask_cnt++;
 }
 
-void MotorDataSendTask(void)
-{
-	DNYawPID();
-	CAN_SendData(CAN2,0x1ff,GimbalYawSpeedPid.m_fpU,0,0,0);
-	systemMonitor.MotorDataSendTask_cnt++;
-}
 
 void SendDataTask(void)
 {
@@ -93,8 +87,11 @@ void VisionDataSendTask(void)
 	#endif
 	{
 		DNVisionDataSend();
-		systemMonitor.DNVisionDataSendTask_cnt++;
+		systemMonitor.VisionDataSendTask_cnt++;
 	}	
 }
-
+void VofaPlusTask()
+{
+	VofaDataScan();
+}
 

@@ -21,6 +21,7 @@
 #include "led_task.h"
 #include "mode_choose_task.h"
 #include "shoot_task.h"
+#include "data_send_task.h"
 
 /*------------OS_init-----------*/
 #include "os.h"
@@ -33,4 +34,5 @@ void ModeChooseTask(void);
 void ShootTask(void);
 void LEDStateChangeTask(void);
 void VisionDataSendTask(void);
+void VofaPlusTask(void);
 #endif

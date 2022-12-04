@@ -1,5 +1,58 @@
 #include "bmi088_driver.h"
 
+
+#define PI 3.14159265358979f
+
+
+IMU_MODE imu_mode;
+
+ST_LPF gyro_x = {0,0,0,150,0.00025f};
+ST_LPF gyro_y = {0,0,0,438,0.00025f};
+ST_LPF gyro_z = {0,0,0,150,0.00025f};
+
+ST_LPF acc_x = {0,0,0,500,0.00025f};
+ST_LPF acc_y = {0,0,0,500,0.00025f};
+ST_LPF acc_z = {0,0,0,500,0.00025f};
+
+USHORT16 Cali_Cnt = CALI_NUM;
+SSHORT16 Real_Temp;
+FP32 Acc_X_Ori;
+FP32 Acc_Y_Ori;
+FP32 Acc_Z_Ori;
+FP32 Gyro_X_Ori;
+FP32 Gyro_Y_Ori;
+FP32 Gyro_Z_Ori;
+
+FP32 Acc_X_Real;											//单位为mg
+FP32 Acc_Y_Real;
+FP32 Acc_Z_Real;
+
+FP32 Gyro_X_Real;											//单位为弧度每秒
+FP32 Gyro_Y_Real;
+FP32 Gyro_Z_Real;
+
+FP32 Gyro_X_Speed;
+FP32 Gyro_Y_Speed;
+FP32 Gyro_Z_Speed;
+
+/*以下为零飘标定值*/
+FP32 Acc_X_Offset = 0;
+FP32 Acc_Y_Offset = 0;
+FP32 Acc_Z_Offset = 0;
+FP32 Gyro_X_Offset = 0;
+FP32 Gyro_Y_Offset = 0;
+FP32 Gyro_Z_Offset = 0;
+
+FP32 Status_offset[3][CALI_NUM] = {0};  //1 X;2 Y;3 Z.
+FP32 Num_offset[CALI_NUM] = {0};
+int  Const_offset = CALI_NUM;
+int  flag_offset = 0;
+FP32 testvalue[3] = {0};
+
+FP32 SEE = 0;    //Z_OFFSET实时标定的值
+
+#define STM32_FLASH_BASE 0x08000000 	//STM32 FLASH的起始地址
+
 int GetOffset(void);
 
 u8 BMI088_Read_Gyro_Data(u8 reg_id)
@@ -7,7 +60,7 @@ u8 BMI088_Read_Gyro_Data(u8 reg_id)
     u8 rec;
 
     GYRO_CS_L;//GPIO_ResetBits(Open_SPIx_CSB2_PORT, Open_SPIx_CSB2_PIN)//GPIOB   GPIO_Pin_12
-    rec = (u8)(0x00ff & spi_read_write_byte((u16)((reg_id<<8 | 0x00) | 0x8000)));//0b1000000000000000)));
+    rec = (u8)(0x00ff & spi1_read_write_byte((u16)((reg_id<<8 | 0x00) | 0x8000)));//0b1000000000000000)));
     GYRO_CS_H;//GPIO_SetBits(Open_SPIx_CSB2_PORT, Open_SPIx_CSB2_PIN)//GPIOB   GPIO_Pin_12
     NOP;
 
@@ -18,7 +71,7 @@ u8 BMI088_Read_Gyro_Data(u8 reg_id)
 void BMI088_Write_Gyro_Data(u8 reg_id,u8 data)
 {
     GYRO_CS_L;
-    spi_read_write_byte((u16)((reg_id<<8 | data) &0x7fff));// 0b0111111111111111));
+    spi1_read_write_byte((u16)((reg_id<<8 | data) &0x7fff));// 0b0111111111111111));
     GYRO_CS_H;
     NOP;
 }
@@ -28,8 +81,8 @@ u8 BMI088_Read_Acc_Data(u8 reg_id)
     u8 rec = 0;
 
     ACC_CS_L;
-    spi_read_write_byte((u16)((reg_id<<8 | 0xff) | 0x8000));//0b1000000000000000));				//Dummy_Byte
-    rec = (u8)(spi_read_write_byte(0x0000)>>8) & 0xff;
+    spi1_read_write_byte((u16)((reg_id<<8 | 0xff) | 0x8000));//0b1000000000000000));				//Dummy_Byte
+    rec = (u8)(spi1_read_write_byte(0x0000)>>8) & 0xff;
     ACC_CS_H;
     NOP;
 
@@ -39,7 +92,7 @@ u8 BMI088_Read_Acc_Data(u8 reg_id)
 void BMI088_Write_Acc_Data(u8 reg_id,u8 data)
 {
     ACC_CS_L;
-    spi_read_write_byte((u16)((reg_id<<8 | data) &0x7fff));// & 0b0111111111111111));
+    spi1_read_write_byte((u16)((reg_id<<8 | data) &0x7fff));// & 0b0111111111111111));
     ACC_CS_H;
     NOP;
 }
@@ -388,29 +441,3 @@ void Sensor_Data_Prepare()				//IMU数据准备（坐标转换，滤波，矫正零偏）
 }
 
 
-//
-//	函数名称：LpFilter(ST_LPF* lpf)
-//	函数功能：频域滤波器
-//
-void LpFilter(ST_LPF* lpf) 
-{                                                                   
-	float fir_a = 1/(1 + lpf->off_freq * lpf->samp_tim); 
-	lpf->preout = lpf->out;
-  lpf->out = fir_a * lpf->preout + (1 - fir_a) * lpf->in;
-}
-
-
-//
-//	函数名称：invSqrt(float x)
-//	函数功能：平方根倒数速算法，进行一次牛顿迭代法迭代
-//
-float invSqrt(float x)
-{
-	float halfx = 0.5f * x;
-	float y = x;
-	long i = *(long*)&y;
-	i = 0x5f3759df - (i>>1);
-	y = *(float*)&i;
-	y = y * (1.5f - (halfx * y * y));
-	return y;
-}

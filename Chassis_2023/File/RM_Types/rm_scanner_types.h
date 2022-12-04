@@ -23,8 +23,7 @@ typedef struct
 	DECLARE_MONITOR(ChassisTask);
 	DECLARE_MONITOR(MotorDataSendTask);
 	DECLARE_MONITOR(GimbalDataSendTask);
-	DECLARE_MONITOR(UPVisionDataSendTask);
-	DECLARE_MONITOR(DNVisionDataSendTask);
+	DECLARE_MONITOR(VisionDataSendTask);
 	DECLARE_MONITOR(CapacitorTask);
 	DECLARE_MONITOR(StateDataSendTask);
 	DECLARE_MONITOR(LEDStateChangeTask);

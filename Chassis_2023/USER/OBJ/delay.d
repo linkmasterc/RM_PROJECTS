@@ -44,6 +44,7 @@
 .\obj\delay.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\delay.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\delay.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
+.\obj\delay.o: ..\File\RM_Types\ParamConfig.h
 .\obj\delay.o: ..\File\API\gimbal_protocol.h
 .\obj\delay.o: ..\File\USER\global_declare.h
 .\obj\delay.o: ..\File\API\rm_algorithm.h
@@ -57,13 +58,16 @@
 .\obj\delay.o: ..\File\BSP\can.h
 .\obj\delay.o: ..\File\BSP\usart.h
 .\obj\delay.o: ..\File\BSP\nvic.h
+.\obj\delay.o: ..\File\BSP\systick.h
 .\obj\delay.o: ..\File\BSP\delay.h
 .\obj\delay.o: ..\File\USER\stm32f4xx_it.h
 .\obj\delay.o: ..\File\API\can_protocol.h
 .\obj\delay.o: ..\File\API\vision_protocol.h
+.\obj\delay.o: ..\File\API\DJI_protocol.h
 .\obj\delay.o: ..\File\TASK\systemmonitor_task.h
 .\obj\delay.o: ..\File\TASK\gimbal_task.h
 .\obj\delay.o: ..\File\TASK\led_task.h
 .\obj\delay.o: ..\File\TASK\mode_choose_task.h
 .\obj\delay.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\delay.o: ..\File\TASK\shoot_task.h
+.\obj\delay.o: ..\File\TASK\data_send_task.h

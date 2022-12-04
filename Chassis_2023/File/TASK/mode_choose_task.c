@@ -41,24 +41,49 @@ static void 	ShootInit(bool UPShoot);											// 发射机构初始化
 
 void ModeChoose(void)
 {
-	if(g_StDbus.stRC.SW_L==RC_SW_DOWN && g_StDbus.stRC.SW_R==RC_SW_DOWN)
+	/*********************安全模式********************/
+	if(g_StDbus.stRC.SW_L==RC_SW_DOWN)
 	{
 		ControlMode=0x00;
 		MotorInit(DN_OFF,CHASSIS_OFF);
 		ShootInit(DN_SHOOT_OFF);
 	}
-	else if (g_StDbus.stRC.SW_L==RC_SW_MID && g_StDbus.stRC.SW_R==RC_SW_DOWN)
+	
+	
+	/*********************手动遥控模式********************/
+	else if (g_StDbus.stRC.SW_L==RC_SW_MID)
 	{
 		ControlMode=0x01;
 		MotorInit(DN_ON,CHASSIS_OFF);
 		ShootInit(DN_SHOOT_ON);
 	}
-	else if(g_StDbus.stRC.SW_L==RC_SW_UP && g_StDbus.stRC.SW_R==RC_SW_DOWN)
+	
+	
+	/*********************巡逻模式手动打弹********************/
+	else if(g_StDbus.stRC.SW_L==RC_SW_UP&&g_StDbus.stRC.SW_R==RC_SW_DOWN)
 	{
 		ControlMode=0x02;
 		MotorInit(DN_ON,CHASSIS_OFF);
 		ShootInit(DN_SHOOT_ON);
 	}
+	
+	
+	/*********************巡逻模式自动打弹********************/
+	else if(g_StDbus.stRC.SW_L==RC_SW_UP&&g_StDbus.stRC.SW_R==RC_SW_MID)
+	{
+		ControlMode=0x03;
+		MotorInit(DN_ON,CHASSIS_OFF);
+		ShootInit(DN_SHOOT_ON);
+	}
+	
+	
+//	/*********************巡逻模式********************/
+//	else if(g_StDbus.stRC.SW_L==RC_SW_UP&&g_StDbus.stRC.SW_R==RC_SW_UP)
+//	{
+//		ControlMode=0x04;
+//		MotorInit(DN_ON,CHASSIS_OFF);
+//		ShootInit(DN_SHOOT_ON);
+//	}
 
 }
 
@@ -110,14 +135,8 @@ void ShootInit(bool DNShoot)
 		//测弹模式重置		
 		stFlag.ShootFlag = FALSE;											// 发射机构启动标志位
 		Friction_State_UP 	= 500;												// 摩擦轮开启标志位
-		DNSTC.BoDan_Flag 	= FALSE;											// 拨弹标志位
-		FrictFirstIn 		= TRUE;										// 用于摩擦轮延时启动
-		BoDanFirstIn		= TRUE;	
 	}
-	
-
 }
-
 
 
 

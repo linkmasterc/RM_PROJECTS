@@ -1,164 +1,129 @@
-#ifndef _GLOBAL_DECLARE_H_
-#define _GLOBAL_DECLARE_H_
+#ifndef GLOBAL_DECLARE_H
+#define GLOBAL_DECLARE_H
 
+#include "rm_rc_types.h"
+#include "rm_rs_types.h"
+#include "rm_pid_types.h"
+#include "rm_scanner_types.h"
+#include "rm_communicate_types.h"
 #include "stm32f4xx.h"
-#include "rm_robot_types.h"
 #include <string.h>
 #define __packed
 
+#define ChassisBufLen_Rx	USART3_RX_BUF_LEN
+#define ChassisBufLen_Tx	USART3_TX_BUF_LEN
+
+#define ST_GIMBAL_FLAG ST_IQRFLAG
 
 
 
 
+//摩擦轮
+#define fric_speed1 7400.0
+#define fric_speed2 4000.0
+#define Fric 139
 
-extern SYSTEM_MONITOR system_monitor;           //系统监视器
+//拨弹电机
+#define Bottom_SupplyStep 29491
 
+//pitch轴电机
+#define PITCH_ANGLE_FEEDBACK_GRYOSCOPE
+//#define PITCH_ANGLE_FEEDBACK_ENCODER
+#define PITCH_SPEED_FEEDBACK_GRYOSCOPE
+//#define PITCH_SPEED_FEEDBACK_ENCODER
+#define	PITCH_USE_TD
+#define GBDN_PITCH_MAX	10.0f
+#define GBDN_PITCH_MIN	-45.0f
+#define GM_PITCH_MIDPOS 4106
 
-
-extern u8 res_data[ReceiveBufSize];								//所需数据填充buf
-
-extern u8 send_data[SendBufSize];							//发送的数据
-
-extern const u8 NUM_BUF;													//数据包的数量
-
-extern USART2_DMA SendBuf;												//DMA发送结构体
+/** @brief 通讯所用变量 */
+	/** @brief can通讯 */
+		extern CanRxMsg CAN1_RX_Message;
+		extern CanRxMsg CAN2_RX_Message;
 	
-extern USART2_DMA ReceiveBuf;											//DMA接收结构体
-
-extern SEND_DMA_UNION Send_Union;									//DMA发送联合体
-
-extern u8 cushioning[13];					//DMA接收缓冲区
-
-extern motor_parameter motor_wheel[13];
-
-extern ST_ENCODER encoder[13];
-
-extern float YAW_POS_DES;
-
-extern float PITCH_POS_DES;
-
-extern float gravity_fb;
-
-extern float COE;
-
-extern ST_TD YAW_POS_TD;
-
-extern ST_TD PITCH_POS_TD;
-
-extern ST_PID YAW_POS_PID;
-
-extern ST_PID YAW_SPEED_PID;
-
-extern ST_PID PITCH_POS_PID;
-
-extern ST_PID PITCH_SPEED_PID;
-
-extern ST_PID	TRIGGER_POS_PID;
-
-extern ST_PID	TRIGGER_SPEED_PID;
-
-extern ST_PID	SHOOTER_SPEED_PID_L;
-
-extern ST_PID	SHOOTER_SPEED_PID_R;
-
-extern ST_LPF PITCH_LPF;
-
-extern ST_LPF YAW_LPF;
-
-extern ST_LPF	YAW_LPF;
-
-extern ST_ANGLE YAW_ANGLE;
-
-extern u8 DOWN_PLATFOM_STATUS;
-
-extern u8	DOWN_SHOOT_STATUS;
-
-extern u16 bullet_num;
-
-extern const u8 CRC8_INIT;												//crc8初始值
 	
-extern const u8 CRC8_TAB[256];										//crc8查询表
-
-extern u16 CRC16_INIT;
-
-extern const u16 CRC16_Table[256];
-
-typedef enum {FALSE = 0, TRUE = !FALSE} bool;
-
-extern IMU_MODE imu_mode;
-
-extern ST_LPF gyro_x;
-extern ST_LPF gyro_y;
-extern ST_LPF gyro_z;
-
-extern ST_LPF acc_x;
-extern ST_LPF acc_y;
-extern ST_LPF acc_z;
-
-extern u16 Cali_Cnt;
-extern s16 Real_Temp;
-extern float Acc_X_Ori;
-extern float Acc_Y_Ori;
-extern float Acc_Z_Ori;
-extern float Gyro_X_Ori;
-extern float Gyro_Y_Ori;
-extern float Gyro_Z_Ori;
-
-extern float Acc_X_Real;											//单位为mg
-extern float Acc_Y_Real;
-extern float Acc_Z_Real;
-
-extern float Gyro_X_Real;											//单位为弧度每秒
-extern float Gyro_Y_Real;
-extern float Gyro_Z_Real;
-
-extern float Gyro_X_Speed;
-extern float Gyro_Y_Speed;
-extern float Gyro_Z_Speed;
-
-/*以下为零飘标定值*/
-extern float Acc_X_Offset;
-extern float Acc_Y_Offset;
-extern float Acc_Z_Offset;
-extern float Gyro_X_Offset;
-extern float Gyro_Y_Offset;
-extern float Gyro_Z_Offset;
-
-extern float Status_offset[3][CALI_NUM];  //1 X;2 Y;3 Z.
-extern float Num_offset[CALI_NUM];
-extern int  Const_offset;
-extern int  flag_offset;
-extern float testvalue[3];
-
-extern float SEE;
-
-extern float Test_Flash_Ori;
-extern float Test_Flash_Write[2];
-extern float  Test_Flash_Get[2];
-
-extern float BMIPitchSpeed;
-extern float BMIYawSpeed;
-extern float BMIYawAngle;
-extern float BMIPitchAngle;
-extern float BMIRollSpeed;
-extern float BMIRollAngle;
-extern float DOWN_SHOOT_FREQ;
-
-extern _imu_st imu_data;
-extern float Kp;/**/
-extern float Ki;/**/
-/**/
-extern float exInt;
-extern float eyInt;
-extern float ezInt;
-/**/
-static float q0 = 1.0f;
-static float q1 = 0.0f;
-static float q2 = 0.0f;
-static float q3 = 0.0f;
+	/** @brief 大疆遥控器*/
+		extern ST_DBUS 	g_StDbus;	
+	
+	
+	/** @brief 串口通讯变量*/
+		extern __IO u8 USART2_Cushioning_Rx[1];		
+		extern __IO u8 USART3_Cushioning_Rx[ChassisBufLen_Rx];
+		extern __IO u8 UART4_Cushioning_Rx[1];
+		extern __IO u8 UART5_Cushioning_Rx[1];
+		extern __IO u8 USART6_Cushioning_Rx[1];
+		extern ST_IMU ChassisData;
 
 
+/** @brief 电机所用变量 */
+	/** @brief	编码器数据结构体 */
+		extern ST_ENCODER GimbalYawEncoder;
+		extern ST_ENCODER ShootEncoder;
+		extern ST_ENCODER ChassisEncoder;
+		extern ST_ENCODER MotorEncoder;
+		extern ST_ENCODER ChassisZigEncoder;
+	
+	/** @brief 电机控制pid */
+		extern ST_PID GimbalYawPosPid;
+		extern ST_PID GimbalYawSpeedPid; 
+		extern ST_PID GimbalPitchPosPid;
+		extern ST_PID GimbalPitchSpeedPid;
+		extern ST_TD	YawTD;
+	/** @brief 电调返回转化位常用单位 */
+	  extern float YawPosDes;
+		extern float YawEncoderAngle;
+		extern float YawEncoderSpeed;
+		extern float YawBMIAngle;
+		extern float YawBMISpeed;
+		
+		extern float PitchPosDes;
+		extern float PitchBMIAngle;
+		extern float PitchBMISpeed;
+	/** @brief 摩擦轮 */
+		extern float Friction1_Temp;
+		extern float Friction2_Temp;
+		extern float Real_Friction1_Temp;
+		extern float Real_Friction2_Temp;
+		extern ST_ENCODER g_stFriction1Encoder;
+		extern ST_ENCODER g_stFriction2Encoder;
+		extern ST_SMC g_stFriction1SMC;
+		extern ST_SMC g_stFriction2SMC;
+	/** @brief 拨弹电机 */
+		extern bool Shooter_BLOCK;
+		extern float ShooterN;
+		extern ST_ENCODER g_stShooterEncoder;
+		extern ST_PID g_stShooterPosPID;
+		extern ST_PID g_stShooterSpeedPID;
+	/** @brief pitch轴电机 */
+		extern float COMP;
+		extern float PitchTest;
+		extern s16 G_Compensate;
 
+		extern float Pitch_Encoder_angle;
+		extern float Pitch_Encoder_speed;
+		extern ST_ANGLE BMIPitchAngle;
+		extern float BMIPitchSpeed;
+		extern ST_ANGLE BMIYawAngle;
+		extern float BMIYawSpeed;
+
+		extern float PitchDiff;
+		extern float Gravity_Compensate;
+
+
+		extern ST_ENCODER g_stPitchEncoder;
+		extern float PitchSpeedCompensate;
+		extern float	PitchCoe;
+		extern ST_TD 	g_stPitchTD;
+		extern ST_PID g_stPitchPosPID;
+		extern ST_PID g_stPitchSpeedPID;
+/** @brief 侦测 */
+	/**	@brief	系统监视器 */
+		extern SYSTEM_MONITOR systemMonitor;
+		extern SUB_SYSTEM_MONITOR	SubSystemMonitor;
+		extern RS_SYSTEM_MONITOR	RSSystemMonitor;
+		extern ST_ERROR stError;	// 模块异常标志位#endif
+		extern ST_FLAG 	stFlag;
+		extern ST_GIMBAL_FLAG stGimbalFlag; //云台控制标志位
 #endif
 
 

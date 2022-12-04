@@ -4,6 +4,7 @@
 #include "can.h"
 #include "usart.h"
 #include "nvic.h"
+#include "systick.h"
 #include "main.h"
 
 void BSP_Init(void);

@@ -183,8 +183,8 @@ void DNVisionDataSend(void)
 	/* PROTOCOL DATA CODE BEGIN */
 	VisionDataSendBuff.My_Data.Send_Data1 = VisionSendData1 = GimbalPitchPosPid.m_fpFB;
 	VisionDataSendBuff.My_Data.Send_Data2 = VisionSendData2 = GimbalYawPosPid.m_fpFB;
-	VisionDataSendBuff.My_Data.Send_Data3 = VisionSendData3 = 1.0;//Bullet2SpeedMessage;
-	VisionDataSendBuff.My_Data.Send_Data4 = VisionSendData4 = 1.0;//HP_Detect();
+	VisionDataSendBuff.My_Data.Send_Data3 = VisionSendData3 = Bullet2SpeedMessage;
+	VisionDataSendBuff.My_Data.Send_Data4 = VisionSendData4 = HP_Detect();
 	VisionDataSendBuff.My_Data.Send_Data5 = VisionSendData5 = 1.0;//rush.EncoderSite - rush.LeftOffset;
 	VisionDataSendBuff.My_Data.Send_Data6 = VisionSendData6 = 1.0;//EncoderSpeed;
 	if(BanlanReconizeFinshFlag)
@@ -211,226 +211,226 @@ void DNVisionDataSend(void)
 
 
 
-///**
-//  *	@brief	敌方血量评估
-//  */
-//float HP_Detect(void)
-//{
-//	UCHAR8 Hero_bit;
-//	UCHAR8 Engi_bit;
-//	UCHAR8 Stan1_bit;
-//	UCHAR8 Stan2_bit;
-//	UCHAR8 Stan3_bit;
-//	
-//	static u16 PreRobot1HP = 150;
-//	static u32 Robot1ProtectTick = 0;
-//	static u16 PreRobot2HP = 500;
-//	static u32 Robot2ProtectTick = 0;
-//	static u16 PreRobot3HP = 100;
-//	static u32 Robot3ProtectTick = 0;
-//	static u16 PreRobot4HP = 100;
-//	static u32 Robot4ProtectTick = 0;
-//	static u16 PreRobot5HP = 100;
-//	static u32 Robot5ProtectTick = 0;
-//	
-//	if(RobotIDMessage == Red_7_Sentry)//红方ID 7	（识别蓝色）
-//	{
-//		/** 英雄无敌以及残血检测 */
-//		if(PreRobot1HP == 0 && GameRobotHP.blue_1_robot_HP > 0)
-//		{
-//			Robot1ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot1ShootFlag 	= FALSE;
-//			Hero_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot1ProtectTick > 10000)
-//		{
-//			Robot1ShootFlag 	= TRUE;
-//			if(GameRobotHP.blue_1_robot_HP <= Hero_HP_Threshold && GameRobotHP.blue_1_robot_HP != 0)
-//			{	Hero_bit = 1;}
-//			else
-//			{	Hero_bit = 0;}
-//		}
-//		else
-//		{	Hero_bit = 0;}
-//		
-//		/** 工程无敌以及残血检测 */
-//		if(PreRobot2HP == 0 && GameRobotHP.blue_2_robot_HP > 0)
-//		{
-//			Robot2ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot2ShootFlag 	= FALSE;
-//			Engi_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot2ProtectTick > 10000)
-//		{
-//			Robot2ShootFlag 	= FALSE;
-//			if(GameRobotHP.blue_2_robot_HP <= Engi_HP_Threshold && GameRobotHP.blue_2_robot_HP != 0)
-//			{	Engi_bit = 2;}
-//			else
-//			{	Engi_bit = 0;}
-//		}
-//		else
-//		{	Engi_bit = 0;}
-//		
-//		/** 步兵3无敌以及残血检测 */
-//		if(PreRobot3HP == 0 && GameRobotHP.blue_3_robot_HP > 0)
-//		{
-//			Robot3ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot3ShootFlag 	= FALSE;
-//			Stan1_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot3ProtectTick > 10000)
-//		{
-//			Robot3ShootFlag 	= TRUE;
-//			if(GameRobotHP.blue_3_robot_HP <= Stan_HP_Threshold && GameRobotHP.blue_3_robot_HP != 0)
-//			{	Stan1_bit = 3;}
-//			else
-//			{	Stan1_bit = 0;}
-//		}
-//		else
-//		{	Stan1_bit = 0;}
-//		
-//		
-//		/** 步兵4无敌以及残血检测 */
-//		if(PreRobot4HP == 0 && GameRobotHP.blue_4_robot_HP > 0)
-//		{
-//			Robot4ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot4ShootFlag 	= FALSE;
-//			Stan2_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot4ProtectTick > 10000)
-//		{
-//			Robot4ShootFlag 	= TRUE;
-//			if(GameRobotHP.blue_4_robot_HP <= Stan_HP_Threshold && GameRobotHP.blue_4_robot_HP != 0)
-//			{	Stan2_bit = 4;}
-//			else
-//			{	Stan2_bit = 0;}
-//		}
-//		else
-//		{	Stan2_bit = 0;}
-//		
-//		/** 步兵5无敌以及残血检测 */
-//		if(PreRobot5HP == 0 && GameRobotHP.blue_5_robot_HP > 0)
-//		{
-//			Robot5ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot5ShootFlag 	= FALSE;
-//			Stan3_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot5ProtectTick > 10000)
-//		{
-//			Robot5ShootFlag 	= TRUE;
-//			if(GameRobotHP.blue_5_robot_HP <= Stan_HP_Threshold && GameRobotHP.blue_5_robot_HP != 0)
-//			{	Stan3_bit = 5;}
-//			else
-//			{	Stan3_bit = 0;}
-//		}
-//		else
-//		{	Stan3_bit = 0;}
-//		
-//		PreRobot1HP = GameRobotHP.blue_1_robot_HP;
-//		PreRobot2HP = GameRobotHP.blue_2_robot_HP;
-//		PreRobot3HP = GameRobotHP.blue_3_robot_HP;
-//		PreRobot4HP = GameRobotHP.blue_4_robot_HP;
-//		PreRobot5HP = GameRobotHP.blue_5_robot_HP;
-//	}	
-//	else if(RobotIDMessage == Blue_7_Sentry)//蓝方ID 17	（识别红色）
-//	{
-//		/** 英雄无敌以及残血检测 */
-//		if(PreRobot1HP == 0 && GameRobotHP.red_1_robot_HP > 0)
-//		{
-//			Robot1ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot1ShootFlag 	= FALSE;
-//			Hero_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot1ProtectTick > 10000)
-//		{
-//			Robot1ShootFlag 	= TRUE;
-//			if(GameRobotHP.red_1_robot_HP <= Hero_HP_Threshold && GameRobotHP.red_1_robot_HP != 0)
-//			{	Hero_bit = 1;}
-//			else
-//			{	Hero_bit = 0;}
-//		}
-//		else
-//		{	Hero_bit = 0;}
-//		
-//		/** 工程无敌以及残血检测 */
-//		if(PreRobot2HP == 0 && GameRobotHP.red_2_robot_HP > 0)
-//		{	
-//			Robot2ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot2ShootFlag 	= FALSE;
-//			Engi_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot2ProtectTick > 10000)
-//		{
-//			Robot2ShootFlag 	= TRUE;
-//			if(GameRobotHP.red_2_robot_HP <= Engi_HP_Threshold && GameRobotHP.red_2_robot_HP != 0)
-//			{	Engi_bit = 2;}
-//			else
-//			{	Engi_bit = 0;}
-//		}
-//		else
-//		{	Engi_bit = 0;}
-//		/** 步兵3无敌以及残血检测 */
-//		if(PreRobot3HP == 0 && GameRobotHP.red_3_robot_HP > 0)
-//		{
-//			Robot3ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot3ShootFlag 	= FALSE;
-//			Stan1_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot3ProtectTick > 10000)
-//		{
-//			Robot3ShootFlag 	= TRUE;
-//			if(GameRobotHP.red_3_robot_HP <= Stan_HP_Threshold && GameRobotHP.red_3_robot_HP != 0)
-//			{	Stan1_bit = 5;}
-//			else
-//			{	Stan1_bit = 0;}	
-//		}
-//		else
-//		{	Stan1_bit = 0;}	
-//		
-//		/** 步兵4无敌以及残血检测 */
-//		if(PreRobot4HP == 0 && GameRobotHP.red_4_robot_HP > 0)
-//		{
-//			Robot4ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot4ShootFlag 	= FALSE;
-//			Stan2_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot4ProtectTick > 10000)
-//		{
-//			Robot4ShootFlag 	= TRUE;
-//			if(GameRobotHP.red_4_robot_HP <= Stan_HP_Threshold && GameRobotHP.red_4_robot_HP != 0)
-//			{	Stan2_bit = 4;}
-//			else
-//			{	Stan2_bit = 0;}	
-//		}
-//		else
-//		{	Stan2_bit = 0;}	
-//		
-//		/** 步兵5无敌以及残血检测 */
-//		if(PreRobot5HP == 0 && GameRobotHP.red_5_robot_HP > 0)
-//		{
-//			Robot5ProtectTick 	= systemMonitor.SysTickTime;
-//			Robot5ShootFlag 	= FALSE;
-//			Stan3_bit = 0;
-//		}
-//		else if(systemMonitor.SysTickTime - Robot5ProtectTick > 10000)
-//		{
-//			Robot5ShootFlag 	= TRUE;
-//			if(GameRobotHP.red_5_robot_HP <= Stan_HP_Threshold && GameRobotHP.red_5_robot_HP != 0)
-//			{	Stan3_bit = 5;}
-//			else
-//			{	Stan3_bit = 0;}	
-//		}
-//		else
-//		{	Stan3_bit = 0;}		
-//		
-//		PreRobot1HP = GameRobotHP.red_1_robot_HP;
-//		PreRobot2HP = GameRobotHP.red_2_robot_HP;
-//		PreRobot3HP = GameRobotHP.red_3_robot_HP;
-//		PreRobot4HP = GameRobotHP.red_4_robot_HP;
-//		PreRobot5HP = GameRobotHP.red_5_robot_HP;
-//	}
-//	
-//	return (float)(Hero_bit*10000 + Engi_bit*1000 + Stan1_bit*100 + Stan2_bit*10 + Stan3_bit*1);
-//}
+/**
+  *	@brief	敌方血量评估
+  */
+float HP_Detect(void)
+{
+	UCHAR8 Hero_bit;
+	UCHAR8 Engi_bit;
+	UCHAR8 Stan1_bit;
+	UCHAR8 Stan2_bit;
+	UCHAR8 Stan3_bit;
+	
+	static u16 PreRobot1HP = 150;
+	static u32 Robot1ProtectTick = 0;
+	static u16 PreRobot2HP = 500;
+	static u32 Robot2ProtectTick = 0;
+	static u16 PreRobot3HP = 100;
+	static u32 Robot3ProtectTick = 0;
+	static u16 PreRobot4HP = 100;
+	static u32 Robot4ProtectTick = 0;
+	static u16 PreRobot5HP = 100;
+	static u32 Robot5ProtectTick = 0;
+	
+	if(RobotIDMessage == Red_7_Sentry)//红方ID 7	（识别蓝色）
+	{
+		/** 英雄无敌以及残血检测 */
+		if(PreRobot1HP == 0 && GameRobotHP.blue_1_robot_HP > 0)
+		{
+			Robot1ProtectTick 	= systemMonitor.SysTickTime;
+			Robot1ShootFlag 	= FALSE;
+			Hero_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot1ProtectTick > 10000)
+		{
+			Robot1ShootFlag 	= TRUE;
+			if(GameRobotHP.blue_1_robot_HP <= Hero_HP_Threshold && GameRobotHP.blue_1_robot_HP != 0)
+			{	Hero_bit = 1;}
+			else
+			{	Hero_bit = 0;}
+		}
+		else
+		{	Hero_bit = 0;}
+		
+		/** 工程无敌以及残血检测 */
+		if(PreRobot2HP == 0 && GameRobotHP.blue_2_robot_HP > 0)
+		{
+			Robot2ProtectTick 	= systemMonitor.SysTickTime;
+			Robot2ShootFlag 	= FALSE;
+			Engi_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot2ProtectTick > 10000)
+		{
+			Robot2ShootFlag 	= FALSE;
+			if(GameRobotHP.blue_2_robot_HP <= Engi_HP_Threshold && GameRobotHP.blue_2_robot_HP != 0)
+			{	Engi_bit = 2;}
+			else
+			{	Engi_bit = 0;}
+		}
+		else
+		{	Engi_bit = 0;}
+		
+		/** 步兵3无敌以及残血检测 */
+		if(PreRobot3HP == 0 && GameRobotHP.blue_3_robot_HP > 0)
+		{
+			Robot3ProtectTick 	= systemMonitor.SysTickTime;
+			Robot3ShootFlag 	= FALSE;
+			Stan1_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot3ProtectTick > 10000)
+		{
+			Robot3ShootFlag 	= TRUE;
+			if(GameRobotHP.blue_3_robot_HP <= Stan_HP_Threshold && GameRobotHP.blue_3_robot_HP != 0)
+			{	Stan1_bit = 3;}
+			else
+			{	Stan1_bit = 0;}
+		}
+		else
+		{	Stan1_bit = 0;}
+		
+		
+		/** 步兵4无敌以及残血检测 */
+		if(PreRobot4HP == 0 && GameRobotHP.blue_4_robot_HP > 0)
+		{
+			Robot4ProtectTick 	= systemMonitor.SysTickTime;
+			Robot4ShootFlag 	= FALSE;
+			Stan2_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot4ProtectTick > 10000)
+		{
+			Robot4ShootFlag 	= TRUE;
+			if(GameRobotHP.blue_4_robot_HP <= Stan_HP_Threshold && GameRobotHP.blue_4_robot_HP != 0)
+			{	Stan2_bit = 4;}
+			else
+			{	Stan2_bit = 0;}
+		}
+		else
+		{	Stan2_bit = 0;}
+		
+		/** 步兵5无敌以及残血检测 */
+		if(PreRobot5HP == 0 && GameRobotHP.blue_5_robot_HP > 0)
+		{
+			Robot5ProtectTick 	= systemMonitor.SysTickTime;
+			Robot5ShootFlag 	= FALSE;
+			Stan3_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot5ProtectTick > 10000)
+		{
+			Robot5ShootFlag 	= TRUE;
+			if(GameRobotHP.blue_5_robot_HP <= Stan_HP_Threshold && GameRobotHP.blue_5_robot_HP != 0)
+			{	Stan3_bit = 5;}
+			else
+			{	Stan3_bit = 0;}
+		}
+		else
+		{	Stan3_bit = 0;}
+		
+		PreRobot1HP = GameRobotHP.blue_1_robot_HP;
+		PreRobot2HP = GameRobotHP.blue_2_robot_HP;
+		PreRobot3HP = GameRobotHP.blue_3_robot_HP;
+		PreRobot4HP = GameRobotHP.blue_4_robot_HP;
+		PreRobot5HP = GameRobotHP.blue_5_robot_HP;
+	}	
+	else if(RobotIDMessage == Blue_7_Sentry)//蓝方ID 17	（识别红色）
+	{
+		/** 英雄无敌以及残血检测 */
+		if(PreRobot1HP == 0 && GameRobotHP.red_1_robot_HP > 0)
+		{
+			Robot1ProtectTick 	= systemMonitor.SysTickTime;
+			Robot1ShootFlag 	= FALSE;
+			Hero_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot1ProtectTick > 10000)
+		{
+			Robot1ShootFlag 	= TRUE;
+			if(GameRobotHP.red_1_robot_HP <= Hero_HP_Threshold && GameRobotHP.red_1_robot_HP != 0)
+			{	Hero_bit = 1;}
+			else
+			{	Hero_bit = 0;}
+		}
+		else
+		{	Hero_bit = 0;}
+		
+		/** 工程无敌以及残血检测 */
+		if(PreRobot2HP == 0 && GameRobotHP.red_2_robot_HP > 0)
+		{	
+			Robot2ProtectTick 	= systemMonitor.SysTickTime;
+			Robot2ShootFlag 	= FALSE;
+			Engi_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot2ProtectTick > 10000)
+		{
+			Robot2ShootFlag 	= TRUE;
+			if(GameRobotHP.red_2_robot_HP <= Engi_HP_Threshold && GameRobotHP.red_2_robot_HP != 0)
+			{	Engi_bit = 2;}
+			else
+			{	Engi_bit = 0;}
+		}
+		else
+		{	Engi_bit = 0;}
+		/** 步兵3无敌以及残血检测 */
+		if(PreRobot3HP == 0 && GameRobotHP.red_3_robot_HP > 0)
+		{
+			Robot3ProtectTick 	= systemMonitor.SysTickTime;
+			Robot3ShootFlag 	= FALSE;
+			Stan1_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot3ProtectTick > 10000)
+		{
+			Robot3ShootFlag 	= TRUE;
+			if(GameRobotHP.red_3_robot_HP <= Stan_HP_Threshold && GameRobotHP.red_3_robot_HP != 0)
+			{	Stan1_bit = 5;}
+			else
+			{	Stan1_bit = 0;}	
+		}
+		else
+		{	Stan1_bit = 0;}	
+		
+		/** 步兵4无敌以及残血检测 */
+		if(PreRobot4HP == 0 && GameRobotHP.red_4_robot_HP > 0)
+		{
+			Robot4ProtectTick 	= systemMonitor.SysTickTime;
+			Robot4ShootFlag 	= FALSE;
+			Stan2_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot4ProtectTick > 10000)
+		{
+			Robot4ShootFlag 	= TRUE;
+			if(GameRobotHP.red_4_robot_HP <= Stan_HP_Threshold && GameRobotHP.red_4_robot_HP != 0)
+			{	Stan2_bit = 4;}
+			else
+			{	Stan2_bit = 0;}	
+		}
+		else
+		{	Stan2_bit = 0;}	
+		
+		/** 步兵5无敌以及残血检测 */
+		if(PreRobot5HP == 0 && GameRobotHP.red_5_robot_HP > 0)
+		{
+			Robot5ProtectTick 	= systemMonitor.SysTickTime;
+			Robot5ShootFlag 	= FALSE;
+			Stan3_bit = 0;
+		}
+		else if(systemMonitor.SysTickTime - Robot5ProtectTick > 10000)
+		{
+			Robot5ShootFlag 	= TRUE;
+			if(GameRobotHP.red_5_robot_HP <= Stan_HP_Threshold && GameRobotHP.red_5_robot_HP != 0)
+			{	Stan3_bit = 5;}
+			else
+			{	Stan3_bit = 0;}	
+		}
+		else
+		{	Stan3_bit = 0;}		
+		
+		PreRobot1HP = GameRobotHP.red_1_robot_HP;
+		PreRobot2HP = GameRobotHP.red_2_robot_HP;
+		PreRobot3HP = GameRobotHP.red_3_robot_HP;
+		PreRobot4HP = GameRobotHP.red_4_robot_HP;
+		PreRobot5HP = GameRobotHP.red_5_robot_HP;
+	}
+	
+	return (float)(Hero_bit*10000 + Engi_bit*1000 + Stan1_bit*100 + Stan2_bit*10 + Stan3_bit*1);
+}
 
 

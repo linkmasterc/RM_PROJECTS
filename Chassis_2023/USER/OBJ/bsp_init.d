@@ -39,6 +39,7 @@
 .\obj\bsp_init.o: ..\File\BSP\can.h
 .\obj\bsp_init.o: ..\File\BSP\usart.h
 .\obj\bsp_init.o: ..\File\BSP\nvic.h
+.\obj\bsp_init.o: ..\File\BSP\systick.h
 .\obj\bsp_init.o: ..\File\USER\main.h
 .\obj\bsp_init.o: ..\File\USER\global_declare.h
 .\obj\bsp_init.o: ..\File\RM_Types\rm_rc_types.h
@@ -47,6 +48,7 @@
 .\obj\bsp_init.o: ..\File\RM_Types\rm_pid_types.h
 .\obj\bsp_init.o: ..\File\RM_Types\rm_scanner_types.h
 .\obj\bsp_init.o: ..\File\RM_Types\rm_communicate_types.h
+.\obj\bsp_init.o: ..\File\RM_Types\ParamConfig.h
 .\obj\bsp_init.o: ..\File\API\gimbal_protocol.h
 .\obj\bsp_init.o: ..\File\USER\global_declare.h
 .\obj\bsp_init.o: ..\File\API\rm_algorithm.h
@@ -60,9 +62,11 @@
 .\obj\bsp_init.o: ..\File\USER\stm32f4xx_it.h
 .\obj\bsp_init.o: ..\File\API\can_protocol.h
 .\obj\bsp_init.o: ..\File\API\vision_protocol.h
+.\obj\bsp_init.o: ..\File\API\DJI_protocol.h
 .\obj\bsp_init.o: ..\File\TASK\systemmonitor_task.h
 .\obj\bsp_init.o: ..\File\TASK\gimbal_task.h
 .\obj\bsp_init.o: ..\File\TASK\led_task.h
 .\obj\bsp_init.o: ..\File\TASK\mode_choose_task.h
 .\obj\bsp_init.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\bsp_init.o: ..\File\TASK\shoot_task.h
+.\obj\bsp_init.o: ..\File\TASK\data_send_task.h

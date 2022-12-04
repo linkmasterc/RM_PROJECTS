@@ -44,6 +44,7 @@
 .\obj\systemmonitor_task.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\systemmonitor_task.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\systemmonitor_task.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
+.\obj\systemmonitor_task.o: ..\File\RM_Types\ParamConfig.h
 .\obj\systemmonitor_task.o: ..\File\API\gimbal_protocol.h
 .\obj\systemmonitor_task.o: ..\File\USER\global_declare.h
 .\obj\systemmonitor_task.o: ..\File\API\rm_algorithm.h
@@ -55,15 +56,18 @@
 .\obj\systemmonitor_task.o: ..\File\BSP\can.h
 .\obj\systemmonitor_task.o: ..\File\BSP\usart.h
 .\obj\systemmonitor_task.o: ..\File\BSP\nvic.h
+.\obj\systemmonitor_task.o: ..\File\BSP\systick.h
 .\obj\systemmonitor_task.o: ..\File\USER\main.h
 .\obj\systemmonitor_task.o: ..\File\BSP\delay.h
 .\obj\systemmonitor_task.o: ..\File\USER\stm32f4xx_it.h
 .\obj\systemmonitor_task.o: ..\File\API\can_protocol.h
 .\obj\systemmonitor_task.o: ..\File\API\vision_protocol.h
+.\obj\systemmonitor_task.o: ..\File\API\DJI_protocol.h
 .\obj\systemmonitor_task.o: ..\File\TASK\systemmonitor_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\gimbal_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\led_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\mode_choose_task.h
 .\obj\systemmonitor_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\systemmonitor_task.o: ..\File\TASK\shoot_task.h
+.\obj\systemmonitor_task.o: ..\File\TASK\data_send_task.h
 .\obj\systemmonitor_task.o: ..\File\RM_Types\rm_os_types.h

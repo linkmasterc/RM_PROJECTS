@@ -1,119 +1,136 @@
 #include "global_declare.h"
 
 SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
-u8 								res_data[ReceiveBufSize];
-u8								send_data[SendBufSize];
-USART2_DMA 				SendBuf={
-													 .head[0]=FRAME_HEAD1,
-													 .head[1]=FRAME_HEAD2,
-													};
-USART2_DMA 				ReceiveBuf;
-SEND_DMA_UNION 		Send_Union;
-const u8 					NUM_BUF=1;
-u8  							cushioning[13];
-motor_parameter   motor_wheel[13];
-ST_ENCODER 				encoder[13]={{0,0,0,8192,0},{0,0,0,8192,0},{0,0,0,8192,0},{0,0,0,8192,0},
-															 {0,0,0,8192,0},{0,0,0,8192,0},{0,0,0,8192,0},{0,0,0,8192,0},
-															 {0,0,0,8192,0},{0,0,0,8192,0},{0,0,0,8192,0},{0,0,0,8192,0},
-															 {0,0,0,8192,0}};
-float							YAW_POS_DES;
-float							PITCH_POS_DES;
-float							gravity_fb=-6000;
-float 						COE=1;
-ST_TD 						YAW_POS_TD;
-ST_TD							PITCH_POS_TD={0,0,0,150,0.001,0.001,0};
-ST_PID 						YAW_POS_PID;
-ST_PID 						YAW_SPEED_PID;
-ST_PID 						PITCH_POS_PID={.fpKp=0,.fpKi=0.0,.fpDt=0.001,.fpUiMax=5000,.fpEMin=1,.fpUMax=2000};
-ST_PID 						PITCH_SPEED_PID={.fpKp=0,.fpKd=0,.fpUdMax=25000,.fpDt=0.001,.fpUMax=28000};
-ST_PID						TRIGGER_POS_PID={.fpKp=0.215,.fpUMax=8000};
-ST_PID						TRIGGER_SPEED_PID={.fpKp=500,.fpUMax=8000};
-ST_PID						SHOOTER_SPEED_PID_L;
-ST_PID						SHOOTER_SPEED_PID_R;
-ST_LPF 						PITCH_LPF={0,0,0,500,0.001};
-ST_LPF 						YAW_LPF={0,0,0,500,0.001};
-ST_ANGLE					YAW_ANGLE={0,0,0,360,0};
-ST_ANGLE					PITCH_ANGLE={0,0,0,360,0};
-u8								DOWN_PLATFOM_STATUS=1;
-u8								DOWN_SHOOT_STATUS=1;
-u16								bullet_num;
-IMU_MODE 					imu_mode = INIT;
 
-ST_LPF 						gyro_x = {0,0,0,150,0.00025f};
-ST_LPF 						gyro_y = {0,0,0,150,0.00025f};
-ST_LPF 						gyro_z = {0,0,0,150,0.00025f};
-
-ST_LPF 						acc_x = {0,0,0,500,0.00025f};
-ST_LPF 						acc_y = {0,0,0,500,0.00025f};
-ST_LPF 						acc_z = {0,0,0,500,0.00025f};
-
-u16 							Cali_Cnt = CALI_NUM;
-s16 							Real_Temp;
-float 						Acc_X_Ori;
-float 						Acc_Y_Ori;
-float 						Acc_Z_Ori;
-float							Gyro_X_Ori;
-float 						Gyro_Y_Ori;
-float							Gyro_Z_Ori;
-
-float 						Acc_X_Real;											//单位为mg
-float 						Acc_Y_Real;
-float 						Acc_Z_Real;
-
-float 						Gyro_X_Real;											//单位为弧度每秒
-float 						Gyro_Y_Real;
-float 						Gyro_Z_Real;
-
-float 						Gyro_X_Speed;
-float 						Gyro_Y_Speed;
-float 						Gyro_Z_Speed;
-
-/*以下为零飘标定值*/
-float 						Acc_X_Offset = 0;
-float 						Acc_Y_Offset = 0;
-float 						Acc_Z_Offset = 0;
-float 						Gyro_X_Offset = 0;
-float 						Gyro_Y_Offset = 0;
-float 						Gyro_Z_Offset = 0;
-
-float 						Status_offset[3][CALI_NUM] = {0};  //1 X;2 Y;3 Z.
-float 						Num_offset[CALI_NUM] = {0};
-int  							Const_offset = CALI_NUM;
-int  							flag_offset = 0;
-float 						testvalue[3] = {0};
-
-float 						SEE = 0;    //Z_OFFSET实时标定的值
+/** @brief 通讯所用变量 */
+	/** @brief can通讯 */
+		CanRxMsg CAN1_RX_Message;
+		CanRxMsg CAN2_RX_Message;
+	/** @brief 大疆遥控器*/
+		ST_DBUS  g_StDbus;	
+	/** @brief 串口通讯变量*/
+		__IO u8 USART2_Cushioning_Rx[1]={0};
+		__IO u8 USART3_Cushioning_Rx[ChassisBufLen_Rx]={0};
+		__IO u8 UART4_Cushioning_Rx[1]={0};
+		__IO u8 UART5_Cushioning_Rx[1]={0};
+		__IO u8 USART6_Cushioning_Rx[1]={0};		
+		ST_IMU ChassisData={.Send.head[0]=0x55,.Send.head[1]=0x00};
 
 
-float 						Test_Flash_Ori = 1.1;
-float 						Test_Flash_Write[2] = {1.1,2.2};
-float  						Test_Flash_Get[2] = {0,0};
+/** @brief 电机所用变量 */
+	/** @brief	编码器数据结构体 */
+		ST_ENCODER GimbalYawEncoder		= QuickEncoder(1,8192);
+		ST_ENCODER ShootEncoder 		= QuickEncoder(36,8192);
+		ST_ENCODER ChassisEncoder 		= QuickEncoder(14,8192);
+		ST_ENCODER MotorEncoder				= QuickEncoder(1,8192);
+		ST_ENCODER ChassisZigEncoder	= QuickEncoder(19,8192);	
+	/** @brief 电机控制pid */
+		ST_PID GimbalYawPosPid;
+		ST_PID GimbalYawSpeedPid;	
+		ST_PID GimbalPitchPosPid;
+		ST_PID GimbalPitchSpeedPid;
+		ST_TD	 YawTD;
+	/** @brief 控制电机的角度与速度 */
+		float YawPosDes=0;
+		float YawEncoderAngle=0;
+		float YawEncoderSpeed=0;
+		float YawBMIAngle=0;
+		float YawBMISpeed=0;
+		
+		float PitchPosDes=0;
+		float PitchBMIAngle=0;
+		float PitchBMISpeed=0;
+	/** @brief 摩擦轮 */
+		float Friction1_Temp = 0;
+		float Friction2_Temp = 0;
+		float Real_Friction1_Temp = 0;
+		float Real_Friction2_Temp = 0;
+		ST_ENCODER g_stFriction1Encoder	= {0,0,0,0,36,8192,0};
+		ST_ENCODER g_stFriction2Encoder = {0,0,0,0,36,8192,0};
+		ST_SMC g_stFriction1SMC	= {
+			.m_b = 4.4936132,
+			.m_eps = 8000,
+			.m_dead = 5,
+			.m_gain = 20,
+			.m_fpDes = 0,
+			.m_fpFB = 0,
+			.m_fpU = 0,
+			.m_fpUMax = 16200,
+			
+			.m_TD.m_h = 0.001,
+			.m_TD.m_r = 5000,
+			.m_TD.m_T = 0.001,
+			.m_TD.m_aim = 0,
+			.m_TD.m_x = 0,
+			.m_TD.m_x1 = 0,
+			.m_TD.m_x2 = 0
+		};
+		ST_SMC g_stFriction2SMC = {
+			.m_b = 4.4936132,
+			.m_eps = 8000,
+			.m_dead = 5,
+			.m_gain = 20,
+			.m_fpDes = 0,
+			.m_fpFB = 0,
+			.m_fpU = 0,
+			.m_fpUMax = 16200,
+			
+			.m_TD.m_h = 0.001,
+			.m_TD.m_r = 5000,
+			.m_TD.m_T = 0.001,
+			.m_TD.m_aim = 0,
+			.m_TD.m_x = 0,
+			.m_TD.m_x1 = 0,
+			.m_TD.m_x2 = 0
+		};
+	/** @brief 拨弹电机 */
+		bool Shooter_BLOCK = FALSE;
+		float ShooterN = 0;
+		ST_ENCODER g_stShooterEncoder 	= {0,0,0,0,36,8192,0};
+		ST_PID g_stShooterPosPID 		= QuickPID(0.215,0,0,8000,6000,100,0,100);
+		ST_PID g_stShooterSpeedPID 		= QuickPID(500,0,0,8000,10000,0,10000,20);
+	/** @brief pitch轴电机 */
+		float COMP = 0;
+		float PitchTest = 0;
+		s16 G_Compensate = 0;
+		float Pitch_Encoder_angle = 0;
+		float Pitch_Encoder_speed = 0;
+		ST_ANGLE BMIPitchAngle	= {0};
+		float BMIPitchSpeed = 0;
+		ST_ANGLE BMIYawAngle	= {0};
+		float BMIYawSpeed	= 0;
 
+		float PitchDiff	= 0.0f;
+		float Gravity_Compensate = -11300;
 
-float 						BMIPitchSpeed;
-float 						BMIYawSpeed;
-float 						BMIYawAngle;
-float 						BMIPitchAngle;
-float 						BMIRollSpeed;
-float 						BMIRollAngle;
-float 						DOWN_SHOOT_FREQ;
-_imu_st imu_data =  {1,0,0,0,0,0,
-    {0,0,0},
-    {0,0,0},
-    {0,0,0},
-    {0,0,0},
-    {0,0,0},
-    {0,0,0},
-    0,0,0
-};
+		ST_ENCODER g_stPitchEncoder 	= {0,0,0,0,1,8192,0};
+		float PitchSpeedCompensate=0;
 
-float Kp = 0.5f;/**/
-float Ki = 0.001f;/**/
-/**/
-float exInt = 0.0f;
-float eyInt = 0.0f;
-float ezInt = 0.0f;
+		#if defined(PITCH_ANGLE_FEEDBACK_GRYOSCOPE) && defined(PITCH_SPEED_FEEDBACK_GRYOSCOPE)
+		/**	@brief angle & speed used gryoscope
+			*	@date ?
+			*/
+		float	PitchCoe			= 1.0f;
+		ST_TD 	g_stPitchTD			= QuickTD(5000,0.001f,0.001f);
+		ST_PID 	g_stPitchPosPID 	= QuickPID(37,0.02,0,3000,3000,6000,1500,100);
+		ST_PID 	g_stPitchSpeedPID 	= QuickPID(300,0,0,28000,28000,15000,15000,12);
 
+		#elif defined(PITCH_ANGLE_FEEDBACK_ENCODER) && defined(PITCH_SPEED_FEEDBACK_GRYOSCOPE)
+		/** @brief angle used encoder, speed used gryoscope	
+			*	@date ?
+			*/
+		float	PitchCoe			= 1.0f;
+		ST_TD 	g_stPitchTD			= QuickTD(6000,0.008f,0.001f);
+		ST_PID 	g_stPitchPosPID 	= QuickPID(-45,-0.01,0,3000,3000,6000,1500,100);	// 有前馈
+		ST_PID 	g_stPitchSpeedPID 	= QuickPID(-300,0,0,28000,28000,15000,15000,12);
+		#endif	
 
-
-
+/** @brief 系统侦测 */
+	/**	@brief	系统监视器 */
+		SYSTEM_MONITOR 		systemMonitor 		= {0};
+	  SUB_SYSTEM_MONITOR	SubSystemMonitor 	= {0};
+		RS_SYSTEM_MONITOR	RSSystemMonitor		= {0};
+		
+		ST_ERROR stError = {FALSE};	// 模块异常标志位	
+		ST_FLAG 	stFlag = {FALSE};	// 全局标志位		
+		ST_GIMBAL_FLAG stGimbalFlag; //云台控制标志位

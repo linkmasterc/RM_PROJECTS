@@ -3,7 +3,11 @@
 #include "ParamConfig.h"
 #include "global_declare.h"
 #define ABS(x) ( (x)>0?(x):-(x) )
-u8 judgeTD=0;
+u8 judgeTD=1;
+u8 yaw_span_type=0;
+u8 pit_span_type=0;
+float yaw_ramp_step=0.02;
+float pit_ramp_step=0.05;
 /** --------------------------------------------------------------------------
   * @brief  遥控器控制云台运动
 			
@@ -32,7 +36,7 @@ void GimbalRCMode(void)
 		{
 			if(TestFlag)
 			{
-				GimbalPitchPosPid.m_fpDes -= ((float)(g_StDbus.stRC.Ch1 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE/GM_PITCH_SENSIBILITY_TEST);
+				GimbalPitchPosPid.m_fpDes -= (((float)(g_StDbus.stRC.Ch1 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE)/GM_PITCH_SENSIBILITY_TEST);
 			}
 			else
 			{
@@ -50,13 +54,48 @@ void GimbalRCMode(void)
 		{	
 			if(TestFlag)
 			{
-				YawPosDes+= ((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE * GM_YAW_SENSIBILITY_TEST) * 360/8192.0f/1400 * 1.5f;
+				YawPosDes+= (((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE) * GM_YAW_SENSIBILITY_TEST);
 			}
 			else
 			{
 				YawPosDes+= ((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE * GM_YAW_SENSIBILITY) * 360/8192.0f/1400 * 1.5f;
 			}
 		}
+	}
+}
+
+/** --------------------------------------------------------------------------
+  * @brief  云台自动巡逻（正弦巡逻）
+			
+  * @note	
+ -------------------------------------------------------------------------- **/
+void GimbalAutoScan(void)
+{
+	if(yaw_span_type==1)
+	{
+		YawPosDes=FPRampSignal(YawPosDes,60,yaw_ramp_step);
+		if(YawPosDes>=60)
+			yaw_span_type=0;
+	}
+	else if(yaw_span_type==0)
+	{
+		YawPosDes=FPRampSignal(YawPosDes,-60,yaw_ramp_step);
+		if(YawPosDes<=-60)
+			yaw_span_type=1;
+	}
+	
+	
+	if(pit_span_type==1)
+	{
+		GimbalPitchPosPid.m_fpDes=FPRampSignal(GimbalPitchPosPid.m_fpDes,0,pit_ramp_step);
+		if(GimbalPitchPosPid.m_fpDes<=0)
+			pit_span_type=0;
+	}
+	else if(pit_span_type==0)
+	{
+		GimbalPitchPosPid.m_fpDes=FPRampSignal(GimbalPitchPosPid.m_fpDes,40,pit_ramp_step);
+		if(GimbalPitchPosPid.m_fpDes>=40)
+			pit_span_type=1;
 	}
 }
 
@@ -91,7 +130,33 @@ void DNYawPID(void)
 	CalIWeakenPID(&GimbalYawPosPid);													// 得到位置环PID输出（只用PI控制，D使用TD跟踪微分器）
 	GimbalYawSpeedPid.m_fpDes = GimbalYawPosPid.m_fpU ;		
 	CalIWeakenPID(&GimbalYawSpeedPid);													// 得到速度环PID输出
-	GimbalYawSpeedPid.m_fpU = GimbalYawSpeedPid.m_fpU;
+	GimbalYawSpeedPid.m_fpU =-GimbalYawSpeedPid.m_fpU;
+
 }
 
+void GimbalModeChoose()
+{
+	if(ControlMode==0x01)
+	{
+		GimbalRCMode();
+	}
+	else if(ControlMode==0x02)
+	{
+		GimbalAutoScan();
+	}
+	
+	if(stFlag.RunFlag==TRUE)
+	{
+		DNYawPID();
+	}
+	else
+	{
+		GimbalYawPosPid.m_fpDes=GimbalYawPosPid.m_fpFB;
+		GimbalYawSpeedPid.m_fpDes=GimbalYawSpeedPid.m_fpFB;
+		GimbalYawSpeedPid.m_fpU=0;
+		CalIWeakenPID(&GimbalYawPosPid);	
+		CalIWeakenPID(&GimbalYawSpeedPid);	
+	}
+	CAN_SendData(CAN2,0x1ff,GimbalYawSpeedPid.m_fpU,0,0,0);
+}
 

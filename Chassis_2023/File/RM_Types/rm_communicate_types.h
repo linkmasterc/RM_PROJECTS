@@ -24,17 +24,23 @@
 #define GimbalCushioning_Rx     USART3_Cushioning_Rx 	
 #define GimbalCushioning_Tx			GimbalSendData
 
-#define USART2_RX_BUF_LEN       	500
-#define USART2_TX_BUF_LEN					250
+#define USART1_RX_BUF_LEN         18
 
-#define USART3_RX_BUF_LEN       	16
-#define USART3_TX_BUF_LEN				17
+#define USART2_RX_DMA_BUF_LEN       	500
+#define USART2_RX_MB_BUF_LEN					250
+#define USART2_TX_DMA_BUF_LEN    200
+#define USART2_TX_MB_BUF_LEN     20
+
+#define USART3_RX_BUF_LEN       	20
+#define USART3_TX_BUF_LEN				15
 
 #define UART4_RX_BUF_LEN       	
 #define UART4_TX_BUF_LEN				
 
 #define UA6RxDMAbuf_LEN    60
 #define UA6RxMBbuf_LEN     (VISION_RECIEVE_DATA_LEN_DN + 5)
+
+#define STATE_SEND_DATA_LEN	(STATE_SEND_DATA_NUM * 4 + 4)	 //（基于伏特加串口助手软件协议）
 
 #define QuickEncoder(Ratio, Number) {.fpGearRatio=Ratio, .siNumber=Number}
 
@@ -74,6 +80,7 @@ typedef __packed struct
 		float BMIYawAngle;		//IMU经解算得到的yaw轴角度
 		float BMIYawSpeed;		//IMU发出的yaw轴角速度
 		float BMIPitchAngle;	//IMU经解算得到的pitch轴角度
+		float BMIPitchSpeed;	//IMU发出的pitch轴角速度
 		u8 TriggerState;			//1
 		u8 CRC8_Bit;					//CRC校验位
 		
@@ -84,10 +91,11 @@ typedef __packed struct
 		u8 head[2];
 		u8 Flag_Run;					//云台使能标志位
 		u8 Flag_Shoot;				
+		u8 Flag_Sniper;		
+		u8 Flag_Reset;						
 		s16 Friction_Send_Des;//摩擦轮转速期望值
 		s16 Shooter_Send_Des;		//弹数期望
 		float PitAngleDes;		//在手操时发给云控的pitch角度期望
-		float ShootFreq;			//枪管打蛋频率
 		u8 CRC8_Bit;
 		
 	}Send;
@@ -203,6 +211,79 @@ typedef union
 	ST_DATA_DN_V My_Data;
 	UCHAR8 Vision_Send_Data_Buf[VISION_SEND_DATA_LEN_DN];
 } VISION_SEND_DATA_DN;		//向视觉发送打包联合体
+
+/* 用于串口助手通信看状态变量的波形 */
+#define STATE_SEND_DATA_NUM	20
+
+#ifdef MINYOU_PROTOCOL
+	#define STATE_SEND_DATA_LEN	(STATE_SEND_DATA_NUM * 4 + 9)	 //（基于名优科创串口助手软件协议）
+#elif defined VOFA_PROTOCOL
+	#define STATE_SEND_DATA_LEN	(STATE_SEND_DATA_NUM * 4 + 4)	 //（基于伏特加串口助手软件协议）
+#endif
+
+typedef __packed struct
+{
+	u8 Head1;
+	u8 Head2;
+	u8 Head3;
+	u8 Head4;
+	u8 Head5;
+	u8 Head6;
+	u8 Head7;
+	u8 Num;
+
+
+	float Send_Data1; 
+	float Send_Data2;
+	float Send_Data3;  
+	float Send_Data4;   
+	float Send_Data5;   
+	float Send_Data6;   
+	float Send_Data7; 
+	float Send_Data8;
+	float Send_Data9;  
+	float Send_Data10;   
+	float Send_Data11;   
+	float Send_Data12; 
+	float Send_Data13; 
+	float Send_Data14;
+	float Send_Data15;  
+	float Send_Data16;   
+ 
+	
+	u8 Tail1;
+} ST_UART_DATA_MY;
+
+
+typedef __packed struct
+{
+	float Send_Data1; 
+	float Send_Data2;
+	float Send_Data3;  
+	float Send_Data4;   
+	float Send_Data5;   
+	float Send_Data6;   
+	float Send_Data7; 
+	float Send_Data8;
+	float Send_Data9;  
+	float Send_Data10;   
+	float Send_Data11;   
+	float Send_Data12; 
+	float Send_Data13; 
+	float Send_Data14;
+	float Send_Data15;  
+	float Send_Data16;   
+ 	float Send_Data17;  
+	float Send_Data18;  
+ 	float Send_Data19;  
+	float Send_Data20;
+	
+	u8 Tail1;
+	u8 Tail2;
+	u8 Tail3;
+	u8 Tail4;
+} ST_UART_DATA_VOFA;
+
 #endif
 
 

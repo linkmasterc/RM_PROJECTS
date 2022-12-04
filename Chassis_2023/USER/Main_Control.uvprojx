@@ -439,14 +439,14 @@
               <FilePath>..\File\API\rm_algorithm.c</FilePath>
             </File>
             <File>
-              <FileName>gimbal_protocol.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\API\gimbal_protocol.c</FilePath>
-            </File>
-            <File>
               <FileName>vision_protocol.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\API\vision_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>gimbal_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\gimbal_protocol.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -534,14 +534,9 @@
           <GroupName>TASK</GroupName>
           <Files>
             <File>
-              <FileName>gimbal_task.c</FileName>
+              <FileName>led_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\TASK\gimbal_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>systemmonitor_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\TASK\systemmonitor_task.c</FilePath>
+              <FilePath>..\File\TASK\led_task.c</FilePath>
             </File>
             <File>
               <FileName>shoot_task.c</FileName>
@@ -549,14 +544,29 @@
               <FilePath>..\File\TASK\shoot_task.c</FilePath>
             </File>
             <File>
+              <FileName>chassis_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\chassis_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>gimbal_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\gimbal_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>data_send_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\data_send_task.c</FilePath>
+            </File>
+            <File>
               <FileName>mode_choose_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\TASK\mode_choose_task.c</FilePath>
             </File>
             <File>
-              <FileName>led_task.c</FileName>
+              <FileName>systemmonitor_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\File\TASK\led_task.c</FilePath>
+              <FilePath>..\File\TASK\systemmonitor_task.c</FilePath>
             </File>
           </Files>
         </Group>

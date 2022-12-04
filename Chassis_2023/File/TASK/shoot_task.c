@@ -5,10 +5,10 @@
 #include "mode_choose_task.h"
 #include "ParamConfig.h"
 
-
+#define ABS(x) ( (x)>0?(x):-(x) )
 
 static void 	RCShootBullet(void);											// 遥控射击
-//static void 	AutoShootBullet(void);											// 自动射击
+static void 	AutoShootBullet(void);											// 自动射击
 static void 	GBShoot(int Shoot_f, bool mode);								// 按频率拨弹
 //static void		RammerDetect(void);												// 子弹装填情况检测
 static void 	ShootNumberRecord(bool mode);									// 实际发射子弹数记录
@@ -33,12 +33,11 @@ void ShootBullet(void)
 		RCShootBullet();
 	}
 		
-//	/* 自动打弹 */
-//	else if(ControlMode == 0x03 || ControlMode == 0x06 || ControlMode == 0x08 || 
-//			ControlMode == 0x09)
-//	{	
-//		AutoShootBullet();
-//	}
+	/* 自动打弹 */
+	else if(ControlMode == 0x03 )
+	{	
+		AutoShootBullet();
+	}
 	
 	
 /****************/
@@ -83,7 +82,7 @@ void RCShootBullet()
 	
 	
 	/*延时打开拨弹开关*/
-	if(systemMonitor.SysTickTime - FrictionTick > 0 && (Friction_State == 700 || Friction_State_UP == 700) && BoDanFirstIn)// 开启摩擦轮后延时0s开启拨弹开关
+	if(systemMonitor.SysTickTime - FrictionTick >7000 && (Friction_State == 700 || Friction_State_UP == 700) && BoDanFirstIn)// 开启摩擦轮后延时3s开启拨弹开关
 	{
 		if(Friction_State == 700)	{DNSTC.BoDan_Flag 		= TRUE;}
 		BoDanFirstIn											= FALSE;
@@ -103,6 +102,61 @@ void RCShootBullet()
 			else if(g_StDbus.stRC.Ch2 - RC_CH_VALUE_OFFSET < -300)
 			{	GBShoot(17, DNShootMode);}
 		}
+	}
+}
+
+/** --------------------------------------------------------------------------
+	* @brief  	自动射击
+			
+	* @note		
+ -------------------------------------------------------------------------- **/
+void AutoShootBullet(void)
+{
+	static u32	DNFrictionTick 	= 0;																						// 用于摩擦轮延时启动
+	
+	
+	/*开启摩擦轮*/
+	
+	if(stFlag.ShootFlag)
+	{
+		Friction_State 		= 700;
+		if(FrictFirstIn)
+		{
+			DNFrictionTick		= systemMonitor.SysTickTime;
+			FrictFirstIn 		= FALSE;	
+		}
+	}
+
+	
+	
+	/*延时打开拨弹开关*/
+	if(systemMonitor.SysTickTime - DNFrictionTick > 3000 && Friction_State == 700 && Auto_BoDanFirstIn)// 开启摩擦轮后延时3s开启拨弹开关
+	{
+		DNSTC.BoDan_Flag		= TRUE;
+		Auto_BoDanFirstIn			= FALSE;	
+	}	
+	
+	
+	/*跟随误差检测*/
+	if(stFlag.SniperFlag && DNSTC.BoDan_Flag)
+	{
+		if(ABS(GimbalPitchPosPid.m_fpFB - GimbalPitchPosPid.m_fpDes) < DN_ATTACK_PITCH_ERROR											// pitch跟随误差小于击打误差
+			&& ABS(GimbalYawPosPid.m_fpFB - YawTD.m_aim) < DN_ATTACK_YAW_ERROR)													// yaw跟随误差小于击打误差
+		{
+			Follow_Flag_DN = TRUE;																								// 紧密跟随
+		}
+		else
+		{
+			Follow_Flag_DN = FALSE;																								// 紧密跟随
+		}
+		
+	}
+	
+	
+	/*自动射击*/
+	if(DNSTC.BoDan_Flag && stFlag.SniperFlag && Follow_Flag_DN && Shoot_Area_Flag)										// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
+	{
+		GBShoot(Shoot_Frequency_DN,DNShootMode);																			// 自动射击的弹频为9hz
 	}
 }
 

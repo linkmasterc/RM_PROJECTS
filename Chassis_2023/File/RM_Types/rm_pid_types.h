@@ -10,7 +10,7 @@
 
 #define QuickPID(Kp,Ki,Kd,UMax,UpMax,EiMax,UdMax,EMin) {.m_fpKp=Kp, .m_fpKi=Ki, .m_fpKd=Kd,	\
 		.m_fpUMax=UMax, .m_fpUpMax=UpMax, .m_fpEiMax=EiMax, .m_fpUdMax=UdMax, .m_fpEMin=EMin}
-
+#define		QuickTD(r,h,T)	{.m_r = r, .m_h = h, .m_T = T}
 // PID参数结构体
 typedef struct
 {

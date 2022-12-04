@@ -46,6 +46,7 @@
 .\obj\rm_algorithm.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h
 .\obj\rm_algorithm.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h
 .\obj\rm_algorithm.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
+.\obj\rm_algorithm.o: ..\File\RM_Types\ParamConfig.h
 .\obj\rm_algorithm.o: ..\File\API\gimbal_protocol.h
 .\obj\rm_algorithm.o: ..\File\USER\global_declare.h
 .\obj\rm_algorithm.o: ..\File\API\rm_algorithm.h
@@ -55,16 +56,19 @@
 .\obj\rm_algorithm.o: ..\File\BSP\can.h
 .\obj\rm_algorithm.o: ..\File\BSP\usart.h
 .\obj\rm_algorithm.o: ..\File\BSP\nvic.h
+.\obj\rm_algorithm.o: ..\File\BSP\systick.h
 .\obj\rm_algorithm.o: ..\File\USER\main.h
 .\obj\rm_algorithm.o: ..\File\BSP\delay.h
 .\obj\rm_algorithm.o: ..\File\USER\stm32f4xx_it.h
 .\obj\rm_algorithm.o: ..\File\API\can_protocol.h
 .\obj\rm_algorithm.o: ..\File\API\vision_protocol.h
+.\obj\rm_algorithm.o: ..\File\API\DJI_protocol.h
 .\obj\rm_algorithm.o: ..\File\TASK\systemmonitor_task.h
 .\obj\rm_algorithm.o: ..\File\TASK\gimbal_task.h
 .\obj\rm_algorithm.o: ..\File\TASK\led_task.h
 .\obj\rm_algorithm.o: ..\File\TASK\mode_choose_task.h
 .\obj\rm_algorithm.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\rm_algorithm.o: ..\File\TASK\shoot_task.h
+.\obj\rm_algorithm.o: ..\File\TASK\data_send_task.h
 .\obj\rm_algorithm.o: ..\File\USER\os.h
 .\obj\rm_algorithm.o: ..\File\RM_Types\rm_os_types.h

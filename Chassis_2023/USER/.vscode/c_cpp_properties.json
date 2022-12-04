@@ -3,14 +3,14 @@
         {
             "name": "Target 1",
             "includePath": [
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\API",
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\BSP",
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\RM_Types",
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\TASK",
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\USER",
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\STM32_LIB\\CMSIS",
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\STM32_LIB\\FWLIB\\inc",
-                "c:\\Users\\24066\\Desktop\\STM32\\Sentry_Main_Control\\File\\STM32_LIB\\FWLIB\\src",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\API",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\BSP",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\RM_Types",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\TASK",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\USER",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\STM32_LIB\\CMSIS",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\STM32_LIB\\FWLIB\\inc",
+                "c:\\Users\\24066\\Desktop\\STM32\\Sentry2023\\Chassis_2023\\File\\STM32_LIB\\FWLIB\\src",
                 "D:\\keil5\\ARM\\ARMCC\\include",
                 "D:\\keil5\\ARM\\ARMCC\\include\\rw"
             ],
