@@ -20,7 +20,7 @@
 
 //Ä¦²ÁÂÖ
 #define fric_speed1 7400.0
-#define fric_speed2 4000.0
+#define fric_speed2 12400.0
 #define Fric 139
 
 //²¦µ¯µç»ú

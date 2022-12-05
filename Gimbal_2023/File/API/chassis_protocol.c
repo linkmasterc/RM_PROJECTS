@@ -42,6 +42,7 @@ void GimbalReceiveDataProtocol(void)
 		memcpy(&ChassisData.Receive, (u8*)GimbalCushioning_Rx, sizeof(ChassisData.Receive));	
 		
 		PitchPosDes=ChassisData.Receive.PitAngleDes;
+		
 		stGimbalFlag.ShootFlag      = (bool)ChassisData.Receive.Flag_Shoot;
 		stGimbalFlag.RunFlag 		   	= (bool)ChassisData.Receive.Flag_Run;
 		stGimbalFlag.ShootFlag 			= (bool)ChassisData.Receive.Flag_Shoot;

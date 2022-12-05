@@ -9,7 +9,6 @@
 ".\obj\dji_protocol.o"
 ".\obj\can_protocol.o"
 ".\obj\rm_algorithm.o"
-".\obj\general_math.o"
 ".\obj\vision_protocol.o"
 ".\obj\gimbal_protocol.o"
 ".\obj\tim.o"

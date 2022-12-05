@@ -105,7 +105,6 @@ void usart2_init(u32 bound)
 	/*定义初始化相关结构体*/
 	GPIO_InitTypeDef 	GPIO_InitStructure;
 	USART_InitTypeDef 	USART_InitStructure;
-	NVIC_InitTypeDef 	NVIC_InitStructure;
 	DMA_InitTypeDef 	DMA_InitStructure;
 
 	
@@ -138,12 +137,12 @@ void usart2_init(u32 bound)
 	USART_Init(USART2,&USART_InitStructure);//初始化串口
 
 	
-	/*配置中断*/
-	NVIC_InitStructure.NVIC_IRQChannel 						= USART2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority 	= 1;							// 抢占优先级
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority 			= 0;							// 子优先级
-	NVIC_InitStructure.NVIC_IRQChannelCmd 					= ENABLE;						// IRQ通道使能 
-	NVIC_Init(&NVIC_InitStructure);															// 根据指定的参数初始化VIC寄存器
+//	/*配置中断*/
+//	NVIC_InitStructure.NVIC_IRQChannel 						= USART2_IRQn;
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority 	= 1;							// 抢占优先级
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority 			= 0;							// 子优先级
+//	NVIC_InitStructure.NVIC_IRQChannelCmd 					= ENABLE;						// IRQ通道使能 
+//	NVIC_Init(&NVIC_InitStructure);															// 根据指定的参数初始化VIC寄存器
 
 
 	/*配置接收DMA*/
@@ -541,7 +540,6 @@ void usart6_init(u32 bound)
 	/*定义初始化相关结构体*/
 	GPIO_InitTypeDef 	GPIO_InitStructure;
 	USART_InitTypeDef 	USART_InitStructure;
-	NVIC_InitTypeDef 	NVIC_InitStructure;
 	DMA_InitTypeDef   	DMA_InitStructure;
 
 	
@@ -633,3 +631,4 @@ void usart6_init(u32 bound)
     DMA_Cmd(USART6_RX_STREAM,ENABLE);														// 使能DMA
 	DMA_Cmd(USART6_TX_STREAM,DISABLE);														// 失能DMA
 }
+
