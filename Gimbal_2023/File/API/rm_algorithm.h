@@ -24,7 +24,7 @@ void CalSMC(ST_SMC *pStSMC);
 /*********************************************** 斜坡信号输出 ***********************************************************/
 void S16RampSignal(s16 *Output, s16 DesValue, s16 Step);
 void U32RampSignal(u32 *Output, u32 DesValue, u32 Step);
-float FPRampSignal(float Output, float DesValue, float Step);
+void FPRampSignal(float* Output, float DesValue, float Step);
 /*********************************************** 滤波器 ***********************************************************/
 float DataSmoothFilter(float* Box, u8 BoxSize, float RawData);
 /***********************************************离散信号***********************************************************/

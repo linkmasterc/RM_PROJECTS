@@ -439,6 +439,11 @@
               <FilePath>..\File\API\rm_algorithm.c</FilePath>
             </File>
             <File>
+              <FileName>general_math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\general_math.c</FilePath>
+            </File>
+            <File>
               <FileName>vision_protocol.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\API\vision_protocol.c</FilePath>

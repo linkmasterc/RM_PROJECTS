@@ -38,7 +38,7 @@ void GimbalSendDataProtocol(void)
 	GimbalData.Send.Friction_Send_Des		= Friction_State;
 	GimbalData.Send.Flag_Run				= stFlag.RunFlag;
 	GimbalData.Send.Flag_Shoot			= stFlag.ShootFlag;
-//	GimbalData.Send.Flag_Sniper			= stFlag.DN_SniperFlag;
+	GimbalData.Send.Flag_Sniper			= stFlag.SniperFlag;
 //	GimbalData.Send.Flag_Reset			= stFlag.ResetFlag;
 //	GimbalData.Send.Flag_Pitch_Protect	= stFlag.PT_DNFlag; 
 	Append_CRC8_Check_Sum(&GimbalData.Send.head[0], ChassisBufLen_Tx);

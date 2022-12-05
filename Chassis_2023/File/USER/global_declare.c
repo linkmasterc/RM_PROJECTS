@@ -52,26 +52,27 @@
 		bool	RSPowerUpdataFlag			= FALSE;		//裁判系统功率更新标志位，实际10Hz
 		u8 		CalibrateState				= CAPACITOR_CALIBRATE_WAIT;		//标定状态标志位
 	/**	@brief 	裁判系统返回的比赛实时信息 */
-		ext_game_status_t						GameStatus;						// 比赛状态数据
-		ext_game_result_t						GameResult;						// 比赛结果数据
-		ext_game_robot_HP_t						GameRobotHP;					// 机器人血量数据
-		ext_ICRA_buff_debuff_zone_status_t		ICRABuffDebuffZoneStatus;		// 人工智能挑战赛加成与惩罚区状态
-		ext_event_data_t						EventData;						// 场地事件数据
-		ext_supply_projectile_action_t			SupplyProjectileAction;			// 补给站动作标识
-		ext_referee_warning_t					RefereeWarning;					// 裁判警告信息
-		ext_dart_remaining_time_t				DartRemainingTime;				// 飞镖发射口倒计时
-		ext_game_robot_status_t					GameRobotStatus;				// 比赛机器人状态
-		ext_power_heat_data_t					PowerHeatData;					// 实时功率热量数据
-		ext_game_robot_pos_t					GameRobotPos;					// 机器人位置
-		ext_buff_t								Buff;							// 机器人增益
-		aerial_robot_energy_t					AerialRobotEnergy;				// 空中机器人能量状态
-		ext_robot_hurt_t						RobotHurt = {.hurt_type = 9, .armor_id = 9};						// 伤害状态
-		ext_shoot_data_t						ShootData;						// 实时射击信息
-		ext_bullet_remaining_t					BulletRemaining;				// 子弹剩余发射数目
-		ext_rfid_status_t						RFIDStatus;						// 机器人RFID状态
-		ext_dart_client_cmd_t					DartClientCmd;					// 飞镖机器人客户端指令数据
-		ext_student_interactive_header_data_t	StudentInteractiveHeaderData;	// 机器人间交互信息
-		robot_interactive_data_t				RobotInteractiveData;			// 交互数据
+		ext_game_status_t												GameStatus;										// 比赛状态数据
+		ext_game_result_t												GameResult;										// 比赛结果数据
+		ext_game_robot_HP_t											GameRobotHP;									// 机器人血量数据
+		ext_ICRA_buff_debuff_zone_status_t			ICRABuffDebuffZoneStatus;			// 人工智能挑战赛加成与惩罚区状态
+		ext_event_data_t												EventData;										// 场地事件数据
+		ext_supply_projectile_action_t					SupplyProjectileAction;				// 补给站动作标识
+		ext_referee_warning_t										RefereeWarning;								// 裁判警告信息
+		ext_dart_remaining_time_t								DartRemainingTime;						// 飞镖发射口倒计时
+		ext_game_robot_status_t									GameRobotStatus;							// 比赛机器人状态
+		ext_power_heat_data_t										PowerHeatData;								// 实时功率热量数据
+		ext_game_robot_pos_t										GameRobotPos;									// 机器人位置
+		ext_buff_t															Buff;													// 机器人增益
+		aerial_robot_energy_t										AerialRobotEnergy;						// 空中机器人能量状态
+		ext_robot_hurt_t												RobotHurt = {.hurt_type = 9, 	// 伤害状态
+																												 .armor_id = 9};	
+		ext_shoot_data_t												ShootData;										// 实时射击信息
+		ext_bullet_remaining_t									BulletRemaining;							// 子弹剩余发射数目
+		ext_rfid_status_t												RFIDStatus;										// 机器人RFID状态
+		ext_dart_client_cmd_t										DartClientCmd;								// 飞镖机器人客户端指令数据
+		ext_student_interactive_header_data_t		StudentInteractiveHeaderData;	// 机器人间交互信息
+		robot_interactive_data_t								RobotInteractiveData;					// 交互数据
 	/** @brief 大疆遥控器*/
 		ST_DBUS  g_StDbus;	
 	/** @brief 串口通讯变量*/
@@ -156,7 +157,8 @@
 			.Fact_pShootNumber 		= 0,
 			.Des_pShootNumber 		= 10000,
 		};
-
+	/** @brief 底盘电机 */
+		
 
 /** @brief 系统侦测 */
 	/**	@brief	系统监视器 */

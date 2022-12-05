@@ -6,7 +6,8 @@
 #include "rm_pid_types.h"
 
 #define PI 3.14159265358979f
-
+static s32 Sgn(float fpNumber);
+static float SMC_SatFunc(float in, float d);
 /*********************************************** 通用数学函数 ***********************************************************/
 float LinearInterpolation(const float *fpSampleX, const float *fpSampleY, float fpX, uint8_t size);
 float Clip(float fpValue, float fpMin, float fpMax);
@@ -24,7 +25,7 @@ void CalSMC(ST_SMC *pStSMC);
 /*********************************************** 斜坡信号输出 ***********************************************************/
 void S16RampSignal(s16 *Output, s16 DesValue, s16 Step);
 void U32RampSignal(u32 *Output, u32 DesValue, u32 Step);
-float FPRampSignal(float Output, float DesValue, float Step);
+void FPRampSignal(float *Output, float DesValue, float Step);
 /*********************************************** 滤波器 ***********************************************************/
 float DataSmoothFilter(float* Box, u8 BoxSize, float RawData);
 /***********************************************离散信号***********************************************************/

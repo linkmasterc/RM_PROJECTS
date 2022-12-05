@@ -24,6 +24,12 @@
 #define RecordBullet1Num	10
 #define RecordBullet2Num	10
 #define RecordEncoderLengthNum	10
+
+/*3508电流最大值*/
+#define MECANUM_CURRENT_MAX  16000                      //最大16383
+
+/*底盘功率限制*/
+#define MaxPower   ((float)GameRobotStatus.chassis_power_limit) //瓦特
 #define __packed
 
 /** @brief 通讯所用变量 */
@@ -83,26 +89,26 @@
 		
 		extern float PreChassisPowerMessage;
 		
-		extern ext_game_status_t						GameStatus;						// 比赛状态数据
-		extern ext_game_result_t						GameResult;						// 比赛结果数据
-		extern ext_game_robot_HP_t						GameRobotHP;					// 机器人血量数据
-		extern ext_ICRA_buff_debuff_zone_status_t		ICRABuffDebuffZoneStatus;		// 人工智能挑战赛加成与惩罚区状态
-		extern ext_event_data_t						EventData;						// 场地事件数据
-		extern ext_supply_projectile_action_t			SupplyProjectileAction;			// 补给站动作标识
-		extern ext_referee_warning_t					RefereeWarning;					// 裁判警告信息
-		extern ext_dart_remaining_time_t				DartRemainingTime;				// 飞镖发射口倒计时
-		extern ext_game_robot_status_t					GameRobotStatus;				// 比赛机器人状态
-		extern ext_power_heat_data_t					PowerHeatData;					// 实时功率热量数据
-		extern ext_game_robot_pos_t					GameRobotPos;					// 机器人位置
-		extern ext_buff_t								Buff;							// 机器人增益
-		extern aerial_robot_energy_t					AerialRobotEnergy;				// 空中机器人能量状态
-		extern ext_robot_hurt_t						RobotHurt;						// 伤害状态
-		extern ext_shoot_data_t						ShootData;						// 实时射击信息
-		extern ext_bullet_remaining_t					BulletRemaining;				// 子弹剩余发射数目
-		extern ext_rfid_status_t						RFIDStatus;						// 机器人RFID状态
-		extern ext_dart_client_cmd_t					DartClientCmd;					// 飞镖机器人客户端指令数据
+		extern ext_game_status_t											GameStatus;										// 比赛状态数据
+		extern ext_game_result_t											GameResult;										// 比赛结果数据
+		extern ext_game_robot_HP_t										GameRobotHP;									// 机器人血量数据
+		extern ext_ICRA_buff_debuff_zone_status_t			ICRABuffDebuffZoneStatus;			// 人工智能挑战赛加成与惩罚区状态
+		extern ext_event_data_t												EventData;										// 场地事件数据
+		extern ext_supply_projectile_action_t					SupplyProjectileAction;				// 补给站动作标识
+		extern ext_referee_warning_t									RefereeWarning;								// 裁判警告信息
+		extern ext_dart_remaining_time_t							DartRemainingTime;						// 飞镖发射口倒计时
+		extern ext_game_robot_status_t								GameRobotStatus;							// 比赛机器人状态
+		extern ext_power_heat_data_t									PowerHeatData;								// 实时功率热量数据
+		extern ext_game_robot_pos_t										GameRobotPos;									// 机器人位置
+		extern ext_buff_t															Buff;													// 机器人增益
+		extern aerial_robot_energy_t									AerialRobotEnergy;						// 空中机器人能量状态
+		extern ext_robot_hurt_t												RobotHurt;										// 伤害状态
+		extern ext_shoot_data_t												ShootData;										// 实时射击信息
+		extern ext_bullet_remaining_t									BulletRemaining;							// 子弹剩余发射数目
+		extern ext_rfid_status_t											RFIDStatus;										// 机器人RFID状态
+		extern ext_dart_client_cmd_t									DartClientCmd;								// 飞镖机器人客户端指令数据
 		extern ext_student_interactive_header_data_t	StudentInteractiveHeaderData;	// 机器人间交互信息
-		extern robot_interactive_data_t				RobotInteractiveData;			// 交互数据extern 
+		extern robot_interactive_data_t								RobotInteractiveData;					// 交互数据extern 
 	
 	/** @brief 串口通讯变量*/
 		extern u8 USART1_Cushioning_Rx[USART1_RX_BUF_LEN];
@@ -183,6 +189,8 @@
 		extern bool	FrictFirstIn;								// 用于摩擦轮延时启动
 		extern bool Auto_BoDanFirstIn;
 		extern ST_ShootTestControl DNSTC;									// 下云台射击
+	/** @brief 底盘电机 */
+
 /** @brief 系统侦测 */
 	/**	@brief	系统监视器 */
 		extern SYSTEM_MONITOR systemMonitor;

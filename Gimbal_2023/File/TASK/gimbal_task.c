@@ -276,7 +276,7 @@ void GimbalControl(void)
 		if(stGimbalFlag.RunFlag == FALSE && Pre_RunFlag == FALSE)
 		{
 			S16RampSignal(&G_Compensate,0,2);
-			g_stPitchSpeedPID.m_fpUMax=FPRampSignal(g_stPitchSpeedPID.m_fpUMax,0,2);
+			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax,0,2);
 			//»ý·ÖÇåÁã
 			g_stPitchPosPID.m_fpSumE = 0;
 			g_stPitchSpeedPID.m_fpSumE = 0;

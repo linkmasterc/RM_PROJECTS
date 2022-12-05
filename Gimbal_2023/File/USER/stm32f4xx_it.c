@@ -4,6 +4,16 @@
 void SysTick_Handler(void)
 {	
 	systemMonitor.SysTickTime++;
+	if(systemMonitor.SysTickTime%1000==0)
+	{
+		DETECT_MONITOR(IMUSampleTask);
+		DETECT_MONITOR(IMUUpdateTask);
+		DETECT_MONITOR(GimbalTask);
+		DETECT_MONITOR(DataSendTask);
+		DETECT_MONITOR(USART3_rx);
+		DETECT_MONITOR(CAN1_rx);
+		DETECT_MONITOR(CAN2_rx);
+	}
 }
 
 void USART3_IRQHandler(void)

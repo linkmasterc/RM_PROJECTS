@@ -3,6 +3,8 @@
 #include "rm_redefine_types.h"
 void GimbalRCMode(void);
 void GimbalAutoScan(void);
+void GimbalFollowAim(void);
+void GimbalAutoMode(void);
 void DNYawPID(void);
 void GimbalModeChoose(void);
 #endif

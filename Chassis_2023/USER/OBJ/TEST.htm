@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OBJ\TEST.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OBJ\TEST.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Dec 05 00:42:53 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Dec 05 22:36:21 2022
 <BR><P>
 <H3>Maximum Stack Usage =        192 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -831,8 +831,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b1]"></a>DMA_ClearITPendingBit</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_ClearITPendingBit))
-<BR><BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VofaDataScan
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalSendDataProtocol
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalSendDataProtocol
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DNVisionDataSend
 </UL>
 
@@ -844,24 +843,22 @@ Global Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart3_init
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart2_init
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VofaDataScan
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalSendDataProtocol
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DNVisionDataSend
 </UL>
 
-<P><STRONG><a name="[e0]"></a>DMA_DeInit</STRONG> (Thumb, 324 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_DeInit))
+<P><STRONG><a name="[df]"></a>DMA_DeInit</STRONG> (Thumb, 324 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_DeInit))
 <BR><BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart6_init
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart3_init
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart2_init
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_init
 </UL>
 
-<P><STRONG><a name="[dc]"></a>DMA_GetCmdStatus</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_GetCmdStatus))
+<P><STRONG><a name="[e0]"></a>DMA_GetCmdStatus</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_GetCmdStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart6_init
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart3_init
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart2_init
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VofaDataScan
 </UL>
 
 <P><STRONG><a name="[d2]"></a>DMA_GetCurrDataCounter</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_GetCurrDataCounter))
@@ -897,7 +894,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VisionDataSendTask
 </UL>
 
-<P><STRONG><a name="[b3]"></a>DNYawPID</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, gimbal_task.o(i.DNYawPID))
+<P><STRONG><a name="[b3]"></a>DNYawPID</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, gimbal_task_1.o(i.DNYawPID))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = DNYawPID &rArr; CalTD &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CalTD
@@ -906,7 +903,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalModeChoose
 </UL>
 
-<P><STRONG><a name="[b5]"></a>FPRampSignal</STRONG> (Thumb, 116 bytes, Stack size 0 bytes, rm_algorithm.o(i.FPRampSignal))
+<P><STRONG><a name="[b5]"></a>FPRampSignal</STRONG> (Thumb, 148 bytes, Stack size 0 bytes, rm_algorithm.o(i.FPRampSignal))
 <BR><BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalAutoScan
 </UL>
 
@@ -967,7 +964,7 @@ Global Symbols
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Append_CRC8_Check_Sum
 </UL>
 
-<P><STRONG><a name="[b4]"></a>GimbalAutoScan</STRONG> (Thumb, 240 bytes, Stack size 8 bytes, gimbal_task.o(i.GimbalAutoScan))
+<P><STRONG><a name="[b4]"></a>GimbalAutoScan</STRONG> (Thumb, 200 bytes, Stack size 8 bytes, gimbal_task_1.o(i.GimbalAutoScan))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = GimbalAutoScan
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FPRampSignal
@@ -975,7 +972,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalModeChoose
 </UL>
 
-<P><STRONG><a name="[b6]"></a>GimbalModeChoose</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, gimbal_task.o(i.GimbalModeChoose))
+<P><STRONG><a name="[b6]"></a>GimbalModeChoose</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, gimbal_task_1.o(i.GimbalModeChoose))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = GimbalModeChoose &rArr; DNYawPID &rArr; CalTD &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalRCMode
@@ -987,7 +984,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalTask
 </UL>
 
-<P><STRONG><a name="[b7]"></a>GimbalRCMode</STRONG> (Thumb, 438 bytes, Stack size 40 bytes, gimbal_task.o(i.GimbalRCMode))
+<P><STRONG><a name="[b7]"></a>GimbalRCMode</STRONG> (Thumb, 438 bytes, Stack size 40 bytes, gimbal_task_1.o(i.GimbalRCMode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = GimbalRCMode &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Clip
@@ -1008,7 +1005,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[bb]"></a>GimbalSendDataProtocol</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, gimbal_protocol.o(i.GimbalSendDataProtocol))
+<P><STRONG><a name="[bb]"></a>GimbalSendDataProtocol</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, gimbal_protocol.o(i.GimbalSendDataProtocol))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GimbalSendDataProtocol &rArr; Append_CRC8_Check_Sum &rArr; Get_CRC8_Check_Sum
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
@@ -1029,8 +1026,7 @@ Global Symbols
 <P><STRONG><a name="[b0]"></a>HP_Detect</STRONG> (Thumb, 952 bytes, Stack size 16 bytes, vision_protocol.o(i.HP_Detect))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HP_Detect
 </UL>
-<BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VofaDataScan
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DNVisionDataSend
+<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DNVisionDataSend
 </UL>
 
 <P><STRONG><a name="[bd]"></a>LEDStateChange</STRONG> (Thumb, 314 bytes, Stack size 8 bytes, led_task.o(i.LEDStateChange))
@@ -1090,7 +1086,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalSendDataProtocol
 </UL>
 
-<P><STRONG><a name="[de]"></a>OS_RUN</STRONG> (Thumb, 412 bytes, Stack size 0 bytes, os.o(i.OS_RUN))
+<P><STRONG><a name="[dd]"></a>OS_RUN</STRONG> (Thumb, 412 bytes, Stack size 0 bytes, os.o(i.OS_RUN))
 <BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1115,7 +1111,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DeInit
 </UL>
 
-<P><STRONG><a name="[df]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphClockCmd))
+<P><STRONG><a name="[de]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphClockCmd))
 <BR><BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart6_init
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_init
 </UL>
@@ -1349,19 +1345,12 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> os.o(.data)
 </UL>
-<P><STRONG><a name="[db]"></a>VofaDataScan</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, data_send_task.o(i.VofaDataScan))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = VofaDataScan &rArr; HP_Detect
-</UL>
-<BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HP_Detect
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ClearITPendingBit
-</UL>
-<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VofaPlusTask
+<P><STRONG><a name="[db]"></a>VofaDataScan</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, data_send_task.o(i.VofaDataScan))
+<BR><BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VofaPlusTask
 </UL>
 
 <P><STRONG><a name="[8]"></a>VofaPlusTask</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, main.o(i.VofaPlusTask))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = VofaPlusTask &rArr; VofaDataScan &rArr; HP_Detect
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = VofaPlusTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VofaDataScan
 </UL>
@@ -1381,7 +1370,7 @@ Global Symbols
 <P><STRONG><a name="[a9]"></a>__hardfp_sqrt</STRONG> (Thumb, 122 bytes, Stack size 32 bytes, sqrt.o(i.__hardfp_sqrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = __hardfp_sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
+<BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CalTD
@@ -1391,7 +1380,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 180<LI>Call Chain = main &rArr; BSP_Init &rArr; usart6_init &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_Init
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RUN
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_RUN
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1404,10 +1393,10 @@ Global Symbols
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DMACmd
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -1424,8 +1413,8 @@ Global Symbols
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DMACmd
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
@@ -1444,8 +1433,8 @@ Global Symbols
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DMACmd
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -1463,10 +1452,10 @@ Global Symbols
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DeInit
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DMACmd
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCmdStatus
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -1533,7 +1522,7 @@ Global Symbols
 <P><STRONG><a name="[e7]"></a>__fpl_dnaninf</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, dnaninf.o(x$fpl$dnaninf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __fpl_dnaninf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
+<BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
 <LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
 <LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
@@ -1557,7 +1546,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmple_InfNaN
 </UL>
 
-<P><STRONG><a name="[dd]"></a>_dsqrt</STRONG> (Thumb, 404 bytes, Stack size 24 bytes, dsqrt_umaal.o(x$fpl$dsqrt))
+<P><STRONG><a name="[dc]"></a>_dsqrt</STRONG> (Thumb, 404 bytes, Stack size 24 bytes, dsqrt_umaal.o(x$fpl$dsqrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf

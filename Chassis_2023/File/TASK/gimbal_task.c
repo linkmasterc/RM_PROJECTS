@@ -63,7 +63,6 @@ void GimbalRCMode(void)
 		}
 	}
 }
-
 /** --------------------------------------------------------------------------
   * @brief  云台自动巡逻（正弦巡逻）
 			
@@ -73,30 +72,59 @@ void GimbalAutoScan(void)
 {
 	if(yaw_span_type==1)
 	{
-		YawPosDes=FPRampSignal(YawPosDes,60,yaw_ramp_step);
+		FPRampSignal(&YawPosDes,60,yaw_ramp_step);
 		if(YawPosDes>=60)
 			yaw_span_type=0;
 	}
 	else if(yaw_span_type==0)
 	{
-		YawPosDes=FPRampSignal(YawPosDes,-60,yaw_ramp_step);
+		FPRampSignal(&YawPosDes,-60,yaw_ramp_step);
 		if(YawPosDes<=-60)
 			yaw_span_type=1;
 	}
-	
-	
+		
+		
 	if(pit_span_type==1)
 	{
-		GimbalPitchPosPid.m_fpDes=FPRampSignal(GimbalPitchPosPid.m_fpDes,0,pit_ramp_step);
+		FPRampSignal(&GimbalPitchPosPid.m_fpDes,0,pit_ramp_step);
 		if(GimbalPitchPosPid.m_fpDes<=0)
 			pit_span_type=0;
 	}
 	else if(pit_span_type==0)
 	{
-		GimbalPitchPosPid.m_fpDes=FPRampSignal(GimbalPitchPosPid.m_fpDes,40,pit_ramp_step);
+		FPRampSignal(&GimbalPitchPosPid.m_fpDes,40,pit_ramp_step);
 		if(GimbalPitchPosPid.m_fpDes>=40)
 			pit_span_type=1;
 	}
+}
+
+void GimbalFollowAim(void)
+{
+	YawPosDes=VisionDataReceiveBuff.stVisionData.Recieve_Data2;
+	GimbalPitchPosPid.m_fpDes=VisionDataReceiveBuff.stVisionData.Recieve_Data1;
+}
+	
+
+
+/** --------------------------------------------------------------------------
+  * @brief  云台自动巡逻模式选择
+			
+  * @note	
+ -------------------------------------------------------------------------- **/
+void GimbalAutoMode(void)
+{
+	
+	if(VisionDataReceiveBuff.stVisionData.Recieve_ID == 0)
+	{	stFlag.SniperFlag = FALSE;}
+	else if(VisionDataReceiveBuff.stVisionData.Recieve_ID == 1)
+	{	stFlag.SniperFlag = TRUE;}
+	
+	if(stFlag.RunFlag==TRUE&&stFlag.SniperFlag==FALSE)
+	{
+		GimbalAutoScan();
+	}
+	
+	
 }
 
 /** --------------------------------------------------------------------------

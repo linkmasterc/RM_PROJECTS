@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OBJ\test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OBJ\test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Dec 04 23:58:06 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Dec 05 20:44:13 2022
 <BR><P>
 <H3>Maximum Stack Usage =        312 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -956,7 +956,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart3_init
 </UL>
 
-<P><STRONG><a name="[c0]"></a>FPRampSignal</STRONG> (Thumb, 116 bytes, Stack size 0 bytes, rm_algorithm.o(i.FPRampSignal))
+<P><STRONG><a name="[c0]"></a>FPRampSignal</STRONG> (Thumb, 148 bytes, Stack size 0 bytes, rm_algorithm.o(i.FPRampSignal))
 <BR><BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalReceiveDataProtocol
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GimbalControl
 </UL>
@@ -1053,7 +1053,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_Protocol
 </UL>
 
-<P><STRONG><a name="[bd]"></a>GimbalControl</STRONG> (Thumb, 1224 bytes, Stack size 72 bytes, gimbal_task.o(i.GimbalControl))
+<P><STRONG><a name="[bd]"></a>GimbalControl</STRONG> (Thumb, 1210 bytes, Stack size 72 bytes, gimbal_task.o(i.GimbalControl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = GimbalControl &rArr; Friction_Control &rArr; CalSMC &rArr; CalTD &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;S16RampSignal
@@ -1084,7 +1084,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> os.o(.data)
 </UL>
-<P><STRONG><a name="[c2]"></a>GimbalReceiveDataProtocol</STRONG> (Thumb, 648 bytes, Stack size 8 bytes, chassis_protocol.o(i.GimbalReceiveDataProtocol))
+<P><STRONG><a name="[c2]"></a>GimbalReceiveDataProtocol</STRONG> (Thumb, 620 bytes, Stack size 8 bytes, chassis_protocol.o(i.GimbalReceiveDataProtocol))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GimbalReceiveDataProtocol &rArr; Verify_CRC8_Check_Sum &rArr; Get_CRC8_Check_Sum
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Verify_CRC8_Check_Sum
@@ -1252,7 +1252,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SensorDataPrepareTask
 </UL>
 
-<P><STRONG><a name="[12]"></a>SysTick_Handler</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.SysTick_Handler))
+<P><STRONG><a name="[12]"></a>SysTick_Handler</STRONG> (Thumb, 120 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.SysTick_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
 <P><STRONG><a name="[65]"></a>SystemInit</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, system_stm32f4xx.o(i.SystemInit))
@@ -1269,7 +1269,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> os.o(.data)
 </UL>
-<P><STRONG><a name="[d6]"></a>System_Monitor</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, system_monitor_task.o(i.System_Monitor))
+<P><STRONG><a name="[d6]"></a>System_Monitor</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, system_monitor_task.o(i.System_Monitor))
 <BR><BR>[Called By]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemMonitorTask
 </UL>
 

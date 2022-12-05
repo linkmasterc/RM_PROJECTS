@@ -45,10 +45,11 @@ void GimbalReceiveDataProtocol(void)
 		stGimbalFlag.ShootFlag      = (bool)ChassisData.Receive.Flag_Shoot;
 		stGimbalFlag.RunFlag 		   	= (bool)ChassisData.Receive.Flag_Run;
 		stGimbalFlag.ShootFlag 			= (bool)ChassisData.Receive.Flag_Shoot;
+		stGimbalFlag.SniperFlag			= (bool)ChassisData.Receive.Flag_Sniper;
 		
 	if(stGimbalFlag.RunFlag == TRUE)
 		{
-			g_stPitchSpeedPID.m_fpUMax=FPRampSignal(g_stPitchSpeedPID.m_fpUMax, 28000, 10);
+			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax, 28000, 10);
 			#ifdef USING_G_COM
 			G_Compensate = Gravity_Compensate;
 			#endif
@@ -76,7 +77,7 @@ void GimbalReceiveDataProtocol(void)
 		}
 		else if(stGimbalFlag.RunFlag == FALSE)
 		{
-			g_stPitchSpeedPID.m_fpUMax=FPRampSignal(g_stPitchSpeedPID.m_fpUMax,0,20);
+			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax,0,20);
 			if(stGimbalFlag.ShootFlag == TRUE)
 			{
 				g_stShooterPosPID.m_fpUMax = 8000;

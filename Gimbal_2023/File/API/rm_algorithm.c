@@ -342,32 +342,31 @@ void U32RampSignal(u32 *Output, u32 DesValue, u32 Step)
  * @param 	DesValue	目标值
  * @param 	Step		步长
  */
-float FPRampSignal(float Output, float DesValue, float Step)
+void FPRampSignal(float* Output, float DesValue, float Step)
 {
 	u8 type;
-	if(Output < DesValue) type = 0;
-	else if(Output > DesValue) type = 1;
+	if(*Output < DesValue) type = 0;
+	else if(*Output > DesValue) type = 1;
 	else type =2;
 
 	if(type == 0)
 	{
-		if(Output >= DesValue) Output = DesValue;
+		if(*Output >= DesValue) *Output = DesValue;
 		else
 		{
-			Output += Step;
-			if(Output >= DesValue) Output = DesValue;
+			*Output += Step;
+			if(*Output >= DesValue) *Output = DesValue;
 		}
 	}
 	else if(type == 1)
 	{
-		if(Output <= DesValue) Output = DesValue;
+		if(*Output <= DesValue) *Output = DesValue;
 		else
 		{
-			Output -= Step;
-			if(Output <= DesValue) Output = DesValue;
+			*Output -= Step;
+			if(*Output <= DesValue) *Output = DesValue;
 		}
 	}
-	return Output;
 }
 
 
