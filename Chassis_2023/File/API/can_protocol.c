@@ -42,7 +42,30 @@ void CAN_SendData(CAN_TypeDef* CANx,u32 id,s16 Data1,s16 Data2,s16 Data3,s16 Dat
  */
 void CAN1_Protocol(void)
 {
-	
+	switch(CAN1_RX_Message.StdId)
+	{
+		case 0x400:  //超级电容
+			capacitor_msg.CAP_Vol     = (float)( ( CAN2_RX_Message.Data[0] << 8 ) | (CAN2_RX_Message.Data[1] ) ) / 100.0f;
+			capacitor_msg.Pow_In      = (float)( ( CAN2_RX_Message.Data[2] << 8 ) | (CAN2_RX_Message.Data[3] ) ) / 100.0f;
+			capacitor_msg.Pow_Out     = (float)( ( CAN2_RX_Message.Data[4] << 8 ) | (CAN2_RX_Message.Data[5] ) ) / 100.0f;
+			capacitor_msg.Volt_Out		= (float)( ( CAN2_RX_Message.Data[6] << 8 ) | (CAN2_RX_Message.Data[7] ) ) / 100.0f;	
+			break;
+		case 0x201:
+			stWheel1_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			break;
+		case 0x202:
+			stWheel2_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			break;
+		case 0x203:
+			stWheel3_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			break;
+		case 0x204:
+			stWheel4_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			break;
+			
+	}
+		
+	//				capacitor_msg.CAP_ERROR = CAN_RxMsg.Data[6] ;
 }
 
 
@@ -82,6 +105,8 @@ void CAN2_Protocol(void)
 			YawEncoderAngle = (GimbalYawEncoder.fpSumValue - DN_YAW_MID) * 360 / 8192.0f;										// 以YAW电机设定中值为0°,得到YAW轴当前角度
 			YawEncoderSpeed = GetSpeed(CAN2_RX_Message.Data);																	// 得到编码器测得的速度
 		break;
+
+
 
 		default:
 			break;

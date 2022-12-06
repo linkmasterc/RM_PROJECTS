@@ -212,6 +212,18 @@ typedef union
 	UCHAR8 Vision_Send_Data_Buf[VISION_SEND_DATA_LEN_DN];
 } VISION_SEND_DATA_DN;		//向视觉发送打包联合体
 
+typedef struct
+{
+    /*接收消息，ID0x400*/
+    float CAP_Vol;
+    float Pow_In;
+    float Pow_Out;
+		float Volt_Out;
+	  u8 CAP_ERROR;
+
+    /*发送消息，ID0x220*/
+    float TxPower;
+} CAPACITOR_MSG;
 /* 用于串口助手通信看状态变量的波形 */
 #define STATE_SEND_DATA_NUM	20
 

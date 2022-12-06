@@ -8,11 +8,10 @@ float X_Max_Vel;
 float Y_Max_Vel;
 float W_Max_Vel;
 
-float Raw_Power;
-float Max_Power;
-
 s16 Raw_Sum_Current;
 s16 Limit_Sum_Current;
+
+float speed_rate=1;
 void ChassisRCMode()
 {
 	//g_StDbus.stRC.Ch3;//y
@@ -23,6 +22,24 @@ void ChassisRCMode()
 	if(ABS(g_StDbus.stRC.Ch2 - RC_CH_VALUE_OFFSET) < RC_CH_VALUE_DEAD)
 	{	g_StDbus.stRC.Ch1 = RC_CH_VALUE_OFFSET;}
 	
+}
+
+void PowerLoopControl()
+{
+	ChassisPowerPid.m_fpDes=MaxPower;
+	ChassisPowerPid.m_fpFB=capacitor_msg.Pow_Out;
+	CalIWeakenPID(&ChassisPowerPid);
+	speed_rate=ChassisPowerPid.m_fpU/MaxPower+1;
+	stWheel1_SpeedPid.m_fpDes*=speed_rate;
+	stWheel2_SpeedPid.m_fpDes*=speed_rate;
+	stWheel3_SpeedPid.m_fpDes*=speed_rate;
+	stWheel4_SpeedPid.m_fpDes*=speed_rate;
+	CalIWeakenPID(&stWheel1_SpeedPid);
+	CalIWeakenPID(&stWheel2_SpeedPid);
+	CalIWeakenPID(&stWheel3_SpeedPid);
+	CalIWeakenPID(&stWheel4_SpeedPid);
+	CAN_SendData(CAN1,200,stWheel1_SpeedPid.m_fpU,stWheel2_SpeedPid.m_fpU,stWheel3_SpeedPid.m_fpU,stWheel4_SpeedPid.m_fpU);
+
 }
 
 ///*----------------------------------------------------------------------------------------

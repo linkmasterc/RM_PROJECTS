@@ -190,6 +190,13 @@
 		extern bool Auto_BoDanFirstIn;
 		extern ST_ShootTestControl DNSTC;									// 下云台射击
 	/** @brief 底盘电机 */
+		extern ST_PID ChassisPowerPid;
+		extern ST_PID stWheel1_SpeedPid;
+		extern ST_PID stWheel2_SpeedPid;
+		extern ST_PID stWheel3_SpeedPid;
+		extern ST_PID stWheel4_SpeedPid;
+		extern CAPACITOR_MSG capacitor_msg;
+
 
 /** @brief 系统侦测 */
 	/**	@brief	系统监视器 */
@@ -216,7 +223,6 @@
 	extern u8 			Chassis_Test_Flag;
 
 	/** @brief底盘功率 */
-	
 
 	/** @brief车间通讯 */
 		extern bool	Range360Flag;

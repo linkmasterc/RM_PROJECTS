@@ -158,6 +158,15 @@
 			.Des_pShootNumber 		= 10000,
 		};
 	/** @brief 底盘电机 */
+		ST_PID ChassisPowerPid;
+		
+		ST_PID stWheel1_SpeedPid;
+		ST_PID stWheel2_SpeedPid;
+		ST_PID stWheel3_SpeedPid;
+		ST_PID stWheel4_SpeedPid;
+
+		CAPACITOR_MSG capacitor_msg = {0};
+
 		
 
 /** @brief 系统侦测 */
