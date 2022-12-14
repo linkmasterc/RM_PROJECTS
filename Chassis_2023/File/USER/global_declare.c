@@ -164,6 +164,11 @@
 		ST_PID stWheel2_SpeedPid;
 		ST_PID stWheel3_SpeedPid;
 		ST_PID stWheel4_SpeedPid;
+		
+		ST_PID stHelm1_SpeedPid;
+		ST_PID stHelm2_SpeedPid;
+		ST_PID stHelm3_SpeedPid;
+		ST_PID stHelm4_SpeedPid;
 
 		CAPACITOR_MSG capacitor_msg = {0};
 

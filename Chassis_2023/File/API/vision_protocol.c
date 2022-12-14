@@ -110,9 +110,15 @@ void DNVisionDataProtocol(void) {
 				if(fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data1) != FP_NORMAL				// 为了防止接收到奇怪的数据
 					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data2) != FP_NORMAL
 					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data3) != FP_NORMAL
-			//		|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data4) != FP_NORMAL
-			//		|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data5) != FP_NORMAL
-			//		|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data6) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data4) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data5) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data6) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data7) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data8) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data9) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data10) != FP_NORMAL
+					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data11) != FP_NORMAL
+				
 				)
 				{
 					VisionDataReceiveBuff.stVisionData.Recieve_ID	= 0;

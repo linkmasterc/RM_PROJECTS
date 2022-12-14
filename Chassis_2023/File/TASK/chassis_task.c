@@ -4,6 +4,11 @@ float X_Vel;
 float Y_Vel;
 float W_Vel;
 
+float Angle_I;
+float Angle_II;
+float Angle_III;
+float Angle_IV;
+
 float X_Max_Vel;
 float Y_Max_Vel;
 float W_Max_Vel;
@@ -16,7 +21,7 @@ void ChassisRCMode()
 {
 	//g_StDbus.stRC.Ch3;//y
 	//g_StDbus.stRC.Ch2;//x
-		/* 遥控器通道死区限制 */
+		/* 遥控器通道死区限制 */////
 	if(ABS(g_StDbus.stRC.Ch3 - RC_CH_VALUE_OFFSET) < RC_CH_VALUE_DEAD)
 	{	g_StDbus.stRC.Ch0 = RC_CH_VALUE_OFFSET;}
 	if(ABS(g_StDbus.stRC.Ch2 - RC_CH_VALUE_OFFSET) < RC_CH_VALUE_DEAD)
@@ -41,6 +46,7 @@ void PowerLoopControl()
 	CAN_SendData(CAN1,200,stWheel1_SpeedPid.m_fpU,stWheel2_SpeedPid.m_fpU,stWheel3_SpeedPid.m_fpU,stWheel4_SpeedPid.m_fpU);
 
 }
+
 
 ///*----------------------------------------------------------------------------------------
 //                                功率限制变量
