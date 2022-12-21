@@ -221,6 +221,11 @@
 	//extern //bool 		DN_Range_Mode_First_in_Flag = TRUE;
 	extern bool		ChassisPositionLeftFlag;
 	extern u8 			Chassis_Test_Flag;
+	/** @brief ³¬Éù²¨Ä£¿é */
+	extern u32 		TIM8_OverflowTimes;
+	extern u32    TIM8_Rising_ARR;
+	extern u32    TIM8_Falling_ARR;
+	extern float    US_Distance;
 
 	/** @briefµ×ÅÌ¹¦ÂÊ */
 

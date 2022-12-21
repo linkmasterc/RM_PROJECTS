@@ -17,6 +17,12 @@ s16 Raw_Sum_Current;
 s16 Limit_Sum_Current;
 
 float speed_rate=1;
+
+void UltraSound()
+{
+	
+}
+
 void ChassisRCMode()
 {
 	//g_StDbus.stRC.Ch3;//y

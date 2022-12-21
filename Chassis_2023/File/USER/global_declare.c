@@ -197,8 +197,11 @@
 	//bool 		DN_Range_Mode_First_in_Flag = TRUE;
 	bool		ChassisPositionLeftFlag		= TRUE;
 	u8 			Chassis_Test_Flag	= 0x00;
-
-
+	/** @brief ³¬Éù²¨Ä£¿é */
+	u32 		TIM8_OverflowTimes=0;
+	u32    TIM8_Rising_ARR=0;
+	u32    TIM8_Falling_ARR=0;
+	float    US_Distance=0;
 
 	u8 			TirggerState = 0 ;
 		

@@ -281,3 +281,51 @@ void CAN2_RX0_IRQHandler(void)
 	}
 }
 
+/** --------------------------------------------------------------------------
+  * @brief  TIM8输入捕获
+			
+  * @note		TIM8分频后计数频率为1us
+						重装载周期为1ms
+ -------------------------------------------------------------------------- **/
+void TIM8_CC_IRQHandler(void)
+{	
+	if(TIM_GetITStatus(TIM8,TIM8_CC_IRQn)!=RESET)
+	{
+		TIM_ClearITPendingBit(TIM8,TIM8_CC_IRQn);
+		if(!(TIM8->CCER&0x0002))															//此位为0是上升沿触发
+		{
+			TIM8_Falling_ARR=0;
+			TIM8->CNT=0;																				//清空一下计数器，使计数器从0开始计数
+			TIM8_OverflowTimes=0;																//捕获上升沿后便重新记录计数器溢出次数
+			
+			TIM_Cmd(TIM8,DISABLE);
+			TIM_OC3PolarityConfig(TIM8,TIM_ICPolarity_Falling); //此处使用输出比较模式的函数没有问题，可以配置边沿触发模式(因为输入捕获没有单独的配置函数)
+			TIM_Cmd(TIM8,ENABLE);
+		}
+		if(TIM8->CCER&0x0002)																	//此位为1是下降沿触发
+		{
+			TIM8_Falling_ARR=TIM_GetCapture3(TIM8);
+			US_Distance=(TIM8_OverflowTimes*1+TIM8_Falling_ARR*0.001)*0.34/2.0;//计算与障碍物的距离
+			
+			TIM_Cmd(TIM8,DISABLE);
+			TIM_OC3PolarityConfig(TIM8,TIM_ICPolarity_Rising);
+			TIM_Cmd(TIM8,ENABLE);
+		}
+		
+	}
+}
+
+void TIM8_UP_TIM13_IRQHandler(void)
+{
+	if(TIM_GetITStatus(TIM8,TIM8_UP_TIM13_IRQn)!=RESET)
+	{
+		TIM_ClearITPendingBit(TIM8,TIM8_UP_TIM13_IRQn);
+		
+		TIM8_OverflowTimes++;
+		
+	}
+}
+
+
+
+
