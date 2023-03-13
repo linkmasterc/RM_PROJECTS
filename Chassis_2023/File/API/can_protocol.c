@@ -45,23 +45,38 @@ void CAN1_Protocol(void)
 	switch(CAN1_RX_Message.StdId)
 	{
 		case 0x400:  //超级电容
-			capacitor_msg.CAP_Vol     = (float)( ( CAN2_RX_Message.Data[0] << 8 ) | (CAN2_RX_Message.Data[1] ) ) / 100.0f;
-			capacitor_msg.Pow_In      = (float)( ( CAN2_RX_Message.Data[2] << 8 ) | (CAN2_RX_Message.Data[3] ) ) / 100.0f;
-			capacitor_msg.Pow_Out     = (float)( ( CAN2_RX_Message.Data[4] << 8 ) | (CAN2_RX_Message.Data[5] ) ) / 100.0f;
-			capacitor_msg.Volt_Out		= (float)( ( CAN2_RX_Message.Data[6] << 8 ) | (CAN2_RX_Message.Data[7] ) ) / 100.0f;	
-			break;
+			capacitor_msg.CAP_Vol     = (float)( ( CAN1_RX_Message.Data[0] << 8 ) | (CAN1_RX_Message.Data[1] ) ) / 100.0f;
+			capacitor_msg.Pow_In      = (float)( ( CAN1_RX_Message.Data[2] << 8 ) | (CAN1_RX_Message.Data[3] ) ) / 100.0f;
+			capacitor_msg.Pow_Out     = (float)( ( CAN1_RX_Message.Data[4] << 8 ) | (CAN1_RX_Message.Data[5] ) ) / 100.0f;
+			capacitor_msg.Volt_Out		= (float)( ( CAN1_RX_Message.Data[6] << 8 ) | (CAN1_RX_Message.Data[7] ) ) / 100.0f;	
+		break;
+		
 		case 0x201:
-			stWheel1_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
-			break;
+			stWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+		break;
+		
 		case 0x202:
-			stWheel2_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
-			break;
+			stWheel_SpeedPid[1].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+		break;
+		
 		case 0x203:
-			stWheel3_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
-			break;
+			stWheel_SpeedPid[2].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+		break;
+		
 		case 0x204:
-			stWheel4_SpeedPid.m_fpFB=GetSpeed(CAN1_RX_Message.Data);
-			break;
+			stWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+		break;
+		case 0x208:	//拨弹电机
+		{
+			AbsEncoderProcess(&g_stShooterEncoder,GetEncoderNumber(CAN2_RX_Message.Data));
+			c_stShooterPosPID.m_fpFB = -g_stShooterEncoder.fpSumValue;
+			c_stShooterSpeedPID.m_fpFB = -(GetSpeed(CAN2_RX_Message.Data)/g_stShooterEncoder.fpGearRatio);
+			systemMonitor.CAN2_BODAN_RX_cnt++;
+		}
+
+		
+		default:
+		break;
 			
 	}
 		
@@ -83,7 +98,8 @@ void CAN2_Protocol(void)
 	{	
 		/** 下云台Yaw 6020电机 */
 		case 0x205: 
-		SubSystemMonitor.CAN2_YawMotor_rx_cnt++;
+		{
+			SubSystemMonitor.CAN2_YawMotor_rx_cnt++;
 		if(FirstInDNYaw)
 		{
 			GimbalYawEncoder.uiRawValue = GetEncoderNumber(CAN2_RX_Message.Data);													// 初次获取电机编码值fpSumValue取当前编码值
@@ -104,12 +120,57 @@ void CAN2_Protocol(void)
 		}
 			YawEncoderAngle = (GimbalYawEncoder.fpSumValue - DN_YAW_MID) * 360 / 8192.0f;										// 以YAW电机设定中值为0°,得到YAW轴当前角度
 			YawEncoderSpeed = GetSpeed(CAN2_RX_Message.Data);																	// 得到编码器测得的速度
+		}
 		break;
 
-
-
+		
+		case 0x201:
+		{
+			AbsEncoderProcess(&stServoEncoder[0],GetEncoderNumber(CAN2_RX_Message.Data));
+			stServoWheel_PosPid[0].m_fpFB=stServoEncoder[0].fpSumValue/8192.0*40.0;
+			stServoWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
+			systemMonitor.CAN2_SERVO1_RX_cnt++;
+		}
+		break;
+		
+		case 0x202:
+		{
+			AbsEncoderProcess(&stServoEncoder[1],GetEncoderNumber(CAN2_RX_Message.Data));
+			stServoWheel_PosPid[1].m_fpFB=stServoEncoder[1].fpSumValue/8192.0*40.0;
+			stServoWheel_SpeedPid[1].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
+			systemMonitor.CAN2_SERVO2_RX_cnt++;
+		}
+		break;
+		
+		case 0x203:
+		{
+			AbsEncoderProcess(&stServoEncoder[2],GetEncoderNumber(CAN2_RX_Message.Data));
+			stServoWheel_PosPid[2].m_fpFB=stServoEncoder[2].fpSumValue/8192.0*40.0;
+			stServoWheel_SpeedPid[2].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
+			systemMonitor.CAN2_SERVO3_RX_cnt++;
+		}
+		break;
+		
+		case 0x204:
+		{
+			AbsEncoderProcess(&stServoEncoder[3],GetEncoderNumber(CAN2_RX_Message.Data));
+			stServoWheel_PosPid[3].m_fpFB=stServoEncoder[3].fpSumValue/8192.0*40.0;			
+			stServoWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
+			systemMonitor.CAN2_SERVO4_RX_cnt++;
+		}
+		break;
+		
+		case 0x208:	//拨弹电机
+		{
+			AbsEncoderProcess(&g_stShooterEncoder,GetEncoderNumber(CAN2_RX_Message.Data));
+			c_stShooterPosPID.m_fpFB = -g_stShooterEncoder.fpSumValue;
+			c_stShooterSpeedPID.m_fpFB = -(GetSpeed(CAN2_RX_Message.Data)/g_stShooterEncoder.fpGearRatio);
+			systemMonitor.CAN2_BODAN_RX_cnt++;
+		}
+		break;
+		
 		default:
-			break;
+		break;
 	}
 }
 
@@ -156,7 +217,7 @@ s32 GetSpeed(u8* pData)
 			针对编码值“8191（前一次）-2（后一次）”这种情况的跳变
 			（实际变化3，但返回值前后差异为-8189）
  -------------------------------------------------------------------------- **/
-void AbsEncoderProcess(ST_ENCODER* pEncoder, s32 value)
+void AbsEncoderProcess(ST_ENCODER* pEncoder, float value)
 {
 	pEncoder->uiPreRawValue = pEncoder->uiRawValue;
 	pEncoder->uiRawValue = value;

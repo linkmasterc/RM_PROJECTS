@@ -8,11 +8,11 @@
 #include "rm_algorithm.h"
 void ChassisSendDataProtocol(void)
 {
+	ChassisData.Send.PitchDesAngle=g_stPitchPosPID.m_fpDes;
 	ChassisData.Send.BMIPitchAngle=imu_data.pit;
 	ChassisData.Send.BMIPitchSpeed=Gyro_X_Speed;
 	ChassisData.Send.BMIYawAngle=imu_data.yaw;
 	ChassisData.Send.BMIYawSpeed=-Gyro_Z_Speed;
-	
 	ChassisData.Send.TriggerState		= TriggerState;
 	if(TriggerState)
 	{
@@ -51,9 +51,11 @@ void GimbalReceiveDataProtocol(void)
 	if(stGimbalFlag.RunFlag == TRUE)
 		{
 			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax, 28000, 10);
-			#ifdef USING_G_COM
-			G_Compensate = Gravity_Compensate;
-			#endif
+			S16RampSignal(&G_Compensate,3000,2);
+
+//			#ifdef USING_G_COM
+//			G_Compensate = Gravity_Compensate;
+//			#endif
 			if(stGimbalFlag.ShootFlag == TRUE)
 			{
 				g_stShooterPosPID.m_fpUMax = 6000;
@@ -87,6 +89,7 @@ void GimbalReceiveDataProtocol(void)
 				{
 					g_stShooterPosPID.m_fpDes 	= g_stShooterPosPID.m_fpFB;
 					Last_Shooter_Send_Des = ChassisData.Receive.Shooter_Send_Des;
+			
 				}
 				if(Last_Shooter_Send_Des != ChassisData.Receive.Shooter_Send_Des)
 				{

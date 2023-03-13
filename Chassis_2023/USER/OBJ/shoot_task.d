@@ -58,6 +58,7 @@
 .\obj\shoot_task.o: ..\File\BSP\usart.h
 .\obj\shoot_task.o: ..\File\BSP\nvic.h
 .\obj\shoot_task.o: ..\File\BSP\systick.h
+.\obj\shoot_task.o: ..\File\BSP\gpio.h
 .\obj\shoot_task.o: ..\File\BSP\delay.h
 .\obj\shoot_task.o: ..\File\USER\stm32f4xx_it.h
 .\obj\shoot_task.o: ..\File\API\can_protocol.h
@@ -70,3 +71,4 @@
 .\obj\shoot_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\shoot_task.o: ..\File\TASK\shoot_task.h
 .\obj\shoot_task.o: ..\File\TASK\data_send_task.h
+.\obj\shoot_task.o: ..\File\TASK\chassis_task.h

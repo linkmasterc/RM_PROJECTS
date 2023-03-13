@@ -19,7 +19,7 @@
 bool UPReceiveFlag = FALSE;
 bool DNReceiveFlag = FALSE;
 
-
+bool FPtest=FALSE;
 /** --------------------------------------------------------------------------
   * @brief  解码下云台小电脑发送的视觉数据
   
@@ -106,7 +106,9 @@ void DNVisionDataProtocol(void) {
 				}
 				DNStatus = V_RX_FREE_1;
 				
-				
+			
+			if(FPtest)
+			{
 				if(fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data1) != FP_NORMAL				// 为了防止接收到奇怪的数据
 					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data2) != FP_NORMAL
 					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data3) != FP_NORMAL
@@ -115,19 +117,16 @@ void DNVisionDataProtocol(void) {
 					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data6) != FP_NORMAL
 					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data7) != FP_NORMAL
 					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data8) != FP_NORMAL
-					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data9) != FP_NORMAL
-					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data10) != FP_NORMAL
-					|| fpclassify(VisionDataReceiveBuff.stVisionData.Recieve_Data11) != FP_NORMAL
-				
 				)
 				{
 					VisionDataReceiveBuff.stVisionData.Recieve_ID	= 0;
 				}
+			}
 				
-				if(ABS(VisionDataReceiveBuff.stVisionData.Recieve_Data1 - GimbalPitchPosPid.m_fpFB) > 40.0f)
-				{	VisionDataReceiveBuff.stVisionData.Recieve_Data1 = VisionData1;}
-				if(ABS(VisionDataReceiveBuff.stVisionData.Recieve_Data2 - GimbalPitchPosPid.m_fpFB) > 90.0f)
-				{	VisionDataReceiveBuff.stVisionData.Recieve_Data2 = VisionData2;}
+//				if(ABS(VisionDataReceiveBuff.stVisionData.Recieve_Data1 - GimbalPitchPosPid.m_fpFB) > 40.0f)
+//				{	VisionDataReceiveBuff.stVisionData.Recieve_Data1 = VisionData1;}
+//				if(ABS(VisionDataReceiveBuff.stVisionData.Recieve_Data2 - GimbalPitchPosPid.m_fpFB) > 90.0f)
+//				{	VisionDataReceiveBuff.stVisionData.Recieve_Data2 = VisionData2;}
 				
 				VisionData1 = VisionDataReceiveBuff.stVisionData.Recieve_Data1;								// pitch
 				VisionData2 = VisionDataReceiveBuff.stVisionData.Recieve_Data2;								// yaw
@@ -189,7 +188,7 @@ void DNVisionDataSend(void)
 	/* PROTOCOL DATA CODE BEGIN */
 	VisionDataSendBuff.My_Data.Send_Data1 = VisionSendData1 = GimbalPitchPosPid.m_fpFB;
 	VisionDataSendBuff.My_Data.Send_Data2 = VisionSendData2 = GimbalYawPosPid.m_fpFB;
-	VisionDataSendBuff.My_Data.Send_Data3 = VisionSendData3 = Bullet2SpeedMessage;
+	VisionDataSendBuff.My_Data.Send_Data3 = VisionSendData3 = Bullet1SpeedMessage;
 	VisionDataSendBuff.My_Data.Send_Data4 = VisionSendData4 = HP_Detect();
 	VisionDataSendBuff.My_Data.Send_Data5 = VisionSendData5 = 1.0;//rush.EncoderSite - rush.LeftOffset;
 	VisionDataSendBuff.My_Data.Send_Data6 = VisionSendData6 = 1.0;//EncoderSpeed;
@@ -199,11 +198,11 @@ void DNVisionDataSend(void)
 	}
 	VisionDataSendBuff.My_Data.Send_Data8 = VisionSendData8 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data8;
 	
-	VisionDataSendBuff.My_Data.Send_Data9	= VisionSendData9 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data9;
-	
-	VisionDataSendBuff.My_Data.Send_Data10 = VisionSendData10 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data10;
+//	VisionDataSendBuff.My_Data.Send_Data9	= VisionSendData9 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data9;
+//	
+//	VisionDataSendBuff.My_Data.Send_Data10 = VisionSendData10 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data10;
 
-	VisionDataSendBuff.My_Data.Send_Data11 = VisionSendData11 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data11;
+//	VisionDataSendBuff.My_Data.Send_Data11 = VisionSendData11 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data11;
 	
 	/* PROTOCOL DATA CODE END */
 

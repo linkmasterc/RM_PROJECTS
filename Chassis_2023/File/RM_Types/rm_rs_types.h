@@ -71,21 +71,23 @@ typedef struct
 	bool EXTI2_IT_ENABLE_FLAG;
 
 
-	bool RunFlag_Pre;		//前次pitch电机运动标记
-	bool RunFlag;			//pitch电机运动标记
-	bool ShootFlag;			//拨弹电机运动标记
-	bool FrictionFlag;		//摩擦轮启动标志
+	bool GimbalRunFlag_Pre;	//前次pitch电机运动标记
+	bool GimbalRunFlag;			//pitch电机运动标记
+	bool ShootFlag;					//拨弹电机运动标记
+	bool FrictionFlag;			//摩擦轮启动标志
 	bool SniperFlag_Pre;		//前次识别标志
-	bool SniperFlag;			//视觉识别物体标记
+	bool SniperFlag;				//视觉识别物体标记
 
-	bool CS_RunFlag;			//底盘启动标志
-	bool CS_RunFlag_Pre;		//前次底盘启动标志
+	bool CS_SPEED_RunFlag;				//底盘速度轮启动标志
+	bool CS_SPEED_RunFlag_Pre;		//前次底盘速度轮启动标志
 	
-	bool PT_UPFlag;				//上云台空弹仓停电保护标志
-	bool PT_DNFlag;				//下云台空弹仓停电保护标志
+	bool CS_SERVO_RunFlag;				//底盘舵向轮启动标志
+	bool CS_SERVO_RunFlag_Pre; 		//前次底盘舵向轮启动标志
 	
-	bool ResetFlag;				//复位标志位
-	bool InitFlag;				//初始化成功标志位
+	bool PT_DNFlag;					//空弹仓停电保护标志
+	
+	bool ResetFlag;					//复位标志位
+	bool InitFlag;					//初始化成功标志位
 	
 } ST_FLAG;
 
@@ -104,6 +106,51 @@ typedef struct
 	s32 Des_pShootNumber;		//允许单次上限打弹数
 
 }ST_ShootTestControl;
+
+
+typedef struct
+{
+	//实际数据区
+	float 	FactSpeed;			//实际底盘运动速度
+	float 	FactEnergyBuf;		//实际剩余缓冲能量
+	float 	FactPower;			//实际底盘功率
+	float	FactCurrent;		//实际底盘输出电流
+	float	FactDetectCurrent;	//实际底盘检测电流
+	bool 	BufRunOutFlag;		//缓冲能量耗尽标志
+	bool 	DangerFlag;			//危机启动标志
+	bool 	AccStartFlag;		// 加速开始标志位
+
+	//功率控制
+	/** 简易开环控制 */
+	float	SetSpeed;			//巡逻目标速度，实际速度由功率环控制
+	float	SetCurrentMax;		//功率环输出最大电流 mA
+	float	SetPowerMax;		//最大限制功率 W
+	
+	float	SetPowerLimCoe;		//设置功率补偿系数 mA
+	
+	float	CapPowerDes;
+
+	/** 闭环控制 */
+	bool	AccelFlag;			//加速标志
+	float	ControlMode;		//控制环模式
+	float	SetLeftSpeed;		//左向稳定巡逻速度	mm/s
+	float	SetRightSpeed;		//右向稳定巡逻速度	mm/s
+	
+	/** 缓冲能量决策 */
+	float	DesBufPower;			//目标控制缓冲能量 J
+
+	//撞柱错误自动检测
+	bool	StaticDetectFlag;	//静止检测标志
+	u32		StaticTick;			//静止时间 ms
+	u32		StaticTimeLimit;	//静止时间阈值 ms
+	
+	/* 变向相关 */
+	bool	TurnRoudFlag;					// 变向请求
+	bool 	StaticFlag;						// 停止运动请求
+	bool	PositionControlFlag;			// 位置控制请求
+	
+}ST_ChassisMoveControl;
+
 /* 裁判系统数据接收体 */
 /** 比赛状态数据：0x0001    发送频率：1Hz
   * @param	game_type	比赛类型：	1-RoboMaster机甲大师赛

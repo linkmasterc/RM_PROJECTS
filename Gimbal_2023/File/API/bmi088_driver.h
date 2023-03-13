@@ -26,6 +26,12 @@ extern FP32 Gyro_Z_Ori;
 extern FP32 Gyro_X_Speed;
 extern FP32 Gyro_Y_Speed;
 extern FP32 Gyro_Z_Speed;
+
+extern FP32 Acc_X_Real;
+extern FP32 Acc_Y_Real;
+extern FP32 Acc_Z_Real;
+
+extern ST_KMF stZSpeedKMF;
 //Accelerater_Reg
 
 #define	ACC_ID				0X00

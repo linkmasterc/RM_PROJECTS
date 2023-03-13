@@ -588,7 +588,7 @@ void usart6_init(u32 bound)
     DMA_InitStructure.DMA_PeripheralBaseAddr      =    (uint32_t)&(USART6->DR);				// 设置DMA传输外设基地址（把DMA应用于串口1的接收中）
     DMA_InitStructure.DMA_Memory0BaseAddr         =    (uint32_t)UA6RxDMAbuf;				// 设置DMA传输内存基地址（用户自定义，串口1接收到的数据将存在这里面）
     DMA_InitStructure.DMA_DIR                     =    DMA_DIR_PeripheralToMemory;			// 设置数据传输方向（外设接收到内存）
-    DMA_InitStructure.DMA_BufferSize              =    UA6RxDMAbuf_LEN;						// 设置DMA一次传输数据量的大小（500字节）
+    DMA_InitStructure.DMA_BufferSize              =    38;						// 设置DMA一次传输数据量的大小（500字节）
     DMA_InitStructure.DMA_PeripheralInc           =    DMA_PeripheralInc_Disable;			// 设置外设地址不变
     DMA_InitStructure.DMA_MemoryInc               =    DMA_MemoryInc_Enable;				// 设置内存地址递增
     DMA_InitStructure.DMA_PeripheralDataSize      =    DMA_PeripheralDataSize_Byte;			// 设置外设的数据长度为字节（8bits）
@@ -600,6 +600,7 @@ void usart6_init(u32 bound)
     DMA_InitStructure.DMA_MemoryBurst             =    DMA_Mode_Normal;						// 使用普通模式
     DMA_InitStructure.DMA_PeripheralBurst         =    DMA_PeripheralBurst_Single;			// 外设突发单次传输
     DMA_Init(USART6_RX_STREAM,&DMA_InitStructure);		
+
 	
 	
 	/*配置发送DMA*/

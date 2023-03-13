@@ -483,6 +483,11 @@
               <FileType>1</FileType>
               <FilePath>..\File\BSP\systick.c</FilePath>
             </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\BSP\gpio.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

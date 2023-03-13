@@ -123,8 +123,9 @@
 		ST_ENCODER MotorEncoder				= QuickEncoder(1,8192);
 		ST_ENCODER ChassisZigEncoder	= QuickEncoder(19,8192);	
 	/** @brief 电机控制pid */
-		ST_PID GimbalYawPosPid=QuickPID(-45,0,0,5000,5000,1000,1500,0.4);
-		ST_PID GimbalYawSpeedPid=QuickPID(-400,0,0,28000,28000,20000,20000,15);	
+		ST_PID GimbalYawPosPid=QuickPID(30,0.5,0,5000,5000,5000,1500,1);
+		ST_PID GimbalYawSpeedPid=QuickPID(280,0,0,0,28000,20000,20000,15);	
+		ST_ENCODER GimbalYawABS=QuickEncoder(1,360);
 		ST_PID GimbalPitchPosPid;
 		ST_PID GimbalPitchSpeedPid;
 		ST_TD	 YawTD=QuickTD(2000,0.001f,0.001f);
@@ -137,6 +138,7 @@
 		float PitchBMIAngle=0;
 		float PitchBMISpeed=0;
 	/** @brief 射击相关电机 */
+	  u32 Bottom_SupplyStep = 29491*5/3;
 		u32 	Friction_State_UP			= 500;								// 摩擦轮状态(500停止700开启）
 		u32 	Friction_State 				= 500;
 		s16 	Bullet_Des 						= 0;											// 拨弹目标数目
@@ -159,17 +161,13 @@
 		};
 	/** @brief 底盘电机 */
 		ST_PID ChassisPowerPid;
-		
-		ST_PID stWheel1_SpeedPid;
-		ST_PID stWheel2_SpeedPid;
-		ST_PID stWheel3_SpeedPid;
-		ST_PID stWheel4_SpeedPid;
-		
-		ST_PID stHelm1_SpeedPid;
-		ST_PID stHelm2_SpeedPid;
-		ST_PID stHelm3_SpeedPid;
-		ST_PID stHelm4_SpeedPid;
-
+		ST_PID stWheel_SpeedPid[4];
+		ST_PID stServoWheel_PosPid[4];
+		ST_PID stServoWheel_SpeedPid[4];
+		ST_ENCODER stServoEncoder[4];
+		ST_ENCODER g_stShooterEncoder 	= {0,0,0,0,36,8192,0};
+		ST_PID c_stShooterPosPID 		  = QuickPID(0.18,0,0,10000,8000,0,0,100);
+		ST_PID c_stShooterSpeedPID 		= QuickPID(100,0,0,10000,10000,0,0,20);
 		CAPACITOR_MSG capacitor_msg = {0};
 
 		
@@ -198,9 +196,9 @@
 	bool		ChassisPositionLeftFlag		= TRUE;
 	u8 			Chassis_Test_Flag	= 0x00;
 	/** @brief 超声波模块 */
-	u32 		TIM8_OverflowTimes=0;
-	u32    TIM8_Rising_ARR=0;
-	u32    TIM8_Falling_ARR=0;
+	u32 		TIM9_OverflowTimes=0;
+	u32    TIM9_Rising_ARR=0;
+	u32    TIM9_Falling_ARR=0;
 	float    US_Distance=0;
 
 	u8 			TirggerState = 0 ;
@@ -251,7 +249,8 @@ ST_UART_DATA_VOFA StateDataSendBuff = {.Tail1 = 0x00, .Tail2 = 0x00, .Tail3 = 0x
 #endif
 /***********************************************************************/
 	
-
+/**滤波器**/
+ST_KMF US_KMF={.m_preP=1,.m_Q=0.1,.m_R=0.8};
 
 
 

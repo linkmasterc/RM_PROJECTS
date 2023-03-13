@@ -57,8 +57,9 @@
 .\obj\mode_choose_task.o: ..\File\BSP\usart.h
 .\obj\mode_choose_task.o: ..\File\BSP\nvic.h
 .\obj\mode_choose_task.o: ..\File\BSP\systick.h
-.\obj\mode_choose_task.o: ..\File\USER\main.h
+.\obj\mode_choose_task.o: ..\File\BSP\gpio.h
 .\obj\mode_choose_task.o: ..\File\BSP\delay.h
+.\obj\mode_choose_task.o: ..\File\USER\main.h
 .\obj\mode_choose_task.o: ..\File\USER\stm32f4xx_it.h
 .\obj\mode_choose_task.o: ..\File\API\can_protocol.h
 .\obj\mode_choose_task.o: ..\File\API\vision_protocol.h
@@ -69,6 +70,8 @@
 .\obj\mode_choose_task.o: ..\File\TASK\shoot_task.h
 .\obj\mode_choose_task.o: ..\File\TASK\data_send_task.h
 .\obj\mode_choose_task.o: ..\File\API\gimbal_protocol.h
+.\obj\mode_choose_task.o: ..\File\TASK\chassis_task.h
+.\obj\mode_choose_task.o: ..\File\API\rm_algorithm.h
 .\obj\mode_choose_task.o: ..\File\USER\os.h
 .\obj\mode_choose_task.o: ..\File\RM_Types\rm_os_types.h
 .\obj\mode_choose_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

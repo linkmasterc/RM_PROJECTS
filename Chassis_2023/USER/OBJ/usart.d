@@ -54,8 +54,9 @@
 .\obj\usart.o: ..\File\BSP\can.h
 .\obj\usart.o: ..\File\BSP\nvic.h
 .\obj\usart.o: ..\File\BSP\systick.h
-.\obj\usart.o: ..\File\USER\main.h
+.\obj\usart.o: ..\File\BSP\gpio.h
 .\obj\usart.o: ..\File\BSP\delay.h
+.\obj\usart.o: ..\File\USER\main.h
 .\obj\usart.o: ..\File\USER\stm32f4xx_it.h
 .\obj\usart.o: ..\File\API\can_protocol.h
 .\obj\usart.o: ..\File\API\vision_protocol.h
@@ -68,6 +69,8 @@
 .\obj\usart.o: ..\File\TASK\shoot_task.h
 .\obj\usart.o: ..\File\TASK\data_send_task.h
 .\obj\usart.o: ..\File\API\gimbal_protocol.h
+.\obj\usart.o: ..\File\TASK\chassis_task.h
+.\obj\usart.o: ..\File\API\rm_algorithm.h
 .\obj\usart.o: ..\File\USER\os.h
 .\obj\usart.o: ..\File\RM_Types\rm_os_types.h
 .\obj\usart.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

@@ -49,9 +49,7 @@ void RCProtocol(u8 *pData)
 	g_StDbus.stRC.SW_R = ((pData[5] >> 4) & 0x0003);
 	
 	systemMonitor.USART1_rx_valid_cnt++;													// 对有效接收次数进行计数（计数周期为1s）
-
 }
-
 
 /** --------------------------------------------------------------------------
   * @brief  裁判系统数据解码

@@ -14,5 +14,5 @@ extern float DNPitchAnglebox[100];
 
 float Angle_180_To_Inf(float angle_input, ST_ANGLE* st_angle);
 void GimbalControl(void);
-
+void ChamberTranfer(void);
 #endif

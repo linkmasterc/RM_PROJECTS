@@ -19,8 +19,8 @@
 
 
 //摩擦轮
-#define fric_speed1 7400.0
-#define fric_speed2 12400.0
+#define fric_speed1 -12400.0
+#define fric_speed2 -12400.0
 #define Fric 139
 
 //拨弹电机
@@ -32,8 +32,8 @@
 #define PITCH_SPEED_FEEDBACK_GRYOSCOPE
 //#define PITCH_SPEED_FEEDBACK_ENCODER
 #define	PITCH_USE_TD
-#define GBDN_PITCH_MAX	10.0f
-#define GBDN_PITCH_MIN	-45.0f
+#define GBDN_PITCH_MAX	30.0f
+#define GBDN_PITCH_MIN	-30.0f
 #define GM_PITCH_MIDPOS 4106
 
 /** @brief 通讯所用变量 */
@@ -62,12 +62,15 @@
 		extern ST_ENCODER ChassisEncoder;
 		extern ST_ENCODER MotorEncoder;
 		extern ST_ENCODER ChassisZigEncoder;
+		extern ST_ENCODER GimbalSecondEncoder;
 	
 	/** @brief 电机控制pid */
 		extern ST_PID GimbalYawPosPid;
 		extern ST_PID GimbalYawSpeedPid; 
 		extern ST_PID GimbalPitchPosPid;
 		extern ST_PID GimbalPitchSpeedPid;
+		extern ST_PID GimbalSecondPosPid;
+		extern ST_PID GimbalSecondSpeedPid;
 		extern ST_TD	YawTD;
 	/** @brief 电调返回转化位常用单位 */
 	  extern float YawPosDes;
@@ -124,6 +127,10 @@
 		extern ST_ERROR stError;	// 模块异常标志位#endif
 		extern ST_FLAG 	stFlag;
 		extern ST_GIMBAL_FLAG stGimbalFlag; //云台控制标志位
+		
+		
+	/**滤波器**/
+		extern ST_KMF GimbalYawKMF;
 #endif
 
 

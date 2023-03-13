@@ -425,4 +425,20 @@ float NoiseSimulator(float in, bool state)
 		return in;
 }
 
+ /** --------------------------------------------------------------------------
+  * @brief  一维卡尔曼滤波器
+  
+  * @retval None
+  
+  * @param	None
+			
+  * @note	
+ -------------------------------------------------------------------------- **/
+void KalmanFilter(ST_KMF* pStKMF)
+{
+	pStKMF->m_rawP=pStKMF->m_preP+pStKMF->m_Q;
+	pStKMF->m_K=pStKMF->m_rawP/(pStKMF->m_rawP+pStKMF->m_R);
+	pStKMF->m_output=pStKMF->m_output+pStKMF->m_K*(pStKMF->m_input-pStKMF->m_output);
+	pStKMF->m_preP=(1-pStKMF->m_K)*pStKMF->m_rawP;
+}
 

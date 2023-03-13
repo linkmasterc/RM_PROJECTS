@@ -4,5 +4,5 @@
 
 void TIM5_Configuration(void);
 void TIM3_Configuration(void);
-void TIM8_Configuration(u32 arr,u16 psc);
+void TIM9_Configuration(u32 arr,u16 psc);
 #endif

@@ -1,5 +1,17 @@
 #include "chassis_task.h"
 #define ABS(x) ( (x)>0?(x):-(x) )
+#define SpeedWheelRate 10
+#define SafeType 		0x00
+#define GyroType 		0x01
+#define LineType 		0x02
+#define ForceFBType 0x03
+
+#define SpanSpeed 6000
+
+bool GyroJudge=TRUE;
+
+float InitAngle[4]={906,5356,2945,6948};
+
 float X_Vel;
 float Y_Vel;
 float W_Vel;
@@ -16,40 +28,224 @@ float W_Max_Vel;
 s16 Raw_Sum_Current;
 s16 Limit_Sum_Current;
 
+float testkp=0;
+
 float speed_rate=1;
 
-void UltraSound()
+void ForceFB()
 {
+	for(u8 i=0;i<4;i++)
+	{
+		if(fabs(stServoEncoder[i].uiRawValue-InitAngle[i])<=400)
+		{
+			stServoWheel_SpeedPid[i].m_fpUMax=3500;
+		}
+		else
+		{
+			stServoWheel_SpeedPid[i].m_fpUMax=0;
+			stServoWheel_PosPid[i].m_fpDes=stServoWheel_PosPid[i].m_fpFB;
+		}
+	}
 	
+}
+void ServoWheelControl()
+{
+	for(u8 i=0;i<4;i++)
+	{
+		CalIWeakenPID(&stServoWheel_PosPid[i]);
+		stServoWheel_SpeedPid[i].m_fpDes=stServoWheel_PosPid[i].m_fpU;
+		CalIWeakenPID(&stServoWheel_SpeedPid[i]);
+	}
+	CAN_SendData(CAN2,0x200,stServoWheel_SpeedPid[0].m_fpU,stServoWheel_SpeedPid[1].m_fpU,
+													stServoWheel_SpeedPid[2].m_fpU,stServoWheel_SpeedPid[3].m_fpU);
+
+}
+void SpeedWheelControl()
+{
+	for(u8 i=0;i<4;i++)
+	{
+		CalIWeakenPID(&stWheel_SpeedPid[i]);
+	}
+	CAN_SendData(CAN1,0x0200,stWheel_SpeedPid[0].m_fpU,stWheel_SpeedPid[1].m_fpU,
+													 stWheel_SpeedPid[2].m_fpU,stWheel_SpeedPid[3].m_fpU);	
+}
+	
+
+void ServoMode(u8 modechoice)
+{
+	switch (modechoice)
+	{
+		/*******************小陀螺模式下舵向轮控制************************/
+		case GyroType:
+		{
+			for(u8 i=0;i<4;i++)
+			{
+				stServoWheel_SpeedPid[i].m_fpUpMax=8000;
+				stServoWheel_SpeedPid[i].m_fpUMax=8000;
+
+			}
+			if(GyroJudge)
+			{
+				stServoWheel_PosPid[0].m_fpDes=stServoWheel_PosPid[0].m_fpDes+45;
+				stServoWheel_PosPid[1].m_fpDes=stServoWheel_PosPid[1].m_fpDes-45;
+				stServoWheel_PosPid[2].m_fpDes=stServoWheel_PosPid[2].m_fpDes+45;
+				stServoWheel_PosPid[3].m_fpDes=stServoWheel_PosPid[3].m_fpDes-45;
+				GyroJudge=FALSE;
+			}			
+		}break;
+		/********************直线模式下舵向轮控制***********************/
+		case LineType:
+		{
+			for(u8 i=0;i<4;i++)
+			{
+				stServoWheel_SpeedPid[i].m_fpUpMax=8000;
+				stServoWheel_SpeedPid[i].m_fpUMax=8000;
+
+			}
+			if(!GyroJudge)
+			{
+				stServoWheel_PosPid[0].m_fpDes=stServoWheel_PosPid[0].m_fpDes-45;
+				stServoWheel_PosPid[1].m_fpDes=stServoWheel_PosPid[1].m_fpDes+45;
+				stServoWheel_PosPid[2].m_fpDes=stServoWheel_PosPid[2].m_fpDes-45;
+				stServoWheel_PosPid[3].m_fpDes=stServoWheel_PosPid[3].m_fpDes+45;
+				GyroJudge=TRUE;
+			}	
+		}break;
+		/********************机械测试模式下舵向轮标定控制**********************/
+		case ForceFBType:
+		{
+			ForceFB();
+		}break;
+		/********************安全模式下舵向轮控制***********************/
+		case SafeType:
+		{
+			for(u8 i=0;i<4;i++)
+			{
+				stServoWheel_SpeedPid[i].m_fpUMax=0;
+			}
+		}break;
+		
+		default:
+		break;
+	}
+	ServoWheelControl();
 }
 
-void ChassisRCMode()
+
+void SpeedMode(u8 modechoice)
 {
-	//g_StDbus.stRC.Ch3;//y
-	//g_StDbus.stRC.Ch2;//x
-		/* 遥控器通道死区限制 */////
-	if(ABS(g_StDbus.stRC.Ch3 - RC_CH_VALUE_OFFSET) < RC_CH_VALUE_DEAD)
-	{	g_StDbus.stRC.Ch0 = RC_CH_VALUE_OFFSET;}
-	if(ABS(g_StDbus.stRC.Ch2 - RC_CH_VALUE_OFFSET) < RC_CH_VALUE_DEAD)
-	{	g_StDbus.stRC.Ch1 = RC_CH_VALUE_OFFSET;}
-	
+	switch (modechoice)
+	{
+		/**********************小陀螺模式下速度轮的控制*********************/
+		case GyroType:
+		{
+			for(u8 i=0;i<4;i++)
+				stWheel_SpeedPid[i].m_fpUMax=8000;
+			for(u8 i=0;i<4;i++)
+				FPRampSignal(&stWheel_SpeedPid[i].m_fpDes,SpanSpeed,10);
+		}break;
+		/**********************直线模式下速度轮的控制*********************/		
+		case LineType:
+		{
+			for(u8 i=0;i<4;i++)
+				stWheel_SpeedPid[i].m_fpUMax=8000;
+			
+			stWheel_SpeedPid[0].m_fpDes=-(g_StDbus.stRC.Ch1-1024);
+			stWheel_SpeedPid[1].m_fpDes=(g_StDbus.stRC.Ch1-1024);
+			stWheel_SpeedPid[2].m_fpDes=(g_StDbus.stRC.Ch1-1024);
+			stWheel_SpeedPid[3].m_fpDes=-(g_StDbus.stRC.Ch1-1024);
+			if(g_StDbus.stRC.Ch0-1024<0)
+			{
+				stWheel_SpeedPid[0].m_fpDes+=(g_StDbus.stRC.Ch0-1024);
+				stWheel_SpeedPid[3].m_fpDes=stWheel_SpeedPid[0].m_fpDes;
+			}
+			else if(g_StDbus.stRC.Ch0-1024>0)
+			{
+				stWheel_SpeedPid[1].m_fpDes=(g_StDbus.stRC.Ch0-1024);
+				stWheel_SpeedPid[2].m_fpDes=stWheel_SpeedPid[1].m_fpDes;
+			}	
+			for(u8 i=0;i<4;i++)
+			{
+				stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;
+			}
+		}break;
+		/*********************安全模式下速度轮的控制**********************/
+		case SafeType:
+		{
+			for(u8 i=0;i<4;i++)
+			{
+				stWheel_SpeedPid[i].m_fpUMax=0;
+			}
+		}break;
+		
+		default:
+		break;
+	}
+	SpeedWheelControl();
 }
+
+
+void ChassisModeChosse()
+{
+	switch(ControlMode)
+	{
+		case 0x00:
+		{
+			ServoMode(SafeType);
+			SpeedMode(SafeType);
+		}
+		break;
+		case 0x01:
+		{
+			ServoMode(ForceFBType);
+			SpeedMode(SafeType);
+		}
+		break;
+	
+		case 0x02:
+		{
+			ServoMode(LineType);
+			SpeedMode(LineType);
+		}
+		break;
+
+		case 0x03:
+		{
+			ServoMode(GyroType);
+			SpeedMode(GyroType);
+		}	
+		break;	
+	
+		case 0x04:
+		{
+
+		}
+		break;
+		
+
+		
+		default:
+		break;
+	}
+}
+
+
 
 void PowerLoopControl()
 {
-	ChassisPowerPid.m_fpDes=MaxPower;
+	capacitor_msg.TxPower=MaxPower;
+	CAN_SendData(CAN1,0x1FF,0,capacitor_msg.TxPower*100,0,0);
+	ChassisPowerPid.m_fpDes=capacitor_msg.Pow_In;
 	ChassisPowerPid.m_fpFB=capacitor_msg.Pow_Out;
+	
 	CalIWeakenPID(&ChassisPowerPid);
 	speed_rate=ChassisPowerPid.m_fpU/MaxPower+1;
-	stWheel1_SpeedPid.m_fpDes*=speed_rate;
-	stWheel2_SpeedPid.m_fpDes*=speed_rate;
-	stWheel3_SpeedPid.m_fpDes*=speed_rate;
-	stWheel4_SpeedPid.m_fpDes*=speed_rate;
-	CalIWeakenPID(&stWheel1_SpeedPid);
-	CalIWeakenPID(&stWheel2_SpeedPid);
-	CalIWeakenPID(&stWheel3_SpeedPid);
-	CalIWeakenPID(&stWheel4_SpeedPid);
-	CAN_SendData(CAN1,200,stWheel1_SpeedPid.m_fpU,stWheel2_SpeedPid.m_fpU,stWheel3_SpeedPid.m_fpU,stWheel4_SpeedPid.m_fpU);
+	for(u8 i=0;i<4;i++)
+		stWheel_SpeedPid[i].m_fpDes*=speed_rate;
+	for(u8 i=0;i<4;i++)
+		CalIWeakenPID(&stWheel_SpeedPid[i]);
+
+	CAN_SendData(CAN1,0x200,stWheel_SpeedPid[0].m_fpU,stWheel_SpeedPid[1].m_fpU,stWheel_SpeedPid[2].m_fpU,stWheel_SpeedPid[3].m_fpU);
 
 }
 

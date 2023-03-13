@@ -57,8 +57,9 @@
 .\obj\data_send_task.o: ..\File\BSP\usart.h
 .\obj\data_send_task.o: ..\File\BSP\nvic.h
 .\obj\data_send_task.o: ..\File\BSP\systick.h
-.\obj\data_send_task.o: ..\File\USER\main.h
+.\obj\data_send_task.o: ..\File\BSP\gpio.h
 .\obj\data_send_task.o: ..\File\BSP\delay.h
+.\obj\data_send_task.o: ..\File\USER\main.h
 .\obj\data_send_task.o: ..\File\USER\stm32f4xx_it.h
 .\obj\data_send_task.o: ..\File\API\can_protocol.h
 .\obj\data_send_task.o: ..\File\API\vision_protocol.h
@@ -70,6 +71,8 @@
 .\obj\data_send_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\data_send_task.o: ..\File\TASK\shoot_task.h
 .\obj\data_send_task.o: ..\File\TASK\data_send_task.h
+.\obj\data_send_task.o: ..\File\TASK\chassis_task.h
+.\obj\data_send_task.o: ..\File\API\rm_algorithm.h
 .\obj\data_send_task.o: ..\File\USER\os.h
 .\obj\data_send_task.o: ..\File\RM_Types\rm_os_types.h
 .\obj\data_send_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

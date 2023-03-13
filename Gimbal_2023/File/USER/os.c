@@ -43,10 +43,10 @@ u32 TaskTotalTimeLeast;
 ST_TAST G_ST_Task[] =
 {
 {.Name="SystemMonitorTask",   .Func=SystemMonitorTask,    .State=OS_READY,    .TimeDelay=1000*1000,   .TimeUsedLeast=0xFFFFFFFF},
-//{.Name="SensorDataPrepareTask",   .Func=SensorDataPrepareTask,    .State=OS_READY,    .TimeDelay=1000*0.25,   .TimeUsedLeast=0xFFFFFFFF},
-//{.Name="IMUUpdateTask",   .Func=IMUUpdateTask,    .State=OS_READY,    .TimeDelay=1000,   .TimeUsedLeast=0xFFFFFFFF},
+{.Name="SensorDataPrepareTask",   .Func=SensorDataPrepareTask,    .State=OS_READY,    .TimeDelay=1000*0.25,   .TimeUsedLeast=0xFFFFFFFF},
+{.Name="IMUUpdateTask",   .Func=IMUUpdateTask,    .State=OS_READY,    .TimeDelay=1000,   .TimeUsedLeast=0xFFFFFFFF},
 {.Name="GimbalControlTask",   .Func=GimbalControlTask,    .State=OS_READY,    .TimeDelay=1000*0.25,   .TimeUsedLeast=0xFFFFFFFF},
-//{.Name="SendDataTask",   .Func=SendDataTask,    .State=OS_READY,    .TimeDelay=1000,   .TimeUsedLeast=0xFFFFFFFF},
+{.Name="SendDataTask",   .Func=SendDataTask,    .State=OS_READY,    .TimeDelay=1000,   .TimeUsedLeast=0xFFFFFFFF},
 //{.Name="TriggerTask",   .Func=TriggerTask,    .State=OS_READY,    .TimeDelay=1000,   .TimeUsedLeast=0xFFFFFFFF},
 //{.Name="LedTask",   .Func=LedTask,    .State=OS_READY,    .TimeDelay=1000,   .TimeUsedLeast=0xFFFFFFFF},
 };

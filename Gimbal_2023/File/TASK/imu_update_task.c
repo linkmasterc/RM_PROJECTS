@@ -18,9 +18,7 @@ extern FP32 Gyro_X_Real;
 extern FP32 Gyro_Y_Real;
 extern FP32 Gyro_Z_Real;
 
-extern FP32 Acc_X_Real;
-extern FP32 Acc_Y_Real;
-extern FP32 Acc_Z_Real;
+
 
 float Kp = 0.5f;/**/
 float Ki = 0.001f;/**/
@@ -149,6 +147,6 @@ void IMU_Update_Mahony(_imu_st* imu,float dt)
     imu->rol = atan2f(vecyZ, veczZ) * 57.30f;
     imu->yaw = atan2f(R21, R11) * 57.30f;
 
-
+		
 }
 

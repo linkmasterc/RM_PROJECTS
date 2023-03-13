@@ -21,7 +21,7 @@ typedef enum {LOOP = 0, IDENTIFY = 1}CTRL_MODE;
 
 #define Cali_Rol_Coe 1
 #define Cali_Pit_Coe 1
-#define Cali_Yaw_Coe 1.0021f
+#define Cali_Yaw_Coe 1.0021f//1.0021f
 
 enum {X = 0, Y = 1, Z = 2, VEC_XYZ};
 enum {A_X = 0, A_Y, A_Z, G_X, G_Y, G_Z, TEM, MPU_ITEMS};
@@ -157,6 +157,16 @@ typedef struct
 	ST_TD m_TD;
 }ST_SMC;
 
-
+typedef struct
+{
+	float m_preP;
+	float m_rawP;
+	float m_Q;
+	float m_R;
+	float m_K;
+	float m_input;
+	float m_output;
+	
+}ST_KMF;
 
 #endif //HAL_CHASSIS_RM_PID_TYPES_H

@@ -55,8 +55,9 @@
 .\obj\gimbal_protocol.o: ..\File\BSP\usart.h
 .\obj\gimbal_protocol.o: ..\File\BSP\nvic.h
 .\obj\gimbal_protocol.o: ..\File\BSP\systick.h
-.\obj\gimbal_protocol.o: ..\File\USER\main.h
+.\obj\gimbal_protocol.o: ..\File\BSP\gpio.h
 .\obj\gimbal_protocol.o: ..\File\BSP\delay.h
+.\obj\gimbal_protocol.o: ..\File\USER\main.h
 .\obj\gimbal_protocol.o: ..\File\USER\stm32f4xx_it.h
 .\obj\gimbal_protocol.o: ..\File\API\can_protocol.h
 .\obj\gimbal_protocol.o: ..\File\API\vision_protocol.h
@@ -68,6 +69,8 @@
 .\obj\gimbal_protocol.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\gimbal_protocol.o: ..\File\TASK\shoot_task.h
 .\obj\gimbal_protocol.o: ..\File\TASK\data_send_task.h
+.\obj\gimbal_protocol.o: ..\File\TASK\chassis_task.h
+.\obj\gimbal_protocol.o: ..\File\API\rm_algorithm.h
 .\obj\gimbal_protocol.o: ..\File\USER\os.h
 .\obj\gimbal_protocol.o: ..\File\RM_Types\rm_os_types.h
 .\obj\gimbal_protocol.o: ..\File\API\verify.h

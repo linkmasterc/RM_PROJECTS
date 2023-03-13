@@ -40,7 +40,7 @@
 .\obj\bsp_init.o: ..\File\BSP\usart.h
 .\obj\bsp_init.o: ..\File\BSP\nvic.h
 .\obj\bsp_init.o: ..\File\BSP\systick.h
-.\obj\bsp_init.o: ..\File\USER\main.h
+.\obj\bsp_init.o: ..\File\BSP\gpio.h
 .\obj\bsp_init.o: ..\File\USER\global_declare.h
 .\obj\bsp_init.o: ..\File\RM_Types\rm_rc_types.h
 .\obj\bsp_init.o: ..\File\RM_Types\rm_redefine_types.h
@@ -55,10 +55,9 @@
 .\obj\bsp_init.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
 .\obj\bsp_init.o: ..\File\USER\os.h
 .\obj\bsp_init.o: ..\File\USER\main.h
-.\obj\bsp_init.o: ..\File\RM_Types\rm_os_types.h
-.\obj\bsp_init.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\bsp_init.o: ..\File\USER\bsp_init.h
 .\obj\bsp_init.o: ..\File\BSP\delay.h
+.\obj\bsp_init.o: ..\File\USER\main.h
 .\obj\bsp_init.o: ..\File\USER\stm32f4xx_it.h
 .\obj\bsp_init.o: ..\File\API\can_protocol.h
 .\obj\bsp_init.o: ..\File\API\vision_protocol.h
@@ -70,3 +69,9 @@
 .\obj\bsp_init.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\bsp_init.o: ..\File\TASK\shoot_task.h
 .\obj\bsp_init.o: ..\File\TASK\data_send_task.h
+.\obj\bsp_init.o: ..\File\API\gimbal_protocol.h
+.\obj\bsp_init.o: ..\File\TASK\chassis_task.h
+.\obj\bsp_init.o: ..\File\API\rm_algorithm.h
+.\obj\bsp_init.o: ..\File\USER\os.h
+.\obj\bsp_init.o: ..\File\RM_Types\rm_os_types.h
+.\obj\bsp_init.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

@@ -23,6 +23,7 @@ void SysTick_Handler(void)
 		DETECT_MONITOR(CapacitorTask);
 		DETECT_MONITOR(StateDataSendTask);
 		DETECT_MONITOR(LEDStateChangeTask);
+		DETECT_MONITOR(TriggerTask);
 		
 		/** IT Monitor */
 		DETECT_MONITOR(USART1_rx);					// 进入中断帧率检测
@@ -39,7 +40,12 @@ void SysTick_Handler(void)
 		DETECT_MONITOR(USART6_rx_valid);
 		DETECT_MONITOR(CAN1_rx);
 		DETECT_MONITOR(CAN2_rx);
-		
+		DETECT_MONITOR(CAN2_BODAN_RX);
+		DETECT_MONITOR(CAN2_SERVO1_RX);
+		DETECT_MONITOR(CAN2_SERVO2_RX);
+		DETECT_MONITOR(CAN2_SERVO3_RX);
+		DETECT_MONITOR(CAN2_SERVO4_RX);
+		DETECT_MONITOR(CAN2_YAW_RX);
 //		/** can1帧率检测 */
 //		DETECT_SUB_MONITOR(CAN1_CapacitorMode_rx);
 //		DETECT_SUB_MONITOR(CAN1_PowerBoard_rx);
@@ -131,13 +137,14 @@ u16 USART_Receive(USART_RX_TypeDef* USARTx)
 			使用空闲中断+DMA对数据进行处理
 			先读SR再读DR清除IDLE中断标志位
  -------------------------------------------------------------------------- **/
+u32 DMA_RAW_LEN=0;
 void USART1_IRQHandler(void)
 {
 	if(USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 	{
 		USART1->SR;																
 		USART1->DR;
-		
+		DMA_RAW_LEN=DMA_GetCurrDataCounter(USART1_RX_STREAM);
 		if(DMA_GetCurrDataCounter(USART1_RX_STREAM) == USART1_RX_BUF_LEN)				// 验证一次接收结束时DMA中接收到的数据是否完整
 		{
 			RCProtocol(USART1_Cushioning_Rx);												// 按协议对接收到的遥控器通讯数据进行处理
@@ -231,17 +238,50 @@ void USART3_IRQHandler(void)
 			使用空闲中断+DMA对数据进行处理
 			先读SR再读DR清除IDLE中断标志位
  -------------------------------------------------------------------------- **/
+
+
 void USART6_IRQHandler(void)
 {
+//	if(USART_GetITStatus(USART6, USART_IT_IDLE) == SET)
+//	{
+//		USART6->SR;
+//		USART6->DR;
+//		
+
+
+//		
+//		DMA_GetCurrDataCounter(USART6_RX_STREAM);							// 验证一次接收结束时DMA中接收到的数据是否完整
+//				DMA_Cmd(USART6_RX_STREAM, DISABLE);													// DMA清空为下一次接收做准备
+//			USART6_RX_STREAM->NDTR = UA6RxDMAbuf_LEN;
+//			DMA_Cmd(USART6_RX_STREAM, ENABLE);
+//		systemMonitor.USART6_rx_cnt++;
+//	}	
+	
 	if(USART_GetITStatus(USART6, USART_IT_IDLE) == SET)
 	{
 		USART6->SR;
 		USART6->DR;
-		
-		USART_Receive(&USART6_Rcr);																// 获取串口的DMA中接收数据的长度(暂未利用） 
-		DNVisionDataProtocol();
-		systemMonitor.USART6_rx_cnt++;
-	}	
+
+
+		if(DMA_GetCurrDataCounter(USART6_RX_STREAM) == 38)							// 验证一次接收结束时DMA中接收到的数据是否完整
+		{
+			//USART_Receive(&USART6_Rcr);																// 获取串口的DMA中接收数据的长度(暂未利用） 
+//			DNVisionDataProtocol();															// 按协议对接收到的下云控通讯数据进行处理
+			if(UA6RxDMAbuf[0]==0x55&&UA6RxDMAbuf[1]==00)
+			{
+				memcpy(&VisionDataReceiveBuff,(u8*)(&UA6RxDMAbuf)+2,1);
+				memcpy((u8*)(&VisionDataReceiveBuff)+1,(u8*)(&UA6RxDMAbuf)+4,32);
+				systemMonitor.USART6_rx_valid_cnt++;
+			}
+			systemMonitor.USART6_rx_cnt++;														// 对接收次数进行计数（计数周期为1s）
+		}
+		else
+		{
+			DMA_Cmd(USART6_RX_STREAM, DISABLE);													// DMA清空为下一次接收做准备
+			USART6_RX_STREAM->NDTR = 38;
+			DMA_Cmd(USART6_RX_STREAM, ENABLE);
+		}
+	}
 }
 
 /** --------------------------------------------------------------------------
@@ -282,49 +322,64 @@ void CAN2_RX0_IRQHandler(void)
 }
 
 /** --------------------------------------------------------------------------
-  * @brief  TIM8输入捕获
+  * @brief  TIM9输入捕获
 			
-  * @note		TIM8分频后计数频率为1us
+  * @note		TIM9分频后计数频率为1us
 						重装载周期为1ms
  -------------------------------------------------------------------------- **/
-void TIM8_CC_IRQHandler(void)
+float BOX[10];
+float preUS_Distance;
+void TIM1_BRK_TIM9_IRQHandler(void)
 {	
-	if(TIM_GetITStatus(TIM8,TIM8_CC_IRQn)!=RESET)
+	if(TIM_GetITStatus(TIM9,TIM_IT_CC1)!=RESET)
 	{
-		TIM_ClearITPendingBit(TIM8,TIM8_CC_IRQn);
-		if(!(TIM8->CCER&0x0002))															//此位为0是上升沿触发
+		TIM_ClearITPendingBit(TIM9,TIM_IT_CC1);
+		if(!(TIM9->CCER&0x0002))															//此位为0是上升沿触发
 		{
-			TIM8_Falling_ARR=0;
-			TIM8->CNT=0;																				//清空一下计数器，使计数器从0开始计数
-			TIM8_OverflowTimes=0;																//捕获上升沿后便重新记录计数器溢出次数
+			TIM9_Falling_ARR=0;
+			TIM9->CNT=0;																				//清空一下计数器，使计数器从0开始计数
+			TIM9_OverflowTimes=0;																//捕获上升沿后便重新记录计数器溢出次数
 			
-			TIM_Cmd(TIM8,DISABLE);
-			TIM_OC3PolarityConfig(TIM8,TIM_ICPolarity_Falling); //此处使用输出比较模式的函数没有问题，可以配置边沿触发模式(因为输入捕获没有单独的配置函数)
-			TIM_Cmd(TIM8,ENABLE);
+			TIM_Cmd(TIM9,DISABLE);
+			TIM_OC1PolarityConfig(TIM9,TIM_ICPolarity_Falling); //此处使用输出比较模式的函数没有问题，可以配置边沿触发模式(因为输入捕获没有单独的配置函数)
+			TIM_Cmd(TIM9,ENABLE);
 		}
-		if(TIM8->CCER&0x0002)																	//此位为1是下降沿触发
+		else if(TIM9->CCER&0x0002)																	//此位为1是下降沿触发
 		{
-			TIM8_Falling_ARR=TIM_GetCapture3(TIM8);
-			US_Distance=(TIM8_OverflowTimes*1+TIM8_Falling_ARR*0.001)*0.34/2.0;//计算与障碍物的距离
-			
-			TIM_Cmd(TIM8,DISABLE);
-			TIM_OC3PolarityConfig(TIM8,TIM_ICPolarity_Rising);
-			TIM_Cmd(TIM8,ENABLE);
+			TIM9_Falling_ARR=TIM_GetCapture1(TIM9);
+			US_Distance=(TIM9_OverflowTimes*1+TIM9_Falling_ARR*0.001)*0.34/2.0;//计算与障碍物的距离
+			preUS_Distance=US_Distance;
+			preUS_Distance=Clip(preUS_Distance,0,4.5);
+			if(US_Distance>4.5)
+				US_Distance=preUS_Distance;
+			if(fabs(preUS_Distance-US_Distance)>0.3)
+				US_Distance=preUS_Distance;
+			US_Distance=DataSmoothFilter(BOX,10,US_Distance);
+			US_Distance*=1000;
+			TIM_Cmd(TIM9,DISABLE);
+			TIM_OC1PolarityConfig(TIM9,TIM_ICPolarity_Rising);
+			TIM_Cmd(TIM9,ENABLE);
 		}
 		
+	}
+	if(TIM_GetITStatus(TIM9,TIM_IT_Update)!=RESET)
+	{
+		TIM_ClearITPendingBit(TIM9,TIM_IT_Update);
+		
+		TIM9_OverflowTimes++;
 	}
 }
 
-void TIM8_UP_TIM13_IRQHandler(void)
-{
-	if(TIM_GetITStatus(TIM8,TIM8_UP_TIM13_IRQn)!=RESET)
-	{
-		TIM_ClearITPendingBit(TIM8,TIM8_UP_TIM13_IRQn);
-		
-		TIM8_OverflowTimes++;
-		
-	}
-}
+//void TIM8_UP_TIM13_IRQHandler(void)
+//{
+//	if(TIM_GetITStatus(TIM8,TIM8_UP_TIM13_IRQn)!=RESET)
+//	{
+//		TIM_ClearITPendingBit(TIM8,TIM8_UP_TIM13_IRQn);
+//		
+//		TIM8_OverflowTimes++;
+//		
+//	}
+//}
 
 
 

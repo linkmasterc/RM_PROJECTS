@@ -57,8 +57,9 @@
 .\obj\os.o: ..\File\BSP\usart.h
 .\obj\os.o: ..\File\BSP\nvic.h
 .\obj\os.o: ..\File\BSP\systick.h
-.\obj\os.o: ..\File\USER\main.h
+.\obj\os.o: ..\File\BSP\gpio.h
 .\obj\os.o: ..\File\BSP\delay.h
+.\obj\os.o: ..\File\USER\main.h
 .\obj\os.o: ..\File\USER\stm32f4xx_it.h
 .\obj\os.o: ..\File\API\can_protocol.h
 .\obj\os.o: ..\File\API\vision_protocol.h
@@ -70,4 +71,5 @@
 .\obj\os.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\os.o: ..\File\TASK\shoot_task.h
 .\obj\os.o: ..\File\TASK\data_send_task.h
+.\obj\os.o: ..\File\TASK\chassis_task.h
 .\obj\os.o: ..\File\RM_Types\rm_os_types.h

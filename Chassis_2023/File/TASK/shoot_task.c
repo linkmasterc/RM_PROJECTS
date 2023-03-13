@@ -28,16 +28,67 @@ void ShootBullet(void)
 {
 
 	/* 遥控打弹 */
-	if(ControlMode == 0x01	|| ControlMode == 0x02 )
+	if(ControlMode == 0x01	|| ControlMode == 0x02 || ControlMode ==0x03)
 	{
 		RCShootBullet();
 	}
+	
 		
 	/* 自动打弹 */
-	else if(ControlMode == 0x03 )
-	{	
-		AutoShootBullet();
-	}
+//	else if(ControlMode == 0x03 )
+//	{	
+//		AutoShootBullet()                                          ;
+//	}
+//	if(stFlag.GimbalRunFlag==TRUE)
+//	{
+//		if(stFlag.ShootFlag == TRUE)
+//		{
+//			c_stShooterPosPID.m_fpUMax = 8000;
+//			c_stShooterSpeedPID.m_fpUMax = 10000;
+//			if(ABS(Bullet_Des_Pre - Bullet_Des) > 2)
+//			{
+//				c_stShooterPosPID.m_fpDes	= c_stShooterPosPID.m_fpFB;
+//				Bullet_Des_Pre = Bullet_Des;
+//			}
+//			if(Bullet_Des_Pre != Bullet_Des)
+//			{
+//				c_stShooterPosPID.m_fpDes 	= c_stShooterPosPID.m_fpDes + Bottom_SupplyStep * (Bullet_Des - Bullet_Des_Pre);
+//				Bullet_Des_Pre = Bullet_Des;
+//			}
+//		}
+//		else
+//		{
+//			c_stShooterPosPID.m_fpDes = c_stShooterPosPID.m_fpFB;
+//			Bullet_Des_Pre = Bullet_Des;
+//			c_stShooterSpeedPID.m_fpUMax = 0;
+//		}
+//	}
+//	else if(stFlag.GimbalRunFlag==FALSE)
+//	{
+//		if(stFlag.ShootFlag == TRUE)
+//		{
+//			c_stShooterPosPID.m_fpUMax = 8000;
+//			c_stShooterSpeedPID.m_fpUMax = 8000;
+//			if(ABS(Bullet_Des_Pre - Bullet_Des) > 2)
+//			{
+//				c_stShooterPosPID.m_fpDes 	= c_stShooterPosPID.m_fpFB;
+//				Bullet_Des_Pre = Bullet_Des;
+//		
+//			}
+//			if(Bullet_Des_Pre != Bullet_Des)
+//			{
+//				c_stShooterPosPID.m_fpDes 	= c_stShooterPosPID.m_fpDes + Bottom_SupplyStep * (Bullet_Des - Bullet_Des_Pre);
+//				Bullet_Des_Pre = Bullet_Des;
+//			}
+//		}
+//		else
+//		{
+//			c_stShooterPosPID.m_fpUMax 		= 0;
+//			c_stShooterPosPID.m_fpDes 		= c_stShooterPosPID.m_fpFB;
+//			Bullet_Des_Pre 			= Bullet_Des;
+//			c_stShooterSpeedPID.m_fpUMax	= 0;
+//		}
+//	}
 	
 	
 /****************/
@@ -49,6 +100,20 @@ void ShootBullet(void)
 //	/*子弹装填情况检测*/
 //	RammerDetect();
 	
+	if(DNSTC.BoDan_Flag)
+	{
+		c_stShooterSpeedPID.m_fpUMax=10000;
+		c_stShooterPosPID.m_fpDes=c_stShooterPosPID.m_fpDes+Bottom_SupplyStep * (Bullet_Des - Bullet_Des_Pre);
+		
+	}
+	
+	else
+	{
+		c_stShooterSpeedPID.m_fpUMax=0;
+		c_stShooterPosPID.m_fpDes=c_stShooterPosPID.m_fpFB;
+		c_stShooterSpeedPID.m_fpDes=c_stShooterSpeedPID.m_fpFB;
+	}
+	ShootPid();
 	/*记录状态*/
 	ShootNumberRecord(DNShootMode);																							// 记录下云台实际发射子弹数	
 	DNSTC.PreBoDan_Flag = DNSTC.BoDan_Flag;
@@ -82,7 +147,7 @@ void RCShootBullet()
 	
 	
 	/*延时打开拨弹开关*/
-	if(systemMonitor.SysTickTime - FrictionTick >7000 && (Friction_State == 700 || Friction_State_UP == 700) && BoDanFirstIn)// 开启摩擦轮后延时3s开启拨弹开关
+	if(systemMonitor.SysTickTime - FrictionTick >1000 && (Friction_State == 700 || Friction_State_UP == 700) && BoDanFirstIn)// 开启摩擦轮后延时3s开启拨弹开关
 	{
 		if(Friction_State == 700)	{DNSTC.BoDan_Flag 		= TRUE;}
 		BoDanFirstIn											= FALSE;
@@ -91,7 +156,7 @@ void RCShootBullet()
 
 	if(DNSTC.BoDan_Flag)																									// 下云台拨弹
 	{
-		if((Friction_State == 700) && stFlag.ShootFlag)												
+		if((Friction_State == 700)&&stFlag.ShootFlag)												
 		{
 			if(g_StDbus.stRC.Ch3 - RC_CH_VALUE_OFFSET < -300 )
 			{	GBShoot(1, DNShootMode);}
@@ -100,7 +165,7 @@ void RCShootBullet()
 			else if(g_StDbus.stRC.Ch3 - RC_CH_VALUE_OFFSET > 300)
 			{	GBShoot(13, DNShootMode);}
 			else if(g_StDbus.stRC.Ch2 - RC_CH_VALUE_OFFSET < -300)
-			{	GBShoot(17, DNShootMode);}
+			{	GBShoot(15, DNShootMode);}
 		}
 	}
 }
@@ -138,10 +203,10 @@ void AutoShootBullet(void)
 	
 	
 	/*跟随误差检测*/
-	if(stFlag.SniperFlag && DNSTC.BoDan_Flag)
+	if(DNSTC.BoDan_Flag)//stFlag.SniperFlag 
 	{
-		if(ABS(GimbalPitchPosPid.m_fpFB - GimbalPitchPosPid.m_fpDes) < DN_ATTACK_PITCH_ERROR											// pitch跟随误差小于击打误差
-			&& ABS(GimbalYawPosPid.m_fpFB - YawTD.m_aim) < DN_ATTACK_YAW_ERROR)													// yaw跟随误差小于击打误差
+		if(ABS(GimbalPitchPosPid.m_fpFB -(- GimbalPitchPosPid.m_fpDes)) < DN_ATTACK_PITCH_ERROR											// pitch跟随误差小于击打误差
+			&& ABS(GimbalYawPosPid.m_fpFB - GimbalYawPosPid.m_fpDes) < DN_ATTACK_YAW_ERROR)													// yaw跟随误差小于击打误差
 		{
 			Follow_Flag_DN = TRUE;																								// 紧密跟随
 		}
@@ -154,7 +219,7 @@ void AutoShootBullet(void)
 	
 	
 	/*自动射击*/
-	if(DNSTC.BoDan_Flag && stFlag.SniperFlag && Follow_Flag_DN && Shoot_Area_Flag)										// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
+	if(DNSTC.BoDan_Flag && Follow_Flag_DN )	//stFlag.SniperFlag&& Shoot_Area_Flag									// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
 	{
 		GBShoot(Shoot_Frequency_DN,DNShootMode);																			// 自动射击的弹频为9hz
 	}
@@ -211,9 +276,19 @@ void ShootNumberRecord(bool mode)
 			DNSTC.Fact_ShootPos = ShootEncoder.fpSumValue;
 		}
 		DNSTC.Fact_pShootNumber 	= (s32)((DNSTC.Fact_ShootPos - DNSTC.Fact_PreShootPos) / (-(BOTTOM_SUPPLY_STEP)) + 0.5f);
-		DNSTC.Fact_ShootSumNumber 	+= DNSTC.Fact_pShootNumber;
+		DNSTC.Fact_ShootSumNumber 	= DNSTC.Fact_pShootNumber;
 	}
 }
 
-
+void ShootPid()
+{
+	if(DNSTC.BoDan_Flag&& !DNSTC.PreBoDan_Flag)
+	{
+		c_stShooterPosPID.m_fpDes=c_stShooterPosPID.m_fpFB;
+	}
+	CalIResistedPID(&c_stShooterPosPID);
+	c_stShooterSpeedPID.m_fpDes = c_stShooterPosPID.m_fpU / 8192 * 360.0f;
+	CalIWeakenPID(&c_stShooterSpeedPID);
+	CAN_SendData(CAN2,0x1ff, GimbalYawSpeedPid.m_fpU,0,0,-(s16)(c_stShooterSpeedPID.m_fpU));
+}
 

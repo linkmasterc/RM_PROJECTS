@@ -25,7 +25,7 @@
 #define ChassisCushioning_Tx			ChassisData
 
 #define USART3_RX_BUF_LEN       	15
-#define USART3_TX_BUF_LEN				20
+#define USART3_TX_BUF_LEN				24
 
 #define QuickEncoder(Ratio, Number) {.fpGearRatio=Ratio, .siNumber=Number}
 
@@ -51,6 +51,7 @@ typedef __packed struct
 		u8 head[2];						//帧头1~2
 		float BMIYawAngle;		//IMU经解算得到的yaw轴角度
 		float BMIYawSpeed;		//IMU发出的yaw轴角速度
+		float PitchDesAngle;  //测试时使用的期望角度
 		float BMIPitchAngle;	//IMU经解算得到的pitch轴角度
 		float BMIPitchSpeed;	//IMU发出的pitch轴角速度
 		u8 TriggerState;			//1

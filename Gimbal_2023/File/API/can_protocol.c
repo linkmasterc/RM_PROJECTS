@@ -40,18 +40,24 @@ void CAN1_Protocol(void)
 {
 		switch(CAN1_RX_Message.StdId)
 	{
-		case 0x201:
+		case 0x208:
 			AbsEncoderProcess(&g_stFriction1Encoder, Get_Encoder_Number(&CAN1_RX_Message));
 			g_stFriction1SMC.m_fpFB = Get_Speed(&CAN1_RX_Message);
 			Friction1_Temp = Get_Temperature(&CAN1_RX_Message);
 		break;
 		
-		case 0x202:
+		case 0x205:
 			AbsEncoderProcess(&g_stFriction2Encoder, Get_Encoder_Number(&CAN1_RX_Message));
 			g_stFriction2SMC.m_fpFB = Get_Speed(&CAN1_RX_Message);
 			Friction2_Temp = Get_Temperature(&CAN1_RX_Message);
 		break;
 				
+		case 0x206:
+			AbsEncoderProcess(&GimbalSecondEncoder,Get_Encoder_Number(&CAN1_RX_Message));
+			GimbalSecondPosPid.m_fpFB=GimbalSecondEncoder.fpSumValue/8192.0*360.0;
+			GimbalSecondSpeedPid.m_fpFB=Get_Speed(&CAN1_RX_Message);
+		
+		break;
 		default:
 			
 		break;
@@ -67,7 +73,7 @@ void CAN2_Protocol(void)
 	{
 	//前四位是int型cur位置
 	//后四位是int型torque		
-		case 0x207:
+		case 0x206:
 			AbsEncoderProcess(&g_stPitchEncoder,Get_Encoder_Number(&CAN2_RX_Message));
 			Pitch_Encoder_angle = (float)((s16)g_stPitchEncoder.uiRawValue - GM_PITCH_MIDPOS) * 360/8192.0f;
 			Pitch_Encoder_speed = - Get_Speed(&CAN2_RX_Message);

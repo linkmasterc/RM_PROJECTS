@@ -11,7 +11,7 @@
 
 
 void ShootBullet(void);
-
+void ShootPid(void);
 
 
 #endif

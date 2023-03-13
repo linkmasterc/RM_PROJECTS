@@ -5,7 +5,9 @@
 #include "usart.h"
 #include "nvic.h"
 #include "systick.h"
-#include "main.h"
-
+#include "gpio.h"
+#include "global_declare.h"
+void Encoder_Init(void);
+void Motor_Init(void);
 void BSP_Init(void);
 #endif

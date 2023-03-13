@@ -73,6 +73,13 @@ extern double CM2_Limit_Speed_Coe;
 extern double CM3_Limit_Speed_Coe;
 extern double CM4_Limit_Speed_Coe;
 
+void ServoWheelControl(void);
+void SpeedWheelControl(void);
+void ForceFB(void);
+void ServoMode(u8 modechoice);
+void SpeedMode(u8 modechoice);
+void ChassisModeChosse(void);
 void Power_Limit_algorithm(float limit_cur,int limit_v);
+void PowerLoopControl(void);
 
 #endif

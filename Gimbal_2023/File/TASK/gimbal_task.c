@@ -162,7 +162,7 @@ void Friction_Control(float speed1, float speed2)
 			SMC_f = SMC_J*Dec_k;
 		}
 		
-		CAN_SendData(CAN1,0x200,(s16)(g_stFriction1SMC.m_fpU),(s16)(g_stFriction2SMC.m_fpU),0,0);
+		CAN_SendData(CAN1,0x1ff,-(s16)(g_stFriction2SMC.m_fpU),0,0,(s16)(g_stFriction1SMC.m_fpU));
 	}
 	
 	else if(Friction_State_Flag == 2)							//辨识模式
@@ -176,14 +176,14 @@ void Friction_Control(float speed1, float speed2)
 		CalSMC(&g_stFriction1SMC);
 		CalSMC(&g_stFriction2SMC);
 		
-		CAN_SendData(CAN1,0x200,(s16)(g_stFriction1SMC.m_fpU)-Fric,(s16)(g_stFriction2SMC.m_fpU)+Fric,0,0);
+		CAN_SendData(CAN1,0x1ff,((s16)(g_stFriction2SMC.m_fpU)-Fric),0,0,((s16)(g_stFriction1SMC.m_fpU)+Fric));
 	}
 	else																	//空闲模式
 	{
 		time_tick = 0;
 		Auto_Phase = 1;
 		
-		CAN_SendData(CAN1,0x200,0,0,0,0);
+		CAN_SendData(CAN1,0x1ff,0,0,0,0);
 	}
 	
 	Last_CM1_TEMP = Friction1_Temp;
@@ -234,7 +234,7 @@ void GimbalControl(void)
 		if(test==0){
 		CalTD(&g_stPitchTD);
 		g_stPitchPosPID.m_fpDes = g_stPitchTD.m_x1;}
-		else g_stPitchPosPID.m_fpDes = PitchTest;
+//		else g_stPitchPosPID.m_fpDes = PitchTest;
 		CalIWeakenPID(&g_stPitchPosPID);
 		PitchSpeedCompensate = PitchCoe * g_stPitchTD.m_x2;
 		g_stPitchSpeedPID.m_fpDes = g_stPitchPosPID.m_fpU - PitchSpeedCompensate;
@@ -243,6 +243,11 @@ void GimbalControl(void)
 		CalIWeakenPID(&g_stPitchPosPID);
 		g_stPitchSpeedPID.m_fpDes = g_stPitchPosPID.m_fpU;
 		CalIWeakenPID(&g_stPitchSpeedPID);
+		
+		CalIWeakenPID(&GimbalSecondPosPid);
+		GimbalSecondSpeedPid.m_fpDes=GimbalSecondPosPid.m_fpU;
+		CalIWeakenPID(&GimbalSecondSpeedPid);
+		
 		
 		//拨弹电机闭环控制
 		CalIResistedPID(&g_stShooterPosPID);
@@ -298,11 +303,14 @@ void GimbalControl(void)
 		
 		if(stGimbalFlag.PitchProtectFlag)
 		{	Pitch_Current	= 0;}
-		
-		CAN_SendData(CAN2,0x1ff, (s16)(g_stShooterSpeedPID.m_fpU),0,(s16)(-Pitch_Current),0);
+		CAN_SendData(CAN2,0x1ff,0,(s16)(Pitch_Current),0,0);
 		Pre_RunFlag = stGimbalFlag.RunFlag;
 		Clk_Div = 0;
 	}
 }
 
+void ChamberTranfer()
+{
+	
+}
 

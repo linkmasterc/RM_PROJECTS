@@ -15,8 +15,8 @@
 /*PITCH电机遥控角度范围*/
 #define UP_PITCH_RC_ANGLE_MAX				(5.0f)									// 上云台PITCH遥控角度最大值
 #define UP_PITCH_RC_ANGLE_MIN				(-32.0f)								// 上云台PITCH遥控角度最小值
-#define DN_PITCH_RC_ANGLE_MAX				(40.0f)									// 下云台PITCH遥控角度最大值
-#define DN_PITCH_RC_ANGLE_MIN				(0.0f)									// 下云台PITCH遥控角度最小值
+#define DN_PITCH_RC_ANGLE_MAX				(30.0f)									// 下云台PITCH遥控角度最大值
+#define DN_PITCH_RC_ANGLE_MIN				(-30.0f)									// 下云台PITCH遥控角度最小值
 
 
 /*PITCH电机扫描角度范围*/
@@ -60,7 +60,7 @@
 
 
 /*射击允许跟随误差*/
-#define DN_ATTACK_PITCH_ERROR				1.0f
+#define DN_ATTACK_PITCH_ERROR				1.5f
 #define DN_ATTACK_YAW_ERROR					2.5f
 #define UP_ATTACK_PITCH_ERROR				1.0f
 #define UP_ATTACK_YAW_ERROR					2.5f

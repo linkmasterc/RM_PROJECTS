@@ -55,8 +55,9 @@
 .\obj\global_declare.o: ..\File\BSP\usart.h
 .\obj\global_declare.o: ..\File\BSP\nvic.h
 .\obj\global_declare.o: ..\File\BSP\systick.h
-.\obj\global_declare.o: ..\File\USER\main.h
+.\obj\global_declare.o: ..\File\BSP\gpio.h
 .\obj\global_declare.o: ..\File\BSP\delay.h
+.\obj\global_declare.o: ..\File\USER\main.h
 .\obj\global_declare.o: ..\File\USER\stm32f4xx_it.h
 .\obj\global_declare.o: ..\File\API\can_protocol.h
 .\obj\global_declare.o: ..\File\API\vision_protocol.h
@@ -69,6 +70,8 @@
 .\obj\global_declare.o: ..\File\TASK\shoot_task.h
 .\obj\global_declare.o: ..\File\TASK\data_send_task.h
 .\obj\global_declare.o: ..\File\API\gimbal_protocol.h
+.\obj\global_declare.o: ..\File\TASK\chassis_task.h
+.\obj\global_declare.o: ..\File\API\rm_algorithm.h
 .\obj\global_declare.o: ..\File\USER\os.h
 .\obj\global_declare.o: ..\File\RM_Types\rm_os_types.h
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

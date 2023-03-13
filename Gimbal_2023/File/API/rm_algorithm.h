@@ -27,6 +27,7 @@ void U32RampSignal(u32 *Output, u32 DesValue, u32 Step);
 void FPRampSignal(float* Output, float DesValue, float Step);
 /*********************************************** 滤波器 ***********************************************************/
 float DataSmoothFilter(float* Box, u8 BoxSize, float RawData);
+void KalmanFilter(ST_KMF* pStKMF);
 /***********************************************离散信号***********************************************************/
 float NoiseSimulator(float in, bool state);
 #endif

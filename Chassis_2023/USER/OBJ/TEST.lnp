@@ -17,6 +17,7 @@
 ".\obj\usart.o"
 ".\obj\delay.o"
 ".\obj\systick.o"
+".\obj\gpio.o"
 ".\obj\led_task.o"
 ".\obj\shoot_task.o"
 ".\obj\chassis_task.o"

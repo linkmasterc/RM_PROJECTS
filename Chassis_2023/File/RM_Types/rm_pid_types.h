@@ -79,8 +79,21 @@ typedef struct
 /*机器人底盘运动速度结构体*/
 typedef struct
 {
-    float fpVx; //X方向速度（单位：mm/s）
-    float fpVy; //Y方向速度（单位：mm/s）
-    float fpW;  //角速度（逆时针为正，单位rad/s）
+	float fpVx; //X方向速度（单位：mm/s）
+	float fpVy; //Y方向速度（单位：mm/s）
+	float fpW;  //角速度（逆时针为正，单位rad/s）
 } ST_VELT;
+
+typedef struct
+{
+	float m_preP;
+	float m_rawP;
+	float m_Q;
+	float m_R;
+	float m_K;
+	float m_input;
+	float m_output;
+	
+}ST_KMF;
+
 #endif //HAL_CHASSIS_RM_PID_TYPES_H

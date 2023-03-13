@@ -8,8 +8,13 @@ void GimbalReceiveDataProtocol(void)
 		Verify_CRC8_Check_Sum((u8*)GimbalCushioning_Rx, ChassisBufLen_Rx))							// 帧尾CRC16校验
 	{
 		memcpy(&GimbalData.Receive, (u8*)GimbalCushioning_Rx, sizeof(GimbalData.Receive));	// 帧尾CRC16校验
-		YawBMIAngle			= GimbalData.Receive.BMIYawAngle;										// 上云台YAW轴角度（陀螺仪测得，但实际使用的是电机编码器测得的角度）
+		
+		YawBMIAngle			= -GimbalData.Receive.BMIYawAngle;										// 上云台YAW轴角度（陀螺仪测得，但实际使用的是电机编码器测得的角度）
+		AbsEncoderProcess(&GimbalYawABS,YawBMIAngle);
+		GimbalYawPosPid.m_fpFB=GimbalYawABS.fpSumValue;
+		
 		GimbalPitchPosPid.m_fpFB	= GimbalData.Receive.BMIPitchAngle;									// 上云台Pitch轴角度(陀螺仪测得）
+//		GimbalPitchPosPid.m_fpDes = GimbalData.Receive.PitchDesAngle;
 		PitchBMISpeed = GimbalData.Receive.BMIPitchSpeed;
 		TirggerState  = GimbalData.Receive.TriggerState;
 		if(PitchBMIAngle < 90.0f)																// 此处用意？
@@ -20,7 +25,6 @@ void GimbalReceiveDataProtocol(void)
 		{	
 			YawBMISpeed = -GimbalData.Receive.BMIYawSpeed;
 		}
-		
 		systemMonitor.UART4_rx_valid_cnt++;																// 对有效接收次数进行计数（1s内）
 	}
 }
@@ -36,7 +40,7 @@ void GimbalSendDataProtocol(void)
 	GimbalData.Send.PitAngleDes		= -NoiseSimulator(GimbalPitchPosPid.m_fpDes,FALSE);
 	GimbalData.Send.Shooter_Send_Des		= Bullet_Des;
 	GimbalData.Send.Friction_Send_Des		= Friction_State;
-	GimbalData.Send.Flag_Run				= stFlag.RunFlag;
+	GimbalData.Send.Flag_Run				= stFlag.GimbalRunFlag;
 	GimbalData.Send.Flag_Shoot			= stFlag.ShootFlag;
 	GimbalData.Send.Flag_Sniper			= stFlag.SniperFlag;
 //	GimbalData.Send.Flag_Reset			= stFlag.ResetFlag;

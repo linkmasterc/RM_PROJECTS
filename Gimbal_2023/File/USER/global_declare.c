@@ -24,11 +24,14 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 		ST_ENCODER ChassisEncoder 		= QuickEncoder(14,8192);
 		ST_ENCODER MotorEncoder				= QuickEncoder(1,8192);
 		ST_ENCODER ChassisZigEncoder	= QuickEncoder(19,8192);	
+		ST_ENCODER GimbalSecondEncoder=QuickEncoder(1,8192);
 	/** @brief 电机控制pid */
 		ST_PID GimbalYawPosPid;
 		ST_PID GimbalYawSpeedPid;	
 		ST_PID GimbalPitchPosPid;
 		ST_PID GimbalPitchSpeedPid;
+		ST_PID GimbalSecondPosPid;
+		ST_PID GimbalSecondSpeedPid;
 		ST_TD	 YawTD;
 	/** @brief 控制电机的角度与速度 */
 		float YawPosDes=0;
@@ -92,7 +95,7 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 	/** @brief pitch轴电机 */
 		float COMP = 0;
 		float PitchTest = 0;
-		s16 G_Compensate = 0;
+		s16 G_Compensate = 2500;
 		float Pitch_Encoder_angle = 0;
 		float Pitch_Encoder_speed = 0;
 		ST_ANGLE BMIPitchAngle	= {0};
@@ -112,8 +115,8 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 			*/
 		float	PitchCoe			= 1.0f;
 		ST_TD 	g_stPitchTD			= QuickTD(5000,0.001f,0.001f);
-		ST_PID 	g_stPitchPosPID 	= QuickPID(37,0.02,0,3000,3000,6000,1500,100);
-		ST_PID 	g_stPitchSpeedPID 	= QuickPID(300,0,0,28000,28000,15000,15000,12);
+		ST_PID 	g_stPitchPosPID 	= QuickPID(40,0.5,0,3000,3000,3000,1500,1);
+		ST_PID 	g_stPitchSpeedPID 	= QuickPID(300,0,0,28000,28000,1,15000,12);
 
 		#elif defined(PITCH_ANGLE_FEEDBACK_ENCODER) && defined(PITCH_SPEED_FEEDBACK_GRYOSCOPE)
 		/** @brief angle used encoder, speed used gryoscope	
@@ -134,3 +137,8 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 		ST_ERROR stError = {FALSE};	// 模块异常标志位	
 		ST_FLAG 	stFlag = {FALSE};	// 全局标志位		
 		ST_GIMBAL_FLAG stGimbalFlag; //云台控制标志位
+		
+		
+		
+	/**滤波器**/
+	ST_KMF GimbalYawKMF={.m_preP=1,.m_Q=0.1,.m_R=0.8};

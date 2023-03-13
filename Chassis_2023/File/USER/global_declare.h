@@ -18,7 +18,7 @@
 
 #define GM_YAW_SENSIBILITY		3800							// 遥控器yaw灵敏度
 #define GM_PITCH_SENSIBILITY	12								// 遥控器pitch灵敏度
-#define GM_YAW_SENSIBILITY_TEST		0.1					// 遥控器yaw灵敏度(调弹道用）
+#define GM_YAW_SENSIBILITY_TEST		0.05					// 遥控器yaw灵敏度(调弹道用）
 #define GM_PITCH_SENSIBILITY_TEST	25						// 遥控器pitch灵敏度（调弹道用）
 
 #define RecordBullet1Num	10
@@ -164,8 +164,12 @@
 	/** @brief 电机控制pid */
 		extern ST_PID GimbalYawPosPid;
 		extern ST_PID GimbalYawSpeedPid; 
+		extern ST_ENCODER GimbalYawABS;
 		extern ST_PID GimbalPitchPosPid;
 		extern ST_PID GimbalPitchSpeedPid;
+		extern ST_ENCODER g_stShooterEncoder;
+		extern ST_PID c_stShooterPosPID;
+		extern ST_PID c_stShooterSpeedPID;
 		extern ST_TD	YawTD;
 	/** @brief 电调返回转化位常用单位 */
 	  extern float YawPosDes;
@@ -176,6 +180,8 @@
 		extern float PitchBMIAngle;
 		extern float PitchBMISpeed;
 	/** @brief 射击相关电机 */
+	//拨弹电机
+	  extern u32  Bottom_SupplyStep;
 		extern u32 	Friction_State_UP;								// 摩擦轮状态(500停止700开启）
 		extern u32 	Friction_State ;
 		extern s16 	Bullet_Des; 																// 拨弹目标数目				
@@ -191,10 +197,10 @@
 		extern ST_ShootTestControl DNSTC;									// 下云台射击
 	/** @brief 底盘电机 */
 		extern ST_PID ChassisPowerPid;
-		extern ST_PID stWheel1_SpeedPid;
-		extern ST_PID stWheel2_SpeedPid;
-		extern ST_PID stWheel3_SpeedPid;
-		extern ST_PID stWheel4_SpeedPid;
+		extern ST_PID stWheel_SpeedPid[4];
+		extern ST_PID stServoWheel_PosPid[4];
+		extern ST_PID stServoWheel_SpeedPid[4];
+		extern ST_ENCODER stServoEncoder[4];
 		extern CAPACITOR_MSG capacitor_msg;
 
 
@@ -222,9 +228,9 @@
 	extern bool		ChassisPositionLeftFlag;
 	extern u8 			Chassis_Test_Flag;
 	/** @brief 超声波模块 */
-	extern u32 		TIM8_OverflowTimes;
-	extern u32    TIM8_Rising_ARR;
-	extern u32    TIM8_Falling_ARR;
+	extern u32 		TIM9_OverflowTimes;
+	extern u32    TIM9_Rising_ARR;
+	extern u32    TIM9_Falling_ARR;
 	extern float    US_Distance;
 
 	/** @brief底盘功率 */
@@ -262,6 +268,11 @@
 #elif defined VOFA_PROTOCOL
 	extern ST_UART_DATA_VOFA StateDataSendBuff;
 #endif
+
+	
+/**滤波器**/
+extern ST_KMF US_KMF;
+
 #endif
 
 

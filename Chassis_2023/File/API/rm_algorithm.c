@@ -380,19 +380,30 @@ void FPRampSignal(float* Output, float DesValue, float Step)
  -------------------------------------------------------------------------- **/
 float DataSmoothFilter(float* Box, u8 BoxSize, float RawData)
 {
-	float DataAllAdd = 0;
+	static float DataAllAdd = 0;
+	static u8 pointer=0;
+//	for(int i = 1;i<BoxSize;i++)					// 数据移位
+//	{
+//		Box[BoxSize-i] = Box[BoxSize-i-1];
+//	}
+//	
+//	Box[0] = RawData;								// 添加新数据
+	
 
-	for(int i = 1;i<BoxSize;i++)					// 数据移位
+	if(pointer>BoxSize)
+		pointer=0;
+	else
 	{
-		Box[BoxSize-i] = Box[BoxSize-i-1];
+		DataAllAdd-=Box[pointer];
+		Box[pointer]=RawData;
+		pointer++;		
 	}
-	
-	Box[0] = RawData;								// 添加新数据
-	
-	for(int i = 0;i<BoxSize;i++)					// 数据均值
-	{
-		DataAllAdd += Box[i];
-	}
+	DataAllAdd+=Box[pointer-1];
+
+//	for(int i = 0;i<BoxSize;i++)					// 数据均值
+//	{
+//		DataAllAdd += Box[i];
+//	}
 	return (DataAllAdd / BoxSize);
 }
 
@@ -422,6 +433,25 @@ float NoiseSimulator(float in, bool state)
 	}
 	else
 		return in;
+}
+
+ /** --------------------------------------------------------------------------
+  * @brief  一维卡尔曼滤波器
+  
+  * @retval None
+  
+  * @param	None
+			
+  * @note	
+ -------------------------------------------------------------------------- **/
+float KalmanFilter(ST_KMF* pStKMF,float input)
+{
+	pStKMF->m_rawP=pStKMF->m_preP+pStKMF->m_Q;
+	pStKMF->m_K=pStKMF->m_rawP/(pStKMF->m_rawP+pStKMF->m_R);
+	pStKMF->m_output=pStKMF->m_output+pStKMF->m_K*(input-pStKMF->m_output);
+	pStKMF->m_preP=(1-pStKMF->m_K)*pStKMF->m_rawP;
+	
+	return pStKMF->m_output;
 }
 
 

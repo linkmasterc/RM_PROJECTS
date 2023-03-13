@@ -57,8 +57,9 @@
 .\obj\stm32f4xx_it.o: ..\File\BSP\usart.h
 .\obj\stm32f4xx_it.o: ..\File\BSP\nvic.h
 .\obj\stm32f4xx_it.o: ..\File\BSP\systick.h
-.\obj\stm32f4xx_it.o: ..\File\USER\main.h
+.\obj\stm32f4xx_it.o: ..\File\BSP\gpio.h
 .\obj\stm32f4xx_it.o: ..\File\BSP\delay.h
+.\obj\stm32f4xx_it.o: ..\File\USER\main.h
 .\obj\stm32f4xx_it.o: ..\File\USER\stm32f4xx_it.h
 .\obj\stm32f4xx_it.o: ..\File\TASK\systemmonitor_task.h
 .\obj\stm32f4xx_it.o: ..\File\TASK\gimbal_task.h
@@ -69,6 +70,8 @@
 .\obj\stm32f4xx_it.o: ..\File\TASK\data_send_task.h
 .\obj\stm32f4xx_it.o: ..\File\API\vision_protocol.h
 .\obj\stm32f4xx_it.o: ..\File\API\gimbal_protocol.h
+.\obj\stm32f4xx_it.o: ..\File\TASK\chassis_task.h
+.\obj\stm32f4xx_it.o: ..\File\API\rm_algorithm.h
 .\obj\stm32f4xx_it.o: ..\File\USER\os.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_os_types.h
 .\obj\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

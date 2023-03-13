@@ -31,7 +31,7 @@
 #define USART2_TX_DMA_BUF_LEN    200
 #define USART2_TX_MB_BUF_LEN     20
 
-#define USART3_RX_BUF_LEN       	20
+#define USART3_RX_BUF_LEN       	24
 #define USART3_TX_BUF_LEN				15
 
 #define UART4_RX_BUF_LEN       	
@@ -60,12 +60,12 @@ typedef struct {
 /**@brief 电机编码器解码结构体 */
 typedef struct
 {
-	u32 uiRawValue;     	//本次编码器的原始值
-	u32 uiPreRawValue;  	//上一次编码器的原始值
-	s32 siDiff;         	//编码器两次原始值的差值
+	float uiRawValue;     	//本次编码器的原始值
+	float uiPreRawValue;  	//上一次编码器的原始值
+	float siDiff;         	//编码器两次原始值的差值
 	float fpSpeed;      	//电机减速器输出轴转速，单位：r/min
 	float fpGearRatio; 		//电机减速器减速比
-	s32 siNumber;       	//编码器线数
+	float siNumber;       	//编码器线数
 	float fpSumValue; 	  	//编码器累加值
 } ST_ENCODER;
 
@@ -79,6 +79,7 @@ typedef __packed struct
 		u8 head[2];						//帧头1~2
 		float BMIYawAngle;		//IMU经解算得到的yaw轴角度
 		float BMIYawSpeed;		//IMU发出的yaw轴角速度
+		float PitchDesAngle;
 		float BMIPitchAngle;	//IMU经解算得到的pitch轴角度
 		float BMIPitchSpeed;	//IMU发出的pitch轴角速度
 		u8 TriggerState;			//1
@@ -105,7 +106,7 @@ typedef __packed struct
 /** 视觉数据接收结构体 */
 #define VISION_RECIEVE_DATA_NUM_UP		11
 #define VISION_RECIEVE_DATA_LEN_UP		(VISION_RECIEVE_DATA_NUM_UP * 4 + 1)
-#define VISION_RECIEVE_DATA_NUM_DN		11
+#define VISION_RECIEVE_DATA_NUM_DN		8
 #define VISION_RECIEVE_DATA_LEN_DN		(VISION_RECIEVE_DATA_NUM_DN * 4 + 1)
 typedef __packed struct
 {
@@ -153,7 +154,7 @@ typedef union
 /** 视觉数据发送结构体 */
 #define VISION_SEND_DATA_NUM_UP	8
 #define VISION_SEND_DATA_LEN_UP	(VISION_SEND_DATA_NUM_UP * 4 + 6)
-#define VISION_SEND_DATA_NUM_DN	11
+#define VISION_SEND_DATA_NUM_DN	8
 #define VISION_SEND_DATA_LEN_DN	(VISION_SEND_DATA_NUM_DN * 4 + 6)
 typedef struct
 {
@@ -191,9 +192,9 @@ typedef struct
 	float Send_Data6;   //Chassis Speed
 	float Send_Data7;   //Banlance Soldior Number
 	float Send_Data8;	//全局视野Pitch
-	float Send_Data9;	//全局视野Yaw
-	float Send_Data10;	//全局视野权重
-	float Send_Data11;	//全局视野号码
+//	float Send_Data9;	//全局视野Yaw
+//	float Send_Data10;	//全局视野权重
+//	float Send_Data11;	//全局视野号码
 
 
 	u8 Tail1;
@@ -225,7 +226,7 @@ typedef struct
     float TxPower;
 } CAPACITOR_MSG;
 /* 用于串口助手通信看状态变量的波形 */
-#define STATE_SEND_DATA_NUM	20
+#define STATE_SEND_DATA_NUM	8
 
 #ifdef MINYOU_PROTOCOL
 	#define STATE_SEND_DATA_LEN	(STATE_SEND_DATA_NUM * 4 + 9)	 //（基于名优科创串口助手软件协议）
@@ -277,18 +278,18 @@ typedef __packed struct
 	float Send_Data6;   
 	float Send_Data7; 
 	float Send_Data8;
-	float Send_Data9;  
-	float Send_Data10;   
-	float Send_Data11;   
-	float Send_Data12; 
-	float Send_Data13; 
-	float Send_Data14;
-	float Send_Data15;  
-	float Send_Data16;   
- 	float Send_Data17;  
-	float Send_Data18;  
- 	float Send_Data19;  
-	float Send_Data20;
+//	float Send_Data9;  
+//	float Send_Data10;   
+//	float Send_Data11;   
+//	float Send_Data12; 
+//	float Send_Data13; 
+//	float Send_Data14;
+//	float Send_Data15;  
+//	float Send_Data16;   
+// 	float Send_Data17;  
+//	float Send_Data18;  
+// 	float Send_Data19;  
+//	float Send_Data20;
 	
 	u8 Tail1;
 	u8 Tail2;
