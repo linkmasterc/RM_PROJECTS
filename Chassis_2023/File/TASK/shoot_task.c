@@ -289,6 +289,6 @@ void ShootPid()
 	CalIResistedPID(&c_stShooterPosPID);
 	c_stShooterSpeedPID.m_fpDes = c_stShooterPosPID.m_fpU / 8192 * 360.0f;
 	CalIWeakenPID(&c_stShooterSpeedPID);
-	CAN_SendData(CAN2,0x1ff, GimbalYawSpeedPid.m_fpU,0,0,-(s16)(c_stShooterSpeedPID.m_fpU));
+	CAN_SendData(CAN1,0x1ff, -(s16)(c_stShooterSpeedPID.m_fpU),0,0,0);
 }
 

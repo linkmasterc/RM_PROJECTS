@@ -121,6 +121,7 @@
 		extern u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN_DN - 1];
 		extern VISION_SEND_DATA_DN VisionDataSendBuff;
 		extern __IO u8 UA6RxDMAbuf[UA6RxDMAbuf_LEN];
+		extern __IO u8 UA5RxDMAbuf[UA5RxDMAbuf_LEN];
 		extern u8 UA6RxMailbox[UA6RxMBbuf_LEN];
 		extern USART_RX_TypeDef USART6_Rcr;
 		extern UN_VISION_DATA_DN VisionDataReceiveBuff;						// 下云台视觉发来的数据

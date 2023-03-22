@@ -56,9 +56,6 @@ void ServoWheelControl()
 		stServoWheel_SpeedPid[i].m_fpDes=stServoWheel_PosPid[i].m_fpU;
 		CalIWeakenPID(&stServoWheel_SpeedPid[i]);
 	}
-	CAN_SendData(CAN2,0x200,stServoWheel_SpeedPid[0].m_fpU,stServoWheel_SpeedPid[1].m_fpU,
-													stServoWheel_SpeedPid[2].m_fpU,stServoWheel_SpeedPid[3].m_fpU);
-
 }
 void SpeedWheelControl()
 {
@@ -66,8 +63,6 @@ void SpeedWheelControl()
 	{
 		CalIWeakenPID(&stWheel_SpeedPid[i]);
 	}
-	CAN_SendData(CAN1,0x0200,stWheel_SpeedPid[0].m_fpU,stWheel_SpeedPid[1].m_fpU,
-													 stWheel_SpeedPid[2].m_fpU,stWheel_SpeedPid[3].m_fpU);	
 }
 	
 
@@ -227,6 +222,10 @@ void ChassisModeChosse()
 		default:
 		break;
 	}
+	CAN_SendData(CAN1,0x0200,stServoWheel_SpeedPid[0].m_fpU,stWheel_SpeedPid[1].m_fpU,
+													 stWheel_SpeedPid[2].m_fpU,stServoWheel_SpeedPid[3].m_fpU);
+	CAN_SendData(CAN2,0x0200,stWheel_SpeedPid[0].m_fpU,stServoWheel_SpeedPid[1].m_fpU,
+													 stServoWheel_SpeedPid[2].m_fpU,stWheel_SpeedPid[3].m_fpU);
 }
 
 

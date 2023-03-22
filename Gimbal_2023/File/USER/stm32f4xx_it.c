@@ -25,6 +25,7 @@ void USART3_IRQHandler(void)
 		if(DMA_GetCurrDataCounter(USART3_RX_STREAM) == ChassisBufLen_Rx)							// 验证一次接收结束时DMA中接收到的数据是否完整
 		{
 			GimbalReceiveDataProtocol();
+			systemMonitor.USART3_rx_cnt++;
 		}
 		else
 		{

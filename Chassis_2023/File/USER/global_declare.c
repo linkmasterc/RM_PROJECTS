@@ -86,6 +86,7 @@
 		u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN_DN - 1] 			= {0};
 		VISION_SEND_DATA_DN VisionDataSendBuff 	= {.My_Data.ID = 0x0A,.My_Data.Head1 = 0x55, .My_Data.Head2 = 0x00, .My_Data.Tail1 = 0x00, .My_Data.Tail2 = 0xAA};
 		__IO u8 UA6RxDMAbuf[UA6RxDMAbuf_LEN] = {0};
+		__IO u8 UA5RxDMAbuf[UA5RxDMAbuf_LEN] = {0};
 				 u8 UA6RxMailbox[UA6RxMBbuf_LEN] = {0};
 		USART_RX_TypeDef USART6_Rcr = {USART6,USART6_RX_STREAM,UA6RxMailbox,UA6RxDMAbuf,UA6RxMBbuf_LEN,UA6RxDMAbuf_LEN,0,0,0};
 		UN_VISION_DATA_DN VisionDataReceiveBuff 	= {0};						// 下云台视觉发来的数据

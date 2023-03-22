@@ -170,22 +170,29 @@ void DNYawPID(void)
 
 void GimbalModeChoose()
 {
-	if(ControlMode==0x00)
+	if(systemMonitor.USART3_rx_fps>=900&&systemMonitor.USART3_rx_fps<=1000)
+	{
+		if(ControlMode==0x00)
+		{
+			GimbalYawSpeedPid.m_fpUMax=0;
+			YawPosDes=GimbalYawPosPid.m_fpFB;
+		}
+		else if(ControlMode==0x01)
+		{
+			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
+			GimbalRCMode();
+		}
+		else if(ControlMode==0x02||ControlMode==0x03)
+		{
+			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
+			GimbalFollowAim();
+		}
+	}
+	else if(systemMonitor.USART3_rx_fps<900)
 	{
 		GimbalYawSpeedPid.m_fpUMax=0;
 		YawPosDes=GimbalYawPosPid.m_fpFB;
 	}
-	else if(ControlMode==0x01)
-	{
-		FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
-		GimbalRCMode();
-	}
-	else if(ControlMode==0x02||ControlMode==0x03)
-	{
-		FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
-		GimbalFollowAim();
-	}
 	DNYawPID();
-	CAN_SendData(CAN2,0x1ff, GimbalYawSpeedPid.m_fpU,0,0,-(s16)(c_stShooterSpeedPID.m_fpU));
+	CAN_SendData(CAN2,0x1ff, GimbalYawSpeedPid.m_fpU,0,0,0);
 }
-

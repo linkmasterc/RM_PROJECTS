@@ -190,13 +190,13 @@ void DNVisionDataSend(void)
 	VisionDataSendBuff.My_Data.Send_Data2 = VisionSendData2 = GimbalYawPosPid.m_fpFB;
 	VisionDataSendBuff.My_Data.Send_Data3 = VisionSendData3 = Bullet1SpeedMessage;
 	VisionDataSendBuff.My_Data.Send_Data4 = VisionSendData4 = HP_Detect();
-	VisionDataSendBuff.My_Data.Send_Data5 = VisionSendData5 = 1.0;//rush.EncoderSite - rush.LeftOffset;
-	VisionDataSendBuff.My_Data.Send_Data6 = VisionSendData6 = 1.0;//EncoderSpeed;
-	if(BanlanReconizeFinshFlag)
-	{
-		VisionDataSendBuff.My_Data.Send_Data7 = VisionSendData7 = BalancesoldierNumber;
-	}
-	VisionDataSendBuff.My_Data.Send_Data8 = VisionSendData8 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data8;
+//	VisionDataSendBuff.My_Data.Send_Data5 = VisionSendData5 = 1.0;//rush.EncoderSite - rush.LeftOffset;
+//	VisionDataSendBuff.My_Data.Send_Data6 = VisionSendData6 = 1.0;//EncoderSpeed;
+//	if(BanlanReconizeFinshFlag)
+//	{
+//		VisionDataSendBuff.My_Data.Send_Data7 = VisionSendData7 = BalancesoldierNumber;
+//	}
+//	VisionDataSendBuff.My_Data.Send_Data8 = VisionSendData8 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data8;
 	
 //	VisionDataSendBuff.My_Data.Send_Data9	= VisionSendData9 = 1.0;//UPVisionDataReceiveBuff.stVisionData.Recieve_Data9;
 //	

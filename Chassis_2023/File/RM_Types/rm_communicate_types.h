@@ -37,6 +37,8 @@
 #define UART4_RX_BUF_LEN       	
 #define UART4_TX_BUF_LEN				
 
+#define UA5RxDMAbuf_LEN    60
+
 #define UA6RxDMAbuf_LEN    60
 #define UA6RxMBbuf_LEN     (VISION_RECIEVE_DATA_LEN_DN + 5)
 
@@ -154,7 +156,7 @@ typedef union
 /** 视觉数据发送结构体 */
 #define VISION_SEND_DATA_NUM_UP	8
 #define VISION_SEND_DATA_LEN_UP	(VISION_SEND_DATA_NUM_UP * 4 + 6)
-#define VISION_SEND_DATA_NUM_DN	8
+#define VISION_SEND_DATA_NUM_DN	4
 #define VISION_SEND_DATA_LEN_DN	(VISION_SEND_DATA_NUM_DN * 4 + 6)
 typedef struct
 {
@@ -188,10 +190,10 @@ typedef struct
 	float Send_Data2;   //Yaw
 	float Send_Data3;   //Bullet Speed
 	float Send_Data4;   //Enemy HP Detect
-	float Send_Data5;   //Chassis Position
-	float Send_Data6;   //Chassis Speed
-	float Send_Data7;   //Banlance Soldior Number
-	float Send_Data8;	//全局视野Pitch
+//	float Send_Data5;   //Chassis Position
+//	float Send_Data6;   //Chassis Speed
+//	float Send_Data7;   //Banlance Soldior Number
+//	float Send_Data8;	//全局视野Pitch
 //	float Send_Data9;	//全局视野Yaw
 //	float Send_Data10;	//全局视野权重
 //	float Send_Data11;	//全局视野号码

@@ -52,26 +52,42 @@ void CAN1_Protocol(void)
 		break;
 		
 		case 0x201:
-			stWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+		{
+			AbsEncoderProcess(&stServoEncoder[0],GetEncoderNumber(CAN1_RX_Message.Data));
+			stServoWheel_PosPid[0].m_fpFB=stServoEncoder[0].fpSumValue/8192.0*40.0;
+			stServoWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN1_RX_Message.Data)/9;
+			systemMonitor.CAN1_SERVO1_RX_cnt++;
+		}
 		break;
 		
 		case 0x202:
+		{
 			stWheel_SpeedPid[1].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			systemMonitor.CAN1_SPEED2_RX_cnt++;
+		}
 		break;
 		
 		case 0x203:
+		{
 			stWheel_SpeedPid[2].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			systemMonitor.CAN1_SPEED3_RX_cnt++;
+		}
 		break;
 		
 		case 0x204:
-			stWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
-		break;
-		case 0x208:	//拨弹电机
 		{
-			AbsEncoderProcess(&g_stShooterEncoder,GetEncoderNumber(CAN2_RX_Message.Data));
+			AbsEncoderProcess(&stServoEncoder[3],GetEncoderNumber(CAN1_RX_Message.Data));
+			stServoWheel_PosPid[3].m_fpFB=stServoEncoder[3].fpSumValue/8192.0*40.0;			
+			stServoWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN1_RX_Message.Data)/9;
+			systemMonitor.CAN1_SERVO4_RX_cnt++;
+		}
+		break;
+		case 0x205:	//拨弹电机
+		{
+			AbsEncoderProcess(&g_stShooterEncoder,GetEncoderNumber(CAN1_RX_Message.Data));
 			c_stShooterPosPID.m_fpFB = -g_stShooterEncoder.fpSumValue;
-			c_stShooterSpeedPID.m_fpFB = -(GetSpeed(CAN2_RX_Message.Data)/g_stShooterEncoder.fpGearRatio);
-			systemMonitor.CAN2_BODAN_RX_cnt++;
+			c_stShooterSpeedPID.m_fpFB = -(GetSpeed(CAN1_RX_Message.Data)/g_stShooterEncoder.fpGearRatio);
+			systemMonitor.CAN1_BODAN_RX_cnt++;
 		}
 
 		
@@ -120,16 +136,15 @@ void CAN2_Protocol(void)
 		}
 			YawEncoderAngle = (GimbalYawEncoder.fpSumValue - DN_YAW_MID) * 360 / 8192.0f;										// 以YAW电机设定中值为0°,得到YAW轴当前角度
 			YawEncoderSpeed = GetSpeed(CAN2_RX_Message.Data);																	// 得到编码器测得的速度
+			systemMonitor.CAN2_YAW_RX_cnt++;
 		}
 		break;
 
 		
 		case 0x201:
 		{
-			AbsEncoderProcess(&stServoEncoder[0],GetEncoderNumber(CAN2_RX_Message.Data));
-			stServoWheel_PosPid[0].m_fpFB=stServoEncoder[0].fpSumValue/8192.0*40.0;
-			stServoWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
-			systemMonitor.CAN2_SERVO1_RX_cnt++;
+			stWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN2_RX_Message.Data);
+			systemMonitor.CAN2_SPEED1_RX_cnt++;
 		}
 		break;
 		
@@ -153,19 +168,8 @@ void CAN2_Protocol(void)
 		
 		case 0x204:
 		{
-			AbsEncoderProcess(&stServoEncoder[3],GetEncoderNumber(CAN2_RX_Message.Data));
-			stServoWheel_PosPid[3].m_fpFB=stServoEncoder[3].fpSumValue/8192.0*40.0;			
-			stServoWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
-			systemMonitor.CAN2_SERVO4_RX_cnt++;
-		}
-		break;
-		
-		case 0x208:	//拨弹电机
-		{
-			AbsEncoderProcess(&g_stShooterEncoder,GetEncoderNumber(CAN2_RX_Message.Data));
-			c_stShooterPosPID.m_fpFB = -g_stShooterEncoder.fpSumValue;
-			c_stShooterSpeedPID.m_fpFB = -(GetSpeed(CAN2_RX_Message.Data)/g_stShooterEncoder.fpGearRatio);
-			systemMonitor.CAN2_BODAN_RX_cnt++;
+			stWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN2_RX_Message.Data);
+			systemMonitor.CAN2_SPEED4_RX_cnt++;
 		}
 		break;
 		
