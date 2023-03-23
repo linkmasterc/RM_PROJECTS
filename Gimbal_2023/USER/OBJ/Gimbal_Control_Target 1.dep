@@ -133,7 +133,7 @@ I (..\File\TASK\system_monitor_task.h)(0x6389B71B)
 I (..\File\TASK\gimbal_task.h)(0x63F77967)
 I (..\File\API\can_protocol.h)(0x638A41CF)
 I (..\File\TASK\imu_update_task.h)(0x63483088)
-F (..\File\USER\stm32f4xx_it.c)(0x638DBB77)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\stm32f4xx_it.o --omf_browse .\obj\stm32f4xx_it.crf --depend .\obj\stm32f4xx_it.d)
+F (..\File\USER\stm32f4xx_it.c)(0x64169DA3)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\stm32f4xx_it.o --omf_browse .\obj\stm32f4xx_it.crf --depend .\obj\stm32f4xx_it.d)
 I (..\File\USER\stm32f4xx_it.h)(0x6388F067)
 I (..\File\USER\stm32f4xx.h)(0x5F58438C)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5F58438C)
@@ -657,7 +657,7 @@ I (..\File\TASK\system_monitor_task.h)(0x6389B71B)
 I (..\File\TASK\gimbal_task.h)(0x63F77967)
 I (..\File\API\can_protocol.h)(0x638A41CF)
 I (..\File\TASK\imu_update_task.h)(0x63483088)
-F (..\File\API\bmi088_driver.c)(0x640DAE50)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\bmi088_driver.o --omf_browse .\obj\bmi088_driver.crf --depend .\obj\bmi088_driver.d)
+F (..\File\API\bmi088_driver.c)(0x641CCC13)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\bmi088_driver.o --omf_browse .\obj\bmi088_driver.crf --depend .\obj\bmi088_driver.d)
 I (..\File\API\bmi088_driver.h)(0x640DA5EC)
 I (..\File\BSP\spi.h)(0x6348370D)
 I (..\File\USER\main.h)(0x638C7F94)

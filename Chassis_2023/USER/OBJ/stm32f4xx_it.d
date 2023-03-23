@@ -61,7 +61,7 @@
 .\obj\stm32f4xx_it.o: ..\File\BSP\delay.h
 .\obj\stm32f4xx_it.o: ..\File\USER\main.h
 .\obj\stm32f4xx_it.o: ..\File\USER\stm32f4xx_it.h
-.\obj\stm32f4xx_it.o: ..\File\TASK\systemmonitor_task.h
+.\obj\stm32f4xx_it.o: ..\File\API\systemmonitor_task.h
 .\obj\stm32f4xx_it.o: ..\File\TASK\gimbal_task.h
 .\obj\stm32f4xx_it.o: ..\File\TASK\led_task.h
 .\obj\stm32f4xx_it.o: ..\File\TASK\mode_choose_task.h

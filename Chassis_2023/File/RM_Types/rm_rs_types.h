@@ -56,10 +56,8 @@
 typedef struct
 {
 	bool RSState;			//裁判系统离线
-	bool UPGimbalState;		//上云台云控离线
-	bool UPComputerState;	//上云台小电脑离线
-	bool DNGimbalState;		//下云台云控离线
-	bool DNComputerState;	//下云台小电脑离线
+	bool GimbalState;		//下云台云控离线
+	bool ComputerState;	//下云台小电脑离线
 	bool Can1State;			//CAN1模块离线
 	bool Can2State;			//CAN2模块离线
 	bool CapacitorState; 	//电容模块异常

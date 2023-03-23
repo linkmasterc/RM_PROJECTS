@@ -124,12 +124,12 @@
 		ST_ENCODER MotorEncoder				= QuickEncoder(1,8192);
 		ST_ENCODER ChassisZigEncoder	= QuickEncoder(19,8192);	
 	/** @brief 电机控制pid */
-		ST_PID GimbalYawPosPid=QuickPID(30,0.5,0,5000,5000,5000,1500,1);
+		ST_PID GimbalYawPosPid=QuickPID(30,0.5,0,20000,20000,10000,1500,1);
 		ST_PID GimbalYawSpeedPid=QuickPID(280,0,0,0,28000,20000,20000,15);	
 		ST_ENCODER GimbalYawABS=QuickEncoder(1,360);
 		ST_PID GimbalPitchPosPid;
 		ST_PID GimbalPitchSpeedPid;
-		ST_TD	 YawTD=QuickTD(2000,0.001f,0.001f);
+		ST_TD	 YawTD=QuickTD(7500,0.001f,0.001f);
 	/** @brief 控制电机的角度与速度 */
 		float YawPosDes=0;
 		float YawEncoderAngle=0;

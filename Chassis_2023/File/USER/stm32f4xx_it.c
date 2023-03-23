@@ -78,6 +78,7 @@ void SysTick_Handler(void)
 		DETECT_RS_MONITOR(BulletRemaining);
 		DETECT_RS_MONITOR(RobotInteractiveData);
 	}
+
 }
 
 /** --------------------------------------------------------------------------
@@ -194,8 +195,7 @@ void USART2_IRQHandler(void)
 			DMA_Cmd(USART2_RX_STREAM, ENABLE);
 		}
 //		#endif
-
-	  	systemMonitor.USART2_rx_cnt++;																	// 对接收次数进行计数（计数周期为1s）
+	  systemMonitor.USART2_rx_cnt++;																	// 对接收次数进行计数（计数周期为1s）
 	}	
 }
 

@@ -64,7 +64,7 @@
 .\obj\mode_choose_task.o: ..\File\API\can_protocol.h
 .\obj\mode_choose_task.o: ..\File\API\vision_protocol.h
 .\obj\mode_choose_task.o: ..\File\API\DJI_protocol.h
-.\obj\mode_choose_task.o: ..\File\TASK\systemmonitor_task.h
+.\obj\mode_choose_task.o: ..\File\API\systemmonitor_task.h
 .\obj\mode_choose_task.o: ..\File\TASK\gimbal_task.h
 .\obj\mode_choose_task.o: ..\File\TASK\led_task.h
 .\obj\mode_choose_task.o: ..\File\TASK\shoot_task.h

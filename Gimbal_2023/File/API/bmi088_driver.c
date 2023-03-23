@@ -332,7 +332,7 @@ int GetOffset(void)
 #elif defined Infantry_19//云控备板
 			 Gyro_X_Offset =0.073696509f;//这个得实测，每个陀螺仪有细微的差别
 			 Gyro_Y_Offset =-0.0873621181f;
-		   Gyro_Z_Offset =-0.261000007f;
+		   Gyro_Z_Offset =0.03500000001f;
 //#error "No defined SelfType"
 #endif
         Cali_Cnt = CALI_NUM;
@@ -426,9 +426,9 @@ void Sensor_Data_Prepare()				//IMU数据准备（坐标转换，滤波，矫正零偏）
 	Gyro_X_Speed = Gyro_X_Real / PI * 180.0f;
 	Gyro_Y_Speed = Gyro_Y_Real / PI * 180.0f;
 	Gyro_Z_Speed = Gyro_Z_Real / PI * 180.0f;
-	stZSpeedKMF.m_input=Gyro_Z_Speed;
-	KalmanFilter(&stZSpeedKMF);
-	Gyro_Z_Speed=stZSpeedKMF.m_output;
+////	stZSpeedKMF.m_input=Gyro_Z_Speed;
+////	KalmanFilter(&stZSpeedKMF);
+////	Gyro_Z_Speed=stZSpeedKMF.m_output;
 
     Acc_X_Real = Acc_X_Ori;
     Acc_Y_Real = Acc_Y_Ori;

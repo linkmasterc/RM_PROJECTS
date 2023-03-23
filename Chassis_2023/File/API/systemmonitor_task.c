@@ -1,8 +1,6 @@
-#include "os.h"
-#include "rm_rs_types.h"
 #include "systemmonitor_task.h"
 #include "global_declare.h"
-
+#include "mode_choose_task.h"
 
 RCC_ClocksTypeDef get_rcc_clock;
 
@@ -14,7 +12,7 @@ RCC_ClocksTypeDef get_rcc_clock;
  -------------------------------------------------------------------------- **/
 void SystemMonitorDetect(void)
 {	
- 	RCC_GetClocksFreq(&get_rcc_clock);
+	RCC_GetClocksFreq(&get_rcc_clock);
 
 	/*任务执行时间统计*/
 	systemMonitor.TaskTotalTime = 0;
@@ -25,13 +23,13 @@ void SystemMonitorDetect(void)
 										systemMonitor.TaskTotalTimeMost : systemMonitor.TaskTotalTime;
 
 	/*帧率异常检测*/
-	if(systemMonitor.USART3_rx_fps < 500)	{	stError.GimbalState = TRUE;}								// 云控通信帧率异常检测
-	else										{	stError.GimbalState = FALSE;}
+	if(systemMonitor.USART3_rx_valid_fps < 500)	{	stError.DNGimbalState = TRUE;}								// 下云控通信帧率异常检测
+	else										{	stError.DNGimbalState = FALSE;}
 	
-	if(systemMonitor.USART6_rx_fps < 500)	{	stError.ComputerState = TRUE;}								// 视觉通信帧率异常检测
-	else										{	stError.ComputerState = FALSE;}
+	if(systemMonitor.UART4_rx_valid_fps < 500)	{	stError.UPGimbalState = TRUE;}								// 上云控通信帧率异常检测
+	else										{	stError.UPGimbalState = FALSE;}
 	
-	if(systemMonitor.USART2_rx_fps < 10)	{	stError.RSState = TRUE;}									// 裁判系统通信帧率异常检测
+	if(systemMonitor.USART2_rx_valid_fps < 10)	{	stError.RSState = TRUE;}									// 裁判系统通信帧率异常检测
 	else										{	stError.RSState = FALSE;}
 	
 	if(systemMonitor.CAN1_rx_fps < 1500)		{	stError.Can1State = TRUE;}									// CAN1通信帧率异常检测
@@ -43,17 +41,17 @@ void SystemMonitorDetect(void)
 	if(SubSystemMonitor.CAN1_CapacitorMode_rx_fps < 800)		{	stError.CapacitorState = TRUE;}				// 电容通信异常检测
 	else										{	stError.CapacitorState = FALSE;}
 	
-//	if(systemMonitor.UART5_rx_valid_fps < 10)																	// 上云台小电脑通信帧率异常检测
-//	{	
-//		stError.UPComputerState = TRUE;
-//		UPVisionDataReceiveBuff.stVisionData.Recieve_ID = 0;													// 帧率异常时认为未识别到目标
-//	}
-//	else	{	stError.UPComputerState = FALSE;}
-//	
-//	if(systemMonitor.USART6_rx_valid_fps < 10)																	// 下云台小电脑通信帧率异常检测
-//	{
-//		stError.DNComputerState = TRUE;
-//		DNVisionDataReceiveBuff.stVisionData.Recieve_ID = 0;													// 帧率异常时认为未识别到目标
-//	}
-//	else	{	stError.DNComputerState = FALSE;}
+	if(systemMonitor.UART5_rx_valid_fps < 10)																	// 上云台小电脑通信帧率异常检测
+	{	
+		stError.UPComputerState = TRUE;
+		UPVisionDataReceiveBuff.stVisionData.Recieve_ID = 0;													// 帧率异常时认为未识别到目标
+	}
+	else	{	stError.UPComputerState = FALSE;}
+	
+	if(systemMonitor.USART6_rx_valid_fps < 10)																	// 下云台小电脑通信帧率异常检测
+	{
+		stError.DNComputerState = TRUE;
+		DNVisionDataReceiveBuff.stVisionData.Recieve_ID = 0;													// 帧率异常时认为未识别到目标
+	}
+	else	{	stError.DNComputerState = FALSE;}
 }

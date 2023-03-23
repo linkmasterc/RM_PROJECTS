@@ -10,7 +10,7 @@
 
 bool GyroJudge=TRUE;
 
-float InitAngle[4]={906,5356,2945,6948};
+float InitAngle[4]={3530,4190,4113,4232};
 
 float X_Vel;
 float Y_Vel;

@@ -19,7 +19,7 @@ void LEDStateChange(void)
 	LEDTick++;
 		
 	/* 云控通信异常 */
-	if(stError.DNGimbalState 		|| stError.UPGimbalState)									
+	if(stError.GimbalState)									
 	{	
 		if(!(LEDTick % 150))	
 		{
@@ -33,7 +33,7 @@ void LEDStateChange(void)
 	}
 	
 	/* 视觉通信异常 */	
-	if(stError.DNComputerState || stError.UPComputerState)
+	if(stError.ComputerState)
 	{	
 		if(!(LEDTick % 200))	
 		{
@@ -80,8 +80,14 @@ void LEDStateChange(void)
 		LED_BLUE_OFF();
 		LED_GREEN_OFF();
 		LED_RED_OFF();
-
+		LED_ORANGE_OFF();
 		LED_PINK_ON();
 	}
+
+//	LED_BLUE_ON();
+//	LED_RED_ON();
+//	LED_GREEN_ON();
+//	LED_PINK_ON();
+//	LED_ORANGE_ON();
 }
 

@@ -26,19 +26,23 @@ static void 	ShootNumberRecord(bool mode);									// 实际发射子弹数记录
  -------------------------------------------------------------------------- **/
 void ShootBullet(void)
 {
-
+	
+	if(ControlMode == 0x00)
+	{
+		Friction_State 	= 500;	
+	}
 	/* 遥控打弹 */
-	if(ControlMode == 0x01	|| ControlMode == 0x02 || ControlMode ==0x03)
+	else if(ControlMode == 0x01	|| ControlMode == 0x02 || ControlMode ==0x03)
 	{
 		RCShootBullet();
 	}
 	
 		
 	/* 自动打弹 */
-//	else if(ControlMode == 0x03 )
-//	{	
-//		AutoShootBullet()                                          ;
-//	}
+	else if(ControlMode == 0x04 )
+	{	
+		AutoShootBullet()                                          ;
+	}
 //	if(stFlag.GimbalRunFlag==TRUE)
 //	{
 //		if(stFlag.ShootFlag == TRUE)
@@ -195,9 +199,10 @@ void AutoShootBullet(void)
 	
 	
 	/*延时打开拨弹开关*/
-	if(systemMonitor.SysTickTime - DNFrictionTick > 3000 && Friction_State == 700 && Auto_BoDanFirstIn)// 开启摩擦轮后延时3s开启拨弹开关
+	if(systemMonitor.SysTickTime - DNFrictionTick > 2000 && Friction_State == 700 && Auto_BoDanFirstIn)// 开启摩擦轮后延时2s开启拨弹开关
 	{
-		DNSTC.BoDan_Flag		= TRUE;
+		if(Friction_State==700)
+			DNSTC.BoDan_Flag		= TRUE;
 		Auto_BoDanFirstIn			= FALSE;	
 	}	
 	
@@ -219,7 +224,7 @@ void AutoShootBullet(void)
 	
 	
 	/*自动射击*/
-	if(DNSTC.BoDan_Flag && Follow_Flag_DN )	//stFlag.SniperFlag&& Shoot_Area_Flag									// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
+	if((Friction_State == 700)&&DNSTC.BoDan_Flag && Follow_Flag_DN &&systemMonitor.USART6_rx_fps>=150)	//stFlag.SniperFlag&& Shoot_Area_Flag									// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
 	{
 		GBShoot(Shoot_Frequency_DN,DNShootMode);																			// 自动射击的弹频为9hz
 	}

@@ -43,6 +43,7 @@ u32 TaskTotalTimeLeast;
 ST_TAST G_ST_Task[] =
 {
 {.Name="SystemMonitorTask",   .Func=SystemMonitorTask,    .State=OS_READY,    .TimeDelay=1000*1000,   .TimeUsedLeast=0xFFFFFFFF},
+{.Name="SystemMonitorDetect",       .Func=SystemMonitorDetect,        .State=OS_READY,    .TimeDelay=1000*1000,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="ModeChooseTask",       .Func=ModeChooseTask,        .State=OS_READY,    .TimeDelay=1000,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="GimbalTask",       .Func=GimbalTask,        .State=OS_READY,    .TimeDelay=1000,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="ShootTask",       .Func=ShootTask,        .State=OS_READY,    .TimeDelay=1000*0.5,      .TimeUsedLeast=0xFFFFFFFF},
@@ -51,8 +52,7 @@ ST_TAST G_ST_Task[] =
 {.Name="VofaPlusTask",       .Func=VofaPlusTask,        .State=OS_READY,    .TimeDelay=1000*5,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="ChassisTask",       .Func=ChassisTask,        .State=OS_READY,    .TimeDelay=1000*1,      .TimeUsedLeast=0xFFFFFFFF},
 //{.Name="TriggerTask",       .Func=TriggerTask,        .State=OS_READY,    .TimeDelay=1000*60,      .TimeUsedLeast=0xFFFFFFFF},
-//{.Name="LEDStateChangeTask",       .Func=LEDStateChangeTask,        .State=OS_READY,    .TimeDelay=1000,      .TimeUsedLeast=0xFFFFFFFF},
-
+{.Name="LEDStateChangeTask",       .Func=LEDStateChangeTask,        .State=OS_READY,    .TimeDelay=1000,      .TimeUsedLeast=0xFFFFFFFF},
 };
 
 u32 TotalTaskNum = sizeof(G_ST_Task)/sizeof(ST_TAST);

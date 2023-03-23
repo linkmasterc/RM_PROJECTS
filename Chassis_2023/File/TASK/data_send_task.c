@@ -6,8 +6,8 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "mode_choose_task.h"
-#define Vision_Use_Vofa
-//#define Gimbal_Check_Vofa
+//#define Vision_Use_Vofa
+#define Gimbal_Check_Vofa
 //#define Normal_Use_Vofa
 void VofaDataScan()
 {

@@ -64,7 +64,7 @@
 .\obj\systemmonitor_task.o: ..\File\API\can_protocol.h
 .\obj\systemmonitor_task.o: ..\File\API\vision_protocol.h
 .\obj\systemmonitor_task.o: ..\File\API\DJI_protocol.h
-.\obj\systemmonitor_task.o: ..\File\TASK\systemmonitor_task.h
+.\obj\systemmonitor_task.o: ..\File\API\systemmonitor_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\gimbal_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\led_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\mode_choose_task.h
@@ -73,3 +73,4 @@
 .\obj\systemmonitor_task.o: ..\File\TASK\data_send_task.h
 .\obj\systemmonitor_task.o: ..\File\TASK\chassis_task.h
 .\obj\systemmonitor_task.o: ..\File\RM_Types\rm_os_types.h
+.\obj\systemmonitor_task.o: ..\File\TASK\systemmonitor_task.h

@@ -61,7 +61,7 @@
 .\obj\can_protocol.o: ..\File\USER\stm32f4xx_it.h
 .\obj\can_protocol.o: ..\File\API\vision_protocol.h
 .\obj\can_protocol.o: ..\File\API\DJI_protocol.h
-.\obj\can_protocol.o: ..\File\TASK\systemmonitor_task.h
+.\obj\can_protocol.o: ..\File\API\systemmonitor_task.h
 .\obj\can_protocol.o: ..\File\TASK\gimbal_task.h
 .\obj\can_protocol.o: ..\File\TASK\led_task.h
 .\obj\can_protocol.o: ..\File\TASK\mode_choose_task.h

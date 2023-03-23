@@ -65,7 +65,7 @@
 .\obj\gimbal_task_1.o: ..\File\API\can_protocol.h
 .\obj\gimbal_task_1.o: ..\File\API\vision_protocol.h
 .\obj\gimbal_task_1.o: ..\File\API\DJI_protocol.h
-.\obj\gimbal_task_1.o: ..\File\TASK\systemmonitor_task.h
+.\obj\gimbal_task_1.o: ..\File\API\systemmonitor_task.h
 .\obj\gimbal_task_1.o: ..\File\TASK\led_task.h
 .\obj\gimbal_task_1.o: ..\File\TASK\mode_choose_task.h
 .\obj\gimbal_task_1.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h

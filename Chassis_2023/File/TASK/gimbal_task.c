@@ -6,8 +6,8 @@
 u8 judgeTD=0;
 u8 yaw_span_type=0;
 u8 pit_span_type=0;
-float yaw_ramp_step=0.02;
-float pit_ramp_step=0.05;
+float yaw_ramp_step=0.05;
+float pit_ramp_step=0.02;
 /** --------------------------------------------------------------------------
   * @brief  遥控器控制云台运动
 			
@@ -72,43 +72,44 @@ void GimbalAutoScan(void)
 {
 	if(yaw_span_type==1)
 	{
-		FPRampSignal(&YawPosDes,60,yaw_ramp_step);
-		if(YawPosDes>=60)
+		FPRampSignal(&YawPosDes,45,yaw_ramp_step);
+		if(YawPosDes>=45)
 			yaw_span_type=0;
 	}
 	else if(yaw_span_type==0)
 	{
-		FPRampSignal(&YawPosDes,-60,yaw_ramp_step);
-		if(YawPosDes<=-60)
+		FPRampSignal(&YawPosDes,-45,yaw_ramp_step);
+		if(YawPosDes<=-45)
 			yaw_span_type=1;
 	}
 		
 		
 	if(pit_span_type==1)
 	{
-		FPRampSignal(&GimbalPitchPosPid.m_fpDes,-30,pit_ramp_step);
-		if(GimbalPitchPosPid.m_fpDes<=0)
+		FPRampSignal(&GimbalPitchPosPid.m_fpDes,-15,pit_ramp_step);
+		if(GimbalPitchPosPid.m_fpDes<=-15)
 			pit_span_type=0;
 	}
 	else if(pit_span_type==0)
 	{
-		FPRampSignal(&GimbalPitchPosPid.m_fpDes,30,pit_ramp_step);
-		if(GimbalPitchPosPid.m_fpDes>=40)
+		FPRampSignal(&GimbalPitchPosPid.m_fpDes,0,pit_ramp_step);
+		if(GimbalPitchPosPid.m_fpDes>=0)
 			pit_span_type=1;
 	}
 }
 
 void GimbalFollowAim(void)
 {
-	if(VisionDataReceiveBuff.stVisionData.Recieve_ID==1)
+	if(VisionDataReceiveBuff.stVisionData.Recieve_ID==1&&systemMonitor.USART6_rx_fps>=150)
 	{
 		YawPosDes=VisionDataReceiveBuff.stVisionData.Recieve_Data2;
 		GimbalPitchPosPid.m_fpDes=-VisionDataReceiveBuff.stVisionData.Recieve_Data1;
 	}
 	else 
 	{
-		YawPosDes=GimbalYawPosPid.m_fpFB;
-		GimbalPitchPosPid.m_fpDes=-GimbalPitchPosPid.m_fpFB;
+		GimbalAutoScan();
+//		YawPosDes=GimbalYawPosPid.m_fpFB;
+//		GimbalPitchPosPid.m_fpDes=-GimbalPitchPosPid.m_fpFB;
 	}
 }	
 
@@ -154,12 +155,9 @@ void DNYawPID(void)
 	{
 		YawTD.m_aim=YawPosDes;
 		CalTD(&YawTD);
-		GimbalYawPosPid.m_fpDes=YawTD.m_x1;
+		YawPosDes=YawTD.m_x1;
 	}
-	else
-	{
-		GimbalYawPosPid.m_fpDes=YawPosDes;
-	}
+	GimbalYawPosPid.m_fpDes=YawPosDes;
 	GimbalYawSpeedPid.m_fpFB=YawBMISpeed;
 	CalIWeakenPID(&GimbalYawPosPid);													// 得到位置环PID输出（只用PI控制，D使用TD跟踪微分器）
 	GimbalYawSpeedPid.m_fpDes = GimbalYawPosPid.m_fpU ;		
@@ -182,7 +180,7 @@ void GimbalModeChoose()
 			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
 			GimbalRCMode();
 		}
-		else if(ControlMode==0x02||ControlMode==0x03)
+		else if(ControlMode==0x02||ControlMode==0x03||ControlMode==0x04)
 		{
 			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
 			GimbalFollowAim();
