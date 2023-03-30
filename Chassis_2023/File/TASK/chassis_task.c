@@ -1,4 +1,5 @@
 #include "chassis_task.h"
+#include "math.h"
 #define ABS(x) ( (x)>0?(x):-(x) )
 #define SpeedWheelRate 10
 #define SafeType 		0x00
@@ -32,9 +33,21 @@ float testkp=0;
 
 float speed_rate=1;
 
+void ServoAngleCal()
+{
+	if(ControlMode==0x02)
+		LCSYawAngle=atan2(g_StDbus.stRC.Ch0,g_StDbus.stRC.Ch1)*180/PI;
+
+	else if(ControlMode==0x04)
+		LCSYawAngle=atan(WCSYawAngle)*180/PI;
+	
+	for(u32 i=0;i<4;i++)
+		stServoWheel_PosPid[i].m_fpDes=stServoWheel_PosPid[i].m_fpDes+LCSYawAngle;
+}
+
 void ForceFB()
 {
-	for(u8 i=0;i<4;i++)
+	for(u32 i=0;i<4;i++)
 	{
 		if(fabs(stServoEncoder[i].uiRawValue-InitAngle[i])<=400)
 		{
@@ -50,7 +63,7 @@ void ForceFB()
 }
 void ServoWheelControl()
 {
-	for(u8 i=0;i<4;i++)
+	for(u32 i=0;i<4;i++)
 	{
 		CalIWeakenPID(&stServoWheel_PosPid[i]);
 		stServoWheel_SpeedPid[i].m_fpDes=stServoWheel_PosPid[i].m_fpU;
@@ -59,10 +72,8 @@ void ServoWheelControl()
 }
 void SpeedWheelControl()
 {
-	for(u8 i=0;i<4;i++)
-	{
+	for(u32 i=0;i<4;i++)
 		CalIWeakenPID(&stWheel_SpeedPid[i]);
-	}
 }
 	
 
@@ -73,7 +84,7 @@ void ServoMode(u8 modechoice)
 		/*******************小陀螺模式下舵向轮控制************************/
 		case GyroType:
 		{
-			for(u8 i=0;i<4;i++)
+			for(u32 i=0;i<4;i++)
 			{
 				stServoWheel_SpeedPid[i].m_fpUpMax=8000;
 				stServoWheel_SpeedPid[i].m_fpUMax=8000;
@@ -91,12 +102,15 @@ void ServoMode(u8 modechoice)
 		/********************直线模式下舵向轮控制***********************/
 		case LineType:
 		{
-			for(u8 i=0;i<4;i++)
+			for(u32 i=0;i<4;i++)
 			{
 				stServoWheel_SpeedPid[i].m_fpUpMax=8000;
 				stServoWheel_SpeedPid[i].m_fpUMax=8000;
 
 			}
+			
+			ServoAngleCal();
+			
 			if(!GyroJudge)
 			{
 				stServoWheel_PosPid[0].m_fpDes=stServoWheel_PosPid[0].m_fpDes-45;
@@ -114,7 +128,7 @@ void ServoMode(u8 modechoice)
 		/********************安全模式下舵向轮控制***********************/
 		case SafeType:
 		{
-			for(u8 i=0;i<4;i++)
+			for(u32 i=0;i<4;i++)
 			{
 				stServoWheel_SpeedPid[i].m_fpUMax=0;
 			}
@@ -129,48 +143,46 @@ void ServoMode(u8 modechoice)
 
 void SpeedMode(u8 modechoice)
 {
+	float Chassis_X_Speed=0;
+	float Chassis_Y_Speed=0;
+	
 	switch (modechoice)
 	{
 		/**********************小陀螺模式下速度轮的控制*********************/
 		case GyroType:
 		{
-			for(u8 i=0;i<4;i++)
+			for(u32 i=0;i<4;i++)
 				stWheel_SpeedPid[i].m_fpUMax=8000;
-			for(u8 i=0;i<4;i++)
+			for(u32 i=0;i<4;i++)
 				FPRampSignal(&stWheel_SpeedPid[i].m_fpDes,SpanSpeed,10);
 		}break;
 		/**********************直线模式下速度轮的控制*********************/		
 		case LineType:
 		{
-			for(u8 i=0;i<4;i++)
-				stWheel_SpeedPid[i].m_fpUMax=8000;
-			
-			stWheel_SpeedPid[0].m_fpDes=-(g_StDbus.stRC.Ch1-1024);
-			stWheel_SpeedPid[1].m_fpDes=(g_StDbus.stRC.Ch1-1024);
-			stWheel_SpeedPid[2].m_fpDes=(g_StDbus.stRC.Ch1-1024);
-			stWheel_SpeedPid[3].m_fpDes=-(g_StDbus.stRC.Ch1-1024);
-			if(g_StDbus.stRC.Ch0-1024<0)
+			if(ControlMode==0x02)
 			{
-				stWheel_SpeedPid[0].m_fpDes+=(g_StDbus.stRC.Ch0-1024);
-				stWheel_SpeedPid[3].m_fpDes=stWheel_SpeedPid[0].m_fpDes;
-			}
-			else if(g_StDbus.stRC.Ch0-1024>0)
-			{
-				stWheel_SpeedPid[1].m_fpDes=(g_StDbus.stRC.Ch0-1024);
-				stWheel_SpeedPid[2].m_fpDes=stWheel_SpeedPid[1].m_fpDes;
-			}	
-			for(u8 i=0;i<4;i++)
-			{
-				stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;
+				Chassis_X_Speed=g_StDbus.stRC.Ch0-1024;
+				Chassis_Y_Speed=g_StDbus.stRC.Ch1-1024;
+				WheelSpeed=sqrt(Chassis_X_Speed*Chassis_X_Speed+Chassis_Y_Speed*Chassis_Y_Speed);
+				
+				stWheel_SpeedPid[0].m_fpDes=-WheelSpeed;
+				stWheel_SpeedPid[1].m_fpDes=WheelSpeed;
+				stWheel_SpeedPid[2].m_fpDes=WheelSpeed;
+				stWheel_SpeedPid[3].m_fpDes=-WheelSpeed;
+				
+				for(u32 i=0;i<4;i++)
+					stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;
+				
+				for(u32 i=0;i<4;i++)
+					stWheel_SpeedPid[i].m_fpUMax=8000;
+				
 			}
 		}break;
 		/*********************安全模式下速度轮的控制**********************/
 		case SafeType:
 		{
-			for(u8 i=0;i<4;i++)
-			{
+			for(u32 i=0;i<4;i++)
 				stWheel_SpeedPid[i].m_fpUMax=0;
-			}
 		}break;
 		
 		default:
@@ -239,9 +251,9 @@ void PowerLoopControl()
 	
 	CalIWeakenPID(&ChassisPowerPid);
 	speed_rate=ChassisPowerPid.m_fpU/MaxPower+1;
-	for(u8 i=0;i<4;i++)
+	for(u32 i=0;i<4;i++)
 		stWheel_SpeedPid[i].m_fpDes*=speed_rate;
-	for(u8 i=0;i<4;i++)
+	for(u32 i=0;i<4;i++)
 		CalIWeakenPID(&stWheel_SpeedPid[i]);
 
 	CAN_SendData(CAN1,0x200,stWheel_SpeedPid[0].m_fpU,stWheel_SpeedPid[1].m_fpU,stWheel_SpeedPid[2].m_fpU,stWheel_SpeedPid[3].m_fpU);

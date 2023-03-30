@@ -180,6 +180,10 @@
 		extern float YawBMISpeed;
 		extern float PitchBMIAngle;
 		extern float PitchBMISpeed;
+		extern float WCSYawAngle;
+		extern float LCSYawAngle;
+		extern float WheelSpeed;
+		extern float Receive_WheelSpeed;
 	/** @brief 射击相关电机 */
 	//拨弹电机
 	  extern u32  Bottom_SupplyStep;
@@ -187,10 +191,8 @@
 		extern u32 	Friction_State ;
 		extern s16 	Bullet_Des; 																// 拨弹目标数目				
 		extern s16 	Bullet_Des_Pre; 									// 前一次拨弹目标数目
-		extern bool 	Follow_Flag_UP;						// 紧密跟随标志位
-		extern bool 	Follow_Flag_DN;
-		extern bool 	Shoot_Area_Flag;						// 射击区域检测标志位
-		extern u8		Shoot_Frequency_UP;									// 上云台射速
+		extern bool Follow_Flag_DN;
+		extern bool Shoot_Area_Flag;						// 射击区域检测标志位
 		extern u8		Shoot_Frequency_DN;// 下云台射速
 		extern int 	upShooterStaticTimes;								// 卡弹计数
 		extern bool	FrictFirstIn;								// 用于摩擦轮延时启动
@@ -218,21 +220,21 @@
 		
 /** @brief 控制过程重要参数 */
 	extern u8			PreGimabalTestFlag;
-	extern float 		AccelStep;
-	extern float 		LineDecelerateStep;
-	extern u16			UPShootSpeedTest;
+	extern float 	AccelStep;
+	extern float 	LineDecelerateStep;
+	extern u16		UPShootSpeedTest;
 	extern bool		StartUPShootFlag;
 	extern bool		StartDNShootFlag;
 	extern bool		LowShootFlag;
 	extern u32 		ShootHeatTick;//bool 		UP_Range_Mode_First_in_Flag = TRUE;
 	//extern //bool 		DN_Range_Mode_First_in_Flag = TRUE;
 	extern bool		ChassisPositionLeftFlag;
-	extern u8 			Chassis_Test_Flag;
+	extern u8 		Chassis_Test_Flag;
 	/** @brief 超声波模块 */
 	extern u32 		TIM9_OverflowTimes;
 	extern u32    TIM9_Rising_ARR;
 	extern u32    TIM9_Falling_ARR;
-	extern float    US_Distance;
+	extern float  US_Distance;
 
 	/** @brief底盘功率 */
 
@@ -243,7 +245,7 @@
 		extern bool	FindEnemyRoad;
 
 	/** @brief平均弹速计算 */
-		extern float	Bullet1SpeedMean;
+		extern float  Bullet1SpeedMean;
 		extern float	Bullet1SpeedRecord[RecordBullet1Num];
 		extern float	Bullet2SpeedMean;
 		extern float	Bullet2SpeedRecord[RecordBullet2Num];

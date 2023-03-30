@@ -72,14 +72,14 @@ void GimbalAutoScan(void)
 {
 	if(yaw_span_type==1)
 	{
-		FPRampSignal(&YawPosDes,45,yaw_ramp_step);
-		if(YawPosDes>=45)
+		FPRampSignal(&YawPosDes,90,yaw_ramp_step);
+		if(YawPosDes>=90)
 			yaw_span_type=0;
 	}
 	else if(yaw_span_type==0)
 	{
-		FPRampSignal(&YawPosDes,-45,yaw_ramp_step);
-		if(YawPosDes<=-45)
+		FPRampSignal(&YawPosDes,-90,yaw_ramp_step);
+		if(YawPosDes<=-90)
 			yaw_span_type=1;
 	}
 		
@@ -92,22 +92,22 @@ void GimbalAutoScan(void)
 	}
 	else if(pit_span_type==0)
 	{
-		FPRampSignal(&GimbalPitchPosPid.m_fpDes,0,pit_ramp_step);
-		if(GimbalPitchPosPid.m_fpDes>=0)
+		FPRampSignal(&GimbalPitchPosPid.m_fpDes,15,pit_ramp_step);
+		if(GimbalPitchPosPid.m_fpDes>=15)
 			pit_span_type=1;
 	}
 }
 
 void GimbalFollowAim(void)
 {
-	if(VisionDataReceiveBuff.stVisionData.Recieve_ID==1&&systemMonitor.USART6_rx_fps>=150)
+	if(VisionDataReceiveBuff.stVisionData.Recieve_ID==1)
 	{
 		YawPosDes=VisionDataReceiveBuff.stVisionData.Recieve_Data2;
 		GimbalPitchPosPid.m_fpDes=-VisionDataReceiveBuff.stVisionData.Recieve_Data1;
 	}
 	else 
 	{
-		GimbalAutoScan();
+		GimbalRCMode();
 //		YawPosDes=GimbalYawPosPid.m_fpFB;
 //		GimbalPitchPosPid.m_fpDes=-GimbalPitchPosPid.m_fpFB;
 	}

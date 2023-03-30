@@ -11,6 +11,7 @@ void BSP_Init(void)
 	usart1_init();
 	usart2_init(115200);
 	usart3_init(460800);
+	uart4_init(115200);
 	usart6_init(460800);
 	Encoder_Init();
 	Motor_Init();

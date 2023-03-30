@@ -4,7 +4,8 @@
 #include "rm_algorithm.h"
 #include "can.h"
 u8 test=0;
-
+u16 Barrel1_Angle=0;
+u16 Barrel2_Angle=0;
 
 u8	DNPITCHANGLEBOXSIZE = 1;
 float DNPitchAnglebox[100] = {0};
@@ -309,7 +310,7 @@ void GimbalControl(void)
 	}
 }
 
-void ChamberTranfer()
+void BarrelTranfer()
 {
 	
 }

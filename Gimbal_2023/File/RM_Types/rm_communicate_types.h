@@ -24,7 +24,7 @@
 #define GimbalCushioning_Rx     USART3_Cushioning_Rx 	
 #define ChassisCushioning_Tx			ChassisData
 
-#define USART3_RX_BUF_LEN       	15
+#define USART3_RX_BUF_LEN       	27
 #define USART3_TX_BUF_LEN				24
 
 #define QuickEncoder(Ratio, Number) {.fpGearRatio=Ratio, .siNumber=Number}
@@ -68,6 +68,10 @@ typedef __packed struct
 		u8 Flag_Reset;						
 		s16 Friction_Send_Des;//摩擦轮转速期望值
 		s16 Shooter_Send_Des;		//弹数期望
+		u16 Barrel1_Heat;
+		u16 Barrel2_Heat;
+		float Barrel1_Speed;
+		float Barrel2_Spedd;
 		float PitAngleDes;		//在手操时发给云控的pitch角度期望
 		u8 CRC8_Bit;
 		

@@ -11,25 +11,25 @@
 		USART_RX_TypeDef USART2_Rcr = {USART2,USART2_RX_STREAM,UA2RxMailbox,UA2RxDMAbuf,USART2_RX_MB_BUF_LEN,USART2_RX_DMA_BUF_LEN,0,0,0};
 
 	
-		u8 		RSReceiveDataBuff[USART2_RX_MB_BUF_LEN] 	= {0};					// 裁判系统发来的数据
+		u8 		RSReceiveDataBuff[USART2_RX_MB_BUF_LEN] 	= {0};	// 裁判系统发来的数据
 		u8 		BalancesoldierNumber  				= 0;
-		bool 	BanlanReconizeFinshFlag				= FALSE;				// 平衡步兵识别完标志位
+		bool 	BanlanReconizeFinshFlag				= FALSE;						// 平衡步兵识别完标志位
 		
 		
-		s16     Barrel_Heat_Cur_UP;											// 上云台当前枪管热量
-		s16     Barrel_Heat_Cur_DN;											// 下云台当前枪管热量
-		bool	Invincible_Status					= FALSE;					// 无敌状态
-		u16     Bullet_Num_Remain;											// 剩余子弹数目
-		u16     SentryHPMessage						= 600;					// 哨兵当前血量
-		float   ChassisPowerMessage					= 0;					// 当前底盘功率
-		u16     ChassisPowerBufferMessageLast		= 0;					// 底盘上次剩余缓冲能量
-		u16     ChassisPowerBufferMessage			= 0;					// 底盘剩余缓冲能量
-		u8      RobotIDMessage						= 7;												// 本机器人ID
-		u8 		Bullet1FreqMessage;											// 裁判系统返回的上云台弹频
-		u8		Bullet2FreqMessage;											// 裁判系统返回的下云台弹频
-		float   Bullet1SpeedMessage;										// 裁判系统返回的上云台射速
-		float   Bullet2SpeedMessage;										// 裁判系统返回的下云台射速
-		u16		StageRemainTimeMessage;										// 当前比赛阶段剩余时间
+		s16     Barrel_Heat_Cur_UP;															// 上云台当前枪管热量
+		s16     Barrel_Heat_Cur_DN;															// 下云台当前枪管热量
+		bool	Invincible_Status					= FALSE;								// 无敌状态
+		u16     Bullet_Num_Remain;															// 剩余子弹数目
+		u16     SentryHPMessage						= 600;								// 哨兵当前血量
+		float   ChassisPowerMessage					= 0;								// 当前底盘功率
+		u16     ChassisPowerBufferMessageLast		= 0;						// 底盘上次剩余缓冲能量
+		u16     ChassisPowerBufferMessage			= 0;							// 底盘剩余缓冲能量
+		u8      RobotIDMessage						= 7;									// 本机器人ID
+		u8 		Bullet1FreqMessage;																// 裁判系统返回的上云台弹频
+		u8		Bullet2FreqMessage;																// 裁判系统返回的下云台弹频
+		float   Bullet1SpeedMessage;														// 裁判系统返回的上云台射速
+		float   Bullet2SpeedMessage;														// 裁判系统返回的下云台射速
+		u16		StageRemainTimeMessage;														// 当前比赛阶段剩余时间
 
 
 		u16     OutpostHPMessage;
@@ -45,12 +45,12 @@
 		u16 	Bullet1Cnt 							= 0;
 		u16 	Bullet2Cnt 							= 0;
 		
-		u16		SumHurtPerSecond;											// 每秒伤害
-		bool 	SumHurtFlag 						= FALSE;				// 受伤标志位
-		u8		HitOurselfFlag							= 0;					// 击打己方标志位
+		u16		SumHurtPerSecond;																								// 每秒伤害
+		bool 	SumHurtFlag 						= FALSE;																// 受伤标志位
+		u8		HitOurselfFlag							= 0;																// 击打己方标志位
 		
-		bool	RSPowerUpdataFlag			= FALSE;		//裁判系统功率更新标志位，实际10Hz
-		u8 		CalibrateState				= CAPACITOR_CALIBRATE_WAIT;		//标定状态标志位
+		bool	RSPowerUpdataFlag			= FALSE;		    													//裁判系统功率更新标志位，实际10Hz
+		u8 		CalibrateState				= CAPACITOR_CALIBRATE_WAIT;								//标定状态标志位
 	/**	@brief 	裁判系统返回的比赛实时信息 */
 		ext_game_status_t												GameStatus;										// 比赛状态数据
 		ext_game_result_t												GameResult;										// 比赛结果数据
@@ -138,21 +138,25 @@
 		float YawBMISpeed=0;
 		float PitchBMIAngle=0;
 		float PitchBMISpeed=0;
+		float WCSYawAngle=0;
+		float LCSYawAngle=0;
+		float WheelSpeed=0;
+		float Receive_WheelSpeed=0;
 	/** @brief 射击相关电机 */
 	  u32 Bottom_SupplyStep = 29491*5/3;
-		u32 	Friction_State_UP			= 500;								// 摩擦轮状态(500停止700开启）
+		u32 	Friction_State_UP			= 500;							// 摩擦轮状态(500停止700开启）
 		u32 	Friction_State 				= 500;
-		s16 	Bullet_Des 						= 0;											// 拨弹目标数目
+		s16 	Bullet_Des 						= 0;								// 拨弹目标数目
 		s16 	Bullet_Des_Pre 				= 0;								// 前一次拨弹目标数目
-		bool 	Follow_Flag_UP				= FALSE;							// 紧密跟随标志位
+		bool 	Follow_Flag_UP				= FALSE;						// 紧密跟随标志位
 		bool 	Follow_Flag_DN				= FALSE;
-		bool 	Shoot_Area_Flag				= FALSE;							// 射击区域检测标志位
+		bool 	Shoot_Area_Flag				= FALSE;						// 射击区域检测标志位
 		u8		Shoot_Frequency_UP		= 9;								// 上云台射速
 		u8		Shoot_Frequency_DN		= 9;								// 下云台射速
 		int 	upShooterStaticTimes 	= 0;								// 卡弹计数
-		bool	FrictFirstIn 					= TRUE;										// 用于摩擦轮延时启动
+		bool	FrictFirstIn 					= TRUE;							// 用于摩擦轮延时启动
 		bool 	Auto_BoDanFirstIn				= TRUE;	
-		ST_ShootTestControl DNSTC 	= {										// 下云台射击
+		ST_ShootTestControl DNSTC 	= {									// 下云台射击
 			.BoDan_Flag 	= FALSE,
 			.PreBoDan_Flag 	= FALSE,
 			.Fact_ShootSumNumber 	= 0,
