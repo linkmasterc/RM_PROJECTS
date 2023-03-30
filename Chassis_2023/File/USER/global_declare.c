@@ -16,8 +16,8 @@
 		bool 	BanlanReconizeFinshFlag				= FALSE;						// 平衡步兵识别完标志位
 		
 		
-		s16     Barrel_Heat_Cur_UP;															// 上云台当前枪管热量
-		s16     Barrel_Heat_Cur_DN;															// 下云台当前枪管热量
+		s16     Barrel1_Heat_Cur;															// 上云台当前枪管热量
+		s16     Barrel2_Heat_Cur;															// 下云台当前枪管热量
 		bool	Invincible_Status					= FALSE;								// 无敌状态
 		u16     Bullet_Num_Remain;															// 剩余子弹数目
 		u16     SentryHPMessage						= 600;								// 哨兵当前血量

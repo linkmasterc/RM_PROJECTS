@@ -129,6 +129,11 @@
 		extern ST_GIMBAL_FLAG stGimbalFlag; //云台控制标志位
 		
 		
+		extern s16	Barrel1_Heat_Cur;
+		extern s16	Barrel2_Heat_Cur;
+		extern float Bullet1SpeedMessage;
+		extern float Bullet2SpeedMessage;	
+		
 	/**滤波器**/
 		extern ST_KMF GimbalYawKMF;
 #endif

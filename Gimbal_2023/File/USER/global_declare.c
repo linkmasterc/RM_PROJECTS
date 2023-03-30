@@ -138,6 +138,10 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 		ST_FLAG 	stFlag = {FALSE};	// 全局标志位		
 		ST_GIMBAL_FLAG stGimbalFlag; //云台控制标志位
 		
+		s16	Barrel1_Heat_Cur=0;
+		s16	Barrel2_Heat_Cur=0;
+		float Bullet1SpeedMessage=0;
+		float Bullet2SpeedMessage=0;		
 		
 		
 	/**滤波器**/

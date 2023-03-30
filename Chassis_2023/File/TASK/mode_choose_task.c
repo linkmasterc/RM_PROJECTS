@@ -103,19 +103,13 @@ void ModeChoose(void)
 		ShootInit(SHOOT_ON);
 	}
 	
-	
-	/*********************比赛模式********************/
-	/**@brief
-					 左中，右中
-	*/
-	else if(g_StDbus.stRC.SW_L==RC_SW_MID&&g_StDbus.stRC.SW_R==RC_SW_MID)
+	/*********************XX模式********************/
+	else if(g_StDbus.stRC.SW_L==RC_SW_MID&&g_StDbus.stRC.SW_R==RC_SW_DOWN)
 	{
 		ControlMode=0x04;
-		MotorInit(GIMBAL_ON,SPEED_MOTOR_ON,SERVO_MOTOR_ON);
-		ShootInit(SHOOT_ON);
+
 	}
-	
-	
+
 	/*********************XX模式********************/
 	else if(g_StDbus.stRC.SW_L==RC_SW_MID&&g_StDbus.stRC.SW_R==RC_SW_DOWN)
 	{
@@ -136,6 +130,25 @@ void ModeChoose(void)
 	{
 		ControlMode=0x07;
 
+	}
+	
+	/*********************比赛模式********************/
+	/**@brief
+					 左中，右中
+	*/
+	else if(GameStatus.game_progress==4&&systemMonitor.USART1_rx_fps==0)
+	{
+		ControlMode=0x09;
+		MotorInit(GIMBAL_ON,SPEED_MOTOR_ON,SERVO_MOTOR_ON);
+		ShootInit(SHOOT_ON);
+	}
+	
+	/*********************比赛结束模式**************************/
+	else if(GameStatus.game_progress==5&&systemMonitor.USART1_rx_fps==0)
+	{
+		ControlMode=0x00;
+		MotorInit(GIMBAL_OFF,SPEED_MOTOR_OFF,SERVO_MOTOR_OFF);
+		ShootInit(SHOOT_OFF);
 	}
 }
 

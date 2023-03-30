@@ -38,11 +38,11 @@ void ServoAngleCal()
 	if(ControlMode==0x02)
 		LCSYawAngle=atan2(g_StDbus.stRC.Ch0,g_StDbus.stRC.Ch1)*180/PI;
 
-	else if(ControlMode==0x04)
+	else if(ControlMode==0x09)
 		LCSYawAngle=atan(WCSYawAngle)*180/PI;
 	
 	for(u32 i=0;i<4;i++)
-		stServoWheel_PosPid[i].m_fpDes=stServoWheel_PosPid[i].m_fpDes+LCSYawAngle;
+		stServoWheel_PosPid[i].m_fpDes=LCSYawAngle;
 }
 
 void ForceFB()
@@ -88,16 +88,12 @@ void ServoMode(u8 modechoice)
 			{
 				stServoWheel_SpeedPid[i].m_fpUpMax=8000;
 				stServoWheel_SpeedPid[i].m_fpUMax=8000;
-
 			}
-			if(GyroJudge)
+			for(u32 i=0;i<4;i++)
 			{
-				stServoWheel_PosPid[0].m_fpDes=stServoWheel_PosPid[0].m_fpDes+45;
-				stServoWheel_PosPid[1].m_fpDes=stServoWheel_PosPid[1].m_fpDes-45;
-				stServoWheel_PosPid[2].m_fpDes=stServoWheel_PosPid[2].m_fpDes+45;
-				stServoWheel_PosPid[3].m_fpDes=stServoWheel_PosPid[3].m_fpDes-45;
-				GyroJudge=FALSE;
-			}			
+				stServoWheel_PosPid[i].m_fpDes=(i%2==0)*45;
+			}
+
 		}break;
 		/********************直线模式下舵向轮控制***********************/
 		case LineType:
@@ -111,14 +107,14 @@ void ServoMode(u8 modechoice)
 			
 			ServoAngleCal();
 			
-			if(!GyroJudge)
-			{
-				stServoWheel_PosPid[0].m_fpDes=stServoWheel_PosPid[0].m_fpDes-45;
-				stServoWheel_PosPid[1].m_fpDes=stServoWheel_PosPid[1].m_fpDes+45;
-				stServoWheel_PosPid[2].m_fpDes=stServoWheel_PosPid[2].m_fpDes-45;
-				stServoWheel_PosPid[3].m_fpDes=stServoWheel_PosPid[3].m_fpDes+45;
-				GyroJudge=TRUE;
-			}	
+//			if(!GyroJudge)
+//			{
+//				stServoWheel_PosPid[0].m_fpDes=stServoWheel_PosPid[0].m_fpDes-45;
+//				stServoWheel_PosPid[1].m_fpDes=stServoWheel_PosPid[1].m_fpDes+45;
+//				stServoWheel_PosPid[2].m_fpDes=stServoWheel_PosPid[2].m_fpDes-45;
+//				stServoWheel_PosPid[3].m_fpDes=stServoWheel_PosPid[3].m_fpDes+45;
+//				GyroJudge=TRUE;
+//			}	
 		}break;
 		/********************机械测试模式下舵向轮标定控制**********************/
 		case ForceFBType:

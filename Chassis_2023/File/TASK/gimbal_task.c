@@ -4,10 +4,13 @@
 #include "global_declare.h"
 #define ABS(x) ( (x)>0?(x):-(x) )
 u8 judgeTD=0;
-u8 yaw_span_type=0;
-u8 pit_span_type=0;
-float yaw_ramp_step=0.05;
-float pit_ramp_step=0.02;
+u8 PatrolReductionRate=1;
+u8 WaitCnt=0;
+u8 EnemyPos=0;
+u8 FixedPatrolTime=0;
+u32 WaitTimes=0;
+u32 LossTimes=0;
+FixedPos GimbalFixedPos;
 /** --------------------------------------------------------------------------
   * @brief  遥控器控制云台运动
 			
@@ -64,54 +67,114 @@ void GimbalRCMode(void)
 	}
 }
 /** --------------------------------------------------------------------------
-  * @brief  云台自动巡逻（正弦巡逻）
+	* @brief  云台定点扫描
 			
-  * @note	
+	* @retval 
+  
+	* @param	
+
+	* @note					
  -------------------------------------------------------------------------- **/
-void GimbalAutoScan(void)
-{
-	if(yaw_span_type==1)
+void FixedPosScan(void)
+{	
+	switch(WaitTimes)
 	{
-		FPRampSignal(&YawPosDes,90,yaw_ramp_step);
-		if(YawPosDes>=90)
-			yaw_span_type=0;
-	}
-	else if(yaw_span_type==0)
-	{
-		FPRampSignal(&YawPosDes,-90,yaw_ramp_step);
-		if(YawPosDes<=-90)
-			yaw_span_type=1;
-	}
-		
-		
-	if(pit_span_type==1)
-	{
-		FPRampSignal(&GimbalPitchPosPid.m_fpDes,-15,pit_ramp_step);
-		if(GimbalPitchPosPid.m_fpDes<=-15)
-			pit_span_type=0;
-	}
-	else if(pit_span_type==0)
-	{
-		FPRampSignal(&GimbalPitchPosPid.m_fpDes,15,pit_ramp_step);
-		if(GimbalPitchPosPid.m_fpDes>=15)
-			pit_span_type=1;
+		/*右道远点*/
+		case UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.FR;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.FR;
+			EnemyPos				= 1;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		/*高地右侧*/
+		case 2*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.HR;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.HR;
+			EnemyPos				= 2;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		/*高地正中*/
+		case 3*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.HM;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.HM;
+			EnemyPos				= 3;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		/*高地左侧*/
+		case 4*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.HL;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.HL;
+			EnemyPos				= 4;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		/*左道远点*/
+		case 5*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.FL;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.FL;
+			EnemyPos				= 5;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		/*左道近点*/
+		case 6*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.CL;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.CL;
+			EnemyPos				= 6;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		/*中间近点*/
+		case 7*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.CM;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.CM;
+			EnemyPos				= 7;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		/*右道近点*/
+		case 8*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.CR;
+			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.CR;
+			EnemyPos				= 8;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+
+		default:
+			break;
 	}
 }
 
-void GimbalFollowAim(void)
+/** --------------------------------------------------------------------------
+	* @brief	上云台跟随模式
+			
+	* @note		云台目标值取小电脑发回来的值
+ -------------------------------------------------------------------------- **/
+void GimbalFollowMove(void)
 {
-	if(VisionDataReceiveBuff.stVisionData.Recieve_ID==1)
+	if( systemMonitor.SysTickTime - FixedPatrolTime < UP_FIXED_PATROL_GAPTIME &&
+		(ABS(YawPosDes-GimbalYawPosPid.m_fpFB) > 0.5f || 
+		ABS(GimbalPitchPosPid.m_fpDes-GimbalPitchPosPid.m_fpFB) > 0.5f))						// 禁止跳跃过程中识别目标
 	{
-		YawPosDes=VisionDataReceiveBuff.stVisionData.Recieve_Data2;
-		GimbalPitchPosPid.m_fpDes=-VisionDataReceiveBuff.stVisionData.Recieve_Data1;
 	}
-	else 
+	else
 	{
-		GimbalRCMode();
-//		YawPosDes=GimbalYawPosPid.m_fpFB;
-//		GimbalPitchPosPid.m_fpDes=-GimbalPitchPosPid.m_fpFB;
+		GimbalPitchPosPid.m_fpDes 		= VisionDataReceiveBuff.stVisionData.Recieve_Data1;	
+		YawPosDes 				= VisionDataReceiveBuff.stVisionData.Recieve_Data2;
 	}
-}	
+
+}
 
 
 /** --------------------------------------------------------------------------
@@ -127,11 +190,28 @@ void GimbalAutoMode(void)
 	else if(VisionDataReceiveBuff.stVisionData.Recieve_ID == 1)
 	{	stFlag.SniperFlag = TRUE;}
 	
-	if(stFlag.GimbalRunFlag==TRUE&&stFlag.SniperFlag==FALSE)
+	
+	if(++WaitCnt == PatrolReductionRate)
 	{
-		GimbalAutoScan();
+		if(WaitTimes == 8*UP_FIXED_PATROL_GAPTIME)
+		{
+			WaitTimes = 0;
+		}
+		WaitCnt = 0;
+		WaitTimes++;
 	}
 	
+
+	if(stFlag.GimbalRunFlag && !stFlag.SniperFlag)									// 扫描巡逻状态
+	{
+		LossTimes++;																// 丢失次数累加
+		FixedPosScan();
+	}
+	else if(stFlag.GimbalRunFlag && stFlag.SniperFlag)								// 跟随状态
+	{
+		LossTimes = 0;															// 丢失目标次数清零
+		GimbalFollowMove();														// 云台跟随目标运动
+	}	
 	
 }
 
@@ -149,7 +229,7 @@ void GimbalAutoMode(void)
 			工作状态下用于实战以及对TD微分跟踪器参数的整定
 			离散信号模拟用于模拟视觉发送过来的目标值中夹杂的噪声
  -------------------------------------------------------------------------- **/
-void DNYawPID(void)
+void YawPID(void)
 {	
 	if(judgeTD==1)
 	{
@@ -180,10 +260,10 @@ void GimbalModeChoose()
 			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
 			GimbalRCMode();
 		}
-		else if(ControlMode==0x02||ControlMode==0x03||ControlMode==0x04)
+		else if(ControlMode==0x02||ControlMode==0x03||ControlMode==0x09)
 		{
 			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
-			GimbalFollowAim();
+			GimbalAutoMode();
 		}
 	}
 	else if(systemMonitor.USART3_rx_fps<900)
@@ -191,6 +271,6 @@ void GimbalModeChoose()
 		GimbalYawSpeedPid.m_fpUMax=0;
 		YawPosDes=GimbalYawPosPid.m_fpFB;
 	}
-	DNYawPID();
+	YawPID();
 	CAN_SendData(CAN2,0x1ff, GimbalYawSpeedPid.m_fpU,0,0,0);
 }

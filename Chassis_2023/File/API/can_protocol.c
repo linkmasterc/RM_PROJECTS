@@ -8,6 +8,7 @@
 						由发送的id决定
  * @return 	无
  */
+bool FirstIN=TRUE;
 void CAN_SendData(CAN_TypeDef* CANx,u32 id,s16 Data1,s16 Data2,s16 Data3,s16 Data4)
 {
 	CanTxMsg TX_Message;
@@ -223,7 +224,13 @@ s32 GetSpeed(u8* pData)
  -------------------------------------------------------------------------- **/
 void AbsEncoderProcess(ST_ENCODER* pEncoder, float value)
 {
-	pEncoder->uiPreRawValue = pEncoder->uiRawValue;
+	if(FirstIN==TRUE)
+	{
+		pEncoder->uiPreRawValue=value;
+		FirstIN=FALSE;
+	}
+	else
+		pEncoder->uiPreRawValue = pEncoder->uiRawValue;
 	pEncoder->uiRawValue = value;
 	pEncoder->siDiff = value - pEncoder->uiPreRawValue;
 	if(pEncoder->siDiff < -pEncoder->siNumber/2)

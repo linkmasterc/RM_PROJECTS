@@ -9,7 +9,7 @@ u16 Barrel2_Angle=0;
 
 u8	DNPITCHANGLEBOXSIZE = 1;
 float DNPitchAnglebox[100] = {0};
-
+float Shooter_Speed_K=0;
 
 float Angle_180_To_Inf(float angle_input, ST_ANGLE* st_angle)
 {

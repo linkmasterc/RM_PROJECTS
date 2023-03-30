@@ -51,8 +51,8 @@
 		extern u8 		BalancesoldierNumber;
 		extern bool 	BanlanReconizeFinshFlag;				// 平衡步兵识别完标志位
 		
-		extern s16     Barrel_Heat_Cur_UP;											// 上云台当前枪管热量
-		extern s16     Barrel_Heat_Cur_DN;											// 下云台当前枪管热量
+		extern s16     Barrel1_Heat_Cur;											// 上云台当前枪管热量
+		extern s16     Barrel2_Heat_Cur;											// 下云台当前枪管热量
 		extern bool	Invincible_Status;												// 无敌状态
 		extern u16     Bullet_Num_Remain;											// 剩余子弹数目
 		extern u16     SentryHPMessage;												// 哨兵当前血量

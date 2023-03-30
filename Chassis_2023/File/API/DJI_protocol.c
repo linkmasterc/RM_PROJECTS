@@ -308,8 +308,8 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 			ChassisPowerMessage 			= PowerHeatData.chassis_power;						// 当前底盘功率
 			ChassisPowerBufferMessageLast 	= ChassisPowerBufferMessage;						// 上次底盘剩余缓冲能量
 			ChassisPowerBufferMessage 		= PowerHeatData.chassis_power_buffer;				// 当前底盘剩余缓冲能量
-			Barrel_Heat_Cur_UP 				= PowerHeatData.shooter_id1_17mm_cooling_heat;
-			Barrel_Heat_Cur_DN 				= PowerHeatData.shooter_id2_17mm_cooling_heat;
+			Barrel1_Heat_Cur 				= PowerHeatData.shooter_id1_17mm_cooling_heat;
+			Barrel2_Heat_Cur 				= PowerHeatData.shooter_id2_17mm_cooling_heat;
 		
 //			if(ABS(PreChassisPowerMessage - ChassisPowerMessage) > 0.001f)
 //			{	RSPowerUpdataFlag	= TRUE;}

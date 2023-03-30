@@ -39,7 +39,7 @@ void ShootBullet(void)
 	
 		
 	/* ×Ô¶¯´òµ¯ */
-	else if(ControlMode == 0x04 )
+	else if(ControlMode == 0x09 )
 	{	
 		AutoShootBullet()                                          ;
 	}

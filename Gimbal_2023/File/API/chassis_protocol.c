@@ -47,7 +47,10 @@ void GimbalReceiveDataProtocol(void)
 		stGimbalFlag.RunFlag 		   	= (bool)ChassisData.Receive.Flag_Run;
 		stGimbalFlag.ShootFlag 			= (bool)ChassisData.Receive.Flag_Shoot;
 		stGimbalFlag.SniperFlag			= (bool)ChassisData.Receive.Flag_Sniper;
-		
+		Barrel1_Heat_Cur						=  ChassisData.Receive.Barrel1_Heat;
+		Barrel2_Heat_Cur						=  ChassisData.Receive.Barrel2_Heat;
+		Bullet1SpeedMessage					=  ChassisData.Receive.Barrel1_Speed;
+		Bullet2SpeedMessage					=  ChassisData.Receive.Barrel2_Speed;
 	if(stGimbalFlag.RunFlag == TRUE)
 		{
 			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax, 28000, 10);
