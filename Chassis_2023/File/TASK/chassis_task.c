@@ -1,5 +1,6 @@
 #include "chassis_task.h"
 #include "math.h"
+#include "navigation_protocol.h"
 #define ABS(x) ( (x)>0?(x):-(x) )
 #define SpeedWheelRate 10
 #define SafeType 		0x00
@@ -26,20 +27,37 @@ float X_Max_Vel;
 float Y_Max_Vel;
 float W_Max_Vel;
 
+float Chassis_X_Speed=0;
+float Chassis_Y_Speed=0;
+
 s16 Raw_Sum_Current;
 s16 Limit_Sum_Current;
 
 float testkp=0;
 
 float speed_rate=1;
-
+float preLCSYaw=0;
+float rawLCSYaw=0;
+float diff=0;
 void ServoAngleCal()
 {
 	if(ControlMode==0x02)
-		LCSYawAngle=atan2(g_StDbus.stRC.Ch0,g_StDbus.stRC.Ch1)*180/PI;
+	{
+		preLCSYaw=rawLCSYaw;
+		rawLCSYaw=atan2(Chassis_Y_Speed,Chassis_X_Speed)*180.0/PI;
+		diff=rawLCSYaw-preLCSYaw;
+		if(diff<-180)
+			diff=diff+360;
+		else if(diff>180)
+			diff=diff-360;
+		LCSYawAngle=LCSYawAngle+diff;
 
+	}
 	else if(ControlMode==0x09)
-		LCSYawAngle=atan(WCSYawAngle)*180/PI;
+	{
+		WCS_to_LCS();
+		LCSYawAngle=Wheel_Angle_Des;
+	}
 	
 	for(u32 i=0;i<4;i++)
 		stServoWheel_PosPid[i].m_fpDes=LCSYawAngle;
@@ -139,8 +157,7 @@ void ServoMode(u8 modechoice)
 
 void SpeedMode(u8 modechoice)
 {
-	float Chassis_X_Speed=0;
-	float Chassis_Y_Speed=0;
+
 	
 	switch (modechoice)
 	{
@@ -155,6 +172,8 @@ void SpeedMode(u8 modechoice)
 		/**********************直线模式下速度轮的控制*********************/		
 		case LineType:
 		{
+			for(u32 i=0;i<4;i++)
+				stWheel_SpeedPid[i].m_fpUMax=8000;
 			if(ControlMode==0x02)
 			{
 				Chassis_X_Speed=g_StDbus.stRC.Ch0-1024;
@@ -167,11 +186,14 @@ void SpeedMode(u8 modechoice)
 				stWheel_SpeedPid[3].m_fpDes=-WheelSpeed;
 				
 				for(u32 i=0;i<4;i++)
-					stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;
-				
-				for(u32 i=0;i<4;i++)
-					stWheel_SpeedPid[i].m_fpUMax=8000;
-				
+					stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;	
+			}
+			else if(ControlMode==0x09)
+			{
+				stWheel_SpeedPid[0].m_fpDes=-Chassis_Speed;
+				stWheel_SpeedPid[1].m_fpDes=Chassis_Speed;
+				stWheel_SpeedPid[2].m_fpDes=Chassis_Speed;
+				stWheel_SpeedPid[3].m_fpDes=-Chassis_Speed;
 			}
 		}break;
 		/*********************安全模式下速度轮的控制**********************/
@@ -219,9 +241,10 @@ void ChassisModeChosse()
 		}	
 		break;	
 	
-		case 0x04:
+		case 0x09:
 		{
-
+			ServoMode(LineType);
+			SpeedMode(LineType);
 		}
 		break;
 		

@@ -52,12 +52,7 @@ void CAN1_Protocol(void)
 			Friction2_Temp = Get_Temperature(&CAN1_RX_Message);
 		break;
 				
-		case 0x206:
-			AbsEncoderProcess(&GimbalSecondEncoder,Get_Encoder_Number(&CAN1_RX_Message));
-			GimbalSecondPosPid.m_fpFB=GimbalSecondEncoder.fpSumValue/8192.0*360.0;
-			GimbalSecondSpeedPid.m_fpFB=Get_Speed(&CAN1_RX_Message);
-		
-		break;
+
 		default:
 			
 		break;
@@ -84,7 +79,13 @@ void CAN2_Protocol(void)
 			g_stShooterPosPID.m_fpFB = g_stShooterEncoder.fpSumValue;
 			g_stShooterSpeedPID.m_fpFB = Get_Speed(&CAN2_RX_Message)/g_stShooterEncoder.fpGearRatio;
 			break;
-				
+			
+		case 0x208:
+			AbsEncoderProcess(&GimbalSecondEncoder,Get_Encoder_Number(&CAN2_RX_Message));
+			GimbalSecondPosPid.m_fpFB=GimbalSecondEncoder.fpSumValue/8192.0*360.0;
+			GimbalSecondSpeedPid.m_fpFB=Get_Speed(&CAN2_RX_Message);
+		
+		break;		
 		default:
 			
 		break;

@@ -232,6 +232,38 @@ void USART3_IRQHandler(void)
 }
 
 /** --------------------------------------------------------------------------
+  * @brief  串口5中断服务函数
+  
+  * @retval None
+  
+  * @param	None
+			
+  * @note	串口5用于接收下云控发送的数据
+			使用空闲中断+DMA对数据进行处理
+			先读SR再读DR清除IDLE中断标志位
+ -------------------------------------------------------------------------- **/
+void UART5_IRQHandler(void)
+{
+	if(USART_GetITStatus(UART5,USART_IT_IDLE) == SET)
+	{
+		UART5->SR;
+		UART5->DR;
+		
+		if(DMA_GetCurrDataCounter(UART5_RX_STREAM) == NavigationBufLen_Rx)
+		{
+			NavigationDataReceiveProtocol();
+			systemMonitor.UART5_rx_cnt++;
+		}
+		else
+		{
+			DMA_Cmd(UART5_RX_STREAM,DISABLE);
+			UART5_RX_STREAM->NDTR = NavigationBufLen_Rx;
+			DMA_Cmd(UART5_RX_STREAM,ENABLE);
+		}
+	}
+}
+
+/** --------------------------------------------------------------------------
   * @brief  串口6中断服务函数
   
   * @retval None

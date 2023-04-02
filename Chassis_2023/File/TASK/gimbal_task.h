@@ -6,17 +6,17 @@
 
 typedef struct ENEMYPOS
 {
-	float FR;	/*右道远点*/
-	float HR;	/*高地右侧*/
+	float FR;	/*右道远点*/	//yaw 40 pit -4
+	float HR;	/*高地右侧*/	//yaw 98 pit -6    //高地下面：pit-22
 	float HM;	/*高地正中*/
-	float HL;	/*高地左侧*/
-	float FL;	/*左道远点*/
-	float CL;	/*左道近点*/
-	float CM;	/*中间近点*/
-	float CR;	/*右道近点*/
-	float BL;	/*后方左点*/
-	float BR;	/*后方右点*/
-}enemypos;
+	float HL;	/*高地左侧*/	//-100 -7//-100 -25
+	float FL;	/*左道远点*/	//yaw-60 pit -7
+	float CL;	/*左道近点*/	//yaw-60 pit -20
+	float CM;	/*中间近点*/	//0,0  0,-20
+	float CR;	/*右道近点*/	//yaw40 pit -20
+	float BL;	/*后方左点*/	//yaw233 pit-13
+	float BR;	/*后方右点*/	//yaw133 pit -10
+}enemypos;//后中：yaw178 pit-14
 
 typedef struct FIXED_PATROL_POS
 {

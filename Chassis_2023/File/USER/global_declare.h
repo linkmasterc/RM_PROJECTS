@@ -13,8 +13,14 @@
 #include "stm32f4xx.h"
 #include <string.h>
 
+	
+
 #define ChassisBufLen_Rx	USART3_RX_BUF_LEN
 #define ChassisBufLen_Tx	USART3_TX_BUF_LEN
+
+#define NavigationBufLen_Rx			UART5_RX_BUF_LEN
+#define NavigationBufLen_Tx			UART5_TX_BUF_LEN
+
 
 #define GM_YAW_SENSIBILITY		3800							// 遥控器yaw灵敏度
 #define GM_PITCH_SENSIBILITY	12								// 遥控器pitch灵敏度
@@ -120,11 +126,12 @@
 	/**	@brief	视觉通讯 */
 		extern u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN_DN - 1];
 		extern VISION_SEND_DATA_DN VisionDataSendBuff;
+		extern __IO u8 UA5RxDMAbuf[UART5_RX_BUF_LEN];
 		extern __IO u8 UA6RxDMAbuf[UA6RxDMAbuf_LEN];
-		extern __IO u8 UA5RxDMAbuf[UA5RxDMAbuf_LEN];
 		extern u8 UA6RxMailbox[UA6RxMBbuf_LEN];
 		extern USART_RX_TypeDef USART6_Rcr;
 		extern UN_VISION_DATA_DN VisionDataReceiveBuff;						// 下云台视觉发来的数据
+		extern NAVIGATION_DATA   NavigationReceiveBuff;
 		
 		extern float 		VisionData1 ;	//记录前帧数据
 		extern float 		VisionData2 ;	//记录前帧数据
@@ -180,6 +187,13 @@
 		extern float YawBMISpeed;
 		extern float PitchBMIAngle;
 		extern float PitchBMISpeed;
+		extern float SecondYawAngle;
+				
+		extern float Robot_Yaw_Des;
+		extern float Robot_Yaw_Cur;
+		extern float Chassis_Speed;
+		extern float Wheel_Angle_Des;
+		
 		extern float WCSYawAngle;
 		extern float LCSYawAngle;
 		extern float WheelSpeed;

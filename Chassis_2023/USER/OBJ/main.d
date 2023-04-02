@@ -64,6 +64,7 @@
 .\obj\main.o: ..\File\API\can_protocol.h
 .\obj\main.o: ..\File\API\vision_protocol.h
 .\obj\main.o: ..\File\API\DJI_protocol.h
+.\obj\main.o: ..\File\API\navigation_protocol.h
 .\obj\main.o: ..\File\API\systemmonitor_task.h
 .\obj\main.o: ..\File\TASK\gimbal_task.h
 .\obj\main.o: ..\File\TASK\led_task.h

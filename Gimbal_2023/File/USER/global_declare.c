@@ -30,8 +30,8 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 		ST_PID GimbalYawSpeedPid;	
 		ST_PID GimbalPitchPosPid;
 		ST_PID GimbalPitchSpeedPid;
-		ST_PID GimbalSecondPosPid;
-		ST_PID GimbalSecondSpeedPid;
+		ST_PID GimbalSecondPosPid={.m_fpKp=30,.m_fpUMax=1000,.m_fpUpMax=1000};
+		ST_PID GimbalSecondSpeedPid={.m_fpKp=200,.m_fpUMax=8000,.m_fpUpMax=8000};
 		ST_TD	 YawTD;
 	/** @brief 控制电机的角度与速度 */
 		float YawPosDes=0;

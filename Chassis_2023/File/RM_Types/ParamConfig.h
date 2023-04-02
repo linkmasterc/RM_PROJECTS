@@ -50,7 +50,7 @@
 
 
 /*定点巡逻两点时间间隔*/
-#define UP_FIXED_PATROL_GAPTIME				360
+#define UP_FIXED_PATROL_GAPTIME				700
 #define DN_FIXED_PATROL_GAPTIME				480
 
 

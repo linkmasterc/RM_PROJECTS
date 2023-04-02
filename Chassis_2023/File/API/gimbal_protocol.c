@@ -13,6 +13,8 @@ void GimbalReceiveDataProtocol(void)
 		AbsEncoderProcess(&GimbalYawABS,YawBMIAngle);
 		GimbalYawPosPid.m_fpFB=GimbalYawABS.fpSumValue;
 		
+		SecondYawAngle  = GimbalData.Receive.SecondYawAngle;
+		
 		GimbalPitchPosPid.m_fpFB	= GimbalData.Receive.BMIPitchAngle;									// 上云台Pitch轴角度(陀螺仪测得）
 //		GimbalPitchPosPid.m_fpDes = GimbalData.Receive.PitchDesAngle;
 		PitchBMISpeed = GimbalData.Receive.BMIPitchSpeed;
@@ -30,7 +32,7 @@ void GimbalReceiveDataProtocol(void)
 }
 
 /** --------------------------------------------------------------------------
-	* @brief  向下云台核心板发送的控制数据
+	* @brief  向云台核心板发送的控制数据
 			
 	* @note	注意字节长度，添加CRC16校验字的时候长度与发送数据的长度相关
 			如果发送变量长度改变注意修改
@@ -38,6 +40,7 @@ void GimbalReceiveDataProtocol(void)
 void GimbalSendDataProtocol(void)
 {
 	GimbalData.Send.PitAngleDes		= -NoiseSimulator(GimbalPitchPosPid.m_fpDes,FALSE);
+	GimbalData.Send.FirstYawPosDes= YawPosDes;
 	GimbalData.Send.Shooter_Send_Des		= Bullet_Des;
 	GimbalData.Send.Friction_Send_Des		= Friction_State;
 	GimbalData.Send.Flag_Run				= stFlag.GimbalRunFlag;

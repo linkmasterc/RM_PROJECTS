@@ -31,14 +31,14 @@
 #define USART2_TX_DMA_BUF_LEN    200
 #define USART2_TX_MB_BUF_LEN     20
 
-#define USART3_RX_BUF_LEN       	24
-#define USART3_TX_BUF_LEN				27
+#define USART3_RX_BUF_LEN       	27
+#define USART3_TX_BUF_LEN				31
 
 #define UART4_RX_BUF_LEN       	
 #define UART4_TX_BUF_LEN				
 
-#define UA5RxDMAbuf_LEN    60
-
+#define UART5_RX_BUF_LEN    18
+#define UART5_TX_BUF_LEN 		60
 #define UA6RxDMAbuf_LEN    60
 #define UA6RxMBbuf_LEN     (VISION_RECIEVE_DATA_LEN_DN + 5)
 
@@ -84,6 +84,7 @@ typedef __packed struct
 		float PitchDesAngle;
 		float BMIPitchAngle;	//IMU经解算得到的pitch轴角度
 		float BMIPitchSpeed;	//IMU发出的pitch轴角速度
+		float SecondYawAngle;	//二级云台电机角度
 		u8 TriggerState;			//1
 		u8 CRC8_Bit;					//CRC校验位
 		
@@ -100,6 +101,7 @@ typedef __packed struct
 		s16 Shooter_Send_Des;		//弹数期望
 		s16 Barrel1_Heat;
 		s16 Barrel2_Heat;
+		float FirstYawPosDes;
 		float Barrel1_Speed;
 		float Barrel2_Speed;
 		float PitAngleDes;		//在手操时发给云控的pitch角度期望
@@ -218,6 +220,22 @@ typedef union
 	ST_DATA_DN_V My_Data;
 	UCHAR8 Vision_Send_Data_Buf[VISION_SEND_DATA_LEN_DN];
 } VISION_SEND_DATA_DN;		//向视觉发送打包联合体
+
+#define NAVIGATION_RECEIVE_DATA_NUM 3
+#define NAVIGATION_RECEIVE_DATA_LEN (NAVIGATION_RECEIVE_DATA_NUM*4+1)
+typedef __packed struct
+{
+	u8 Recieve_ID;
+	float Receive_Data1;
+	float Receive_Data2;
+	float Receive_Data3;
+}ST_NAVIGATION_DATA;
+
+typedef union
+{
+	ST_NAVIGATION_DATA stNavigationData;
+	u8 pNavigationData[NAVIGATION_RECEIVE_DATA_LEN];
+}NAVIGATION_DATA;
 
 typedef struct
 {

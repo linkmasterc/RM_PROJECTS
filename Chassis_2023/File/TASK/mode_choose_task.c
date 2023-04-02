@@ -136,7 +136,7 @@ void ModeChoose(void)
 	/**@brief
 					 左中，右中
 	*/
-	else if(GameStatus.game_progress==4&&systemMonitor.USART1_rx_fps==0)
+	if(GameStatus.game_progress==0x04&&systemMonitor.USART1_rx_fps==0)
 	{
 		ControlMode=0x09;
 		MotorInit(GIMBAL_ON,SPEED_MOTOR_ON,SERVO_MOTOR_ON);
@@ -144,7 +144,7 @@ void ModeChoose(void)
 	}
 	
 	/*********************比赛结束模式**************************/
-	else if(GameStatus.game_progress==5&&systemMonitor.USART1_rx_fps==0)
+	else if(GameStatus.game_progress==0x05&&systemMonitor.USART1_rx_fps==0)
 	{
 		ControlMode=0x00;
 		MotorInit(GIMBAL_OFF,SPEED_MOTOR_OFF,SERVO_MOTOR_OFF);

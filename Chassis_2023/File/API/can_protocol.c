@@ -224,7 +224,7 @@ s32 GetSpeed(u8* pData)
  -------------------------------------------------------------------------- **/
 void AbsEncoderProcess(ST_ENCODER* pEncoder, float value)
 {
-	if(FirstIN==TRUE)
+	if(ControlMode==0x00)
 	{
 		pEncoder->uiPreRawValue=value;
 		FirstIN=FALSE;

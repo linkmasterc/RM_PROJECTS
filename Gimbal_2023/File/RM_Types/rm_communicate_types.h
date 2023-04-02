@@ -24,8 +24,8 @@
 #define GimbalCushioning_Rx     USART3_Cushioning_Rx 	
 #define ChassisCushioning_Tx			ChassisData
 
-#define USART3_RX_BUF_LEN       	27
-#define USART3_TX_BUF_LEN				24
+#define USART3_RX_BUF_LEN       	31
+#define USART3_TX_BUF_LEN				27
 
 #define QuickEncoder(Ratio, Number) {.fpGearRatio=Ratio, .siNumber=Number}
 
@@ -54,6 +54,7 @@ typedef __packed struct
 		float PitchDesAngle;  //测试时使用的期望角度
 		float BMIPitchAngle;	//IMU经解算得到的pitch轴角度
 		float BMIPitchSpeed;	//IMU发出的pitch轴角速度
+		float SecondYawAngle;	//二级云台角度
 		u8 TriggerState;			//1
 		u8 CRC8_Bit;					//CRC校验位
 		
@@ -70,6 +71,7 @@ typedef __packed struct
 		s16 Shooter_Send_Des;		//弹数期望
 		s16 Barrel1_Heat;
 		s16 Barrel2_Heat;
+		float FirstYawPosDes;
 		float Barrel1_Speed;
 		float Barrel2_Speed;
 		float PitAngleDes;		//在手操时发给云控的pitch角度期望

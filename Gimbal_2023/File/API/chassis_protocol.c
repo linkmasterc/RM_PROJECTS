@@ -13,6 +13,7 @@ void ChassisSendDataProtocol(void)
 	ChassisData.Send.BMIPitchSpeed=Gyro_X_Speed;
 	ChassisData.Send.BMIYawAngle=imu_data.yaw;
 	ChassisData.Send.BMIYawSpeed=-Gyro_Z_Speed;
+	ChassisData.Send.SecondYawAngle=GimbalSecondPosPid.m_fpFB;
 	ChassisData.Send.TriggerState		= TriggerState;
 	if(TriggerState)
 	{
@@ -42,6 +43,7 @@ void GimbalReceiveDataProtocol(void)
 		memcpy(&ChassisData.Receive, (u8*)GimbalCushioning_Rx, sizeof(ChassisData.Receive));	
 		
 		PitchPosDes=ChassisData.Receive.PitAngleDes;
+		GimbalYawPosPid.m_fpDes			=	 ChassisData.Receive.FirstYawPosDes;
 		
 		stGimbalFlag.ShootFlag      = (bool)ChassisData.Receive.Flag_Shoot;
 		stGimbalFlag.RunFlag 		   	= (bool)ChassisData.Receive.Flag_Run;

@@ -85,12 +85,12 @@
 	/**	@brief	视觉通讯 */
 		u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN_DN - 1] 			= {0};
 		VISION_SEND_DATA_DN VisionDataSendBuff 	= {.My_Data.ID = 0x0A,.My_Data.Head1 = 0x55, .My_Data.Head2 = 0x00, .My_Data.Tail1 = 0x00, .My_Data.Tail2 = 0xAA};
+		__IO u8 UA5RxDMAbuf[UART5_RX_BUF_LEN]= {0};
 		__IO u8 UA6RxDMAbuf[UA6RxDMAbuf_LEN] = {0};
-		__IO u8 UA5RxDMAbuf[UA5RxDMAbuf_LEN] = {0};
 				 u8 UA6RxMailbox[UA6RxMBbuf_LEN] = {0};
 		USART_RX_TypeDef USART6_Rcr = {USART6,USART6_RX_STREAM,UA6RxMailbox,UA6RxDMAbuf,UA6RxMBbuf_LEN,UA6RxDMAbuf_LEN,0,0,0};
 		UN_VISION_DATA_DN VisionDataReceiveBuff 	= {0};						// 下云台视觉发来的数据
-		
+		NAVIGATION_DATA   NavigationReceiveBuff   = {0};						// 导航发来的数据
 		float 	VisionData1 = 0;	//记录前帧数据
 		float 	VisionData2 = 0;	//记录前帧数据
 		float		VisionData3 = 0;
@@ -131,16 +131,23 @@
 		ST_PID GimbalPitchSpeedPid;
 		ST_TD	 YawTD=QuickTD(7500,0.001f,0.001f);
 	/** @brief 控制电机的角度与速度 */
-		float YawPosDes=0;
-		float YawEncoderAngle=0;
-		float YawEncoderSpeed=0;
-		float YawBMIAngle=0;
-		float YawBMISpeed=0;
-		float PitchBMIAngle=0;
-		float PitchBMISpeed=0;
-		float WCSYawAngle=0;
-		float LCSYawAngle=0;
-		float WheelSpeed=0;
+		float YawPosDes							=	0;
+		float YawEncoderAngle       =	0;
+		float YawEncoderSpeed				=	0;
+		float YawBMIAngle						=	0;
+		float YawBMISpeed						=	0;
+		float PitchBMIAngle					= 0;
+		float PitchBMISpeed					= 0;
+		float SecondYawAngle        = 0;
+		
+		float Robot_Yaw_Des					= 0;
+		float Robot_Yaw_Cur					= 0;
+		float Chassis_Speed					= 0;
+		float Wheel_Angle_Des				= 0;
+		
+		float WCSYawAngle						=	0;
+		float LCSYawAngle						=	0;
+		float WheelSpeed						= 0;
 		float Receive_WheelSpeed=0;
 	/** @brief 射击相关电机 */
 	  u32 Bottom_SupplyStep = 29491*5/3;

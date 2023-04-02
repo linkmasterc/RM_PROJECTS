@@ -344,9 +344,10 @@ void uart4_init(u32 bound)
 	DMA_DeInit(UART4_TX_STREAM);
 	while (DMA_GetCmdStatus(UART4_TX_STREAM) != DISABLE){};
 
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
-		DMA_InitStructure.DMA_BufferSize=(u32)(0);
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&StateDataSendBuff);
+		DMA_InitStructure.DMA_BufferSize=(u32)(STATE_SEND_DATA_LEN);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
+		DMA_InitStructure.DMA_Mode=DMA_Mode_Normal;
 	
 	DMA_Init(UART4_TX_STREAM,&DMA_InitStructure);
 		
@@ -410,8 +411,8 @@ void uart5_init(u32 bound)
 		DMA_InitStructure.DMA_Channel=DMA_Channel_4;
 		DMA_InitStructure.DMA_PeripheralBaseAddr=(u32)(&(UART5->DR));
 		
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
-		DMA_InitStructure.DMA_BufferSize=(u32)(0);
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&UA5RxDMAbuf);
+		DMA_InitStructure.DMA_BufferSize=(u32)(NavigationBufLen_Rx);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralToMemory;//传输方向：从外设到内存
 		
 		DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;

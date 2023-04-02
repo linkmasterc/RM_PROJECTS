@@ -10,6 +10,7 @@
 #include "can_protocol.h"
 #include "vision_protocol.h"
 #include "DJI_protocol.h"
+#include "navigation_protocol.h"
 #include "rm_communicate_types.h"
 #include "global_declare.h"
 

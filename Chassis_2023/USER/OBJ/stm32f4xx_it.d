@@ -76,3 +76,4 @@
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_os_types.h
 .\obj\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\stm32f4xx_it.o: ..\File\API\DJI_protocol.h
+.\obj\stm32f4xx_it.o: ..\File\API\navigation_protocol.h

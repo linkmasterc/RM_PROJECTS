@@ -65,6 +65,7 @@
 .\obj\delay.o: ..\File\API\can_protocol.h
 .\obj\delay.o: ..\File\API\vision_protocol.h
 .\obj\delay.o: ..\File\API\DJI_protocol.h
+.\obj\delay.o: ..\File\API\navigation_protocol.h
 .\obj\delay.o: ..\File\API\systemmonitor_task.h
 .\obj\delay.o: ..\File\TASK\gimbal_task.h
 .\obj\delay.o: ..\File\TASK\led_task.h

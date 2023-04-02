@@ -224,7 +224,7 @@ void AutoShootBullet(void)
 	
 	
 	/*自动射击*/
-	if((Friction_State == 700)&&DNSTC.BoDan_Flag && Follow_Flag_DN &&systemMonitor.USART6_rx_fps>=150)	//stFlag.SniperFlag&& Shoot_Area_Flag									// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
+	if((Friction_State == 700)&&DNSTC.BoDan_Flag && Follow_Flag_DN &&VisionDataReceiveBuff.stVisionData.Recieve_ID==1)	//stFlag.SniperFlag&& Shoot_Area_Flag									// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
 	{
 		GBShoot(Shoot_Frequency_DN,DNShootMode);																			// 自动射击的弹频为9hz
 	}

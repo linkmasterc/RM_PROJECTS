@@ -3,7 +3,7 @@
 #include "general_math.h"
 #include "rm_algorithm.h"
 #include "can.h"
-u8 test=0;
+u8 test=1;
 u16 Barrel1_Angle=0;
 u16 Barrel2_Angle=0;
 
@@ -229,6 +229,7 @@ void GimbalControl(void)
 			g_stPitchTD.m_aim = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
 //			g_stPitchTD.m_aim = Clip(PitchTest, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
 			g_stPitchPosPID.m_fpDes = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
+			GimbalSecondPosPid.m_fpDes=GimbalYawPosPid.m_fpDes;
 //			g_stPitchPosPID.m_fpDes = Clip(PitchTest, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
 		}
 		
@@ -245,6 +246,7 @@ void GimbalControl(void)
 		g_stPitchSpeedPID.m_fpDes = g_stPitchPosPID.m_fpU;
 		CalIWeakenPID(&g_stPitchSpeedPID);
 		
+		//二级云台电机控制
 		CalIWeakenPID(&GimbalSecondPosPid);
 		GimbalSecondSpeedPid.m_fpDes=GimbalSecondPosPid.m_fpU;
 		CalIWeakenPID(&GimbalSecondSpeedPid);
@@ -304,7 +306,7 @@ void GimbalControl(void)
 		
 		if(stGimbalFlag.PitchProtectFlag)
 		{	Pitch_Current	= 0;}
-		CAN_SendData(CAN2,0x1ff,0,(s16)(Pitch_Current),0,0);
+		CAN_SendData(CAN2,0x1ff,0,(s16)(Pitch_Current),0,GimbalSecondSpeedPid.m_fpU);
 		Pre_RunFlag = stGimbalFlag.RunFlag;
 		Clk_Div = 0;
 	}

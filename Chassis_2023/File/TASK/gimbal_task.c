@@ -10,7 +10,28 @@ u8 EnemyPos=0;
 u8 FixedPatrolTime=0;
 u32 WaitTimes=0;
 u32 LossTimes=0;
-FixedPos GimbalFixedPos;
+FixedPos GimbalFixedPos={.PitchSite1.FR = -4,.PitchSite2.FR = -16.74,.PitchSite3.FR = -16.74,
+												 .PitchSite1.HR = -6,.PitchSite2.HR = -15.12,.PitchSite3.HR = -14.77,
+												 .PitchSite1.HM = 0,.PitchSite2.HM = -18.24,.PitchSite3.HM = -18.02,
+												 .PitchSite1.HL = -25,.PitchSite2.HL = -15.60,.PitchSite3.HL = -16.79,
+												 .PitchSite1.FL = -7,.PitchSite2.FL = -15.90,.PitchSite3.FL = -17.09,
+												 .PitchSite1.CL = -20,.PitchSite2.CL = -28.65,.PitchSite3.CL = -28.78,
+												 .PitchSite1.CM = -20,.PitchSite2.CM = -30.72,.PitchSite3.CM = -30.85,
+												 .PitchSite1.CR = -20,.PitchSite2.CR = -26.06,.PitchSite3.CR = -28.84,
+												 .PitchSite1.BL = -13,
+												 .PitchSite1.BR = -10,
+	
+												 .YawSite1.FR = 40,.YawSite2.FR = 37.88,.YawSite3.FR = 44.30,
+												 .YawSite1.HR = 98,.YawSite2.HR = 19.25,.YawSite3.HR = 28.65,
+												 .YawSite1.HM = 0,.YawSite2.HM = 1.27,.YawSite3.HM = 15.51,
+												 .YawSite1.HL = -100,.YawSite2.HL = -22.15,.YawSite3.HL = -9.54,
+												 .YawSite1.FL = -60,.YawSite2.FL = -41.35,.YawSite3.FL = -33.75,
+												 .YawSite1.CL = -60,.YawSite2.CL = -39.97,.YawSite3.CL = -23.37,
+												 .YawSite1.CM = -0,.YawSite2.CM = -0.75,.YawSite3.CM = 29.75,
+												 .YawSite1.CR = 40,.YawSite2.CR = 34.98,.YawSite3.CR = 47.63,
+												 .YawSite1.BL = -127,
+												 .YawSite1.BR = 133,
+																																													};
 /** --------------------------------------------------------------------------
   * @brief  遥控器控制云台运动
 			
@@ -83,7 +104,7 @@ void FixedPosScan(void)
 		case UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.FR;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.FR;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.FR;
 			EnemyPos				= 1;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
@@ -92,7 +113,7 @@ void FixedPosScan(void)
 		case 2*UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.HR;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.HR;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.HR;
 			EnemyPos				= 2;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
@@ -101,7 +122,7 @@ void FixedPosScan(void)
 		case 3*UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.HM;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.HM;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.HM;
 			EnemyPos				= 3;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
@@ -110,7 +131,7 @@ void FixedPosScan(void)
 		case 4*UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.HL;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.HL;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.HL;
 			EnemyPos				= 4;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
@@ -119,7 +140,7 @@ void FixedPosScan(void)
 		case 5*UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.FL;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.FL;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.FL;
 			EnemyPos				= 5;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
@@ -128,7 +149,7 @@ void FixedPosScan(void)
 		case 6*UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.CL;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.CL;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.CL;
 			EnemyPos				= 6;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
@@ -137,7 +158,7 @@ void FixedPosScan(void)
 		case 7*UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.CM;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.CM;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.CM;
 			EnemyPos				= 7;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
@@ -146,11 +167,26 @@ void FixedPosScan(void)
 		case 8*UP_FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.CR;
-			GimbalPitchPosPid.m_fpDes 	= GimbalFixedPos.PitchSite1.CR;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.CR;
 			EnemyPos				= 8;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
-
+		
+		case 9*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.BL;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.BL;
+			EnemyPos				= 9;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}
+		
+		case 10*UP_FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.BR;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.BR;
+			EnemyPos				= 10;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}
 		default:
 			break;
 	}
@@ -163,16 +199,16 @@ void FixedPosScan(void)
  -------------------------------------------------------------------------- **/
 void GimbalFollowMove(void)
 {
-	if( systemMonitor.SysTickTime - FixedPatrolTime < UP_FIXED_PATROL_GAPTIME &&
-		(ABS(YawPosDes-GimbalYawPosPid.m_fpFB) > 0.5f || 
-		ABS(GimbalPitchPosPid.m_fpDes-GimbalPitchPosPid.m_fpFB) > 0.5f))						// 禁止跳跃过程中识别目标
-	{
-	}
-	else
-	{
-		GimbalPitchPosPid.m_fpDes 		= VisionDataReceiveBuff.stVisionData.Recieve_Data1;	
+//	if( systemMonitor.SysTickTime - FixedPatrolTime < UP_FIXED_PATROL_GAPTIME &&
+//		(ABS(YawPosDes-GimbalYawPosPid.m_fpFB) > 0.5f || 
+//		ABS(GimbalPitchPosPid.m_fpDes-GimbalPitchPosPid.m_fpFB) > 0.5f))						// 禁止跳跃过程中识别目标
+//	{
+//	}
+//	else
+//	{
+		GimbalPitchPosPid.m_fpDes 		= -VisionDataReceiveBuff.stVisionData.Recieve_Data1;	
 		YawPosDes 				= VisionDataReceiveBuff.stVisionData.Recieve_Data2;
-	}
+//	}
 
 }
 
@@ -193,7 +229,7 @@ void GimbalAutoMode(void)
 	
 	if(++WaitCnt == PatrolReductionRate)
 	{
-		if(WaitTimes == 8*UP_FIXED_PATROL_GAPTIME)
+		if(WaitTimes == 10*UP_FIXED_PATROL_GAPTIME)
 		{
 			WaitTimes = 0;
 		}
@@ -205,9 +241,12 @@ void GimbalAutoMode(void)
 	if(stFlag.GimbalRunFlag && !stFlag.SniperFlag)									// 扫描巡逻状态
 	{
 		LossTimes++;																// 丢失次数累加
-		FixedPosScan();
+		if(ControlMode==0x09)
+			FixedPosScan();
+		else if(ControlMode==0x02)
+			GimbalRCMode();
 	}
-	else if(stFlag.GimbalRunFlag && stFlag.SniperFlag)								// 跟随状态
+	if(stFlag.GimbalRunFlag && stFlag.SniperFlag)								// 跟随状态
 	{
 		LossTimes = 0;															// 丢失目标次数清零
 		GimbalFollowMove();														// 云台跟随目标运动

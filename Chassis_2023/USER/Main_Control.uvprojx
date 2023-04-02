@@ -448,6 +448,11 @@
               <FileType>1</FileType>
               <FilePath>..\File\API\gimbal_protocol.c</FilePath>
             </File>
+            <File>
+              <FileName>navigation_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\API\navigation_protocol.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -549,14 +554,14 @@
               <FilePath>..\File\TASK\shoot_task.c</FilePath>
             </File>
             <File>
-              <FileName>chassis_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\File\TASK\chassis_task.c</FilePath>
-            </File>
-            <File>
               <FileName>gimbal_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\File\TASK\gimbal_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>chassis_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\File\TASK\chassis_task.c</FilePath>
             </File>
             <File>
               <FileName>data_send_task.c</FileName>
