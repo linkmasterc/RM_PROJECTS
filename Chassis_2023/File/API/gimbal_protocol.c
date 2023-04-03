@@ -39,7 +39,7 @@ void GimbalReceiveDataProtocol(void)
  -------------------------------------------------------------------------- **/
 void GimbalSendDataProtocol(void)
 {
-	GimbalData.Send.PitAngleDes		= -NoiseSimulator(GimbalPitchPosPid.m_fpDes,FALSE);
+	GimbalData.Send.PitAngleDes		= NoiseSimulator(GimbalPitchPosPid.m_fpDes,FALSE);
 	GimbalData.Send.FirstYawPosDes= YawPosDes;
 	GimbalData.Send.Shooter_Send_Des		= Bullet_Des;
 	GimbalData.Send.Friction_Send_Des		= Friction_State;

@@ -428,7 +428,7 @@ I (..\File\RM_Types\rm_os_types.h)(0x6389BD6A)
 I (..\File\BSP\delay.h)(0x634833BB)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\API\general_math.h)(0x6388FFE6)
-F (..\File\TASK\gimbal_task.c)(0x64291514)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\gimbal_task.o --omf_browse .\obj\gimbal_task.crf --depend .\obj\gimbal_task.d)
+F (..\File\TASK\gimbal_task.c)(0x642ABEEA)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\gimbal_task.o --omf_browse .\obj\gimbal_task.crf --depend .\obj\gimbal_task.d)
 I (..\File\TASK\gimbal_task.h)(0x63F77967)
 I (..\File\RM_Types\rm_pid_types.h)(0x64020927)
 I (..\File\RM_Types\rm_redefine_types.h)(0x63833AF0)
@@ -720,7 +720,7 @@ I (..\File\USER\os.h)(0x6389BDA3)
 I (..\File\RM_Types\rm_os_types.h)(0x6389BD6A)
 I (..\File\BSP\delay.h)(0x634833BB)
 I (..\File\API\general_math.h)(0x6388FFE6)
-F (..\File\API\chassis_protocol.c)(0x6428DBFA)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\chassis_protocol.o --omf_browse .\obj\chassis_protocol.crf --depend .\obj\chassis_protocol.d)
+F (..\File\API\chassis_protocol.c)(0x642AC043)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB -I ..\File\TASK -I ..\File\USER-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\chassis_protocol.o --omf_browse .\obj\chassis_protocol.crf --depend .\obj\chassis_protocol.d)
 I (..\File\API\chassis_protocol.h)(0x6388F0E8)
 I (..\File\USER\stm32f4xx.h)(0x5F58438C)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5F58438C)

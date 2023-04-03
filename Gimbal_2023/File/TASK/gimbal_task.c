@@ -205,7 +205,7 @@ void GimbalControl(void)
 	#ifdef PITCH_SPEED_FEEDBACK_ENCODER
 	g_stPitchSpeedPID.m_fpFB = Encoder_Pitch_speed;
 	#elif defined(PITCH_SPEED_FEEDBACK_GRYOSCOPE)
-	g_stPitchSpeedPID.m_fpFB = Gyro_Y_Speed;
+	g_stPitchSpeedPID.m_fpFB = -Gyro_Y_Speed;
 	#endif
 	
 	if(Clk_Div == 4)
@@ -220,7 +220,7 @@ void GimbalControl(void)
 		g_stPitchPosPID.m_fpFB = DataSmoothFilter(DNPitchAnglebox,DNPITCHANGLEBOXSIZE,Pitch_Encoder_angle);
 //		g_stPitchPosPID.m_fpFB = Pitch_Encoder_angle;
 		#elif defined(PITCH_ANGLE_FEEDBACK_GRYOSCOPE)
-		g_stPitchPosPID.m_fpFB = GetBMIPitchAngle() + PitchDiff;
+		g_stPitchPosPID.m_fpFB = -(GetBMIPitchAngle() + PitchDiff);
 		#endif
 		
 		if(stGimbalFlag.RunFlag == TRUE)
@@ -229,7 +229,7 @@ void GimbalControl(void)
 			g_stPitchTD.m_aim = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
 //			g_stPitchTD.m_aim = Clip(PitchTest, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
 			g_stPitchPosPID.m_fpDes = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
-			GimbalSecondPosPid.m_fpDes=GimbalYawPosPid.m_fpDes;
+			GimbalSecondPosPid.m_fpDes=-GimbalYawPosPid.m_fpDes;
 //			g_stPitchPosPID.m_fpDes = Clip(PitchTest, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
 		}
 		
@@ -306,7 +306,7 @@ void GimbalControl(void)
 		
 		if(stGimbalFlag.PitchProtectFlag)
 		{	Pitch_Current	= 0;}
-		CAN_SendData(CAN2,0x1ff,0,(s16)(Pitch_Current),0,GimbalSecondSpeedPid.m_fpU);
+		CAN_SendData(CAN2,0x1ff,0,-(s16)(Pitch_Current),0,GimbalSecondSpeedPid.m_fpU);
 		Pre_RunFlag = stGimbalFlag.RunFlag;
 		Clk_Div = 0;
 	}

@@ -78,11 +78,11 @@ void GimbalRCMode(void)
 		{	
 			if(TestFlag)
 			{
-				YawPosDes+= (((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE) * GM_YAW_SENSIBILITY_TEST);
+				YawPosDes-= (((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE) * GM_YAW_SENSIBILITY_TEST);
 			}
 			else
 			{
-				YawPosDes+= ((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE * GM_YAW_SENSIBILITY) * 360/8192.0f/1400 * 1.5f;
+				YawPosDes-= ((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE * GM_YAW_SENSIBILITY) * 360/8192.0f/1400 * 1.5f;
 			}
 		}
 	}
@@ -206,7 +206,7 @@ void GimbalFollowMove(void)
 //	}
 //	else
 //	{
-		GimbalPitchPosPid.m_fpDes 		= -VisionDataReceiveBuff.stVisionData.Recieve_Data1;	
+		GimbalPitchPosPid.m_fpDes 		= VisionDataReceiveBuff.stVisionData.Recieve_Data1;	
 		YawPosDes 				= VisionDataReceiveBuff.stVisionData.Recieve_Data2;
 //	}
 
@@ -281,7 +281,7 @@ void YawPID(void)
 	CalIWeakenPID(&GimbalYawPosPid);													// 得到位置环PID输出（只用PI控制，D使用TD跟踪微分器）
 	GimbalYawSpeedPid.m_fpDes = GimbalYawPosPid.m_fpU ;		
 	CalIWeakenPID(&GimbalYawSpeedPid);													// 得到速度环PID输出
-	GimbalYawSpeedPid.m_fpU =-GimbalYawSpeedPid.m_fpU;
+//	GimbalYawSpeedPid.m_fpU =-GimbalYawSpeedPid.m_fpU;
 
 }
 
