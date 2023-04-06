@@ -11,7 +11,7 @@ void BSP_Init(void)
 	usart1_init();
 	usart2_init(115200);
 	usart3_init(460800);
-	uart4_init(115200);
+	uart4_init(460800);
 	uart5_init(460800);
 	usart6_init(460800);
 	Encoder_Init();
@@ -33,7 +33,7 @@ void Motor_Init()
 {
 	for(u8 i=0;i<4;i++)
 	{
-		stWheel_SpeedPid[i].m_fpKp=10;
+		stWheel_SpeedPid[i].m_fpKp=300;
 		stWheel_SpeedPid[i].m_fpUMax=8000;
 		stWheel_SpeedPid[i].m_fpUpMax=8000;
 		

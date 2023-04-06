@@ -10,6 +10,15 @@ void NavigationDataReceiveProtocol()
 	
 }
 
+void GlobalVisionDataReceiveProtocol()
+{
+	
+}
+
+void DecisionDataSendProtocol()
+{
+	
+}
 
 void WCS_to_LCS()
 {
@@ -18,8 +27,8 @@ void WCS_to_LCS()
 	static float chassis_steer_des  = 0;
 	float yaw_angle_step  = 0;
 	
-	Robot_Yaw_Des = NavigationReceiveBuff.stNavigationData.Receive_Data1*57.3;
-	Robot_Yaw_Cur = NavigationReceiveBuff.stNavigationData.Receive_Data2*57.3;
+	Robot_Yaw_Des = NavigationReceiveBuff.stNavigationData.Receive_Data1;
+	Robot_Yaw_Cur = NavigationReceiveBuff.stNavigationData.Receive_Data2;
 	Chassis_Speed = NavigationReceiveBuff.stNavigationData.Receive_Data3;
 	
 	
@@ -27,7 +36,7 @@ void WCS_to_LCS()
 	if (Chassis_Speed > CHASSIS_LINE_SPEED_MAX) {
 			Chassis_Speed = CHASSIS_LINE_SPEED_MAX;
 	} 
-	Chassis_Speed = (Chassis_Speed / (CHASSIS_WHEEL_RADIUS*2*PI))*60*19;
+	Chassis_Speed = Chassis_Speed /CHASSIS_WHEEL_RADIUS;
 
 	// angle max limit
 	yaw_angle_step = Robot_Yaw_Des - robot_yaw_des_pre;

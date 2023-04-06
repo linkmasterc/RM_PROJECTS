@@ -38,6 +38,7 @@
 .\obj\os.o: ..\File\RM_Types\rm_os_types.h
 .\obj\os.o: ..\File\USER\main.h
 .\obj\os.o: ..\File\USER\global_declare.h
+.\obj\os.o: ..\File\RM_Types\ParamConfig.h
 .\obj\os.o: ..\File\RM_Types\rm_rc_types.h
 .\obj\os.o: ..\File\RM_Types\rm_redefine_types.h
 .\obj\os.o: ..\File\RM_Types\rm_rs_types.h

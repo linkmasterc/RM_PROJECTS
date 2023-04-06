@@ -21,12 +21,6 @@
 #define NavigationBufLen_Rx			UART5_RX_BUF_LEN
 #define NavigationBufLen_Tx			UART5_TX_BUF_LEN
 
-
-#define GM_YAW_SENSIBILITY		3800							// 遥控器yaw灵敏度
-#define GM_PITCH_SENSIBILITY	12								// 遥控器pitch灵敏度
-#define GM_YAW_SENSIBILITY_TEST		0.05					// 遥控器yaw灵敏度(调弹道用）
-#define GM_PITCH_SENSIBILITY_TEST	25						// 遥控器pitch灵敏度（调弹道用）
-
 #define RecordBullet1Num	10
 #define RecordBullet2Num	10
 #define RecordEncoderLengthNum	10
@@ -53,9 +47,9 @@
 		extern USART_RX_TypeDef USART2_Rcr;
 	
 
-		extern u8 		RSReceiveDataBuff[USART2_RX_MB_BUF_LEN];					// 裁判系统发来的数据
+		extern u8 		RSReceiveDataBuff[USART2_RX_MB_BUF_LEN];// 裁判系统发来的数据
 		extern u8 		BalancesoldierNumber;
-		extern bool 	BanlanReconizeFinshFlag;				// 平衡步兵识别完标志位
+		extern bool 	BanlanReconizeFinshFlag;								// 平衡步兵识别完标志位
 		
 		extern s16     Barrel1_Heat_Cur;											// 上云台当前枪管热量
 		extern s16     Barrel2_Heat_Cur;											// 下云台当前枪管热量
@@ -65,12 +59,12 @@
 		extern float   ChassisPowerMessage;										// 当前底盘功率
 		extern u16     ChassisPowerBufferMessageLast;					// 底盘上次剩余缓冲能量
 		extern u16     ChassisPowerBufferMessage;							// 底盘剩余缓冲能量
-		extern u8      RobotIDMessage;													// 本机器人ID
-		extern u8 		Bullet1FreqMessage;												// 裁判系统返回的上云台弹频
+		extern u8      RobotIDMessage;												// 本机器人ID
+		extern u8 		Bullet1FreqMessage;											// 裁判系统返回的上云台弹频
 		extern u8		Bullet2FreqMessage;												// 裁判系统返回的下云台弹频
 		extern float   Bullet1SpeedMessage;										// 裁判系统返回的上云台射速
 		extern float   Bullet2SpeedMessage;										// 裁判系统返回的下云台射速
-		extern u16		StageRemainTimeMessage;										// 当前比赛阶段剩余时间
+		extern u16		StageRemainTimeMessage;									// 当前比赛阶段剩余时间
 
 
 		extern u16     OutpostHPMessage;
@@ -124,14 +118,15 @@
 		extern __IO u8 UART5_Cushioning_Rx[1];
 		extern ST_IMU GimbalData;
 	/**	@brief	视觉通讯 */
-		extern u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN_DN - 1];
-		extern VISION_SEND_DATA_DN VisionDataSendBuff;
+		extern u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN - 1];
+		extern VISION_SEND_DATA VisionDataSendBuff;
+//		extern DECISION_SEND_DATA  DecisionDataSendBuff;
 		extern __IO u8 UA5RxDMAbuf[UART5_RX_BUF_LEN];
 		extern __IO u8 UA6RxDMAbuf[UA6RxDMAbuf_LEN];
 		extern u8 UA6RxMailbox[UA6RxMBbuf_LEN];
 		extern USART_RX_TypeDef USART6_Rcr;
-		extern UN_VISION_DATA_DN VisionDataReceiveBuff;						// 下云台视觉发来的数据
-		extern NAVIGATION_DATA   NavigationReceiveBuff;
+		extern UN_VISION_DATA VisionDataReceiveBuff;						// 下云台视觉发来的数据
+		extern NAVIGATION_RECEIVE_DATA   NavigationReceiveBuff;
 		
 		extern float 		VisionData1 ;	//记录前帧数据
 		extern float 		VisionData2 ;	//记录前帧数据
@@ -200,18 +195,17 @@
 		extern float Receive_WheelSpeed;
 	/** @brief 射击相关电机 */
 	//拨弹电机
-	  extern u32  Bottom_SupplyStep;
-		extern u32 	Friction_State_UP;								// 摩擦轮状态(500停止700开启）
+		extern u32 	Friction_State_UP;					// 摩擦轮状态(500停止700开启）
 		extern u32 	Friction_State ;
-		extern s16 	Bullet_Des; 																// 拨弹目标数目				
-		extern s16 	Bullet_Des_Pre; 									// 前一次拨弹目标数目
+		extern s16 	Bullet_Des; 								// 拨弹目标数目				
+		extern s16 	Bullet_Des_Pre; 						// 前一次拨弹目标数目
 		extern bool Follow_Flag_DN;
 		extern bool Shoot_Area_Flag;						// 射击区域检测标志位
-		extern u8		Shoot_Frequency_DN;// 下云台射速
-		extern int 	upShooterStaticTimes;								// 卡弹计数
+		extern u8		Shoot_Frequency_DN;					// 下云台射速
+		extern int 	upShooterStaticTimes;				// 卡弹计数
 		extern bool	FrictFirstIn;								// 用于摩擦轮延时启动
 		extern bool Auto_BoDanFirstIn;
-		extern ST_ShootTestControl DNSTC;									// 下云台射击
+		extern ST_ShootTestControl DNSTC;				// 下云台射击
 	/** @brief 底盘电机 */
 		extern ST_PID ChassisPowerPid;
 		extern ST_PID stWheel_SpeedPid[4];
@@ -280,11 +274,9 @@
 		extern bool 	Robot3ShootFlag;
 		extern bool 	Robot4ShootFlag;
 		extern bool		Robot5ShootFlag;
-#ifdef MINYOU_PROTOCOL
-	extern ST_UART_DATA_MY StateDataSendBuff;
-#elif defined VOFA_PROTOCOL
+
 	extern ST_UART_DATA_VOFA StateDataSendBuff;
-#endif
+
 
 	
 /**滤波器**/

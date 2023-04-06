@@ -41,7 +41,7 @@ float rawLCSYaw=0;
 float diff=0;
 void ServoAngleCal()
 {
-	if(ControlMode==0x02)
+	if(ControlMode==0x09)
 	{
 		preLCSYaw=rawLCSYaw;
 		rawLCSYaw=atan2(Chassis_Y_Speed,Chassis_X_Speed)*180.0/PI;
@@ -53,7 +53,7 @@ void ServoAngleCal()
 		LCSYawAngle=LCSYawAngle+diff;
 
 	}
-	else if(ControlMode==0x09)
+	else if(ControlMode==0x02)
 	{
 		WCS_to_LCS();
 		LCSYawAngle=Wheel_Angle_Des;
@@ -174,7 +174,7 @@ void SpeedMode(u8 modechoice)
 		{
 			for(u32 i=0;i<4;i++)
 				stWheel_SpeedPid[i].m_fpUMax=8000;
-			if(ControlMode==0x02)
+			if(ControlMode==0x09)
 			{
 				Chassis_X_Speed=g_StDbus.stRC.Ch0-1024;
 				Chassis_Y_Speed=g_StDbus.stRC.Ch1-1024;
@@ -188,12 +188,12 @@ void SpeedMode(u8 modechoice)
 				for(u32 i=0;i<4;i++)
 					stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;	
 			}
-			else if(ControlMode==0x09)
+			else if(ControlMode==0x02)
 			{
-				stWheel_SpeedPid[0].m_fpDes=-Chassis_Speed;
-				stWheel_SpeedPid[1].m_fpDes=Chassis_Speed;
-				stWheel_SpeedPid[2].m_fpDes=Chassis_Speed;
-				stWheel_SpeedPid[3].m_fpDes=-Chassis_Speed;
+				stWheel_SpeedPid[0].m_fpDes=Chassis_Speed;
+				stWheel_SpeedPid[1].m_fpDes=-Chassis_Speed;
+				stWheel_SpeedPid[2].m_fpDes=-Chassis_Speed;
+				stWheel_SpeedPid[3].m_fpDes=Chassis_Speed;
 			}
 		}break;
 		/*********************安全模式下速度轮的控制**********************/
@@ -218,37 +218,31 @@ void ChassisModeChosse()
 		{
 			ServoMode(SafeType);
 			SpeedMode(SafeType);
-		}
-		break;
+		}break;
+		
 		case 0x01:
 		{
 			ServoMode(ForceFBType);
 			SpeedMode(SafeType);
-		}
-		break;
+		}break;
 	
 		case 0x02:
 		{
 			ServoMode(LineType);
 			SpeedMode(LineType);
-		}
-		break;
+		}break;
 
 		case 0x03:
 		{
 			ServoMode(GyroType);
 			SpeedMode(GyroType);
-		}	
-		break;	
+		}break;	
 	
 		case 0x09:
 		{
 			ServoMode(LineType);
 			SpeedMode(LineType);
-		}
-		break;
-		
-
+		}break;
 		
 		default:
 		break;
@@ -261,23 +255,23 @@ void ChassisModeChosse()
 
 
 
-void PowerLoopControl()
-{
-	capacitor_msg.TxPower=MaxPower;
-	CAN_SendData(CAN1,0x1FF,0,capacitor_msg.TxPower*100,0,0);
-	ChassisPowerPid.m_fpDes=capacitor_msg.Pow_In;
-	ChassisPowerPid.m_fpFB=capacitor_msg.Pow_Out;
-	
-	CalIWeakenPID(&ChassisPowerPid);
-	speed_rate=ChassisPowerPid.m_fpU/MaxPower+1;
-	for(u32 i=0;i<4;i++)
-		stWheel_SpeedPid[i].m_fpDes*=speed_rate;
-	for(u32 i=0;i<4;i++)
-		CalIWeakenPID(&stWheel_SpeedPid[i]);
+//void PowerLoopControl()
+//{
+//	capacitor_msg.TxPower=MaxPower;
+//	CAN_SendData(CAN1,0x1FF,0,capacitor_msg.TxPower*100,0,0);
+//	ChassisPowerPid.m_fpDes=capacitor_msg.Pow_In;
+//	ChassisPowerPid.m_fpFB=capacitor_msg.Pow_Out;
+//	
+//	CalIWeakenPID(&ChassisPowerPid);
+//	speed_rate=ChassisPowerPid.m_fpU/MaxPower+1;
+//	for(u32 i=0;i<4;i++)
+//		stWheel_SpeedPid[i].m_fpDes*=speed_rate;
+//	for(u32 i=0;i<4;i++)
+//		CalIWeakenPID(&stWheel_SpeedPid[i]);
 
-	CAN_SendData(CAN1,0x200,stWheel_SpeedPid[0].m_fpU,stWheel_SpeedPid[1].m_fpU,stWheel_SpeedPid[2].m_fpU,stWheel_SpeedPid[3].m_fpU);
+//	CAN_SendData(CAN1,0x200,stWheel_SpeedPid[0].m_fpU,stWheel_SpeedPid[1].m_fpU,stWheel_SpeedPid[2].m_fpU,stWheel_SpeedPid[3].m_fpU);
 
-}
+//}
 
 
 ///*----------------------------------------------------------------------------------------

@@ -188,7 +188,10 @@ void CalIWeakenPID(ST_PID* pStPID)
 	{
 		pStPID->m_fpSumE += pStPID->m_fpE;																					// 计算偏差累积
 	}
-
+	else if(fabs(pStPID->m_fpE)>pStPID->m_fpEMin)
+	{
+		pStPID->m_fpSumE=0;
+	}
 	pStPID->m_fpSumE = Clip(pStPID->m_fpSumE, -pStPID->m_fpEiMax, pStPID->m_fpEiMax);										// 累积偏差（积分）限幅
 	pStPID->m_fpUi = pStPID->m_fpKi * pStPID->m_fpSumE;																		// 得到积分器输出
 	pStPID->m_fpUp = Clip(pStPID->m_fpKp * pStPID->m_fpE, -pStPID->m_fpUpMax, pStPID->m_fpUpMax);							// 得到比例器输出

@@ -28,21 +28,28 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 	/** @brief 电机控制pid */
 		ST_PID GimbalYawPosPid;
 		ST_PID GimbalYawSpeedPid;	
-		ST_PID GimbalPitchPosPid;
-		ST_PID GimbalPitchSpeedPid;
+		ST_TD 	g_stPitchTD			= QuickTD(5000,0.001f,0.001f);
+		ST_PID 	g_stPitchPosPID 	= QuickPID(40,0.5,0,3000,3000,3000,1500,1);
+		ST_PID 	g_stPitchSpeedPID 	= QuickPID(300,0,0,28000,28000,1,15000,12);
 		ST_PID GimbalSecondPosPid={.m_fpKp=30,.m_fpUMax=1000,.m_fpUpMax=1000};
-		ST_PID GimbalSecondSpeedPid={.m_fpKp=200,.m_fpUMax=8000,.m_fpUpMax=8000};
+		ST_PID GimbalSecondSpeedPid={.m_fpKp=200,.m_fpUMax=28000,.m_fpUpMax=28000};
 		ST_TD	 YawTD;
 	/** @brief 控制电机的角度与速度 */
 		float YawPosDes=0;
-		float YawEncoderAngle=0;
-		float YawEncoderSpeed=0;
 		float YawBMIAngle=0;
 		float YawBMISpeed=0;
 		
 		float PitchPosDes=0;
 		float PitchBMIAngle=0;
 		float PitchBMISpeed=0;
+		
+		
+		float BMIYawABSAngle=0;
+		float EncoderYawDesABSAngle=0;
+		float EncoderYawABSAngle=0;
+		float EncoderYawSpeed=0;
+		
+		u32 G_Compensate = 3000;
 	/** @brief 摩擦轮 */
 		float Friction1_Temp = 0;
 		float Friction2_Temp = 0;
@@ -95,7 +102,7 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 	/** @brief pitch轴电机 */
 		float COMP = 0;
 		float PitchTest = 0;
-		s16 G_Compensate = 2500;
+
 		float Pitch_Encoder_angle = 0;
 		float Pitch_Encoder_speed = 0;
 		ST_ANGLE BMIPitchAngle	= {0};
@@ -109,24 +116,8 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 		ST_ENCODER g_stPitchEncoder 	= {0,0,0,0,1,8192,0};
 		float PitchSpeedCompensate=0;
 
-		#if defined(PITCH_ANGLE_FEEDBACK_GRYOSCOPE) && defined(PITCH_SPEED_FEEDBACK_GRYOSCOPE)
-		/**	@brief angle & speed used gryoscope
-			*	@date ?
-			*/
 		float	PitchCoe			= 1.0f;
-		ST_TD 	g_stPitchTD			= QuickTD(5000,0.001f,0.001f);
-		ST_PID 	g_stPitchPosPID 	= QuickPID(40,0.5,0,3000,3000,3000,1500,1);
-		ST_PID 	g_stPitchSpeedPID 	= QuickPID(300,0,0,28000,28000,1,15000,12);
 
-		#elif defined(PITCH_ANGLE_FEEDBACK_ENCODER) && defined(PITCH_SPEED_FEEDBACK_GRYOSCOPE)
-		/** @brief angle used encoder, speed used gryoscope	
-			*	@date ?
-			*/
-		float	PitchCoe			= 1.0f;
-		ST_TD 	g_stPitchTD			= QuickTD(6000,0.008f,0.001f);
-		ST_PID 	g_stPitchPosPID 	= QuickPID(-45,-0.01,0,3000,3000,6000,1500,100);	// 有前馈
-		ST_PID 	g_stPitchSpeedPID 	= QuickPID(-300,0,0,28000,28000,15000,15000,12);
-		#endif	
 
 /** @brief 系统侦测 */
 	/**	@brief	系统监视器 */

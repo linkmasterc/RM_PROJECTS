@@ -2,6 +2,8 @@
 #include "can_protocol.h"
 #include "global_declare.h"
 #include "rm_algorithm.h"
+
+
 /**
 * @brief		由设备向CAN总线发送数据
  * @param 	Data1~4对应总线上挂载的某四个设备，
@@ -82,8 +84,8 @@ void CAN2_Protocol(void)
 			
 		case 0x208:
 			AbsEncoderProcess(&GimbalSecondEncoder,Get_Encoder_Number(&CAN2_RX_Message));
-			GimbalSecondPosPid.m_fpFB=GimbalSecondEncoder.fpSumValue/8192.0*360.0;
-			GimbalSecondSpeedPid.m_fpFB=Get_Speed(&CAN2_RX_Message);
+			EncoderYawABSAngle=(GimbalSecondEncoder.fpSumValue-SECOND_YAW_MID)/GimbalSecondEncoder.siNumber*360;
+			EncoderYawSpeed=Get_Speed(&CAN2_RX_Message)*2*PI/60.0;
 		
 		break;		
 		default:
@@ -140,7 +142,10 @@ s32 Get_Speed(CanRxMsg* rx_message)
  -------------------------------------------------------------------------- **/
 void AbsEncoderProcess(ST_ENCODER* pEncoder, s32 value)
 {
-	pEncoder->uiPreRawValue = pEncoder->uiRawValue;
+//	if(stGimbalFlag.RunFlag==TRUE)
+		pEncoder->uiPreRawValue = pEncoder->uiRawValue;
+//	else
+//	pEncoder->uiPreRawValue = value;
 	pEncoder->uiRawValue = value;
 	pEncoder->siDiff = value - pEncoder->uiPreRawValue;
 	if(pEncoder->siDiff < -pEncoder->siNumber/2)

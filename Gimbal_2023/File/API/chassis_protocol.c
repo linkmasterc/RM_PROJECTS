@@ -56,7 +56,8 @@ void GimbalReceiveDataProtocol(void)
 	if(stGimbalFlag.RunFlag == TRUE)
 		{
 			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax, 28000, 10);
-			S16RampSignal(&G_Compensate,3000,2);
+			FPRampSignal(&GimbalSecondSpeedPid.m_fpUMax,28000,10);
+			U32RampSignal(&G_Compensate,3000,2);
 
 //			#ifdef USING_G_COM
 //			G_Compensate = Gravity_Compensate;
@@ -72,7 +73,7 @@ void GimbalReceiveDataProtocol(void)
 				}
 				if(Last_Shooter_Send_Des != ChassisData.Receive.Shooter_Send_Des)
 				{
-					g_stShooterPosPID.m_fpDes 	= g_stShooterPosPID.m_fpDes + Bottom_SupplyStep * (ChassisData.Receive.Shooter_Send_Des - Last_Shooter_Send_Des);
+					g_stShooterPosPID.m_fpDes 	= g_stShooterPosPID.m_fpDes + BOTTOM_SUPPLY_STEP * (ChassisData.Receive.Shooter_Send_Des - Last_Shooter_Send_Des);
 					Last_Shooter_Send_Des = ChassisData.Receive.Shooter_Send_Des;
 				}
 			}
@@ -98,7 +99,7 @@ void GimbalReceiveDataProtocol(void)
 				}
 				if(Last_Shooter_Send_Des != ChassisData.Receive.Shooter_Send_Des)
 				{
-					g_stShooterPosPID.m_fpDes 	= g_stShooterPosPID.m_fpDes + Bottom_SupplyStep * (ChassisData.Receive.Shooter_Send_Des - Last_Shooter_Send_Des);
+					g_stShooterPosPID.m_fpDes 	= g_stShooterPosPID.m_fpDes + BOTTOM_SUPPLY_STEP * (ChassisData.Receive.Shooter_Send_Des - Last_Shooter_Send_Des);
 					Last_Shooter_Send_Des = ChassisData.Receive.Shooter_Send_Des;
 				}
 			}

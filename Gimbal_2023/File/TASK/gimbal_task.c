@@ -7,9 +7,6 @@ u8 test=1;
 u16 Barrel1_Angle=0;
 u16 Barrel2_Angle=0;
 
-u8	DNPITCHANGLEBOXSIZE = 1;
-float DNPitchAnglebox[100] = {0};
-float Shooter_Speed_K=0;
 
 float Angle_180_To_Inf(float angle_input, ST_ANGLE* st_angle)
 {
@@ -198,64 +195,72 @@ void GimbalControl(void)
 {
 	static bool Pre_RunFlag = FALSE;
 	static u8 Clk_Div = 0;
+	
+	static float PreEncoderYawDesAngle=0;
+	static float RawEncoderYawDesAngle=0;
+	static float EncoderYawAngleDiff=0;
+	
 	float FricSpeed1,FricSpeed2;
-	
+
 	Clk_Div++;
-	
-	#ifdef PITCH_SPEED_FEEDBACK_ENCODER
-	g_stPitchSpeedPID.m_fpFB = Encoder_Pitch_speed;
-	#elif defined(PITCH_SPEED_FEEDBACK_GRYOSCOPE)
-	g_stPitchSpeedPID.m_fpFB = -Gyro_Y_Speed;
+	PreEncoderYawDesAngle=RawEncoderYawDesAngle;
+	RawEncoderYawDesAngle=GimbalYawPosPid.m_fpDes;
+	EncoderYawAngleDiff=RawEncoderYawDesAngle-PreEncoderYawDesAngle;
+	EncoderYawDesABSAngle+=EncoderYawAngleDiff;
+	//二级云台角度处理
+	#ifdef IMU_FEEDBACK
+		GimbalSecondPosPid.m_fpFB=  BMIYawABSAngle+EncoderYawABSAngle;
+		GimbalSecondSpeedPid.m_fpFB=  Gyro_Z_Speed;
+	#elif defined ENCODER_FEEDBACK
+		GimbalSecondPosPid.m_fpFB  =  EncoderYawABSAngle;
+		GimbalSecondSpeedPid.m_fpFB=	EncoderYawSpeed;
 	#endif
+	
+	
+	g_stPitchPosPID.m_fpFB = -GetBMIPitchAngle();
+	g_stPitchSpeedPID.m_fpFB = -Gyro_Y_Speed;
 	
 	if(Clk_Div == 4)
 	{
 		if(stGimbalFlag.RunFlag == TRUE)
 		{
-			g_stPitchPosPID.m_fpDes = ChassisData.Receive.PitAngleDes;
+			GimbalSecondPosPid.m_fpDes=-EncoderYawDesABSAngle;
+			g_stPitchPosPID.m_fpDes 	= ChassisData.Receive.PitAngleDes;
+			g_stPitchTD.m_aim      	  = g_stPitchPosPID.m_fpDes;
+			g_stPitchTD.m_aim			    = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
+			g_stPitchPosPID.m_fpDes   = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
+		}		
+		else if(stGimbalFlag.RunFlag == FALSE && Pre_RunFlag == FALSE)
+		{
+			U32RampSignal(&G_Compensate,0,2);
+			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax,0,10);
+			FPRampSignal(&GimbalSecondSpeedPid.m_fpUMax,0,2);
+			//积分清零
+			g_stPitchPosPID.m_fpSumE = 0;
+			g_stPitchSpeedPID.m_fpSumE = 0;
+			GimbalSecondPosPid.m_fpSumE=0;
+			GimbalSecondSpeedPid.m_fpSumE=0;
+			//
+			GimbalSecondPosPid.m_fpDes=GimbalSecondPosPid.m_fpFB;
 		}
 		
 		//Pitch电机控制
-		#ifdef PITCH_ANGLE_FEEDBACK_ENCODER
-		g_stPitchPosPID.m_fpFB = DataSmoothFilter(DNPitchAnglebox,DNPITCHANGLEBOXSIZE,Pitch_Encoder_angle);
-//		g_stPitchPosPID.m_fpFB = Pitch_Encoder_angle;
-		#elif defined(PITCH_ANGLE_FEEDBACK_GRYOSCOPE)
-		g_stPitchPosPID.m_fpFB = -(GetBMIPitchAngle() + PitchDiff);
-		#endif
 		
-		if(stGimbalFlag.RunFlag == TRUE)
+		if(test==0)
 		{
-			
-			g_stPitchTD.m_aim = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
-//			g_stPitchTD.m_aim = Clip(PitchTest, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
-			g_stPitchPosPID.m_fpDes = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
-			GimbalSecondPosPid.m_fpDes=-GimbalYawPosPid.m_fpDes;
-//			g_stPitchPosPID.m_fpDes = Clip(PitchTest, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
+			CalTD(&g_stPitchTD);
+			g_stPitchPosPID.m_fpDes = g_stPitchTD.m_x1;
 		}
 		
-		if(test==0){
-		CalTD(&g_stPitchTD);
-		g_stPitchPosPID.m_fpDes = g_stPitchTD.m_x1;}
-//		else g_stPitchPosPID.m_fpDes = PitchTest;
 		CalIWeakenPID(&g_stPitchPosPID);
 		PitchSpeedCompensate = PitchCoe * g_stPitchTD.m_x2;
 		g_stPitchSpeedPID.m_fpDes = g_stPitchPosPID.m_fpU - PitchSpeedCompensate;
-		CalIWeakenPID(&g_stPitchSpeedPID);
-		
-		CalIWeakenPID(&g_stPitchPosPID);
-		g_stPitchSpeedPID.m_fpDes = g_stPitchPosPID.m_fpU;
 		CalIWeakenPID(&g_stPitchSpeedPID);
 		
 		//二级云台电机控制
 		CalIWeakenPID(&GimbalSecondPosPid);
 		GimbalSecondSpeedPid.m_fpDes=GimbalSecondPosPid.m_fpU;
 		CalIWeakenPID(&GimbalSecondSpeedPid);
-		
-		
-		//拨弹电机闭环控制
-		CalIResistedPID(&g_stShooterPosPID);
-		g_stShooterSpeedPID.m_fpDes = g_stShooterPosPID.m_fpU / 8192 * 360.0f;
-		CalIWeakenPID(&g_stShooterSpeedPID);
 		
 		//摩擦轮闭环控制
 		if(stGimbalFlag.FrictionFlag == TRUE&&stGimbalFlag.RunFlag==TRUE)
@@ -265,11 +270,6 @@ void GimbalControl(void)
 			{
 				FricSpeed1 = fric_speed1;
 				FricSpeed2 = fric_speed1;
-			}
-			else if(ChassisData.Receive.Friction_Send_Des == 600)
-			{
-				FricSpeed1 = fric_speed2;
-				FricSpeed2 = fric_speed2;
 			}
 		}
 		else
@@ -281,28 +281,15 @@ void GimbalControl(void)
 		}
 		Friction_Control(FricSpeed1, FricSpeed2);
 		
-		if(stGimbalFlag.RunFlag == FALSE && Pre_RunFlag == FALSE)
-		{
-			S16RampSignal(&G_Compensate,0,2);
-			FPRampSignal(&g_stPitchSpeedPID.m_fpUMax,0,2);
-			//积分清零
-			g_stPitchPosPID.m_fpSumE = 0;
-			g_stPitchSpeedPID.m_fpSumE = 0;
-		}
+
 		
-			//重力补偿
-		if(g_stPitchSpeedPID.m_fpU + G_Compensate * cos((g_stPitchPosPID.m_fpFB + COMP)/360*2*PI) > 30000)
-			Pitch_Current =  30000;
-		else if(g_stPitchSpeedPID.m_fpU + G_Compensate * cos((g_stPitchPosPID.m_fpFB +COMP)/360*2*PI) < -30000)
-			Pitch_Current = -30000;
+		//重力补偿
+		if(g_stPitchSpeedPID.m_fpU + G_Compensate * cos((g_stPitchPosPID.m_fpFB + COMP)/360*2*PI) > 28000)
+			Pitch_Current =  28000;
+		else if(g_stPitchSpeedPID.m_fpU + G_Compensate * cos((g_stPitchPosPID.m_fpFB +COMP)/360*2*PI) < -28000)
+			Pitch_Current = -28000;
 		else
 			Pitch_Current = g_stPitchSpeedPID.m_fpU + G_Compensate * cos((g_stPitchPosPID.m_fpFB + COMP)/360*2*PI);
-
-		if(g_stShooterSpeedPID.m_fpE >30000)
-		{
-			g_stShooterSpeedPID.m_fpU = 0;
-			Shooter_BLOCK = TRUE;
-		}
 		
 		if(stGimbalFlag.PitchProtectFlag)
 		{	Pitch_Current	= 0;}

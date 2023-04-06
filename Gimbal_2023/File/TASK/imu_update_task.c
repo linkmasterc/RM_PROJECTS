@@ -38,6 +38,10 @@ float q3 = 0.0f;
 
 void IMU_Update_Task()
 {
+	static float preYawAngle=0;
+	static float rawYawAngle=0;
+	static float YawAngleDiff=0;	
+
     /*设置重力互补融合修正kp系数*/
 	imu_data.gkp = 0.4f;
 
@@ -51,10 +55,22 @@ void IMU_Update_Task()
 //	BMIYawAngle			= imu_data.yaw;
 //	BMIPitchAngle   = imu_data.pit;
 //	BMIRollAngle		= imu_data.rol;
+	preYawAngle=rawYawAngle;
+	rawYawAngle=imu_data.yaw;
+	YawAngleDiff=rawYawAngle-preYawAngle;
+	if(YawAngleDiff>=180)
+		YawAngleDiff-=360;
+	else if(YawAngleDiff<=-180)
+		YawAngleDiff+=360;
+	
+	BMIYawABSAngle+=YawAngleDiff;
 }
 
 void IMU_Update_Mahony(_imu_st* imu,float dt)
 {
+	
+		
+	
     float normalise;
     float nor_acc[VEC_XYZ] = {0};
     float ex, ey, ez;//
@@ -149,4 +165,6 @@ void IMU_Update_Mahony(_imu_st* imu,float dt)
 
 		
 }
+
+
 

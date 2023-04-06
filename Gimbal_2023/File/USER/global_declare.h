@@ -1,6 +1,7 @@
 #ifndef GLOBAL_DECLARE_H
 #define GLOBAL_DECLARE_H
 
+#include "ParamConfig.h"
 #include "rm_rc_types.h"
 #include "rm_rs_types.h"
 #include "rm_pid_types.h"
@@ -14,27 +15,12 @@
 #define ChassisBufLen_Tx	USART3_TX_BUF_LEN
 
 #define ST_GIMBAL_FLAG ST_IQRFLAG
+//二级云台反馈
+#define ENCODER_FEEDBACK
+//#define IMU_FEEDBACK
 
 
 
-
-//摩擦轮
-#define fric_speed1 -10400.0
-#define fric_speed2 -10400.0
-#define Fric 139
-
-//拨弹电机
-#define Bottom_SupplyStep 29491
-
-//pitch轴电机
-#define PITCH_ANGLE_FEEDBACK_GRYOSCOPE
-//#define PITCH_ANGLE_FEEDBACK_ENCODER
-#define PITCH_SPEED_FEEDBACK_GRYOSCOPE
-//#define PITCH_SPEED_FEEDBACK_ENCODER
-#define	PITCH_USE_TD
-#define GBDN_PITCH_MAX	30.0f
-#define GBDN_PITCH_MIN	-30.0f
-#define GM_PITCH_MIDPOS 4106
 
 /** @brief 通讯所用变量 */
 	/** @brief can通讯 */
@@ -67,21 +53,25 @@
 	/** @brief 电机控制pid */
 		extern ST_PID GimbalYawPosPid;
 		extern ST_PID GimbalYawSpeedPid; 
-		extern ST_PID GimbalPitchPosPid;
-		extern ST_PID GimbalPitchSpeedPid;
 		extern ST_PID GimbalSecondPosPid;
 		extern ST_PID GimbalSecondSpeedPid;
 		extern ST_TD	YawTD;
+		extern ST_TD 	g_stPitchTD;
+		extern ST_PID g_stPitchPosPID;
+		extern ST_PID g_stPitchSpeedPID;
 	/** @brief 电调返回转化位常用单位 */
 	  extern float YawPosDes;
-		extern float YawEncoderAngle;
-		extern float YawEncoderSpeed;
 		extern float YawBMIAngle;
 		extern float YawBMISpeed;
 		
 		extern float PitchPosDes;
 		extern float PitchBMIAngle;
 		extern float PitchBMISpeed;
+		
+		extern float BMIYawABSAngle;
+		extern float EncoderYawDesABSAngle;
+		extern float EncoderYawABSAngle;
+		extern float EncoderYawSpeed;
 	/** @brief 摩擦轮 */
 		extern float Friction1_Temp;
 		extern float Friction2_Temp;
@@ -100,7 +90,7 @@
 	/** @brief pitch轴电机 */
 		extern float COMP;
 		extern float PitchTest;
-		extern s16 G_Compensate;
+		extern u32 G_Compensate;
 
 		extern float Pitch_Encoder_angle;
 		extern float Pitch_Encoder_speed;
@@ -116,9 +106,7 @@
 		extern ST_ENCODER g_stPitchEncoder;
 		extern float PitchSpeedCompensate;
 		extern float	PitchCoe;
-		extern ST_TD 	g_stPitchTD;
-		extern ST_PID g_stPitchPosPID;
-		extern ST_PID g_stPitchSpeedPID;
+
 /** @brief 侦测 */
 	/**	@brief	系统监视器 */
 		extern SYSTEM_MONITOR systemMonitor;

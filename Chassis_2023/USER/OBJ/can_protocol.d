@@ -38,9 +38,9 @@
 .\obj\can_protocol.o: ..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h
 .\obj\can_protocol.o: ..\File\RM_Types\rm_communicate_types.h
 .\obj\can_protocol.o: ..\File\RM_Types\rm_redefine_types.h
+.\obj\can_protocol.o: ..\File\RM_Types\rm_rs_types.h
 .\obj\can_protocol.o: ..\File\USER\global_declare.h
 .\obj\can_protocol.o: ..\File\RM_Types\rm_rc_types.h
-.\obj\can_protocol.o: ..\File\RM_Types\rm_rs_types.h
 .\obj\can_protocol.o: ..\File\RM_Types\rm_pid_types.h
 .\obj\can_protocol.o: ..\File\RM_Types\rm_scanner_types.h
 .\obj\can_protocol.o: ..\File\API\gimbal_protocol.h

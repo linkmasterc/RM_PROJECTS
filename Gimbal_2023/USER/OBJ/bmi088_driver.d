@@ -3,6 +3,7 @@
 .\obj\bmi088_driver.o: ..\File\BSP\spi.h
 .\obj\bmi088_driver.o: ..\File\USER\main.h
 .\obj\bmi088_driver.o: ..\File\USER\global_declare.h
+.\obj\bmi088_driver.o: ..\File\RM_Types\ParamConfig.h
 .\obj\bmi088_driver.o: ..\File\RM_Types\rm_rc_types.h
 .\obj\bmi088_driver.o: ..\File\RM_Types\rm_redefine_types.h
 .\obj\bmi088_driver.o: ..\File\RM_Types\rm_rs_types.h

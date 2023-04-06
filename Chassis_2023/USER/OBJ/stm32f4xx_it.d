@@ -38,10 +38,10 @@
 .\obj\stm32f4xx_it.o: ..\File\API\can_protocol.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_communicate_types.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_redefine_types.h
+.\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_rs_types.h
 .\obj\stm32f4xx_it.o: ..\File\API\vision_protocol.h
 .\obj\stm32f4xx_it.o: ..\File\USER\global_declare.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_rc_types.h
-.\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_rs_types.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_pid_types.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\rm_scanner_types.h
 .\obj\stm32f4xx_it.o: ..\File\RM_Types\ParamConfig.h

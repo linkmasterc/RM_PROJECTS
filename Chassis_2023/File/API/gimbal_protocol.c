@@ -1,4 +1,5 @@
 #include "gimbal_protocol.h"
+#include "ParamConfig.h"
 #include "verify.h"
 
 void GimbalReceiveDataProtocol(void)

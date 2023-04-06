@@ -10,27 +10,29 @@ u8 EnemyPos=0;
 u8 FixedPatrolTime=0;
 u32 WaitTimes=0;
 u32 LossTimes=0;
-FixedPos GimbalFixedPos={.PitchSite1.FR = -4,.PitchSite2.FR = -16.74,.PitchSite3.FR = -16.74,
-												 .PitchSite1.HR = -6,.PitchSite2.HR = -15.12,.PitchSite3.HR = -14.77,
+FixedPos GimbalFixedPos={.PitchSite1.FR = -6,.PitchSite2.FR = -16.74,.PitchSite3.FR = -16.74,
+												 .PitchSite1.HR = -8,.PitchSite2.HR = -15.12,.PitchSite3.HR = -14.77,
 												 .PitchSite1.HM = 0,.PitchSite2.HM = -18.24,.PitchSite3.HM = -18.02,
-												 .PitchSite1.HL = -25,.PitchSite2.HL = -15.60,.PitchSite3.HL = -16.79,
-												 .PitchSite1.FL = -7,.PitchSite2.FL = -15.90,.PitchSite3.FL = -17.09,
-												 .PitchSite1.CL = -20,.PitchSite2.CL = -28.65,.PitchSite3.CL = -28.78,
-												 .PitchSite1.CM = -20,.PitchSite2.CM = -30.72,.PitchSite3.CM = -30.85,
-												 .PitchSite1.CR = -20,.PitchSite2.CR = -26.06,.PitchSite3.CR = -28.84,
-												 .PitchSite1.BL = -13,
-												 .PitchSite1.BR = -10,
+												 .PitchSite1.HL = -27,.PitchSite2.HL = -15.60,.PitchSite3.HL = -16.79,
+												 .PitchSite1.FL = -9,.PitchSite2.FL = -15.90,.PitchSite3.FL = -17.09,
+												 .PitchSite1.CL = -22,.PitchSite2.CL = -28.65,.PitchSite3.CL = -28.78,
+												 .PitchSite1.CM = -22,.PitchSite2.CM = -30.72,.PitchSite3.CM = -30.85,
+												 .PitchSite1.CR = -22,.PitchSite2.CR = -26.06,.PitchSite3.CR = -28.84,
+												 .PitchSite1.BL = -15,
+												 .PitchSite1.BR = -12,
+												 .PitchSite1.BM = -16,
 	
-												 .YawSite1.FR = 40,.YawSite2.FR = 37.88,.YawSite3.FR = 44.30,
-												 .YawSite1.HR = 98,.YawSite2.HR = 19.25,.YawSite3.HR = 28.65,
+												 .YawSite1.FR = -40,.YawSite2.FR = 37.88,.YawSite3.FR = 44.30,
+												 .YawSite1.HR = -98,.YawSite2.HR = 19.25,.YawSite3.HR = 28.65,
 												 .YawSite1.HM = 0,.YawSite2.HM = 1.27,.YawSite3.HM = 15.51,
-												 .YawSite1.HL = -100,.YawSite2.HL = -22.15,.YawSite3.HL = -9.54,
-												 .YawSite1.FL = -60,.YawSite2.FL = -41.35,.YawSite3.FL = -33.75,
-												 .YawSite1.CL = -60,.YawSite2.CL = -39.97,.YawSite3.CL = -23.37,
-												 .YawSite1.CM = -0,.YawSite2.CM = -0.75,.YawSite3.CM = 29.75,
-												 .YawSite1.CR = 40,.YawSite2.CR = 34.98,.YawSite3.CR = 47.63,
-												 .YawSite1.BL = -127,
-												 .YawSite1.BR = 133,
+												 .YawSite1.HL = 100,.YawSite2.HL = -22.15,.YawSite3.HL = -9.54,
+												 .YawSite1.FL = 60,.YawSite2.FL = -41.35,.YawSite3.FL = -33.75,
+												 .YawSite1.CL = 60,.YawSite2.CL = -39.97,.YawSite3.CL = -23.37,
+												 .YawSite1.CM = 0,.YawSite2.CM = -0.75,.YawSite3.CM = 29.75,
+												 .YawSite1.CR = -40,.YawSite2.CR = 34.98,.YawSite3.CR = 47.63,
+												 .YawSite1.BL = 127,
+												 .YawSite1.BR = -133,
+												 .YawSite1.BM = -178,
 																																													};
 /** --------------------------------------------------------------------------
   * @brief  遥控器控制云台运动
@@ -38,14 +40,7 @@ FixedPos GimbalFixedPos={.PitchSite1.FR = -4,.PitchSite2.FR = -16.74,.PitchSite3
   * @note	遥控器遥控范围不对YAW轴角度进行限制
  -------------------------------------------------------------------------- **/
 void GimbalRCMode(void)
-{
-	static bool TestFlag = FALSE;
-	
-	if(1)
-	{
-		TestFlag = TRUE;
-	}
-	
+{	
 	/* 遥控器通道死区限制 */
 	if(ABS(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET) < RC_CH_VALUE_DEAD)
 	{	g_StDbus.stRC.Ch0 = RC_CH_VALUE_OFFSET;}
@@ -58,32 +53,17 @@ void GimbalRCMode(void)
 	{	
 		if(stFlag.GimbalRunFlag == TRUE)
 		{
-			if(TestFlag)
-			{
-				GimbalPitchPosPid.m_fpDes -= (((float)(g_StDbus.stRC.Ch1 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE)/GM_PITCH_SENSIBILITY_TEST);
-			}
-			else
-			{
-				GimbalPitchPosPid.m_fpDes -= ((float)(g_StDbus.stRC.Ch1 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE/GM_PITCH_SENSIBILITY);
-			}
-			GimbalPitchPosPid.m_fpDes = Clip(GimbalPitchPosPid.m_fpDes, DN_PITCH_RC_ANGLE_MIN, DN_PITCH_RC_ANGLE_MAX);
+			GimbalPitchPosPid.m_fpDes -= (((float)(g_StDbus.stRC.Ch1 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE)/GM_PITCH_SENSIBILITY_TEST);
+			GimbalPitchPosPid.m_fpDes = Clip(GimbalPitchPosPid.m_fpDes, PITCH_RC_ANGLE_MIN, PITCH_RC_ANGLE_MAX);
 		}
 	}
 
-	
 	/* 遥控器通道0控制云台YAW轴位置 */
 	if(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET != 0 )		
 	{	
 		if(stFlag.GimbalRunFlag == TRUE)
-		{	
-			if(TestFlag)
-			{
-				YawPosDes-= (((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE) * GM_YAW_SENSIBILITY_TEST);
-			}
-			else
-			{
-				YawPosDes-= ((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE * GM_YAW_SENSIBILITY) * 360/8192.0f/1400 * 1.5f;
-			}
+		{
+			YawPosDes-= (((float)(g_StDbus.stRC.Ch0 - RC_CH_VALUE_OFFSET)/RC_CH_VALUE_RANGE) * GM_YAW_SENSIBILITY_TEST);
 		}
 	}
 }
@@ -101,7 +81,7 @@ void FixedPosScan(void)
 	switch(WaitTimes)
 	{
 		/*右道远点*/
-		case UP_FIXED_PATROL_GAPTIME:
+		case FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.FR;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.FR;
@@ -110,7 +90,7 @@ void FixedPosScan(void)
 		}break;
 
 		/*高地右侧*/
-		case 2*UP_FIXED_PATROL_GAPTIME:
+		case 2*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.HR;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.HR;
@@ -119,7 +99,7 @@ void FixedPosScan(void)
 		}break;
 
 		/*高地正中*/
-		case 3*UP_FIXED_PATROL_GAPTIME:
+		case 3*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.HM;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.HM;
@@ -128,7 +108,7 @@ void FixedPosScan(void)
 		}break;
 
 		/*高地左侧*/
-		case 4*UP_FIXED_PATROL_GAPTIME:
+		case 4*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.HL;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.HL;
@@ -137,7 +117,7 @@ void FixedPosScan(void)
 		}break;
 
 		/*左道远点*/
-		case 5*UP_FIXED_PATROL_GAPTIME:
+		case 5*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.FL;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.FL;
@@ -146,7 +126,7 @@ void FixedPosScan(void)
 		}break;
 
 		/*左道近点*/
-		case 6*UP_FIXED_PATROL_GAPTIME:
+		case 6*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.CL;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.CL;
@@ -155,7 +135,7 @@ void FixedPosScan(void)
 		}break;
 
 		/*中间近点*/
-		case 7*UP_FIXED_PATROL_GAPTIME:
+		case 7*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.CM;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.CM;
@@ -164,7 +144,7 @@ void FixedPosScan(void)
 		}break;
 
 		/*右道近点*/
-		case 8*UP_FIXED_PATROL_GAPTIME:
+		case 8*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.CR;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.CR;
@@ -172,26 +152,75 @@ void FixedPosScan(void)
 			FixedPatrolTime		= systemMonitor.SysTickTime;
 		}break;
 		
-		case 9*UP_FIXED_PATROL_GAPTIME:
+		case 9*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.BL;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.BL;
 			EnemyPos				= 9;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
-		}
+		}break;
 		
-		case 10*UP_FIXED_PATROL_GAPTIME:
+		case 10*FIXED_PATROL_GAPTIME:
 		{
 			YawPosDes 			= GimbalFixedPos.YawSite1.BR;
 			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.BR;
 			EnemyPos				= 10;
 			FixedPatrolTime		= systemMonitor.SysTickTime;
-		}
+		}break;
+		
+		case 11*FIXED_PATROL_GAPTIME:
+		{
+			YawPosDes 			= GimbalFixedPos.YawSite1.BM;
+			GimbalPitchPosPid.m_fpDes 	= -GimbalFixedPos.PitchSite1.BM;
+			EnemyPos				= 11;
+			FixedPatrolTime		= systemMonitor.SysTickTime;
+		}break;
+			
 		default:
 			break;
 	}
 }
 
+/** --------------------------------------------------------------------------
+	* @brief  云台连续正弦扫描
+			
+	* @retval 
+  
+	* @param	
+
+	* @note					
+ -------------------------------------------------------------------------- **/
+void GimbalSinScan()
+{
+	static bool YawDirJudge;
+	static bool PitDirJudge;
+	if(YawDirJudge)
+	{
+		YawPosDes+=YAW_LINE_MOVE_SPEED;
+		if(YawPosDes>YAW_SCAN_ANGLE_MAX-0.5f)
+			YawDirJudge=FALSE;	
+	}
+	else
+	{
+		YawPosDes-=YAW_LINE_MOVE_SPEED;
+		if(YawPosDes<YAW_SCAN_ANGLE_MIN+0.5f)
+			YawDirJudge=TRUE;
+	}
+
+	
+	if(PitDirJudge)
+	{
+		GimbalPitchPosPid.m_fpDes+=PITCH_LINE_MOVE_SPEED;
+		if(GimbalPitchPosPid.m_fpDes>PITCH_SCAN_ANGLE_MAX-0.5f)
+			PitDirJudge=FALSE;
+	}
+	else
+	{
+		GimbalPitchPosPid.m_fpDes-=PITCH_LINE_MOVE_SPEED;
+		if(GimbalPitchPosPid.m_fpDes<PITCH_SCAN_ANGLE_MAX+0.5f)
+			PitDirJudge=TRUE;
+	}
+}
 /** --------------------------------------------------------------------------
 	* @brief	上云台跟随模式
 			
@@ -199,16 +228,16 @@ void FixedPosScan(void)
  -------------------------------------------------------------------------- **/
 void GimbalFollowMove(void)
 {
-//	if( systemMonitor.SysTickTime - FixedPatrolTime < UP_FIXED_PATROL_GAPTIME &&
-//		(ABS(YawPosDes-GimbalYawPosPid.m_fpFB) > 0.5f || 
-//		ABS(GimbalPitchPosPid.m_fpDes-GimbalPitchPosPid.m_fpFB) > 0.5f))						// 禁止跳跃过程中识别目标
-//	{
-//	}
-//	else
-//	{
+	if( systemMonitor.SysTickTime - FixedPatrolTime < FIXED_PATROL_GAPTIME &&
+		(ABS(YawPosDes-GimbalYawPosPid.m_fpFB) > 0.5f || 
+		ABS(GimbalPitchPosPid.m_fpDes-GimbalPitchPosPid.m_fpFB) > 0.5f))						// 禁止跳跃过程中识别目标
+	{
+	}
+	else
+	{
 		GimbalPitchPosPid.m_fpDes 		= VisionDataReceiveBuff.stVisionData.Recieve_Data1;	
 		YawPosDes 				= VisionDataReceiveBuff.stVisionData.Recieve_Data2;
-//	}
+	}
 
 }
 
@@ -229,7 +258,7 @@ void GimbalAutoMode(void)
 	
 	if(++WaitCnt == PatrolReductionRate)
 	{
-		if(WaitTimes == 10*UP_FIXED_PATROL_GAPTIME)
+		if(WaitTimes == 11*FIXED_PATROL_GAPTIME)
 		{
 			WaitTimes = 0;
 		}
@@ -241,9 +270,9 @@ void GimbalAutoMode(void)
 	if(stFlag.GimbalRunFlag && !stFlag.SniperFlag)									// 扫描巡逻状态
 	{
 		LossTimes++;																// 丢失次数累加
-		if(ControlMode==0x09)
-			FixedPosScan();
-		else if(ControlMode==0x02)
+//		if(ControlMode==0x09)
+//			FixedPosScan();
+		if(ControlMode==0x02)
 			GimbalRCMode();
 	}
 	if(stFlag.GimbalRunFlag && stFlag.SniperFlag)								// 跟随状态

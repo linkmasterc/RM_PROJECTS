@@ -77,4 +77,3 @@
 .\obj\data_send_task.o: ..\File\USER\os.h
 .\obj\data_send_task.o: ..\File\RM_Types\rm_os_types.h
 .\obj\data_send_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
-.\obj\data_send_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h

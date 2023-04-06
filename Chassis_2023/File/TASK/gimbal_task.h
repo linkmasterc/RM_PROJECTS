@@ -2,8 +2,6 @@
 #define GIMBAL_TASK_H
 #include "rm_redefine_types.h"
 
-#define FixGapTime 420
-
 typedef struct ENEMYPOS
 {
 	float FR;	/*右道远点*/	//yaw 40 pit -4
@@ -16,7 +14,8 @@ typedef struct ENEMYPOS
 	float CR;	/*右道近点*/	//yaw40 pit -20
 	float BL;	/*后方左点*/	//yaw233 pit-13
 	float BR;	/*后方右点*/	//yaw133 pit -10
-}enemypos;//后中：yaw178 pit-14
+	float BM;  /*后方中点*/  //后中：yaw178 pit-14
+}enemypos;
 
 typedef struct FIXED_PATROL_POS
 {

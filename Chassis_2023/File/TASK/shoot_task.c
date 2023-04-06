@@ -43,57 +43,6 @@ void ShootBullet(void)
 	{	
 		AutoShootBullet()                                          ;
 	}
-//	if(stFlag.GimbalRunFlag==TRUE)
-//	{
-//		if(stFlag.ShootFlag == TRUE)
-//		{
-//			c_stShooterPosPID.m_fpUMax = 8000;
-//			c_stShooterSpeedPID.m_fpUMax = 10000;
-//			if(ABS(Bullet_Des_Pre - Bullet_Des) > 2)
-//			{
-//				c_stShooterPosPID.m_fpDes	= c_stShooterPosPID.m_fpFB;
-//				Bullet_Des_Pre = Bullet_Des;
-//			}
-//			if(Bullet_Des_Pre != Bullet_Des)
-//			{
-//				c_stShooterPosPID.m_fpDes 	= c_stShooterPosPID.m_fpDes + Bottom_SupplyStep * (Bullet_Des - Bullet_Des_Pre);
-//				Bullet_Des_Pre = Bullet_Des;
-//			}
-//		}
-//		else
-//		{
-//			c_stShooterPosPID.m_fpDes = c_stShooterPosPID.m_fpFB;
-//			Bullet_Des_Pre = Bullet_Des;
-//			c_stShooterSpeedPID.m_fpUMax = 0;
-//		}
-//	}
-//	else if(stFlag.GimbalRunFlag==FALSE)
-//	{
-//		if(stFlag.ShootFlag == TRUE)
-//		{
-//			c_stShooterPosPID.m_fpUMax = 8000;
-//			c_stShooterSpeedPID.m_fpUMax = 8000;
-//			if(ABS(Bullet_Des_Pre - Bullet_Des) > 2)
-//			{
-//				c_stShooterPosPID.m_fpDes 	= c_stShooterPosPID.m_fpFB;
-//				Bullet_Des_Pre = Bullet_Des;
-//		
-//			}
-//			if(Bullet_Des_Pre != Bullet_Des)
-//			{
-//				c_stShooterPosPID.m_fpDes 	= c_stShooterPosPID.m_fpDes + Bottom_SupplyStep * (Bullet_Des - Bullet_Des_Pre);
-//				Bullet_Des_Pre = Bullet_Des;
-//			}
-//		}
-//		else
-//		{
-//			c_stShooterPosPID.m_fpUMax 		= 0;
-//			c_stShooterPosPID.m_fpDes 		= c_stShooterPosPID.m_fpFB;
-//			Bullet_Des_Pre 			= Bullet_Des;
-//			c_stShooterSpeedPID.m_fpUMax	= 0;
-//		}
-//	}
-	
 	
 /****************/
 	
@@ -107,7 +56,7 @@ void ShootBullet(void)
 	if(DNSTC.BoDan_Flag)
 	{
 		c_stShooterSpeedPID.m_fpUMax=10000;
-		c_stShooterPosPID.m_fpDes=c_stShooterPosPID.m_fpDes+Bottom_SupplyStep * (Bullet_Des - Bullet_Des_Pre);
+		c_stShooterPosPID.m_fpDes=c_stShooterPosPID.m_fpDes+BOTTOM_SUPPLY_STEP * (Bullet_Des - Bullet_Des_Pre);
 		
 	}
 	
@@ -210,8 +159,8 @@ void AutoShootBullet(void)
 	/*跟随误差检测*/
 	if(DNSTC.BoDan_Flag)//stFlag.SniperFlag 
 	{
-		if(ABS(GimbalPitchPosPid.m_fpFB -(- GimbalPitchPosPid.m_fpDes)) < DN_ATTACK_PITCH_ERROR											// pitch跟随误差小于击打误差
-			&& ABS(GimbalYawPosPid.m_fpFB - GimbalYawPosPid.m_fpDes) < DN_ATTACK_YAW_ERROR)													// yaw跟随误差小于击打误差
+		if(ABS(GimbalPitchPosPid.m_fpFB -(- GimbalPitchPosPid.m_fpDes)) < ATTACK_PITCH_ERROR											// pitch跟随误差小于击打误差
+			&& ABS(GimbalYawPosPid.m_fpFB - GimbalYawPosPid.m_fpDes) < ATTACK_YAW_ERROR)													// yaw跟随误差小于击打误差
 		{
 			Follow_Flag_DN = TRUE;																								// 紧密跟随
 		}
@@ -224,7 +173,7 @@ void AutoShootBullet(void)
 	
 	
 	/*自动射击*/
-	if((Friction_State == 700)&&DNSTC.BoDan_Flag && Follow_Flag_DN &&VisionDataReceiveBuff.stVisionData.Recieve_ID==1)	//stFlag.SniperFlag&& Shoot_Area_Flag									// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
+	if((Friction_State == 700)&&DNSTC.BoDan_Flag /*&& Follow_Flag_DN*/ &&VisionDataReceiveBuff.stVisionData.Recieve_ID==1)	//stFlag.SniperFlag&& Shoot_Area_Flag									// 拨弹开关打开、识别到目标、紧密跟随、处于射击区域
 	{
 		GBShoot(Shoot_Frequency_DN,DNShootMode);																			// 自动射击的弹频为9hz
 	}

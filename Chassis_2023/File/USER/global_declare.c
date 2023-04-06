@@ -83,14 +83,15 @@
 		__IO u8 UART5_Cushioning_Rx[1]={0};
 		ST_IMU GimbalData={.Send.head[0]=0x55,.Send.head[1]=0x00};
 	/**	@brief	视觉通讯 */
-		u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN_DN - 1] 			= {0};
-		VISION_SEND_DATA_DN VisionDataSendBuff 	= {.My_Data.ID = 0x0A,.My_Data.Head1 = 0x55, .My_Data.Head2 = 0x00, .My_Data.Tail1 = 0x00, .My_Data.Tail2 = 0xAA};
+		u8 VisionDataBuffTemp[VISION_RECIEVE_DATA_LEN - 1] 			= {0};
+		VISION_SEND_DATA VisionDataSendBuff 	= {.My_Data.ID = 0x0A,.My_Data.Head1 = 0x55, .My_Data.Head2 = 0x00, .My_Data.Tail1 = 0x00, .My_Data.Tail2 = 0xAA};
+
 		__IO u8 UA5RxDMAbuf[UART5_RX_BUF_LEN]= {0};
 		__IO u8 UA6RxDMAbuf[UA6RxDMAbuf_LEN] = {0};
 				 u8 UA6RxMailbox[UA6RxMBbuf_LEN] = {0};
 		USART_RX_TypeDef USART6_Rcr = {USART6,USART6_RX_STREAM,UA6RxMailbox,UA6RxDMAbuf,UA6RxMBbuf_LEN,UA6RxDMAbuf_LEN,0,0,0};
-		UN_VISION_DATA_DN VisionDataReceiveBuff 	= {0};						// 下云台视觉发来的数据
-		NAVIGATION_DATA   NavigationReceiveBuff   = {0};						// 导航发来的数据
+		UN_VISION_DATA VisionDataReceiveBuff 	= {0};						// 下云台视觉发来的数据
+		NAVIGATION_RECEIVE_DATA   NavigationReceiveBuff   = {0};						// 导航发来的数据
 		float 	VisionData1 = 0;	//记录前帧数据
 		float 	VisionData2 = 0;	//记录前帧数据
 		float		VisionData3 = 0;
@@ -150,7 +151,6 @@
 		float WheelSpeed						= 0;
 		float Receive_WheelSpeed=0;
 	/** @brief 射击相关电机 */
-	  u32 Bottom_SupplyStep = 29491*5/3;
 		u32 	Friction_State_UP			= 500;							// 摩擦轮状态(500停止700开启）
 		u32 	Friction_State 				= 500;
 		s16 	Bullet_Des 						= 0;								// 拨弹目标数目
@@ -248,17 +248,9 @@
 		bool		Robot5ShootFlag		= TRUE;
 
 /**串口助手相关**/
-//名优科创
-
-#ifdef MINYOU_PROTOCOL
-ST_UART_DATA_MY StateDataSendBuff 	= {	.Head1 = 0x55, 	.Head2 = 0x11, 	.Head3 = 0xaa, 
-									.Head4 = 0x55,	.Head5 = 0xaa, 	.Head6 = 0xff,
-									.Head7 = 0x01,	.Num = STATE_SEND_DATA_NUM, .Tail1 = 0x01};
-
 // Vofa++
-#elif defined VOFA_PROTOCOL
 ST_UART_DATA_VOFA StateDataSendBuff = {.Tail1 = 0x00, .Tail2 = 0x00, .Tail3 = 0x80, .Tail4 = 0x7F};	
-#endif
+
 /***********************************************************************/
 	
 /**滤波器**/

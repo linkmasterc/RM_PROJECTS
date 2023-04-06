@@ -64,7 +64,7 @@ void DNVisionDataProtocol(void) {
 			case V_RX_FLAG:
 				if (DNData == 0x00 || DNData == 0x01 || DNData == 0x02 || DNData == 0x03) {
 					VisionDataReceiveBuff.pVisionData[0] = DNData;
-					DNDataNum = VISION_RECIEVE_DATA_NUM_DN;
+					DNDataNum = VISION_RECIEVE_DATA_NUM;
 					DNStatus = V_RX_START;
 				} else 
 				{
@@ -100,7 +100,7 @@ void DNVisionDataProtocol(void) {
 			case V_RX_END: {
 				if (DNData == 0xAA)																	// 如果接到了0xAA，数据有效
 				{
-					for (u32 j = 1; j < VISION_RECIEVE_DATA_LEN_DN; j++) {
+					for (u32 j = 1; j < VISION_RECIEVE_DATA_LEN; j++) {
 						VisionDataReceiveBuff.pVisionData[j] = VisionDataBuffTemp[j - 1];
 					}
 				}
@@ -175,7 +175,7 @@ void DNVisionDataSend(void)
 	else if (RobotIDMessage == Blue_7_Sentry) 
 	{	VisionDataSendBuff.My_Data.ID = 0x0A;}
 	
-	VisionDataSendBuff.My_Data.Length = VISION_SEND_DATA_NUM_DN;
+	VisionDataSendBuff.My_Data.Length = VISION_SEND_DATA_NUM;
 
 		/*击打己方判断*/
 	#ifdef HIT_OURSELF
@@ -210,7 +210,7 @@ void DNVisionDataSend(void)
 	
 	DMA_Cmd(USART6_TX_STREAM, DISABLE);				       								//设置当前计数值前先禁用DMA
 	USART6_TX_STREAM->M0AR = (uint32_t)&VisionDataSendBuff;							//设置当前待发数据基地址:Memory0 tARget
-	USART6_TX_STREAM->NDTR = (uint32_t)VISION_SEND_DATA_LEN_DN;			        		//设置当前待发的数据的数量:Number of Data units to be TRansferred
+	USART6_TX_STREAM->NDTR = (uint32_t)VISION_SEND_DATA_LEN;			        		//设置当前待发的数据的数量:Number of Data units to be TRansferred
 	DMA_Cmd(USART6_TX_STREAM, ENABLE);	
 }
 

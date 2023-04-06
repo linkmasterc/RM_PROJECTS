@@ -55,7 +55,7 @@ void CAN1_Protocol(void)
 		case 0x201:
 		{
 			AbsEncoderProcess(&stServoEncoder[0],GetEncoderNumber(CAN1_RX_Message.Data));
-			stServoWheel_PosPid[0].m_fpFB=stServoEncoder[0].fpSumValue/8192.0*40.0;
+			stServoWheel_PosPid[0].m_fpFB=stServoEncoder[0].fpSumValue/stServoEncoder[0].siNumber*40;
 			stServoWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN1_RX_Message.Data)/9;
 			systemMonitor.CAN1_SERVO1_RX_cnt++;
 		}
@@ -63,14 +63,14 @@ void CAN1_Protocol(void)
 		
 		case 0x202:
 		{
-			stWheel_SpeedPid[1].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			stWheel_SpeedPid[1].m_fpFB=GetSpeed(CAN1_RX_Message.Data)*2*PI/(60.0*19.0);
 			systemMonitor.CAN1_SPEED2_RX_cnt++;
 		}
 		break;
 		
 		case 0x203:
 		{
-			stWheel_SpeedPid[2].m_fpFB=GetSpeed(CAN1_RX_Message.Data);
+			stWheel_SpeedPid[2].m_fpFB=GetSpeed(CAN1_RX_Message.Data)*2*PI/(60.0*19.0);
 			systemMonitor.CAN1_SPEED3_RX_cnt++;
 		}
 		break;
@@ -78,7 +78,7 @@ void CAN1_Protocol(void)
 		case 0x204:
 		{
 			AbsEncoderProcess(&stServoEncoder[3],GetEncoderNumber(CAN1_RX_Message.Data));
-			stServoWheel_PosPid[3].m_fpFB=stServoEncoder[3].fpSumValue/8192.0*40.0;			
+			stServoWheel_PosPid[3].m_fpFB=stServoEncoder[3].fpSumValue/stServoEncoder[3].siNumber*40;			
 			stServoWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN1_RX_Message.Data)/9;
 			systemMonitor.CAN1_SERVO4_RX_cnt++;
 		}
@@ -121,11 +121,11 @@ void CAN2_Protocol(void)
 		{
 			GimbalYawEncoder.uiRawValue = GetEncoderNumber(CAN2_RX_Message.Data);													// 初次获取电机编码值fpSumValue取当前编码值
 			GimbalYawEncoder.fpSumValue = GimbalYawEncoder.uiRawValue;
-			if((GimbalYawEncoder.fpSumValue-DN_YAW_MID) > GimbalYawEncoder.siNumber / 2)								
+			if((GimbalYawEncoder.fpSumValue-First_YAW_MID) > GimbalYawEncoder.siNumber / 2)								
 			{	
 				GimbalYawEncoder.fpSumValue -= GimbalYawEncoder.siNumber;
 			}
-			else if((GimbalYawEncoder.fpSumValue-DN_YAW_MID) < -GimbalYawEncoder.siNumber / 2)
+			else if((GimbalYawEncoder.fpSumValue-First_YAW_MID) < -GimbalYawEncoder.siNumber / 2)
 			{	
 				GimbalYawEncoder.fpSumValue += GimbalYawEncoder.siNumber;
 			}
@@ -135,7 +135,7 @@ void CAN2_Protocol(void)
 		{	
 			AbsEncoderProcess(&GimbalYawEncoder, GetEncoderNumber(CAN2_RX_Message.Data));											// 对YAW电机编码器返回的原始值进行预处理
 		}
-			YawEncoderAngle = (GimbalYawEncoder.fpSumValue - DN_YAW_MID) * 360 / 8192.0f;										// 以YAW电机设定中值为0°,得到YAW轴当前角度
+			YawEncoderAngle = (GimbalYawEncoder.fpSumValue - First_YAW_MID) * 360 / 8192.0f;										// 以YAW电机设定中值为0°,得到YAW轴当前角度
 			YawEncoderSpeed = GetSpeed(CAN2_RX_Message.Data);																	// 得到编码器测得的速度
 			systemMonitor.CAN2_YAW_RX_cnt++;
 		}
@@ -144,7 +144,7 @@ void CAN2_Protocol(void)
 		
 		case 0x201:
 		{
-			stWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN2_RX_Message.Data);
+			stWheel_SpeedPid[0].m_fpFB=GetSpeed(CAN2_RX_Message.Data)*2*PI/(60.0*19.0);
 			systemMonitor.CAN2_SPEED1_RX_cnt++;
 		}
 		break;
@@ -152,7 +152,7 @@ void CAN2_Protocol(void)
 		case 0x202:
 		{
 			AbsEncoderProcess(&stServoEncoder[1],GetEncoderNumber(CAN2_RX_Message.Data));
-			stServoWheel_PosPid[1].m_fpFB=stServoEncoder[1].fpSumValue/8192.0*40.0;
+			stServoWheel_PosPid[1].m_fpFB=stServoEncoder[1].fpSumValue/stServoEncoder[1].siNumber*40;
 			stServoWheel_SpeedPid[1].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
 			systemMonitor.CAN2_SERVO2_RX_cnt++;
 		}
@@ -161,7 +161,7 @@ void CAN2_Protocol(void)
 		case 0x203:
 		{
 			AbsEncoderProcess(&stServoEncoder[2],GetEncoderNumber(CAN2_RX_Message.Data));
-			stServoWheel_PosPid[2].m_fpFB=stServoEncoder[2].fpSumValue/8192.0*40.0;
+			stServoWheel_PosPid[2].m_fpFB=stServoEncoder[2].fpSumValue/stServoEncoder[2].siNumber*40;
 			stServoWheel_SpeedPid[2].m_fpFB=GetSpeed(CAN2_RX_Message.Data)/9;
 			systemMonitor.CAN2_SERVO3_RX_cnt++;
 		}
@@ -169,7 +169,7 @@ void CAN2_Protocol(void)
 		
 		case 0x204:
 		{
-			stWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN2_RX_Message.Data);
+			stWheel_SpeedPid[3].m_fpFB=GetSpeed(CAN2_RX_Message.Data)*2*PI/(60.0*19.0);
 			systemMonitor.CAN2_SPEED4_RX_cnt++;
 		}
 		break;

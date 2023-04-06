@@ -36,6 +36,7 @@
 .\obj\chassis_protocol.o: ..\File\STM32_LIB\FWLIB\stm32f4xx_dcmi.h
 .\obj\chassis_protocol.o: ..\File\STM32_LIB\FWLIB\stm32f4xx_fsmc.h
 .\obj\chassis_protocol.o: ..\File\USER\global_declare.h
+.\obj\chassis_protocol.o: ..\File\RM_Types\ParamConfig.h
 .\obj\chassis_protocol.o: ..\File\RM_Types\rm_rc_types.h
 .\obj\chassis_protocol.o: ..\File\RM_Types\rm_redefine_types.h
 .\obj\chassis_protocol.o: ..\File\RM_Types\rm_rs_types.h
