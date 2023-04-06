@@ -192,8 +192,8 @@ void FixedPosScan(void)
  -------------------------------------------------------------------------- **/
 void GimbalSinScan()
 {
-	static bool YawDirJudge;
-	static bool PitDirJudge;
+	static bool YawDirJudge=TRUE;
+	static bool PitDirJudge=TRUE;
 	if(YawDirJudge)
 	{
 		YawPosDes+=YAW_LINE_MOVE_SPEED;
@@ -211,13 +211,13 @@ void GimbalSinScan()
 	if(PitDirJudge)
 	{
 		GimbalPitchPosPid.m_fpDes+=PITCH_LINE_MOVE_SPEED;
-		if(GimbalPitchPosPid.m_fpDes>PITCH_SCAN_ANGLE_MAX-0.5f)
+		if(GimbalPitchPosPid.m_fpDes>PITCH_SCAN_ANGLE_MAX-1.0f)
 			PitDirJudge=FALSE;
 	}
 	else
 	{
 		GimbalPitchPosPid.m_fpDes-=PITCH_LINE_MOVE_SPEED;
-		if(GimbalPitchPosPid.m_fpDes<PITCH_SCAN_ANGLE_MAX+0.5f)
+		if(GimbalPitchPosPid.m_fpDes<PITCH_SCAN_ANGLE_MIN+1.0f)
 			PitDirJudge=TRUE;
 	}
 }
@@ -258,7 +258,7 @@ void GimbalAutoMode(void)
 	
 	if(++WaitCnt == PatrolReductionRate)
 	{
-		if(WaitTimes == 11*FIXED_PATROL_GAPTIME)
+		if(WaitTimes == 12*FIXED_PATROL_GAPTIME)
 		{
 			WaitTimes = 0;
 		}
@@ -270,9 +270,9 @@ void GimbalAutoMode(void)
 	if(stFlag.GimbalRunFlag && !stFlag.SniperFlag)									// 扫描巡逻状态
 	{
 		LossTimes++;																// 丢失次数累加
-//		if(ControlMode==0x09)
-//			FixedPosScan();
 		if(ControlMode==0x02)
+			GimbalSinScan();
+		if(ControlMode==0x01)
 			GimbalRCMode();
 	}
 	if(stFlag.GimbalRunFlag && stFlag.SniperFlag)								// 跟随状态

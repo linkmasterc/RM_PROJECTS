@@ -31,9 +31,10 @@ SYSTEM_MONITOR 		system_monitor = {0};             //系统监视器
 		ST_TD 	g_stPitchTD			= QuickTD(5000,0.001f,0.001f);
 		ST_PID 	g_stPitchPosPID 	= QuickPID(40,0.5,0,3000,3000,3000,1500,1);
 		ST_PID 	g_stPitchSpeedPID 	= QuickPID(300,0,0,28000,28000,1,15000,12);
-		ST_PID GimbalSecondPosPid={.m_fpKp=30,.m_fpUMax=1000,.m_fpUpMax=1000};
-		ST_PID GimbalSecondSpeedPid={.m_fpKp=200,.m_fpUMax=28000,.m_fpUpMax=28000};
+		ST_PID GimbalSecondPosPid={.m_fpKp=15,.m_fpKi=0,.m_fpUMax=10000,.m_fpUpMax=10000,.m_fpEiMax=10000,.m_fpEMin=1};//1:15  2:
+		ST_PID GimbalSecondSpeedPid={.m_fpKp=100,.m_fpUMax=28000,.m_fpUpMax=28000};//1:100  2:
 		ST_TD	 YawTD;
+		ST_TD  SecondYawTD= QuickTD(5000,0.001f,0.001f);
 	/** @brief 控制电机的角度与速度 */
 		float YawPosDes=0;
 		float YawBMIAngle=0;

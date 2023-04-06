@@ -103,7 +103,7 @@
         <bEvRecOn>1</bEvRecOn>
         <bSchkAxf>0</bSchkAxf>
         <bTchkAxf>0</bTchkAxf>
-        <nTsel>4</nTsel>
+        <nTsel>3</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -114,7 +114,7 @@
         <tDlgDll></tDlgDll>
         <tDlgPa></tDlgPa>
         <tIfile></tIfile>
-        <pMon>Segger\JL2CM3.dll</pMon>
+        <pMon>BIN\CMSIS_AGDI.dll</pMon>
       </DebugOpt>
       <TargetDriverDllRegistry>
         <SetRegEntry>
@@ -243,27 +243,32 @@
         <Ww>
           <count>17</count>
           <WinNumber>1</WinNumber>
-          <ItemText>\\test\../File/USER/global_declare.c\ChassisData.Receive</ItemText>
+          <ItemText>SecondYawTD</ItemText>
         </Ww>
         <Ww>
           <count>18</count>
           <WinNumber>1</WinNumber>
-          <ItemText>\\test\../File/USER/global_declare.c\g_stPitchPosPID.m_fpDes</ItemText>
+          <ItemText>EncoderYawDesABSAngle</ItemText>
         </Ww>
         <Ww>
           <count>19</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GimbalSecondPosPid</ItemText>
+          <ItemText>BMIYawABSAngle</ItemText>
         </Ww>
         <Ww>
           <count>20</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GimbalSecondSpeedPid</ItemText>
+          <ItemText>EncoderYawABSAngle</ItemText>
         </Ww>
         <Ww>
           <count>21</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GimbalSecondEncoder,0x0A</ItemText>
+          <ItemText>GimbalYawPosPid</ItemText>
+        </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>SecondTestAngle</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -320,7 +325,7 @@
         <Ww>
           <count>10</count>
           <WinNumber>2</WinNumber>
-          <ItemText>ChassisData</ItemText>
+          <ItemText>ChassisData,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>11</count>

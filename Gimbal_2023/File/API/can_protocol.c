@@ -85,7 +85,7 @@ void CAN2_Protocol(void)
 		case 0x208:
 			AbsEncoderProcess(&GimbalSecondEncoder,Get_Encoder_Number(&CAN2_RX_Message));
 			EncoderYawABSAngle=(GimbalSecondEncoder.fpSumValue-SECOND_YAW_MID)/GimbalSecondEncoder.siNumber*360;
-			EncoderYawSpeed=Get_Speed(&CAN2_RX_Message)*2*PI/60.0;
+			EncoderYawSpeed=Get_Speed(&CAN2_RX_Message)*2*PI*57.3/60.0;
 		
 		break;		
 		default:

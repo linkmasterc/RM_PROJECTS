@@ -55,8 +55,8 @@ void ServoAngleCal()
 	}
 	else if(ControlMode==0x02)
 	{
-		WCS_to_LCS();
-		LCSYawAngle=Wheel_Angle_Des;
+//		WCS_to_LCS();
+//		LCSYawAngle=Wheel_Angle_Des;
 	}
 	
 	for(u32 i=0;i<4;i++)

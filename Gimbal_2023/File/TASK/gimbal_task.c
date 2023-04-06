@@ -7,6 +7,7 @@ u8 test=1;
 u16 Barrel1_Angle=0;
 u16 Barrel2_Angle=0;
 
+float SecondTestAngle=0;
 
 float Angle_180_To_Inf(float angle_input, ST_ANGLE* st_angle)
 {
@@ -209,8 +210,8 @@ void GimbalControl(void)
 	EncoderYawDesABSAngle+=EncoderYawAngleDiff;
 	//二级云台角度处理
 	#ifdef IMU_FEEDBACK
-		GimbalSecondPosPid.m_fpFB=  BMIYawABSAngle+EncoderYawABSAngle;
-		GimbalSecondSpeedPid.m_fpFB=  Gyro_Z_Speed;
+		GimbalSecondPosPid.m_fpFB  =  BMIYawABSAngle+EncoderYawABSAngle;
+		GimbalSecondSpeedPid.m_fpFB=  Gyro_Z_Speed+EncoderYawSpeed;
 	#elif defined ENCODER_FEEDBACK
 		GimbalSecondPosPid.m_fpFB  =  EncoderYawABSAngle;
 		GimbalSecondSpeedPid.m_fpFB=	EncoderYawSpeed;
@@ -224,7 +225,11 @@ void GimbalControl(void)
 	{
 		if(stGimbalFlag.RunFlag == TRUE)
 		{
-			GimbalSecondPosPid.m_fpDes=-EncoderYawDesABSAngle;
+//			
+			GimbalSecondPosPid.m_fpDes=0;
+////			SecondYawTD.m_aim=GimbalSecondPosPid.m_fpDes;
+////			CalTD(&SecondYawTD);
+////			GimbalSecondPosPid.m_fpDes=SecondYawTD.m_x1;
 			g_stPitchPosPID.m_fpDes 	= ChassisData.Receive.PitAngleDes;
 			g_stPitchTD.m_aim      	  = g_stPitchPosPID.m_fpDes;
 			g_stPitchTD.m_aim			    = Clip(ChassisData.Receive.PitAngleDes, GBDN_PITCH_MIN, GBDN_PITCH_MAX);
@@ -246,11 +251,11 @@ void GimbalControl(void)
 		
 		//Pitch电机控制
 		
-		if(test==0)
-		{
-			CalTD(&g_stPitchTD);
-			g_stPitchPosPID.m_fpDes = g_stPitchTD.m_x1;
-		}
+//		if(test==0)
+//		{
+//			CalTD(&g_stPitchTD);
+//			g_stPitchPosPID.m_fpDes = g_stPitchTD.m_x1;
+//		}
 		
 		CalIWeakenPID(&g_stPitchPosPID);
 		PitchSpeedCompensate = PitchCoe * g_stPitchTD.m_x2;
@@ -294,13 +299,14 @@ void GimbalControl(void)
 		if(stGimbalFlag.PitchProtectFlag)
 		{	Pitch_Current	= 0;}
 		CAN_SendData(CAN2,0x1ff,0,-(s16)(Pitch_Current),0,GimbalSecondSpeedPid.m_fpU);
+		BarrelTranfer();
 		Pre_RunFlag = stGimbalFlag.RunFlag;
 		Clk_Div = 0;
 	}
 }
-
+u32 Pwm_value=0;
 void BarrelTranfer()
 {
-	
+	TIM_SetCompare4(TIM4,Pwm_value);
 }
 

@@ -270,6 +270,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>SecondYawAngle</ItemText>
         </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>GimbalPitchPosPid</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

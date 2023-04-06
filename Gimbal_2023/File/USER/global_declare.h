@@ -16,8 +16,8 @@
 
 #define ST_GIMBAL_FLAG ST_IQRFLAG
 //二级云台反馈
-#define ENCODER_FEEDBACK
-//#define IMU_FEEDBACK
+//#define ENCODER_FEEDBACK
+#define IMU_FEEDBACK
 
 
 
@@ -56,6 +56,7 @@
 		extern ST_PID GimbalSecondPosPid;
 		extern ST_PID GimbalSecondSpeedPid;
 		extern ST_TD	YawTD;
+		extern ST_TD  SecondYawTD;
 		extern ST_TD 	g_stPitchTD;
 		extern ST_PID g_stPitchPosPID;
 		extern ST_PID g_stPitchSpeedPID;

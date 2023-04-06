@@ -17,8 +17,8 @@
 
 
 /*PITCH电机扫描角度范围*/
-#define PITCH_SCAN_ANGLE_MAX				(10.0f)				// 下云台PITCH扫描角度最大值
-#define PITCH_SCAN_ANGLE_MIN				(-10.0f)			// 下云台PITCH扫描角度最小值
+#define PITCH_SCAN_ANGLE_MAX				(20.0f)				// 下云台PITCH扫描角度最大值
+#define PITCH_SCAN_ANGLE_MIN				(-20.0f)			// 下云台PITCH扫描角度最小值
 
 /*YAW电机扫描角度范围*/
 #define YAW_SCAN_ANGLE_MAX				(180.0f)				// 下云台YAW扫描角度最大值
@@ -29,7 +29,7 @@
 #define PITCH_LINE_MOVE_SPEED			0.10f						// °/ms
 
 /*YAW电机直线扫描速度大小*/
-#define YAW_LINE_MOVE_SPEED				0.10f						// °/ms
+#define YAW_LINE_MOVE_SPEED				0.20f						// °/ms
 
 
 /*扫描巡逻运动下YAW轴曲线运动的极值*/
@@ -38,7 +38,7 @@
 
 
 /*定点巡逻两点时间间隔*/
-#define FIXED_PATROL_GAPTIME				900
+#define FIXED_PATROL_GAPTIME				1000
 
 
 /*云台拨弹电机单弹占角*/	
