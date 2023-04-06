@@ -267,17 +267,17 @@ void GimbalAutoMode(void)
 	}
 	
 
-	if(stFlag.GimbalRunFlag && !stFlag.SniperFlag)									// 扫描巡逻状态
+	if(stFlag.GimbalRunFlag && !stFlag.SniperFlag)	// 扫描巡逻状态
 	{
-		LossTimes++;																// 丢失次数累加
-		if(ControlMode==0x02)
+		LossTimes++;																	// 丢失次数累加
+		if(ControlMode==0x03)
 			GimbalSinScan();
-		if(ControlMode==0x01)
+		else if(ControlMode==0x02)
 			GimbalRCMode();
 	}
-	if(stFlag.GimbalRunFlag && stFlag.SniperFlag)								// 跟随状态
+	if(stFlag.GimbalRunFlag && stFlag.SniperFlag)		// 跟随状态
 	{
-		LossTimes = 0;															// 丢失目标次数清零
+		LossTimes = 0;																// 丢失目标次数清零
 		GimbalFollowMove();														// 云台跟随目标运动
 	}	
 	

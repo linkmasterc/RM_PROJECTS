@@ -41,7 +41,7 @@ float rawLCSYaw=0;
 float diff=0;
 void ServoAngleCal()
 {
-	if(ControlMode==0x09)
+	if(ControlMode==0x03)
 	{
 		preLCSYaw=rawLCSYaw;
 		rawLCSYaw=atan2(Chassis_Y_Speed,Chassis_X_Speed)*180.0/PI;
@@ -53,10 +53,10 @@ void ServoAngleCal()
 		LCSYawAngle=LCSYawAngle+diff;
 
 	}
-	else if(ControlMode==0x02)
+	else if(ControlMode==0x09)
 	{
-//		WCS_to_LCS();
-//		LCSYawAngle=Wheel_Angle_Des;
+		WCS_to_LCS();
+		LCSYawAngle=Wheel_Angle_Des;
 	}
 	
 	for(u32 i=0;i<4;i++)
@@ -174,7 +174,7 @@ void SpeedMode(u8 modechoice)
 		{
 			for(u32 i=0;i<4;i++)
 				stWheel_SpeedPid[i].m_fpUMax=8000;
-			if(ControlMode==0x09)
+			if(ControlMode==0x03)
 			{
 				Chassis_X_Speed=g_StDbus.stRC.Ch0-1024;
 				Chassis_Y_Speed=g_StDbus.stRC.Ch1-1024;
@@ -188,7 +188,7 @@ void SpeedMode(u8 modechoice)
 				for(u32 i=0;i<4;i++)
 					stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;	
 			}
-			else if(ControlMode==0x02)
+			else if(ControlMode==0x09)
 			{
 				stWheel_SpeedPid[0].m_fpDes=Chassis_Speed;
 				stWheel_SpeedPid[1].m_fpDes=-Chassis_Speed;
@@ -234,10 +234,16 @@ void ChassisModeChosse()
 
 		case 0x03:
 		{
-			ServoMode(GyroType);
-			SpeedMode(GyroType);
+			ServoMode(LineType);
+			SpeedMode(LineType);
 		}break;	
 	
+		case 0x04:
+		{
+			ServoMode(GyroType);
+			SpeedMode(GyroType);
+		}break;
+		
 		case 0x09:
 		{
 			ServoMode(LineType);

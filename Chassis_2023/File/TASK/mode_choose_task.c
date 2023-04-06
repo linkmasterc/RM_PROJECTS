@@ -90,7 +90,7 @@ void ModeChoose(void)
 	}
 	
 	
-	/***********************小陀螺模式**************************/
+	/***********************视觉跟随自动扫描模式**************************/
 	/**@brief
 					 左中，右上
 	  		   此模式云台同样由视觉控制
@@ -103,11 +103,12 @@ void ModeChoose(void)
 		ShootInit(SHOOT_ON);
 	}
 	
-	/*********************XX模式********************/
+	/*********************小陀螺模式********************/
 	else if(g_StDbus.stRC.SW_L==RC_SW_MID&&g_StDbus.stRC.SW_R==RC_SW_DOWN)
 	{
 		ControlMode=0x04;
-
+		MotorInit(GIMBAL_ON,SPEED_MOTOR_ON,SERVO_MOTOR_ON);
+		ShootInit(SHOOT_ON);
 	}
 
 	/*********************XX模式********************/
