@@ -46,7 +46,7 @@
 #define UART4_RX_BUF_LEN       	
 #define UART4_TX_BUF_LEN				
 
-#define UART5_RX_BUF_LEN    18
+#define UART5_RX_BUF_LEN    (18+17)
 #define UART5_TX_BUF_LEN 		60
 #define UA6RxDMAbuf_LEN    60
 #define UA6RxMBbuf_LEN     (VISION_RECIEVE_DATA_LEN + 5)
@@ -148,7 +148,7 @@ typedef union
 
 
 /** 视觉数据发送结构体 */
-#define VISION_SEND_DATA_NUM	4
+#define VISION_SEND_DATA_NUM	11
 #define VISION_SEND_DATA_LEN	(VISION_SEND_DATA_NUM * 4 + 6)
 
 typedef struct
@@ -162,13 +162,13 @@ typedef struct
 	float Send_Data2;   //Yaw
 	float Send_Data3;   //Bullet Speed
 	float Send_Data4;   //Enemy HP Detect
-//	float Send_Data5;   //Chassis Position
-//	float Send_Data6;   //Chassis Speed
-//	float Send_Data7;   //Banlance Soldior Number
-//	float Send_Data8;	//全局视野Pitch
-//	float Send_Data9;	//全局视野Yaw
-//	float Send_Data10;	//全局视野权重
-//	float Send_Data11;	//全局视野号码
+	float Send_Data5;   //Chassis Position
+	float Send_Data6;   //Chassis Speed
+	float Send_Data7;   //Banlance Soldior Number
+	float Send_Data8;	//全局视野Pitch
+	float Send_Data9;	//全局视野Yaw
+	float Send_Data10;	//全局视野权重
+	float Send_Data11;	//全局视野号码
 
 
 	u8 Tail1;
@@ -182,6 +182,9 @@ typedef union
 	ST_DATA_V My_Data;
 	UCHAR8 Vision_Send_Data_Buf[VISION_SEND_DATA_LEN];
 } VISION_SEND_DATA;		//向视觉发送打包联合体
+
+#define DECISION_SEND_DATA_LEN			50
+#define DECISION_SEND_ALL_DATA_LEN  DECISION_SEND_DATA_LEN+7
 
 #define NAVIGATION_RECEIVE_DATA_NUM 3
 #define NAVIGATION_RECEIVE_DATA_LEN (NAVIGATION_RECEIVE_DATA_NUM*4+1)
@@ -201,178 +204,14 @@ typedef union
 }NAVIGATION_RECEIVE_DATA;
 
 //#define DECISION_SEND_DATA_LEN (51)
-
 typedef __packed struct
 {
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_game_status_t RobotGameStatus;
-	u8 Tail[2];
-}ST_DECISION_SEND_GAME_STATUS_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_game_result_t RobotResult;
-	u8 Tail[2];
-}ST_DECISION_SEND_RESULT_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_game_robot_HP_t RobotHP;
-	u8 Tail[2];
-}ST_DECISION_SEND_HP_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_event_data_t RobotEvent;
-	u8 Tail[2];
-}ST_DECISION_SEND_EVENT_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_supply_projectile_action_t RobotSupply;
-	u8 Tail[2];
-}ST_DECISION_SEND_SUPPLY_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_referee_warning_t RobotWarning;
-	u8 Tail[2];
-}ST_DECISION_SEND_Warning_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_dart_remaining_time_t RobotRemainingTime;
-	u8 Tail[2];
-}ST_DECISION_SEND_REMAINING_TIME_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_game_robot_status_t RobotStatus;
-	u8 Tail[2];
-}ST_DECISION_SEND_ROBOT_STATUS_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_power_heat_data_t RobotPowerHeat;
-	u8 Tail[2];
-}ST_DECISION_SEND_POWER_HEAT_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_game_robot_pos_t RobotPos;
-	u8 Tail[2];
-}ST_DECISION_SEND_POS_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_buff_t RobotBuff;
-	u8 Tail[2];
-}ST_DECISION_SEND_BUFF_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	aerial_robot_energy_t AerialRobotEnergy;
-	u8 Tail[2];
-}ST_DECISION_SEND_AERIAL_ROBOT_ENERGY_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_robot_hurt_t RobotHurt;
-	u8 Tail[2];
-}ST_DECISION_SEND_HURT_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_shoot_data_t RobotShoot;
-	u8 Tail[2];
-}ST_DECISION_SEND_SHOOT_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_bullet_remaining_t RobotBulletRemaining;
-	u8 Tail[2];
-}ST_DECISION_SEND_BULLET_REMAINING_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_rfid_status_t RobotRfidStatus;
-	u8 Tail[2];
-}ST_DECISION_SEND_RFID_SATAUS_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_dart_client_cmd_t RobotDartClient;
-	u8 Tail[2];
-}ST_DECISION_SEND_DART_CLIENT_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	ext_student_interactive_header_data_t RobotInteractiveHeader;
-	u8 Tail[2];
-}ST_DECISION_SEND_INTERACTIVE_HEADER_DATA;
-
-typedef __packed struct
-{
-	u8 Head[2];
-	u16 Send_ID;
-	u8 Data_Length;
-	robot_interactive_data_t RobotInteractiveData;
-	u8 Tail[2];
-}ST_DECISION_SEND_INTERACTIVE_DATA;
-
+	u8 head[2];
+	u16 id;
+	u8 length;
+	u8 data[DECISION_SEND_DATA_LEN];
+	u8 tail[2];
+}ST_DECISION_SEND_DATA;
 
 
 typedef struct

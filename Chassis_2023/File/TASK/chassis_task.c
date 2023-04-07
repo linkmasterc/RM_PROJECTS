@@ -8,7 +8,7 @@
 #define LineType 		0x02
 #define ForceFBType 0x03
 
-#define SpanSpeed 6000
+#define SpanSpeed 0
 
 bool GyroJudge=TRUE;
 

@@ -15,6 +15,13 @@
 #include "stm32f4xx_it.h"
 
 /*--------------API--------------*/
+#include "DJI_protocol.h"
+#include "can_protocol.h"
+#include "rm_algorithm.h"
+#include "vision_protocol.h"
+#include "gimbal_protocol.h"
+#include "navigation_protocol.h"
+
 
 /*--------------TASK--------------*/
 #include "systemmonitor_task.h"
@@ -36,6 +43,7 @@ void ModeChooseTask(void);
 void ShootTask(void);
 void LEDStateChangeTask(void);
 void VisionDataSendTask(void);
+void NavigationDataSendTask(void);
 void VofaPlusTask(void);
 void ChassisTask(void);
 void TriggerTask(void);

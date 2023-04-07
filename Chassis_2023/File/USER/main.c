@@ -53,10 +53,6 @@ void ModeChooseTask(void)
 void ShootTask(void)
 {
 	ShootBullet();
-//	CalIResistedPID(&c_stShooterPosPID);
-//	c_stShooterSpeedPID.m_fpDes = c_stShooterPosPID.m_fpU / 8192 * 360.0f;
-//	CalIWeakenPID(&c_stShooterSpeedPID);
-//	CAN_SendData(CAN2,0x1ff, GimbalYawSpeedPid.m_fpU,0,0,-(s16)(c_stShooterSpeedPID.m_fpU));
 	systemMonitor.ShootTask_cnt++;																		
 }
 
@@ -82,16 +78,13 @@ void LEDStateChangeTask(void)
  -------------------------------------------------------------------------- **/
 void VisionDataSendTask(void)
 {
-//	/*下云台视觉数据发送*/
-//	#ifdef DN_CAMERA_HARDWARE_TRIGER_ENABLE
-//	if(TirggerState)
-//	#else
-//	if(TRUE)
-//	#endif
-	{
 		DNVisionDataSend();
 		systemMonitor.VisionDataSendTask_cnt++;
-	}	
+}
+
+void NavigationDataSendTask(void)
+{
+	DecisionDataSendProtocol();
 }
 void VofaPlusTask()
 {
@@ -100,9 +93,7 @@ void VofaPlusTask()
 
 void ChassisTask(void)
 {
-	ChassisModeChosse();
-	ServoWheelControl();
-	
+	ChassisModeChosse();	
 }
 
 void TriggerTask(void)
@@ -111,9 +102,5 @@ void TriggerTask(void)
 	Trigger_HIGH();
 	delay_us(10);
 	Trigger_LOW();
-//	delay_us(10);
-//	Trigger_HIGH();
-//	delay_us(10);
-//	Trigger_LOW();
 	systemMonitor.TriggerTask_cnt++;
 }

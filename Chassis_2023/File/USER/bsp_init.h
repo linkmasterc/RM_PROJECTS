@@ -9,5 +9,6 @@
 #include "global_declare.h"
 void Encoder_Init(void);
 void Motor_Init(void);
+void RSStructAddress_Init(void);
 void BSP_Init(void);
 #endif

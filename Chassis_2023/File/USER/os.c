@@ -49,6 +49,7 @@ ST_TAST G_ST_Task[] =
 {.Name="ShootTask",       .Func=ShootTask,        .State=OS_READY,    .TimeDelay=1000*0.5,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="SendDataTask",			.Func=SendDataTask,			.State=OS_READY,		.TimeDelay=1000,				.TimeUsedLeast=0xFFFFFFFF},
 {.Name="VisionDataSendTask",       .Func=VisionDataSendTask,        .State=OS_READY,    .TimeDelay=1000*1,      .TimeUsedLeast=0xFFFFFFFF},
+{.Name="NavigationDataSendTask",       .Func=NavigationDataSendTask,        .State=OS_READY,    .TimeDelay=1000*1,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="VofaPlusTask",       .Func=VofaPlusTask,        .State=OS_READY,    .TimeDelay=1000*5,      .TimeUsedLeast=0xFFFFFFFF},
 {.Name="ChassisTask",       .Func=ChassisTask,        .State=OS_READY,    .TimeDelay=1000*1,      .TimeUsedLeast=0xFFFFFFFF},
 //{.Name="TriggerTask",       .Func=TriggerTask,        .State=OS_READY,    .TimeDelay=1000*60,      .TimeUsedLeast=0xFFFFFFFF},

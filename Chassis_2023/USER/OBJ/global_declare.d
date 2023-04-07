@@ -63,6 +63,8 @@
 .\obj\global_declare.o: ..\File\API\vision_protocol.h
 .\obj\global_declare.o: ..\File\API\DJI_protocol.h
 .\obj\global_declare.o: ..\File\API\navigation_protocol.h
+.\obj\global_declare.o: ..\File\API\rm_algorithm.h
+.\obj\global_declare.o: ..\File\API\gimbal_protocol.h
 .\obj\global_declare.o: ..\File\API\systemmonitor_task.h
 .\obj\global_declare.o: ..\File\TASK\gimbal_task.h
 .\obj\global_declare.o: ..\File\TASK\led_task.h
@@ -70,9 +72,7 @@
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\global_declare.o: ..\File\TASK\shoot_task.h
 .\obj\global_declare.o: ..\File\TASK\data_send_task.h
-.\obj\global_declare.o: ..\File\API\gimbal_protocol.h
 .\obj\global_declare.o: ..\File\TASK\chassis_task.h
-.\obj\global_declare.o: ..\File\API\rm_algorithm.h
 .\obj\global_declare.o: ..\File\USER\os.h
 .\obj\global_declare.o: ..\File\RM_Types\rm_os_types.h
 .\obj\global_declare.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

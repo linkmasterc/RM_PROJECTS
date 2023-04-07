@@ -13,7 +13,8 @@
 #include "stm32f4xx.h"
 #include <string.h>
 
-	
+#define RS_STRUCT_NUM	16
+
 
 #define ChassisBufLen_Rx	USART3_RX_BUF_LEN
 #define ChassisBufLen_Tx	USART3_TX_BUF_LEN
@@ -126,7 +127,10 @@
 		extern u8 UA6RxMailbox[UA6RxMBbuf_LEN];
 		extern USART_RX_TypeDef USART6_Rcr;
 		extern UN_VISION_DATA VisionDataReceiveBuff;						// 下云台视觉发来的数据
-		extern NAVIGATION_RECEIVE_DATA   NavigationReceiveBuff;
+		extern NAVIGATION_RECEIVE_DATA   NavigationReceiveBuf;
+		extern ST_DECISION_SEND_DATA     DecisionSendBuf;
+		extern u16 RSStructIDBuf[RS_STRUCT_NUM];
+		extern u32 RSStructAddressBuf[RS_STRUCT_NUM];
 		
 		extern float 		VisionData1 ;	//记录前帧数据
 		extern float 		VisionData2 ;	//记录前帧数据

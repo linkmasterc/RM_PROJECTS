@@ -1,14 +1,14 @@
 Dependencies for Project 'Main_Control', Target 'Target 1': (DO NOT MODIFY !)
-F (..\File\USER\os.c)(0x641C70FE)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\os.o --omf_browse .\obj\os.crf --depend .\obj\os.d)
+F (..\File\USER\os.c)(0x64302217)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\os.o --omf_browse .\obj\os.crf --depend .\obj\os.d)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -48,7 +48,7 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -60,7 +60,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -70,15 +70,15 @@ I (..\File\TASK\shoot_task.h)(0x640A5F9A)
 I (..\File\TASK\data_send_task.h)(0x642E302E)
 I (..\File\TASK\chassis_task.h)(0x640A50C5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
-F (..\File\USER\main.c)(0x642C0152)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\global_declare.h)(0x642E401E)
+F (..\File\USER\main.c)(0x64301D4E)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -120,7 +120,7 @@ I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -132,7 +132,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -141,8 +141,8 @@ I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (..\File\TASK\shoot_task.h)(0x640A5F9A)
 I (..\File\TASK\data_send_task.h)(0x642E302E)
 I (..\File\TASK\chassis_task.h)(0x640A50C5)
-F (..\File\USER\bsp_init.c)(0x642E3F34)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\bsp_init.o --omf_browse .\obj\bsp_init.crf --depend .\obj\bsp_init.d)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+F (..\File\USER\bsp_init.c)(0x643028E5)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\bsp_init.o --omf_browse .\obj\bsp_init.crf --depend .\obj\bsp_init.d)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -183,94 +183,25 @@ I (..\File\BSP\usart.h)(0x6380ADBC)
 I (..\File\BSP\nvic.h)(0x633D9966)
 I (..\File\BSP\systick.h)(0x5FCCF438)
 I (..\File\BSP\gpio.h)(0x63A92DBF)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
 I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
+I (..\File\USER\main.h)(0x64301D2F)
 I (..\File\BSP\delay.h)(0x633AFDA6)
 I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
-I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
-I (..\File\TASK\gimbal_task.h)(0x642E36BC)
-I (..\File\TASK\led_task.h)(0x6389BEB0)
-I (..\File\TASK\mode_choose_task.h)(0x6378D0DA)
-I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
-I (..\File\TASK\shoot_task.h)(0x640A5F9A)
-I (..\File\TASK\data_send_task.h)(0x642E302E)
-I (..\File\TASK\chassis_task.h)(0x640A50C5)
-I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
-I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-F (..\File\USER\stm32f4xx_it.c)(0x6427DCA5)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\stm32f4xx_it.o --omf_browse .\obj\stm32f4xx_it.crf --depend .\obj\stm32f4xx_it.d)
-I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
-I (..\File\USER\stm32f4xx.h)(0x5710F38F)
-I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
-I (..\File\STM32_LIB\CMSIS\core_cmInstr.h)(0x5710F38D)
-I (..\File\STM32_LIB\CMSIS\core_cmFunc.h)(0x5710F38D)
-I (..\File\STM32_LIB\CMSIS\core_cm4_simd.h)(0x5710F38D)
-I (..\File\USER\system_stm32f4xx.h)(0x5710F38F)
-I (..\File\USER\stm32f4xx_conf.h)(0x5710F38F)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_adc.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_crc.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dbgmcu.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dma.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_exti.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_flash.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_gpio.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_i2c.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_iwdg.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_pwr.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_rcc.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_rtc.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_sdio.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_spi.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_syscfg.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_tim.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_wwdg.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\misc.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_cryp.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_hash.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_rng.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
-I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
-I (..\File\API\can_protocol.h)(0x63DBD58D)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
-I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
-I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
-I (..\File\API\vision_protocol.h)(0x638CB484)
-I (..\File\USER\global_declare.h)(0x642E401E)
-I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
-I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
-I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
-I (..\File\API\gimbal_protocol.h)(0x642DA432)
-I (..\File\API\rm_algorithm.h)(0x63B94C55)
-I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
-I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
-I (..\File\BSP\tim.h)(0x63A675C7)
-I (..\File\BSP\can.h)(0x633D990B)
-I (..\File\BSP\usart.h)(0x6380ADBC)
-I (..\File\BSP\nvic.h)(0x633D9966)
-I (..\File\BSP\systick.h)(0x5FCCF438)
-I (..\File\BSP\gpio.h)(0x63A92DBF)
-I (..\File\BSP\delay.h)(0x633AFDA6)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -281,16 +212,85 @@ I (..\File\TASK\data_send_task.h)(0x642E302E)
 I (..\File\TASK\chassis_task.h)(0x640A50C5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
+F (..\File\USER\stm32f4xx_it.c)(0x64300736)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\stm32f4xx_it.o --omf_browse .\obj\stm32f4xx_it.crf --depend .\obj\stm32f4xx_it.d)
+I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
+I (..\File\USER\stm32f4xx.h)(0x5710F38F)
+I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
+I (..\File\STM32_LIB\CMSIS\core_cmInstr.h)(0x5710F38D)
+I (..\File\STM32_LIB\CMSIS\core_cmFunc.h)(0x5710F38D)
+I (..\File\STM32_LIB\CMSIS\core_cm4_simd.h)(0x5710F38D)
+I (..\File\USER\system_stm32f4xx.h)(0x5710F38F)
+I (..\File\USER\stm32f4xx_conf.h)(0x5710F38F)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_adc.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_crc.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dbgmcu.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dma.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_exti.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_flash.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_gpio.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_i2c.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_iwdg.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_pwr.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_rcc.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_rtc.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_sdio.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_spi.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_syscfg.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_tim.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_wwdg.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\misc.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_cryp.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_hash.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_rng.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
+I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
+I (..\File\API\can_protocol.h)(0x63DBD58D)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
+I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
+I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
+I (..\File\API\vision_protocol.h)(0x638CB484)
+I (..\File\USER\global_declare.h)(0x643028E6)
+I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
+I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
+I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
+I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
+I (..\File\API\gimbal_protocol.h)(0x642DA432)
+I (..\File\API\rm_algorithm.h)(0x63B94C55)
+I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
+I (..\File\USER\os.h)(0x638356E5)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
+I (..\File\BSP\tim.h)(0x63A675C7)
+I (..\File\BSP\can.h)(0x633D990B)
+I (..\File\BSP\usart.h)(0x6380ADBC)
+I (..\File\BSP\nvic.h)(0x633D9966)
+I (..\File\BSP\systick.h)(0x5FCCF438)
+I (..\File\BSP\gpio.h)(0x63A92DBF)
+I (..\File\BSP\delay.h)(0x633AFDA6)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
-F (..\File\USER\global_declare.c)(0x642E373E)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\global_declare.o --omf_browse .\obj\global_declare.crf --depend .\obj\global_declare.d)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
+I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
+I (..\File\TASK\gimbal_task.h)(0x642E36BC)
+I (..\File\TASK\led_task.h)(0x6389BEB0)
+I (..\File\TASK\mode_choose_task.h)(0x6378D0DA)
+I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
+I (..\File\TASK\shoot_task.h)(0x640A5F9A)
+I (..\File\TASK\data_send_task.h)(0x642E302E)
+I (..\File\TASK\chassis_task.h)(0x640A50C5)
+I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
+I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
+F (..\File\USER\global_declare.c)(0x643028E6)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\global_declare.o --omf_browse .\obj\global_declare.crf --depend .\obj\global_declare.d)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -330,8 +330,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -343,7 +343,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -425,15 +425,15 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
-F (..\File\API\DJI_protocol.c)(0x64257C7C)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\dji_protocol.o --omf_browse .\obj\dji_protocol.crf --depend .\obj\dji_protocol.d)
+F (..\File\API\DJI_protocol.c)(0x64302FD3)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\dji_protocol.o --omf_browse .\obj\dji_protocol.crf --depend .\obj\dji_protocol.d)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -473,8 +473,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -485,7 +485,7 @@ I (..\File\BSP\delay.h)(0x633AFDA6)
 I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -534,10 +534,10 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
@@ -545,8 +545,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -557,7 +557,7 @@ I (..\File\BSP\delay.h)(0x633AFDA6)
 I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -572,14 +572,14 @@ F (..\File\API\rm_algorithm.c)(0x642E2A7E)(--c99 -c --cpu Cortex-M4.fp -g -O0 --
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -617,7 +617,7 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
 I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
 I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -629,7 +629,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -639,15 +639,15 @@ I (..\File\TASK\shoot_task.h)(0x640A5F9A)
 I (..\File\TASK\data_send_task.h)(0x642E302E)
 I (..\File\TASK\chassis_task.h)(0x640A50C5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
-F (..\File\API\vision_protocol.c)(0x642E30CF)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\vision_protocol.o --omf_browse .\obj\vision_protocol.crf --depend .\obj\vision_protocol.d)
+F (..\File\API\vision_protocol.c)(0x642FFCC5)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\vision_protocol.o --omf_browse .\obj\vision_protocol.crf --depend .\obj\vision_protocol.d)
 I (..\File\API\vision_protocol.h)(0x638CB484)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -687,8 +687,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -699,7 +699,7 @@ I (..\File\BSP\delay.h)(0x633AFDA6)
 I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -746,20 +746,20 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -771,7 +771,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -782,15 +782,15 @@ I (..\File\TASK\data_send_task.h)(0x642E302E)
 I (..\File\TASK\chassis_task.h)(0x640A50C5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (..\File\API\verify.h)(0x5FCCF438)
-F (..\File\API\navigation_protocol.c)(0x642E3114)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\navigation_protocol.o --omf_browse .\obj\navigation_protocol.crf --depend .\obj\navigation_protocol.d)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
-I (..\File\USER\global_declare.h)(0x642E401E)
+F (..\File\API\navigation_protocol.c)(0x64303753)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\navigation_protocol.o --omf_browse .\obj\navigation_protocol.crf --depend .\obj\navigation_protocol.d)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -830,8 +830,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -961,7 +961,7 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
-F (..\File\BSP\usart.c)(0x642BFD5D)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\usart.o --omf_browse .\obj\usart.crf --depend .\obj\usart.d)
+F (..\File\BSP\usart.c)(0x6430347A)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\usart.o --omf_browse .\obj\usart.crf --depend .\obj\usart.d)
 I (..\File\BSP\usart.h)(0x6380ADBC)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -997,20 +997,20 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
 I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\nvic.h)(0x633D9966)
@@ -1021,7 +1021,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -1034,14 +1034,14 @@ I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 F (..\File\BSP\delay.c)(0x633AFDBB)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\delay.o --omf_browse .\obj\delay.crf --depend .\obj\delay.d)
 I (..\File\BSP\delay.h)(0x633AFDA6)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -1083,7 +1083,7 @@ I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1094,7 +1094,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -1182,7 +1182,7 @@ F (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)()
 F (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)()
 F (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)()
 F (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)()
-F (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)()
+F (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)()
 F (..\File\TASK\led_task.c)(0x641C70BB)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\led_task.o --omf_browse .\obj\led_task.crf --depend .\obj\led_task.d)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
@@ -1219,20 +1219,20 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_can.h)(0x6381F290)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dac.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_dcmi.h)(0x5710F38D)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
 I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1244,7 +1244,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\mode_choose_task.h)(0x6378D0DA)
@@ -1255,14 +1255,14 @@ I (..\File\TASK\chassis_task.h)(0x640A50C5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 F (..\File\TASK\shoot_task.c)(0x642E3644)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\shoot_task.o --omf_browse .\obj\shoot_task.crf --depend .\obj\shoot_task.d)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -1304,7 +1304,7 @@ I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1316,7 +1316,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -1331,13 +1331,13 @@ I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -1375,7 +1375,7 @@ I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_fsmc.h)(0x5710F38D)
 I (..\File\RM_Types\ParamConfig.h)(0x642EF3CB)
 I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1387,7 +1387,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
 I (..\File\TASK\mode_choose_task.h)(0x6378D0DA)
@@ -1396,15 +1396,15 @@ I (..\File\TASK\shoot_task.h)(0x640A5F9A)
 I (..\File\TASK\data_send_task.h)(0x642E302E)
 I (..\File\TASK\chassis_task.h)(0x640A50C5)
 I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
-F (..\File\TASK\chassis_task.c)(0x642EFF5A)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\chassis_task.o --omf_browse .\obj\chassis_task.crf --depend .\obj\chassis_task.d)
+F (..\File\TASK\chassis_task.c)(0x643041B9)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\chassis_task.o --omf_browse .\obj\chassis_task.crf --depend .\obj\chassis_task.d)
 I (..\File\TASK\chassis_task.h)(0x640A50C5)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -1444,8 +1444,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1457,7 +1457,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -1470,13 +1470,13 @@ I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 F (..\File\TASK\data_send_task.c)(0x642E3657)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\data_send_task.o --omf_browse .\obj\data_send_task.crf --depend .\obj\data_send_task.d)
 I (..\File\TASK\data_send_task.h)(0x642E302E)
 I (..\File\API\vision_protocol.h)(0x638CB484)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -1516,8 +1516,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1528,7 +1528,7 @@ I (..\File\BSP\delay.h)(0x633AFDA6)
 I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -1541,13 +1541,13 @@ I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 F (..\File\TASK\mode_choose_task.c)(0x642EFE65)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\mode_choose_task.o --omf_browse .\obj\mode_choose_task.crf --depend .\obj\mode_choose_task.d)
 I (..\File\TASK\mode_choose_task.h)(0x6378D0DA)
 I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -1587,8 +1587,8 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1600,7 +1600,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)
@@ -1611,14 +1611,14 @@ I (..\File\RM_Types\rm_os_types.h)(0x6383544E)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 F (..\File\TASK\systemmonitor_task.c)(0x641C73E3)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I ..\File\API -I ..\File\BSP -I ..\File\RM_Types -I ..\File\TASK -I ..\File\USER -I ..\File\STM32_LIB\CMSIS -I ..\File\STM32_LIB\FWLIB\inc -I ..\File\STM32_LIB\FWLIB\src-I.\RTE\_Target_1-IC:\Users\24066\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o .\obj\systemmonitor_task.o --omf_browse .\obj\systemmonitor_task.crf --depend .\obj\systemmonitor_task.d)
 I (..\File\USER\os.h)(0x638356E5)
-I (..\File\USER\main.h)(0x63D6872F)
-I (..\File\USER\global_declare.h)(0x642E401E)
+I (..\File\USER\main.h)(0x64301D2F)
+I (..\File\USER\global_declare.h)(0x643028E6)
 I (..\File\RM_Types\rm_rc_types.h)(0x63820AE9)
 I (..\File\RM_Types\rm_redefine_types.h)(0x638C3C9C)
 I (..\File\RM_Types\rm_rs_types.h)(0x641C6CF2)
 I (..\File\RM_Types\rm_pid_types.h)(0x63A95E25)
 I (..\File\RM_Types\rm_scanner_types.h)(0x641A5B4F)
-I (..\File\RM_Types\rm_communicate_types.h)(0x642E308C)
+I (..\File\RM_Types\rm_communicate_types.h)(0x6430383F)
 I (..\File\STM32_LIB\FWLIB\inc\stm32f4xx_usart.h)(0x5710F38D)
 I (..\File\USER\stm32f4xx.h)(0x5710F38F)
 I (..\File\STM32_LIB\CMSIS\core_cm4.h)(0x5710F38D)
@@ -1658,7 +1658,7 @@ I (..\File\API\gimbal_protocol.h)(0x642DA432)
 I (..\File\API\rm_algorithm.h)(0x63B94C55)
 I (D:\keil5\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-I (..\File\USER\bsp_init.h)(0x63D8A2DC)
+I (..\File\USER\bsp_init.h)(0x6430232C)
 I (..\File\BSP\tim.h)(0x63A675C7)
 I (..\File\BSP\can.h)(0x633D990B)
 I (..\File\BSP\usart.h)(0x6380ADBC)
@@ -1670,7 +1670,7 @@ I (..\File\USER\stm32f4xx_it.h)(0x6426D3FE)
 I (..\File\API\can_protocol.h)(0x63DBD58D)
 I (..\File\API\vision_protocol.h)(0x638CB484)
 I (..\File\API\DJI_protocol.h)(0x638C3796)
-I (..\File\API\navigation_protocol.h)(0x6427D575)
+I (..\File\API\navigation_protocol.h)(0x64301CEA)
 I (..\File\API\systemmonitor_task.h)(0x641C6C2E)
 I (..\File\TASK\gimbal_task.h)(0x642E36BC)
 I (..\File\TASK\led_task.h)(0x6389BEB0)

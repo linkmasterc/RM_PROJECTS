@@ -462,10 +462,20 @@ void uart5_init(u32 bound)
 /*-------------------USART5_TX的DMA初始化------------------*/	
 	DMA_DeInit(UART5_TX_STREAM);
 	while (DMA_GetCmdStatus(UART5_TX_STREAM) != DISABLE){};
-
-		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(0);
-		DMA_InitStructure.DMA_BufferSize=(u32)(0);
+		DMA_InitStructure.DMA_Channel=DMA_Channel_4;
+		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(&DecisionSendBuf);
+		DMA_InitStructure.DMA_BufferSize=(u32)(DECISION_SEND_ALL_DATA_LEN);
 		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
+		DMA_InitStructure.DMA_PeripheralInc 		= DMA_PeripheralInc_Disable;
+		DMA_InitStructure.DMA_MemoryInc 			= DMA_MemoryInc_Enable;
+		DMA_InitStructure.DMA_PeripheralDataSize 	= DMA_PeripheralDataSize_Byte;
+		DMA_InitStructure.DMA_MemoryDataSize 		= DMA_MemoryDataSize_Byte;
+		DMA_InitStructure.DMA_Mode 					= DMA_Mode_Normal;							// 普通模式发送
+		DMA_InitStructure.DMA_Priority 				= DMA_Priority_VeryHigh;
+		DMA_InitStructure.DMA_FIFOMode 				= DMA_FIFOMode_Disable;
+		DMA_InitStructure.DMA_FIFOThreshold 		= DMA_FIFOThreshold_1QuarterFull;
+		DMA_InitStructure.DMA_MemoryBurst 			= DMA_MemoryBurst_Single;
+		DMA_InitStructure.DMA_PeripheralBurst 		= DMA_PeripheralBurst_Single;
 	
 	DMA_Init(UART5_TX_STREAM,&DMA_InitStructure);
 		
@@ -481,91 +491,6 @@ void uart5_init(u32 bound)
 		DMA_Cmd(UART5_RX_STREAM, ENABLE);														// 使能接收DMA
 		DMA_Cmd(UART5_TX_STREAM, ENABLE);														// 失能发送DMA(进行发送时再打开)
 }
-
-//void usart6_init(u32 bound)
-//{
-///*------------------声明初始化所用结构体-------------------*/
-//  GPIO_InitTypeDef GPIO_InitStructure;
-//	USART_InitTypeDef USART_InitStructure;
-//	DMA_InitTypeDef DMA_InitStructure;
-//	
-
-///*----------------------时钟使能---------------------------*/	
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE);
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2,ENABLE);
-//	
-
-///*----------------------引脚复用---------------------------*/	
-//	GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_USART6); //TX	
-//	GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_USART6); //RX
-
-//	
-///*---------------------IO口初始化--------------------------*/
-//  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_6;
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-//	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-//	GPIO_Init(GPIOC,&GPIO_InitStructure);
-
-///*---------------------串口6初始化--------------------------*/
-//	USART_InitStructure.USART_BaudRate = bound;
-//	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-//	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-//	USART_InitStructure.USART_Parity = USART_Parity_No;
-//	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-//	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-//  USART_Init(USART6, &USART_InitStructure);
-
-//	
-//	
-///*-------------------USART6_RX的DMA初始化------------------*/
-//	DMA_DeInit(USART6_RX_STREAM);
-//	while (DMA_GetCmdStatus(USART6_RX_STREAM) != DISABLE){};
-//		DMA_InitStructure.DMA_Channel=DMA_Channel_5;
-//		DMA_InitStructure.DMA_PeripheralBaseAddr=(u32)(&(USART6->DR));
-//		
-//		DMA_InitStructure.DMA_Memory0BaseAddr=(u32)(UA6RxDMAbuf);
-//		DMA_InitStructure.DMA_BufferSize=(u32)(UA6RxDMAbuf_LEN);
-//		DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralToMemory;//传输方向：从外设到内存
-//		
-//		DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
-//		DMA_InitStructure.DMA_MemoryInc=DMA_MemoryInc_Enable;
-//		DMA_InitStructure.DMA_PeripheralDataSize=DMA_PeripheralDataSize_Byte;
-//		DMA_InitStructure.DMA_MemoryDataSize=DMA_MemoryDataSize_Byte;
-//		DMA_InitStructure.DMA_Mode=DMA_Mode_Circular;
-//		DMA_InitStructure.DMA_Priority=DMA_Priority_High;
-//		DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
-//		DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;	
-//		DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-//		DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-//		DMA_Init(USART6_RX_STREAM,&DMA_InitStructure);
-//	
-//	
-///*-------------------USART6_TX的DMA初始化------------------*/	
-//	DMA_DeInit(USART6_TX_STREAM);
-//	while (DMA_GetCmdStatus(USART6_TX_STREAM) != DISABLE){};
-
-//		DMA_InitStructure.DMA_Memory0BaseAddr=(uint32_t)&VisionDataSendBuff;
-//		DMA_InitStructure.DMA_BufferSize=(u32)(VISION_SEND_DATA_LEN_DN);
-//		DMA_InitStructure.DMA_DIR=DMA_DIR_MemoryToPeripheral;
-//		DMA_InitStructure.DMA_Mode=DMA_Mode_Normal;
-//	
-//	DMA_Init(USART6_TX_STREAM,&DMA_InitStructure);
-//		
-//	/*使能串口、DMA、中断*/
-//	USART_Cmd(USART6, ENABLE);  															// 使能串口6
-//		
-//		USART_ClearFlag(USART6, USART_FLAG_TC);
-//		USART_ITConfig(USART6, USART_IT_IDLE, ENABLE);											// 使能空闲中断	
-//		
-//		USART_DMACmd(USART6, USART_DMAReq_Rx, ENABLE);											// 使能串口6接收DMA
-//		USART_DMACmd(USART6, USART_DMAReq_Tx, ENABLE);											// 使能串口6发送DMA
-//		
-//		DMA_Cmd(USART6_RX_STREAM, ENABLE);														// 使能接收DMA
-//		DMA_Cmd(USART6_TX_STREAM, ENABLE);														// 失能发送DMA(进行发送时再打开)
-//}
 
 void usart6_init(u32 bound)
 {	

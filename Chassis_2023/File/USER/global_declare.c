@@ -91,7 +91,15 @@
 				 u8 UA6RxMailbox[UA6RxMBbuf_LEN] = {0};
 		USART_RX_TypeDef USART6_Rcr = {USART6,USART6_RX_STREAM,UA6RxMailbox,UA6RxDMAbuf,UA6RxMBbuf_LEN,UA6RxDMAbuf_LEN,0,0,0};
 		UN_VISION_DATA VisionDataReceiveBuff 	= {0};						// 下云台视觉发来的数据
-		NAVIGATION_RECEIVE_DATA   NavigationReceiveBuff   = {0};						// 导航发来的数据
+		NAVIGATION_RECEIVE_DATA   NavigationReceiveBuf   = {0};						// 导航发来的数据
+		ST_DECISION_SEND_DATA     DecisionSendBuf		 = {.head[0]=0x055,.head[1]=0x00,.tail[0]=0x00,.tail[1]=0xAA};
+		u16 RSStructIDBuf[RS_STRUCT_NUM]={0x0001,0x0002,0x0003,0x0101,
+																			0x0102,0x0104,0x0105,0x0201,
+																			0x0202,0x0203,0x0204,0x0205,
+																			0x0206,0x0207,0x0208,0x209};
+		u32 RSStructAddressBuf[RS_STRUCT_NUM]={0};
+		
+		
 		float 	VisionData1 = 0;	//记录前帧数据
 		float 	VisionData2 = 0;	//记录前帧数据
 		float		VisionData3 = 0;

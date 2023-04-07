@@ -63,15 +63,15 @@
 .\obj\led_task.o: ..\File\API\vision_protocol.h
 .\obj\led_task.o: ..\File\API\DJI_protocol.h
 .\obj\led_task.o: ..\File\API\navigation_protocol.h
+.\obj\led_task.o: ..\File\API\rm_algorithm.h
+.\obj\led_task.o: ..\File\API\gimbal_protocol.h
 .\obj\led_task.o: ..\File\API\systemmonitor_task.h
 .\obj\led_task.o: ..\File\TASK\gimbal_task.h
 .\obj\led_task.o: ..\File\TASK\mode_choose_task.h
 .\obj\led_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\led_task.o: ..\File\TASK\shoot_task.h
 .\obj\led_task.o: ..\File\TASK\data_send_task.h
-.\obj\led_task.o: ..\File\API\gimbal_protocol.h
 .\obj\led_task.o: ..\File\TASK\chassis_task.h
-.\obj\led_task.o: ..\File\API\rm_algorithm.h
 .\obj\led_task.o: ..\File\USER\os.h
 .\obj\led_task.o: ..\File\RM_Types\rm_os_types.h
 .\obj\led_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

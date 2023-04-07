@@ -4,10 +4,11 @@ void NavigationDataReceiveProtocol()
 {
 	if(UA5RxDMAbuf[0]==0x55&&UA5RxDMAbuf[1]==0x00)
 	{
-		memcpy(&NavigationReceiveBuff,(u8*)(&UA5RxDMAbuf)+2,1);
-		memcpy((u8*)(&NavigationReceiveBuff)+1,(u8*)(&UA5RxDMAbuf)+4,12);
+		memcpy(&NavigationReceiveBuf,(u8*)(&UA5RxDMAbuf)+2,1);
+		memcpy((u8*)(&NavigationReceiveBuf)+1,(u8*)(&UA5RxDMAbuf)+4,12);
+		memcpy((u8*)(&VisionDataSendBuff.Vision_Send_Data_Buf)+20,(u8*)(&UA5RxDMAbuf)+16,17);
 	}
-	
+
 }
 
 void GlobalVisionDataReceiveProtocol()
@@ -17,7 +18,21 @@ void GlobalVisionDataReceiveProtocol()
 
 void DecisionDataSendProtocol()
 {
+//	static u32 RS_Struct_Number=0;
+//	if(RS_Struct_Number>RS_STRUCT_NUM)
+//		RS_Struct_Number=0;
+//	DecisionSendBuf.id=RSStructIDBuf[RS_Struct_Number];
+//	DecisionSendBuf.length=sizeof(((u32*)RSStructAddressBuf[RS_Struct_Number]));
+//	memcpy(DecisionSendBuf.data,(u8*)RSStructAddressBuf[RS_Struct_Number],DecisionSendBuf.length);
 	
+	
+	DMA_ClearITPendingBit(UART5_TX_STREAM, DMA_IT_TCIF7);								//开启DMA_Mode_Normal,即便没有使用完成中断也要软件清除，否则只发一次
+	
+	DMA_Cmd(UART5_TX_STREAM, DISABLE);				       								//设置当前计数值前先禁用DMA
+	UART5_TX_STREAM->M0AR = (uint32_t)&DecisionSendBuf;							//设置当前待发数据基地址:Memory0 tARget
+	UART5_TX_STREAM->NDTR = (uint32_t)DECISION_SEND_ALL_DATA_LEN;			        		//设置当前待发的数据的数量:Number of Data units to be TRansferred
+	DMA_Cmd(UART5_TX_STREAM, ENABLE);	
+//	RS_Struct_Number++;
 }
 
 void WCS_to_LCS()
@@ -27,9 +42,9 @@ void WCS_to_LCS()
 	static float chassis_steer_des  = 0;
 	float yaw_angle_step  = 0;
 	
-	Robot_Yaw_Des = NavigationReceiveBuff.stNavigationData.Receive_Data1;
-	Robot_Yaw_Cur = NavigationReceiveBuff.stNavigationData.Receive_Data2;
-	Chassis_Speed = NavigationReceiveBuff.stNavigationData.Receive_Data3;
+	Robot_Yaw_Des = NavigationReceiveBuf.stNavigationData.Receive_Data1;
+	Robot_Yaw_Cur = NavigationReceiveBuf.stNavigationData.Receive_Data2;
+	Chassis_Speed = NavigationReceiveBuf.stNavigationData.Receive_Data3;
 	
 	
 	// speed max limit

@@ -163,72 +163,72 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>judgeTD</ItemText>
+          <ItemText>YawTD</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>YawTD</ItemText>
+          <ItemText>GimbalYawPosPid</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GimbalYawPosPid</ItemText>
+          <ItemText>GimbalYawSpeedPid</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GimbalYawSpeedPid</ItemText>
+          <ItemText>GimbalData,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>YawPosDes</ItemText>
+          <ItemText>stFlag</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GimbalData,0x0A</ItemText>
+          <ItemText>c_stShooterPosPID</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>YawBMIAngle</ItemText>
+          <ItemText>c_stShooterSpeedPID</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>stFlag</ItemText>
+          <ItemText>g_stShooterEncoder</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>c_stShooterPosPID</ItemText>
+          <ItemText>GimbalPitchPosPid</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>c_stShooterSpeedPID</ItemText>
+          <ItemText>yaw_ramp_step</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Bullet_Des,0x0A</ItemText>
+          <ItemText>pit_ramp_step</ItemText>
         </Ww>
         <Ww>
           <count>11</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Bullet_Des_Pre,0x0A</ItemText>
+          <ItemText>VisionDataReceiveBuff</ItemText>
         </Ww>
         <Ww>
           <count>12</count>
           <WinNumber>1</WinNumber>
-          <ItemText>g_stShooterEncoder</ItemText>
+          <ItemText>GimbalYawPosPid</ItemText>
         </Ww>
         <Ww>
           <count>13</count>
           <WinNumber>1</WinNumber>
-          <ItemText>DMA_RAW_LEN</ItemText>
+          <ItemText>GimbalYawEncoder</ItemText>
         </Ww>
         <Ww>
           <count>14</count>
@@ -238,42 +238,17 @@
         <Ww>
           <count>15</count>
           <WinNumber>1</WinNumber>
-          <ItemText>yaw_ramp_step</ItemText>
+          <ItemText>RSStructAddressBuf,0x10</ItemText>
         </Ww>
         <Ww>
           <count>16</count>
           <WinNumber>1</WinNumber>
-          <ItemText>pit_ramp_step</ItemText>
+          <ItemText>DecisionSendBuf,0x10</ItemText>
         </Ww>
         <Ww>
           <count>17</count>
           <WinNumber>1</WinNumber>
-          <ItemText>VisionDataReceiveBuff</ItemText>
-        </Ww>
-        <Ww>
-          <count>18</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>GimbalYawPosPid</ItemText>
-        </Ww>
-        <Ww>
-          <count>19</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>GimbalYawEncoder</ItemText>
-        </Ww>
-        <Ww>
-          <count>20</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>YawEncoderAngle</ItemText>
-        </Ww>
-        <Ww>
-          <count>21</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SecondYawAngle</ItemText>
-        </Ww>
-        <Ww>
-          <count>22</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>GimbalPitchPosPid</ItemText>
+          <ItemText>GameStatus</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -315,147 +290,102 @@
         <Ww>
           <count>7</count>
           <WinNumber>2</WinNumber>
-          <ItemText>speed_rate</ItemText>
+          <ItemText>StateDataSendBuff</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>2</WinNumber>
-          <ItemText>ControlMode</ItemText>
+          <ItemText>systemMonitor,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>2</WinNumber>
-          <ItemText>StateDataSendBuff</ItemText>
+          <ItemText>Bottom_SupplyStep,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>2</WinNumber>
-          <ItemText>systemMonitor,0x0A</ItemText>
+          <ItemText>VisionDataSendBuff,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>11</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Bottom_SupplyStep,0x0A</ItemText>
+          <ItemText>VisionDataReceiveBuff</ItemText>
         </Ww>
         <Ww>
           <count>12</count>
           <WinNumber>2</WinNumber>
-          <ItemText>VisionDataSendBuff</ItemText>
+          <ItemText>USART6_Rcr,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>13</count>
           <WinNumber>2</WinNumber>
-          <ItemText>VisionDataReceiveBuff</ItemText>
+          <ItemText>UA6RxDMAbuf</ItemText>
         </Ww>
         <Ww>
           <count>14</count>
           <WinNumber>2</WinNumber>
-          <ItemText>USART6_Rcr,0x0A</ItemText>
+          <ItemText>\\TEST\../File/USER/global_declare.c\VisionDataSendBuff</ItemText>
         </Ww>
         <Ww>
           <count>15</count>
           <WinNumber>2</WinNumber>
-          <ItemText>UA6RxDMAbuf</ItemText>
+          <ItemText>modechoice</ItemText>
         </Ww>
         <Ww>
           <count>16</count>
           <WinNumber>2</WinNumber>
-          <ItemText>\\TEST\../File/USER/global_declare.c\VisionDataReceiveBuff.stVisionData.Recieve_Data2</ItemText>
+          <ItemText>GimbalYawEncoder</ItemText>
         </Ww>
         <Ww>
           <count>17</count>
           <WinNumber>2</WinNumber>
-          <ItemText>\\TEST\../File/USER/global_declare.c\VisionDataSendBuff</ItemText>
+          <ItemText>((DMA_Stream_TypeDef *) (((((uint32_t)0x40000000) + 0x00020000) + 0x6400) + 0x0A0)),0x0A</ItemText>
         </Ww>
         <Ww>
           <count>18</count>
           <WinNumber>2</WinNumber>
-          <ItemText>GyroJudge</ItemText>
+          <ItemText>stError</ItemText>
         </Ww>
         <Ww>
           <count>19</count>
           <WinNumber>2</WinNumber>
-          <ItemText>modechoice</ItemText>
+          <ItemText>\\TEST\../File/USER/global_declare.c\stServoWheel_PosPid[0]</ItemText>
         </Ww>
         <Ww>
           <count>20</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Bullet1SpeedMessage</ItemText>
+          <ItemText>GameStatus,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>21</count>
           <WinNumber>2</WinNumber>
-          <ItemText>GimbalYawEncoder</ItemText>
+          <ItemText>GimbalFixedPos</ItemText>
         </Ww>
         <Ww>
           <count>22</count>
           <WinNumber>2</WinNumber>
-          <ItemText>((DMA_Stream_TypeDef *) (((((uint32_t)0x40000000) + 0x00020000) + 0x6400) + 0x0A0)),0x0A</ItemText>
+          <ItemText>NavigationReceiveBuff</ItemText>
         </Ww>
         <Ww>
           <count>23</count>
           <WinNumber>2</WinNumber>
-          <ItemText>stError</ItemText>
+          <ItemText>UA5RxDMAbuf</ItemText>
         </Ww>
         <Ww>
           <count>24</count>
           <WinNumber>2</WinNumber>
-          <ItemText>\\TEST\../File/USER/global_declare.c\stServoWheel_PosPid[0]</ItemText>
+          <ItemText>stServoWheel_PosPid</ItemText>
         </Ww>
         <Ww>
           <count>25</count>
           <WinNumber>2</WinNumber>
-          <ItemText>LCSYawAngle</ItemText>
+          <ItemText>UA5RxDMAbuf</ItemText>
         </Ww>
         <Ww>
           <count>26</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Chassis_X_Speed</ItemText>
-        </Ww>
-        <Ww>
-          <count>27</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>rawLCSYaw</ItemText>
-        </Ww>
-        <Ww>
-          <count>28</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>preLCSYaw</ItemText>
-        </Ww>
-        <Ww>
-          <count>29</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>diff</ItemText>
-        </Ww>
-        <Ww>
-          <count>30</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>GameStatus,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>31</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>GimbalFixedPos</ItemText>
-        </Ww>
-        <Ww>
-          <count>32</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>NavigationReceiveBuff</ItemText>
-        </Ww>
-        <Ww>
-          <count>33</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>UA5RxDMAbuf</ItemText>
-        </Ww>
-        <Ww>
-          <count>34</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>ControlMode</ItemText>
-        </Ww>
-        <Ww>
-          <count>35</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>stServoWheel_PosPid</ItemText>
+          <ItemText>NavigationReceiveBuf</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
@@ -482,7 +412,7 @@
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
         <aSer4>0</aSer4>
-        <StkLoc>0</StkLoc>
+        <StkLoc>1</StkLoc>
         <TrcWin>0</TrcWin>
         <newCpu>0</newCpu>
         <uProt>0</uProt>

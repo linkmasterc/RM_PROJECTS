@@ -231,13 +231,20 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 		case GameStatusID:
 			RSSystemMonitor.GameStatus_cnt++;
 			memcpy(&GameStatus, &pData[7], Size);
-		
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
+			
 			StageRemainTimeMessage = GameStatus.stage_remain_time;
 			break;
 		case GameRobotHPID:
 			RSSystemMonitor.GameRobotHP_cnt++;
 			memcpy(&GameRobotHP, &pData[7], Size);
-		
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);		
 			if(RobotIDMessage == Red_7_Sentry)
 			{
 				OutpostHPMessage 		= GameRobotHP.red_outpost_HP;
@@ -252,6 +259,10 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 		case EventDataID:
 			RSSystemMonitor.EventData_cnt++;
 			memcpy(&EventData, &pData[7], Size);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);	
 		
 			if((EventData.event_type >> 10) & 1)
 			{
@@ -264,17 +275,28 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 			
 			break;
 		case RefereeWaringID:
-			RSSystemMonitor.RefereeWarning_cnt++;
+			RSSystemMonitor.RefereeWarning_cnt++;		
 			memcpy(&RefereeWarning, &pData[7], Size);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			break;
 		case DartRemainingTimeID:
 			RSSystemMonitor.DartRemainingTime_cnt++;
 			memcpy(&DartRemainingTime, &pData[7], Size);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			break;
 		case GameRobotStatusID:
 			RSSystemMonitor.GameRobotStatus_cnt++;
 			memcpy(&GameRobotStatus, &pData[7], Size);
-		
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			RobotIDMessage 				= GameRobotStatus.robot_id;							// 本机器人ID
 			SentryHPMessage 			= GameRobotStatus.remain_HP;						// 本机器人当前血量
 			ChassisPowerLimitMessage 	= GameRobotStatus.chassis_power_limit;				// 本机器人底盘功率上限
@@ -303,7 +325,10 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 		case PowerHeatDataID:
 			RSSystemMonitor.PowerHeatData_cnt++;
 			memcpy(&PowerHeatData, &pData[7], Size);
-		
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			PreChassisPowerMessage 			= ChassisPowerMessage;
 			ChassisPowerMessage 			= PowerHeatData.chassis_power;						// 当前底盘功率
 			ChassisPowerBufferMessageLast 	= ChassisPowerBufferMessage;						// 上次底盘剩余缓冲能量
@@ -325,18 +350,34 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 		case GameRobotPosID:
 			RSSystemMonitor.GameRobotPos_cnt++;
 			memcpy(&GameRobotPos, &pData[7], Size);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			break;
 		case BuffID:
 			RSSystemMonitor.Buff_cnt++;
 			memcpy(&Buff, &pData[7], Size);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			break;
 		case RobotHurtID:
 			RSSystemMonitor.RobotHurt_cnt++;
 			memcpy(&RobotHurt, &pData[7], Size);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			break;
 		case ShootDataID:
 			RSSystemMonitor.ShootData_cnt++;
 			memcpy(&ShootData, &pData[7], Size);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 		
 			ShooterIDMessage = ShootData.shooter_id;
 			if(ShooterIDMessage == 1)
@@ -393,6 +434,7 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 		case BulletRemainingID:
 			RSSystemMonitor.BulletRemaining_cnt++;
 			memcpy(&BulletRemaining, &pData[7], Size);
+
 		
 			Bullet_Num_Remain = BulletRemaining.bullet_remaining_num_17mm;						// 获取剩余子弹数目
 		
@@ -401,6 +443,10 @@ void RSDataDecode(u16 cmdID, u8 *pData, u16 Size)
 			RSSystemMonitor.RobotInteractiveData_cnt++;
 			memcpy(&StudentInteractiveHeaderData, &pData[7], 6);
 			memcpy(&RobotInteractiveData, &pData[13], Size - 6);
+			//将usart2所收到的数据赋值给uart5需要发送出去的结构体中
+			DecisionSendBuf.id=cmdID;
+			DecisionSendBuf.length=Size;
+			memcpy(&DecisionSendBuf.data,&pData[7],Size);
 			
 			if(StudentInteractiveHeaderData.data_cmd_id == 0x200
 				&& StudentInteractiveHeaderData.receiver_ID == RobotIDMessage

@@ -63,6 +63,7 @@
 .\obj\gimbal_protocol.o: ..\File\API\vision_protocol.h
 .\obj\gimbal_protocol.o: ..\File\API\DJI_protocol.h
 .\obj\gimbal_protocol.o: ..\File\API\navigation_protocol.h
+.\obj\gimbal_protocol.o: ..\File\API\rm_algorithm.h
 .\obj\gimbal_protocol.o: ..\File\API\systemmonitor_task.h
 .\obj\gimbal_protocol.o: ..\File\TASK\gimbal_task.h
 .\obj\gimbal_protocol.o: ..\File\TASK\led_task.h
@@ -71,7 +72,6 @@
 .\obj\gimbal_protocol.o: ..\File\TASK\shoot_task.h
 .\obj\gimbal_protocol.o: ..\File\TASK\data_send_task.h
 .\obj\gimbal_protocol.o: ..\File\TASK\chassis_task.h
-.\obj\gimbal_protocol.o: ..\File\API\rm_algorithm.h
 .\obj\gimbal_protocol.o: ..\File\USER\os.h
 .\obj\gimbal_protocol.o: ..\File\RM_Types\rm_os_types.h
 .\obj\gimbal_protocol.o: ..\File\API\verify.h

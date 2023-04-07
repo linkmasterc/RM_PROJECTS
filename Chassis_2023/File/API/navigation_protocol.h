@@ -3,6 +3,11 @@
 
 #include "global_declare.h"
 
+#define NAVIGATION_ID			1
+#define GLOBAL_VISION_ID  2
+
+
+
 /**
  *@breif	舵轮行驶方式定义
  *
@@ -43,6 +48,7 @@
 #define SEC_GIMBAL_DES_WORLD_ANGLE                               (float)(-90.0f)
 	
 void NavigationDataReceiveProtocol(void);
+void DecisionDataSendProtocol(void);
 void WCS_to_LCS(void);
 #endif
 

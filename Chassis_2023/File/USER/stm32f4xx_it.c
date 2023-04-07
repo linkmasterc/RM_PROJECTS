@@ -184,9 +184,6 @@ void USART2_IRQHandler(void)
 		USART2->SR;																					
 		USART2->DR;   	  	
 		RSProtocol(&USART2_Rcr, RSReceiveDataBuff, USART_Receive(&USART2_Rcr));
-
-//		#ifdef USING_HMI
-//		USART_HMI_Decode();
 	  
 		if(systemMonitor.USART2_rx_valid_fps == 0)
 		{
@@ -277,28 +274,11 @@ void UART5_IRQHandler(void)
 
 
 void USART6_IRQHandler(void)
-{
-//	if(USART_GetITStatus(USART6, USART_IT_IDLE) == SET)
-//	{
-//		USART6->SR;
-//		USART6->DR;
-//		
-
-
-//		
-//		DMA_GetCurrDataCounter(USART6_RX_STREAM);							// 验证一次接收结束时DMA中接收到的数据是否完整
-//				DMA_Cmd(USART6_RX_STREAM, DISABLE);													// DMA清空为下一次接收做准备
-//			USART6_RX_STREAM->NDTR = UA6RxDMAbuf_LEN;
-//			DMA_Cmd(USART6_RX_STREAM, ENABLE);
-//		systemMonitor.USART6_rx_cnt++;
-//	}	
-	
+{	
 	if(USART_GetITStatus(USART6, USART_IT_IDLE) == SET)
 	{
 		USART6->SR;
 		USART6->DR;
-
-
 		if(DMA_GetCurrDataCounter(USART6_RX_STREAM) == 38)							// 验证一次接收结束时DMA中接收到的数据是否完整
 		{
 			//USART_Receive(&USART6_Rcr);																// 获取串口的DMA中接收数据的长度(暂未利用） 
