@@ -13,8 +13,9 @@
 #include "stm32f4xx.h"
 #include <string.h>
 
-#define RS_STRUCT_NUM	16
 
+//#define USED_NAVIGATION
+#define UNUSED_NAVIGATION
 
 #define ChassisBufLen_Rx	USART3_RX_BUF_LEN
 #define ChassisBufLen_Tx	USART3_TX_BUF_LEN
@@ -22,12 +23,8 @@
 #define NavigationBufLen_Rx			UART5_RX_BUF_LEN
 #define NavigationBufLen_Tx			UART5_TX_BUF_LEN
 
-#define RecordBullet1Num	10
-#define RecordBullet2Num	10
-#define RecordEncoderLengthNum	10
 
-/*3508电流最大值*/
-#define MECANUM_CURRENT_MAX  16000                      //最大16383
+
 
 /*底盘功率限制*/
 #define MaxPower   ((float)GameRobotStatus.chassis_power_limit) //瓦特

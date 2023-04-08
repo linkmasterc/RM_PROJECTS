@@ -5,6 +5,19 @@
 //#define Gimbal_Check_Vofa
 //#define Normal_Use_Vofa
 
+#define SpanSpeed 1.3
+
+#define RS_STRUCT_NUM	16
+
+#define RecordBullet1Num	10
+#define RecordBullet2Num	10
+#define RecordEncoderLengthNum	10
+
+
+/*3508电流最大值*/
+#define MECANUM_CURRENT_MAX  16000                      //最大16383
+
+
 /*YAW电机设定中值*/
 #define First_YAW_MID      					1242					// 云台YAW电机的设定中值（枪管朝正前方时YAW电机编码器的返回原始值）
 
@@ -12,17 +25,17 @@
 #define GM_PITCH_SENSIBILITY_TEST	25.0f						// 遥控器pitch灵敏度（调弹道用）
 
 /*PITCH电机遥控角度范围*/
-#define PITCH_RC_ANGLE_MAX				(30.0f)					// 下云台PITCH遥控角度最大值
-#define PITCH_RC_ANGLE_MIN				(-27.0f)				// 下云台PITCH遥控角度最小值
+#define PITCH_RC_ANGLE_MAX				(30.0f)					// 云台PITCH遥控角度最大值
+#define PITCH_RC_ANGLE_MIN				(-27.0f)				// 云台PITCH遥控角度最小值
 
 
 /*PITCH电机扫描角度范围*/
-#define PITCH_SCAN_ANGLE_MAX				(20.0f)				// 下云台PITCH扫描角度最大值
-#define PITCH_SCAN_ANGLE_MIN				(-20.0f)			// 下云台PITCH扫描角度最小值
+#define PITCH_SCAN_ANGLE_MAX				(20.0f)				// 云台PITCH扫描角度最大值
+#define PITCH_SCAN_ANGLE_MIN				(-20.0f)			// 云台PITCH扫描角度最小值
 
 /*YAW电机扫描角度范围*/
-#define YAW_SCAN_ANGLE_MAX				(180.0f)				// 下云台YAW扫描角度最大值
-#define YAW_SCAN_ANGLE_MIN				(-180.0f)				// 下云台YAW扫描角度最小值
+#define YAW_SCAN_ANGLE_MAX				(180.0f)				// 云台YAW扫描角度最大值
+#define YAW_SCAN_ANGLE_MIN				(-180.0f)				// 云台YAW扫描角度最小值
 
 
 /*PITCH电机扫描速度大小*/

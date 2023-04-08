@@ -186,14 +186,19 @@ typedef union
 #define DECISION_SEND_DATA_LEN			50
 #define DECISION_SEND_ALL_DATA_LEN  DECISION_SEND_DATA_LEN+7
 
-#define NAVIGATION_RECEIVE_DATA_NUM 3
-#define NAVIGATION_RECEIVE_DATA_LEN (NAVIGATION_RECEIVE_DATA_NUM*4+1)
+#define NAVIGATION_RECEIVE_DATA_NUM 7
+#define NAVIGATION_RECEIVE_DATA_LEN (NAVIGATION_RECEIVE_DATA_NUM*4+2)
 typedef __packed struct
 {
 	u8 Recieve_ID;
 	float Receive_Data1;
 	float Receive_Data2;
 	float Receive_Data3;
+	float Receive_Data4;
+	float Receive_Data5;
+	float Receive_Data6;
+	float Receive_Data7;
+	u8 Tail_Data;
 }ST_NAVIGATION_RECEIVE_DATA;
 
 

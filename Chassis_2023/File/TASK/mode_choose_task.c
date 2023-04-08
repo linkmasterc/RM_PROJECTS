@@ -104,7 +104,7 @@ void ModeChoose(void)
 	}
 	
 	/*********************Ð¡ÍÓÂÝÄ£Ê½********************/
-	else if(g_StDbus.stRC.SW_L==RC_SW_MID&&g_StDbus.stRC.SW_R==RC_SW_DOWN)
+	else if(g_StDbus.stRC.SW_L==RC_SW_MID&&g_StDbus.stRC.SW_R==RC_SW_MID)
 	{
 		ControlMode=0x04;
 		MotorInit(GIMBAL_ON,SPEED_MOTOR_ON,SERVO_MOTOR_ON);

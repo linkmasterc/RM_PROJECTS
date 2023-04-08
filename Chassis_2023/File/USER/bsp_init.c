@@ -34,11 +34,11 @@ void Motor_Init()
 {
 	for(u32 i=0;i<4;i++)
 	{
-		stWheel_SpeedPid[i].m_fpKp=300;
+		stWheel_SpeedPid[i].m_fpKp=1000;
 		stWheel_SpeedPid[i].m_fpUMax=8000;
 		stWheel_SpeedPid[i].m_fpUpMax=8000;
 		
-		stServoWheel_PosPid[i].m_fpKp=10;
+		stServoWheel_PosPid[i].m_fpKp=20;
 		stServoWheel_SpeedPid[i].m_fpKp=100;
 		stServoWheel_PosPid[i].m_fpUMax=2000;
 		stServoWheel_PosPid[i].m_fpUpMax=2000;

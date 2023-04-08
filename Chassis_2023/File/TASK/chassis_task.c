@@ -8,8 +8,6 @@
 #define LineType 		0x02
 #define ForceFBType 0x03
 
-#define SpanSpeed 0
-
 bool GyroJudge=TRUE;
 
 float InitAngle[4]={3530,4190,4113,4232};
@@ -56,7 +54,11 @@ void ServoAngleCal()
 	else if(ControlMode==0x09)
 	{
 		WCS_to_LCS();
-		LCSYawAngle=Wheel_Angle_Des;
+		#ifdef USED_NAVIGATION
+			LCSYawAngle=Wheel_Angle_Des;
+		#elif defined UNUSED_NAVIGATION
+		
+		#endif
 	}
 	
 	for(u32 i=0;i<4;i++)
@@ -97,6 +99,8 @@ void SpeedWheelControl()
 
 void ServoMode(u8 modechoice)
 {
+	static bool GyroJudge=FALSE;
+	
 	switch (modechoice)
 	{
 		/*******************小陀螺模式下舵向轮控制************************/
@@ -109,7 +113,8 @@ void ServoMode(u8 modechoice)
 			}
 			for(u32 i=0;i<4;i++)
 			{
-				stServoWheel_PosPid[i].m_fpDes=(i%2==0)*45;
+				stServoWheel_PosPid[i].m_fpDes=(i%2==0)*45+(i%2==1)*(-45);
+				GyroJudge=FALSE;
 			}
 
 		}break;
@@ -122,17 +127,16 @@ void ServoMode(u8 modechoice)
 				stServoWheel_SpeedPid[i].m_fpUMax=8000;
 
 			}
-			
-			ServoAngleCal();
-			
-//			if(!GyroJudge)
-//			{
-//				stServoWheel_PosPid[0].m_fpDes=stServoWheel_PosPid[0].m_fpDes-45;
-//				stServoWheel_PosPid[1].m_fpDes=stServoWheel_PosPid[1].m_fpDes+45;
-//				stServoWheel_PosPid[2].m_fpDes=stServoWheel_PosPid[2].m_fpDes-45;
-//				stServoWheel_PosPid[3].m_fpDes=stServoWheel_PosPid[3].m_fpDes+45;
-//				GyroJudge=TRUE;
-//			}	
+			if(GyroJudge==FALSE)
+			{
+				for(u32 i=0;i<4;i++)
+				{
+					stServoWheel_PosPid[i].m_fpDes=0;
+				}
+				GyroJudge=TRUE;
+			}
+			else
+				ServoAngleCal();
 		}break;
 		/********************机械测试模式下舵向轮标定控制**********************/
 		case ForceFBType:
@@ -145,6 +149,7 @@ void ServoMode(u8 modechoice)
 			for(u32 i=0;i<4;i++)
 			{
 				stServoWheel_SpeedPid[i].m_fpUMax=0;
+				stServoWheel_PosPid[i].m_fpDes=0;
 			}
 		}break;
 		
@@ -165,9 +170,14 @@ void SpeedMode(u8 modechoice)
 		case GyroType:
 		{
 			for(u32 i=0;i<4;i++)
+			{
 				stWheel_SpeedPid[i].m_fpUMax=8000;
+			}
 			for(u32 i=0;i<4;i++)
-				FPRampSignal(&stWheel_SpeedPid[i].m_fpDes,SpanSpeed,10);
+			{
+				WheelSpeed=SpanSpeed/CHASSIS_WHEEL_RADIUS;
+				FPRampSignal(&stWheel_SpeedPid[i].m_fpDes,WheelSpeed,0.5);
+			}
 		}break;
 		/**********************直线模式下速度轮的控制*********************/		
 		case LineType:
@@ -176,31 +186,31 @@ void SpeedMode(u8 modechoice)
 				stWheel_SpeedPid[i].m_fpUMax=8000;
 			if(ControlMode==0x03)
 			{
-				Chassis_X_Speed=g_StDbus.stRC.Ch0-1024;
-				Chassis_Y_Speed=g_StDbus.stRC.Ch1-1024;
-				WheelSpeed=sqrt(Chassis_X_Speed*Chassis_X_Speed+Chassis_Y_Speed*Chassis_Y_Speed);
-				
-				stWheel_SpeedPid[0].m_fpDes=-WheelSpeed;
-				stWheel_SpeedPid[1].m_fpDes=WheelSpeed;
-				stWheel_SpeedPid[2].m_fpDes=WheelSpeed;
-				stWheel_SpeedPid[3].m_fpDes=-WheelSpeed;
-				
-				for(u32 i=0;i<4;i++)
-					stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;	
+//				Chassis_X_Speed=g_StDbus.stRC.Ch0-1024;
+//				Chassis_Y_Speed=g_StDbus.stRC.Ch1-1024;
+//				WheelSpeed=sqrt(Chassis_X_Speed*Chassis_X_Speed+Chassis_Y_Speed*Chassis_Y_Speed);
+//				
+//				stWheel_SpeedPid[0].m_fpDes=-WheelSpeed;
+//				stWheel_SpeedPid[1].m_fpDes=WheelSpeed;
+//				stWheel_SpeedPid[2].m_fpDes=WheelSpeed;
+//				stWheel_SpeedPid[3].m_fpDes=-WheelSpeed;
+//				
+//				for(u32 i=0;i<4;i++)
+//					stWheel_SpeedPid[i].m_fpDes*=SpeedWheelRate;	
 			}
 			else if(ControlMode==0x09)
 			{
-				stWheel_SpeedPid[0].m_fpDes=Chassis_Speed;
-				stWheel_SpeedPid[1].m_fpDes=-Chassis_Speed;
-				stWheel_SpeedPid[2].m_fpDes=-Chassis_Speed;
-				stWheel_SpeedPid[3].m_fpDes=Chassis_Speed;
+				stWheel_SpeedPid[0].m_fpDes=WheelSpeed;
+				stWheel_SpeedPid[1].m_fpDes=-WheelSpeed;
+				stWheel_SpeedPid[2].m_fpDes=-WheelSpeed;
+				stWheel_SpeedPid[3].m_fpDes=WheelSpeed;
 			}
 		}break;
 		/*********************安全模式下速度轮的控制**********************/
 		case SafeType:
 		{
 			for(u32 i=0;i<4;i++)
-				stWheel_SpeedPid[i].m_fpUMax=0;
+				stWheel_SpeedPid[i].m_fpDes=0;
 		}break;
 		
 		default:
@@ -246,8 +256,8 @@ void ChassisModeChosse()
 		
 		case 0x09:
 		{
-			ServoMode(LineType);
-			SpeedMode(LineType);
+			ServoMode(GyroType);
+			SpeedMode(GyroType);
 		}break;
 		
 		default:
@@ -263,9 +273,7 @@ void ChassisModeChosse()
 
 //void PowerLoopControl()
 //{
-//	capacitor_msg.TxPower=MaxPower;
-//	CAN_SendData(CAN1,0x1FF,0,capacitor_msg.TxPower*100,0,0);
-//	ChassisPowerPid.m_fpDes=capacitor_msg.Pow_In;
+//	ChassisPowerPid.m_fpDes=MaxPower;
 //	ChassisPowerPid.m_fpFB=capacitor_msg.Pow_Out;
 //	
 //	CalIWeakenPID(&ChassisPowerPid);

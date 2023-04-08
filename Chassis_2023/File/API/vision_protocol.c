@@ -189,7 +189,7 @@ void DNVisionDataSend(void)
 	VisionDataSendBuff.My_Data.Send_Data1 = VisionSendData1 = GimbalPitchPosPid.m_fpFB;
 	VisionDataSendBuff.My_Data.Send_Data2 = VisionSendData2 = GimbalYawPosPid.m_fpFB;
 	VisionDataSendBuff.My_Data.Send_Data3 = VisionSendData3 = Bullet1SpeedMessage;
-	VisionDataSendBuff.My_Data.Send_Data4 = VisionSendData4 = HP_Detect();
+	VisionDataSendBuff.My_Data.Send_Data4 = VisionSendData4 = SecondYawAngle;
 	
 	/* PROTOCOL DATA CODE END */
 

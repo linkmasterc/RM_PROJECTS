@@ -5,7 +5,7 @@ void NavigationDataReceiveProtocol()
 	if(UA5RxDMAbuf[0]==0x55&&UA5RxDMAbuf[1]==0x00)
 	{
 		memcpy(&NavigationReceiveBuf,(u8*)(&UA5RxDMAbuf)+2,1);
-		memcpy((u8*)(&NavigationReceiveBuf)+1,(u8*)(&UA5RxDMAbuf)+4,12);
+		memcpy((u8*)(&NavigationReceiveBuf)+1,(u8*)(&UA5RxDMAbuf)+4,50);
 		memcpy((u8*)(&VisionDataSendBuff.Vision_Send_Data_Buf)+20,(u8*)(&UA5RxDMAbuf)+16,17);
 	}
 
@@ -52,7 +52,6 @@ void WCS_to_LCS()
 			Chassis_Speed = CHASSIS_LINE_SPEED_MAX;
 	} 
 	Chassis_Speed = Chassis_Speed /CHASSIS_WHEEL_RADIUS;
-
 	// angle max limit
 	yaw_angle_step = Robot_Yaw_Des - robot_yaw_des_pre;
 	robot_yaw_des_pre = Robot_Yaw_Des;

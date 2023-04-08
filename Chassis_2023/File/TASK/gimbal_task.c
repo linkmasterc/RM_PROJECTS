@@ -270,9 +270,9 @@ void GimbalAutoMode(void)
 	if(stFlag.GimbalRunFlag && !stFlag.SniperFlag)	// 扫描巡逻状态
 	{
 		LossTimes++;																	// 丢失次数累加
-		if(ControlMode==0x03)
+		if(ControlMode==0x09)
 			GimbalSinScan();
-		else if(ControlMode==0x02)
+		if(ControlMode==0x02)
 			GimbalRCMode();
 	}
 	if(stFlag.GimbalRunFlag && stFlag.SniperFlag)		// 跟随状态
@@ -328,7 +328,7 @@ void GimbalModeChoose()
 			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
 			GimbalRCMode();
 		}
-		else if(ControlMode==0x02||ControlMode==0x03||ControlMode==0x09)
+		else if(ControlMode==0x02||ControlMode==0x03||ControlMode==0x04||ControlMode==0x09)
 		{
 			FPRampSignal(&GimbalYawSpeedPid.m_fpUMax,28000,10);
 			GimbalAutoMode();
